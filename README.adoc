@@ -1,0 +1,23 @@
+= CXF Codegen Gradle
+
+CXF Codegen Gradle is, as the name implies, a Gradle plugin implementation of the
+https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html[CXF Codegen Maven plugin].
+
+== Building from Source
+
+The plugin can be built and published to your local Maven cache using the
+https://docs.gradle.org/current/userguide/gradle_wrapper.html[Gradle Wrapper]. You
+will need at minimum JDK 1.8.
+
+[source,bash]
+----
+./gradlew publishToMavenLocal
+----
+
+This will build and publish it to your local Maven cache. It won't run any of
+the tests. If you want to build everything, use the `build` task:
+
+[source,bash]
+----
+./gradlew build
+----
