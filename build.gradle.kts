@@ -74,6 +74,9 @@ tasks {
     check {
         dependsOn(functionalTest)
     }
+    publishPlugins {
+        dependsOn(build)
+    }
     withType<Test>().configureEach {
         useJUnitPlatform()
         testLogging {
