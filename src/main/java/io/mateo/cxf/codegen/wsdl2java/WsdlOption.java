@@ -15,9 +15,11 @@
  */
 package io.mateo.cxf.codegen.wsdl2java;
 
+import org.gradle.api.GradleException;
 import org.gradle.api.Named;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.ProjectLayout;
+import org.gradle.api.file.RegularFile;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.ListProperty;
@@ -25,6 +27,8 @@ import org.gradle.api.provider.Property;
 import org.gradle.api.provider.SetProperty;
 
 import javax.inject.Inject;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -96,9 +100,12 @@ public class WsdlOption implements Option, Named {
 
 	private final DirectoryProperty outputDir;
 
+	private final ProjectLayout layout;
+
 	@Inject
 	public WsdlOption(String name, ObjectFactory objects, ProjectLayout layout) {
 		this.name = name;
+		this.layout = layout;
 		this.outputDir = objects.directoryProperty().convention(layout.getBuildDirectory().dir("/generated-sources"));
 		this.wsdl = objects.fileProperty();
 		this.packageNames = objects.listProperty(String.class);
@@ -388,8 +395,163 @@ public class WsdlOption implements Option, Named {
 		return this.outputDir;
 	}
 
+	/**
+	 * Generate arguments for {@code wsdl2java}.
+	 *
+	 * @return arguments
+	 */
 	public List<String> generateArgs() {
+		List<String> command = new ArrayList<>();
+		if (this.packageNames.isPresent()) {
+			this.packageNames.get().forEach((value) -> {
+				command.add("-p");
+				command.add(value);
+			});
+		}
+		if (this.namespaceExcludes.isPresent()) {
+			this.namespaceExcludes.get().forEach((value) -> {
+				command.add("-nexclude");
+				command.add(value);
+			});
+		}
+		command.add("-d");
+		command.add(this.outputDir.get().getAsFile().getAbsolutePath()); // always set by convention
+		if (this.bindingFiles.isPresent()) {
+			this.bindingFiles.get().forEach((value) -> {
+				RegularFile bindingFile = this.layout.getProjectDirectory().file(value);
+				command.add("-b");
+				command.add(bindingFile.getAsFile().toURI().toString());
+			});
+		}
+		if (this.frontend.isPresent()) {
+			command.add("-fe");
+			command.add(this.frontend.get());
+		}
+		if (this.databinding.isPresent()) {
+			command.add("-db");
+			command.add(this.databinding.get());
+		}
+		if (this.wsdlVersion.isPresent()) {
+			command.add("-wv");
+			command.add(this.wsdlVersion.get());
+		}
+		if (this.catalog.isPresent()) {
+			command.add("-catalog");
+			command.add(this.catalog.get());
+		}
+		if (this.extendedSoapHeaders.isPresent() && this.extendedSoapHeaders.get()) {
+			command.add("-exsh");
+			command.add("true");
+		}
+		if (this.noTypes.isPresent() && this.noTypes.get()) {
+			command.add("-noTypes");
+		}
+		if (this.allowElementRefs.isPresent() && this.allowElementRefs.get()) {
+			command.add("-allowElementReferences");
+		}
+		if (this.validateWsdl.isPresent()) {
+			command.add("-validate=" + this.validateWsdl.get());
+		}
+		if (this.markGenerated.isPresent() && this.markGenerated.get()) {
+			command.add("-mark-generated");
+		}
+		if (this.suppressGeneratedData.isPresent() && this.suppressGeneratedData.get()) {
+			command.add("-suppress-generated-date");
+		}
+		if (this.defaultExcludesNamespace.isPresent()) {
+			command.add("-dex");
+			command.add(this.defaultExcludesNamespace.get().toString());
+		}
+		if (this.defaultNamespacePackageMapping.isPresent()) {
+			command.add("-dns");
+			command.add(this.defaultNamespacePackageMapping.get().toString());
+		}
+		if (this.serviceName.isPresent()) {
+			command.add("-sn");
+			command.add(this.serviceName.get());
+		}
+		if (this.faultSerialVersionUid.isPresent()) {
+			command.add("-faultSerialVersionUID");
+			command.add(this.faultSerialVersionUid.get());
+		}
+		if (this.exceptionSuper.isPresent()) {
+			command.add("-exceptionSuper");
+			command.add(this.exceptionSuper.get());
+		}
+		if (this.seiSuper.isPresent()) {
+			this.seiSuper.get().forEach((value) -> {
+				command.add("-seiSuper");
+				command.add(value);
+			});
+		}
+		if (this.autoNameResolution.isPresent() && this.autoNameResolution.get()) {
+			command.add("-autoNameResolution");
+		}
+		if (this.noAddressBinding.isPresent() && this.noAddressBinding.get()) {
+			command.add("-noAddressBinding");
+		}
+		if (this.xjcArgs.isPresent()) {
+			this.xjcArgs.get().forEach((value) -> {
+				command.add("-xjc" + value);
+			});
+		}
+		if (this.extraArgs.isPresent()) {
+			command.addAll(this.extraArgs.get());
+		}
+		if (this.wsdlLocation.isPresent()) {
+			command.add("-wsdlLocation");
+			command.add(this.wsdlLocation.get());
+		}
+		if (this.wsdlList.isPresent() && this.wsdlList.get()) {
+			command.add("-wsdlList");
+		}
+		if (this.verbose.isPresent() && this.verbose.get()) {
+			command.add("-verbose");
+		}
+		if (this.asyncMethods.isPresent() && !this.asyncMethods.get().isEmpty()) {
+			StringBuilder sb = new StringBuilder("-asyncMethods");
+			sb.append("=");
+			boolean first = true;
+			for (String value : this.asyncMethods.get()) {
+				if (!first) {
+					sb.append(",");
+				}
+				sb.append(value);
+				first = false;
+			}
+			command.add(sb.toString());
+		}
+		if (this.bareMethods.isPresent() && !this.bareMethods.get().isEmpty()) {
+			StringBuilder sb = new StringBuilder("-bareMethods");
+			sb.append("=");
+			boolean first = true;
+			for (String value : this.bareMethods.get()) {
+				if (!first) {
+					sb.append(",");
+				}
+				sb.append(value);
+				first = false;
+			}
+			command.add(sb.toString());
+		}
+		if (this.mimeMethods.isPresent() && !this.mimeMethods.get().isEmpty()) {
+			StringBuilder sb = new StringBuilder("-mimeMethods");
+			sb.append("=");
+			boolean first = true;
+			for (String value : this.mimeMethods.get()) {
+				if (!first) {
+					sb.append(",");
+				}
+				sb.append(value);
+				first = false;
+			}
 
-		return null;
+			command.add(sb.toString());
+		}
+		if (!this.wsdl.isPresent()) {
+			throw new GradleException("'wsdl' property is not present");
+		}
+		command.add(this.wsdl.get().getAsFile().toURI().toString());
+		return command;
 	}
 }
