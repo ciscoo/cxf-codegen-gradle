@@ -82,6 +82,13 @@ tasks {
             release.set(Integer.parseInt(JavaVersion.VERSION_1_8.majorVersion))
         }
     }
+    withType<Jar>().configureEach {
+        manifest {
+            attributes["Automatic-Module-Name"] = project.name.replace("-", ".")
+            attributes["Implementation-Title"] = project.description
+            attributes["Implementation-Version"] = project.version.toString()
+        }
+    }
     withType<Javadoc>().configureEach {
         options {
             memberLevel = JavadocMemberLevel.PROTECTED
