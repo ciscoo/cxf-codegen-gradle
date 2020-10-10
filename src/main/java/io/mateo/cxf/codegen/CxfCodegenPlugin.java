@@ -118,7 +118,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		// Same dependencies defined in cxf-codegen-plugin's POM.
 		dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-core:" + DEFAULT_CXF_VERSION));
 		dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-common:" + DEFAULT_CXF_VERSION));
-		dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-core" + DEFAULT_CXF_VERSION));
+		dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-core:" + DEFAULT_CXF_VERSION));
 		dependencies.add(
 				dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:" + DEFAULT_CXF_VERSION));
 		dependencies
