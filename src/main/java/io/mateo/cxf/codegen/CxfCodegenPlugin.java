@@ -105,30 +105,28 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 			configuration.setCanBeConsumed(false);
 			configuration.setCanBeResolved(true);
 			configuration.setDescription("Classpath for CXF Codegen.");
-			configuration.getDependencies().addAllLater(createDependencies(project));
+			configuration.getDependencies().addAll(createDependencies(project));
 		});
 	}
 
-	private Provider<List<Dependency>> createDependencies(Project project) {
-		return project.provider(() -> {
-			DependencyHandler dependencyHandler = project.getDependencies();
-			List<Dependency> dependencies = new ArrayList<>();
+	private List<Dependency> createDependencies(Project project) {
+		DependencyHandler dependencyHandler = project.getDependencies();
+		List<Dependency> dependencies = new ArrayList<>();
 
-			// Same dependencies defined in cxf-codegen-plugin's POM.
-			dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-core:" + DEFAULT_CXF_VERSION));
-			dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-common:" + DEFAULT_CXF_VERSION));
-			dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-core" + DEFAULT_CXF_VERSION));
-			dependencies.add(dependencyHandler
-					.create("org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:" + DEFAULT_CXF_VERSION));
-			dependencies.add(
-					dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:" + DEFAULT_CXF_VERSION));
+		// Same dependencies defined in cxf-codegen-plugin's POM.
+		dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-core:" + DEFAULT_CXF_VERSION));
+		dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-common:" + DEFAULT_CXF_VERSION));
+		dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-core" + DEFAULT_CXF_VERSION));
+		dependencies.add(
+				dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:" + DEFAULT_CXF_VERSION));
+		dependencies
+				.add(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:" + DEFAULT_CXF_VERSION));
 
-			// The Maven plugin excludes cxf-rt-frontend-simple, so exclude it here as well.
-			ModuleDependency dependency = (ModuleDependency) dependencyHandler
-					.create("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:" + DEFAULT_CXF_VERSION);
-			dependency.exclude(Collections.singletonMap("org.apache.cxf", "cxf-rt-frontend-simple"));
+		// The Maven plugin excludes cxf-rt-frontend-simple, so exclude it here as well.
+		ModuleDependency dependency = (ModuleDependency) dependencyHandler
+				.create("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:" + DEFAULT_CXF_VERSION);
+		dependency.exclude(Collections.singletonMap("org.apache.cxf", "cxf-rt-frontend-simple"));
 
-			return dependencies;
-		});
+		return dependencies;
 	}
 }
