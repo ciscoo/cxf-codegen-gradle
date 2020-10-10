@@ -1,3 +1,5 @@
+import java.nio.charset.StandardCharsets
+import java.util.Locale
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
@@ -72,6 +74,26 @@ tasks {
     }
     publishPlugins {
         dependsOn(build)
+    }
+    withType<Javadoc>().configureEach {
+        options {
+            memberLevel = JavadocMemberLevel.PROTECTED
+            header = project.name
+            encoding = StandardCharsets.UTF_8.toString()
+            locale = Locale.ENGLISH.language
+            this as StandardJavadocDocletOptions
+            links = listOf(
+                "https://docs.oracle.com/javase/8/docs/api/",
+                "https://docs.gradle.org/current/javadoc/"
+            )
+            addBooleanOption("Xdoclint:html,syntax", true)
+            addBooleanOption("html5", true)
+            use()
+            noTimestamp()
+            // Suppress warnings due to cross-module @see and @link references.
+            logging.captureStandardError(LogLevel.INFO)
+            logging.captureStandardOutput(LogLevel.INFO)
+        }
     }
     withType<Test>().configureEach {
         useJUnitPlatform()
