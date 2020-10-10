@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.mateo.cxf.codegen
+package io.mateo.cxf.codegen;
 
-import io.mateo.cxf.codegen.wsdl2java.WsdlOption
-import javax.inject.Inject
-import org.gradle.api.NamedDomainObjectContainer
-import org.gradle.api.model.ObjectFactory
+import org.gradle.api.file.DirectoryProperty;
 
 /**
- * Entry point to the code generation Gradle DSL.
+ * Base interface for WSDL options.
  */
-open class CxfCodegenExtension @Inject constructor(objects: ObjectFactory) {
+public interface GenericWsdlOption {
 
-    /**
-     * Java code generation sources.
-     */
-    val wsdl2java: NamedDomainObjectContainer<WsdlOption> = objects.domainObjectContainer(WsdlOption::class.java)
+	/**
+	 * Specifies the directory the generated code files are written.
+	 *
+	 * <p>
+	 * If not set, the convention is {@code "${project.buildDir}/generated-sources"}
+	 *
+	 * @return output directory
+	 */
+	DirectoryProperty getOutputDir();
 }

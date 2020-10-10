@@ -13,12 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.mateo.cxf.codegen.wsdl2java
+package io.mateo.cxf.codegen.wsdl2java;
 
-import javax.inject.Inject
-import org.gradle.api.tasks.JavaExec
+import org.gradle.api.tasks.JavaExec;
+
+import javax.inject.Inject;
 
 /**
  * Generates Java sources from WSDLs.
  */
-open class Wsdl2JavaTask @Inject constructor() : JavaExec()
+public class Wsdl2JavaTask extends JavaExec {
+
+	@Inject
+	public Wsdl2JavaTask() {
+		super();
+	}
+}
