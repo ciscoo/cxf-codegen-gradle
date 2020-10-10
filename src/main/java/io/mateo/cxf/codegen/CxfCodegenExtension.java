@@ -16,7 +16,6 @@
 package io.mateo.cxf.codegen;
 
 import io.mateo.cxf.codegen.wsdl2java.WsdlOption;
-import org.gradle.api.Action;
 import org.gradle.api.NamedDomainObjectContainer;
 import org.gradle.api.model.ObjectFactory;
 
@@ -43,15 +42,4 @@ public class CxfCodegenExtension {
 		return this.wsdl2java;
 	}
 
-	/**
-	 * Configures the Java source for code generation.
-	 *
-	 * @param configurationAction
-	 *            action to use to configure the Java source
-	 * @return wsdl2java container
-	 */
-	private NamedDomainObjectContainer<WsdlOption> wsdl2java(Action<? super WsdlOption> configurationAction) {
-		wsdl2java.configureEach(configurationAction);
-		return wsdl2java;
-	}
 }
