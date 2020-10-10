@@ -31,6 +31,8 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * {@link Plugin} for code generation from WSDLs using Apache CXF.
@@ -125,7 +127,10 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		// The Maven plugin excludes cxf-rt-frontend-simple, so exclude it here as well.
 		ModuleDependency dependency = (ModuleDependency) dependencyHandler
 				.create("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:" + DEFAULT_CXF_VERSION);
-		dependency.exclude(Collections.singletonMap("org.apache.cxf", "cxf-rt-frontend-simple"));
+		Map<String, String> excludeProperties = new HashMap<>();
+		excludeProperties.put("group", "org.apache.cxf");
+		excludeProperties.put("module", "cxf-rt-frontend-simple");
+		dependency.exclude(excludeProperties);
 
 		return dependencies;
 	}
