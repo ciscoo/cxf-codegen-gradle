@@ -76,6 +76,12 @@ tasks {
     publishPlugins {
         dependsOn(build)
     }
+    withType<JavaCompile>().configureEach {
+        with(options) {
+            encoding = StandardCharsets.UTF_8.toString()
+            release.set(Integer.parseInt(JavaVersion.VERSION_1_8.majorVersion))
+        }
+    }
     withType<Javadoc>().configureEach {
         options {
             memberLevel = JavadocMemberLevel.PROTECTED
