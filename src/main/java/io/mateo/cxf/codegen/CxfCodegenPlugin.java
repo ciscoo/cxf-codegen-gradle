@@ -43,17 +43,17 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	 * Name of the {@link Configuration} where dependencies are used for code
 	 * generation.
 	 */
-	public final String CXF_CODEGEN_CONFIGURATION_NAME = "cxfCodegen";
+	public static final String CXF_CODEGEN_CONFIGURATION_NAME = "cxfCodegen";
 
 	/**
 	 * Name of the extension contributed by this plugin.
 	 */
-	public final String CXF_CODEGEN_EXTENSION_NAME = "cxfCodegen";
+	public static final String CXF_CODEGEN_EXTENSION_NAME = "cxfCodegen";
 
 	/**
 	 * Task name to execute all {@link Wsdl2JavaTask} tasks.
 	 */
-	public final String WSDL2JAVA_TASK_NAME = "wsdl2java";
+	public static final String WSDL2JAVA_TASK_NAME = "wsdl2java";
 
 	static final String DEFAULT_CXF_VERSION = "3.4.0";
 
