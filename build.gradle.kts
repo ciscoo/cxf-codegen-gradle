@@ -42,6 +42,7 @@ spotless {
     java {
         eclipse()
         licenseHeaderFile(rootProject.file("src/spotless/apache-license-2.0.java"), "(package|import|open|module)")
+        removeUnusedImports()
         trimTrailingWhitespace()
         endWithNewline()
     }
