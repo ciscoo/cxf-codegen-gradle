@@ -85,7 +85,7 @@ public class WsdlOption implements Option, Named {
 
 	private final Property<Boolean> markGenerated;
 
-	private final Property<Boolean> suppressGeneratedData;
+	private final Property<Boolean> suppressGeneratedDate;
 
 	private final Property<String> serviceName;
 
@@ -130,7 +130,7 @@ public class WsdlOption implements Option, Named {
 		this.exceptionSuper = objects.property(String.class);
 		this.seiSuper = objects.listProperty(String.class);
 		this.markGenerated = objects.property(Boolean.class);
-		this.suppressGeneratedData = objects.property(Boolean.class);
+		this.suppressGeneratedDate = objects.property(Boolean.class);
 		this.serviceName = objects.property(String.class);
 		this.autoNameResolution = objects.property(Boolean.class);
 		this.noAddressBinding = objects.property(Boolean.class);
@@ -334,8 +334,8 @@ public class WsdlOption implements Option, Named {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Property<Boolean> getSuppressGeneratedData() {
-		return this.suppressGeneratedData;
+	public Property<Boolean> getSuppressGeneratedDate() {
+		return this.suppressGeneratedDate;
 	}
 
 	/**
@@ -454,7 +454,7 @@ public class WsdlOption implements Option, Named {
 		if (this.markGenerated.isPresent() && this.markGenerated.get()) {
 			command.add("-mark-generated");
 		}
-		if (this.suppressGeneratedData.isPresent() && this.suppressGeneratedData.get()) {
+		if (this.suppressGeneratedDate.isPresent() && this.suppressGeneratedDate.get()) {
 			command.add("-suppress-generated-date");
 		}
 		if (this.defaultExcludesNamespace.isPresent()) {

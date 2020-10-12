@@ -270,9 +270,9 @@ public interface Option extends GenericWsdlOption {
 	 * Enables or disables writing the current timestamp in the generated file
 	 * (since CXF version 3.2.2).
 	 *
-	 * @return suppress generated data indicator
+	 * @return suppress generated date indicator
 	 */
-	Property<Boolean> getSuppressGeneratedData();
+	Property<Boolean> getSuppressGeneratedDate();
 
 	/**
 	 * Specifies the WSDL service name to use for the generated code.
