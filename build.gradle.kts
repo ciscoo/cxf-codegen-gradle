@@ -94,6 +94,10 @@ tasks {
     }
 
     withType<Jar>().configureEach {
+        from(rootDir) {
+            include("LICENSE.txt")
+            into("META-INF")
+        }
         manifest {
             attributes["Automatic-Module-Name"] = project.name.replace("-", ".")
             attributes["Implementation-Title"] = project.description
