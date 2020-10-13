@@ -84,6 +84,15 @@ tasks {
             release.set(Integer.parseInt(JavaVersion.VERSION_1_8.majorVersion))
         }
     }
+
+    // https://docs.oracle.com/en/java/javase/15/docs/specs/man/javac.html
+    compileJava {
+        options.compilerArgs.addAll(listOf("-Xlint:all", "-Werror"))
+    }
+    compileTestJava {
+        options.compilerArgs.addAll(listOf("-Xlint", "-Xlint:-overrides", "-Werror", "-parameters"))
+    }
+
     withType<Jar>().configureEach {
         manifest {
             attributes["Automatic-Module-Name"] = project.name.replace("-", ".")
