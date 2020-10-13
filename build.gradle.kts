@@ -14,7 +14,7 @@ repositories {
 }
 
 group = "io.mateo"
-description = "Plugin to generate Java artifacts from WSDL"
+description = "CXF Codegen Gradle"
 
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.7.0"))
@@ -27,7 +27,7 @@ gradlePlugin {
         create("cxfCodegen") {
             id = "io.mateo.cxf-codegen"
             displayName = "CXF Codegen Gradle"
-            description = project.description
+            description = "Plugin to generate Java artifacts from WSDL"
             implementationClass = "io.mateo.cxf.codegen.CxfCodegenPlugin"
         }
     }
