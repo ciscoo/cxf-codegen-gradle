@@ -121,7 +121,9 @@ tasks {
         }
     }
     withType<Test>().configureEach {
-        useJUnitPlatform()
+        useJUnitPlatform {
+            includeEngines("junit-jupiter")
+        }
         testLogging {
             events = setOf(
                     TestLogEvent.FAILED,
