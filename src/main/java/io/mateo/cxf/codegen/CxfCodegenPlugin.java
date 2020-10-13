@@ -66,7 +66,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 
 	private void registerAggregateTask(Project project) {
 		project.getTasks().register(WSDL2JAVA_TASK_NAME, (task) -> {
-			task.dependsOn(project.getTasks().withType(Wsdl2JavaTask.class));
+			task.setDependsOn(project.getTasks().withType(Wsdl2JavaTask.class));
 			task.setGroup(LifecycleBasePlugin.BUILD_GROUP);
 			task.setDescription("Runs all wsdl2java tasks");
 		});
