@@ -100,8 +100,11 @@ tasks {
         }
         manifest {
             attributes["Automatic-Module-Name"] = project.name.replace("-", ".")
+            attributes["Created-By"] = "${System.getProperty("java.version")} (${System.getProperty("java.vendor")} ${System.getProperty("java.vm.version")})"
             attributes["Implementation-Title"] = project.description
             attributes["Implementation-Version"] = project.version.toString()
+            attributes["Specification-Title"] = project.description
+            attributes["Specification-Version"] = project.version.toString()
         }
     }
     withType<Javadoc>().configureEach {
