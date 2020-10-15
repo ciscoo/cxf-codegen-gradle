@@ -107,7 +107,7 @@ tasks {
             attributes["Specification-Version"] = project.version.toString()
         }
     }
-    withType<Javadoc>().configureEach {
+    javadoc {
         options {
             memberLevel = JavadocMemberLevel.PROTECTED
             header = project.name
