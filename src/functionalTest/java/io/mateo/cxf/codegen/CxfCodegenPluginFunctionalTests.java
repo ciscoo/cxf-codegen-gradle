@@ -17,8 +17,15 @@ package io.mateo.cxf.codegen;
 
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibility;
+import org.apache.commons.io.FileUtils;
 import org.gradle.testkit.runner.BuildResult;
 import org.junit.jupiter.api.TestTemplate;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,4 +40,32 @@ class CxfCodegenPluginFunctionalTests {
 		assertThat(result.getOutput()).contains("'wsdl' property is not present");
 	}
 
+	@TestTemplate
+	void generatesJavaFromWsdl(GradleBuild gradleBuild) {
+		BuildResult result = gradleBuild.build("wsdl2javaCalculator");
+
+		assertThat(result.getOutput()).contains("Task :wsdl2javaCalculator");
+		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
+			File generatedSources = FileUtils.getFile(projectDir, "build", "generated-sources");
+			assertThat(generatedSources).exists();
+			assertThat(generatedSources).isNotEmptyDirectory();
+
+			File packageDir = FileUtils.getFile(generatedSources, "org", "tempuri");
+			assertThat(packageDir).exists();
+			assertThat(packageDir).isNotEmptyDirectory();
+
+			File[] sourcesDir = Objects.requireNonNull(packageDir.listFiles(), "sources dir");
+			assertThat(sourcesDir).isNotEmpty();
+			assertThat(sourcesDir).hasSize(12);
+
+			List<String> generatedFiles = Arrays.stream(sourcesDir).map(File::getName).sorted()
+					.collect(Collectors.toList());
+			List<String> expectedFiles = List.of("Add.java", "AddResponse.java", "Calculator.java",
+					"CalculatorSoap.java", "Divide.java", "DivideResponse.java", "Multiply.java",
+					"MultiplyResponse.java", "ObjectFactory.java", "Subtract.java", "SubtractResponse.java",
+					"package-info.java");
+
+			assertThat(generatedFiles).containsExactlyElementsOf(expectedFiles);
+		});
+	}
 }
