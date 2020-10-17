@@ -1,0 +1,10 @@
+plugins {
+    id "java"
+    id "io.mateo.cxf-codegen"
+}
+
+cxfCodegen {
+    wsdl2java {
+        calculator
+    }
+}
