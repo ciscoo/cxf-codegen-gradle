@@ -33,10 +33,13 @@ class WsdlOptionTests {
 
 	private File temp;
 
+	private File outputDir;
+
 	@BeforeEach
 	void setUp(@TempDir File temp) {
 		Project project = ProjectBuilder.builder().withProjectDir(temp).build();
 		this.temp = temp;
+		this.outputDir = project.getLayout().getBuildDirectory().dir("generated-sources").get().getAsFile();
 		this.option = new WsdlOption("sample", project.getObjects(), project.getLayout());
 		this.option.getWsdl().set(this.temp);
 	}
@@ -45,7 +48,7 @@ class WsdlOptionTests {
 	void packageNames() {
 		this.option.getPackageNames().set(Arrays.asList("com.example.foo", "com.example.bar"));
 		List<String> expected = Arrays.asList("-p", "com.example.foo", "-p", "com.example.bar", "-d",
-				"/generated-sources", this.temp.toURI().toString());
+				this.outputDir.getAbsolutePath(), this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 
@@ -55,8 +58,8 @@ class WsdlOptionTests {
 	@Test
 	void namespaceExcludes() {
 		this.option.getNamespaceExcludes().set(Arrays.asList("foo", "bar"));
-		List<String> expected = Arrays.asList("-nexclude", "foo", "-nexclude", "bar", "-d", "/generated-sources",
-				this.temp.toURI().toString());
+		List<String> expected = Arrays.asList("-nexclude", "foo", "-nexclude", "bar", "-d",
+				this.outputDir.getAbsolutePath(), this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 
@@ -66,7 +69,7 @@ class WsdlOptionTests {
 	@Test
 	void bindingFiles() {
 		this.option.getBindingFiles().set(Arrays.asList("foo", "bar"));
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-b",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-b",
 				new File(this.temp, "foo").toURI().toString(), "-b", new File(this.temp, "bar").toURI().toString(),
 				this.temp.toURI().toString());
 
@@ -78,7 +81,8 @@ class WsdlOptionTests {
 	@Test
 	void frontend() {
 		this.option.getFrontend().set("foo");
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-fe", "foo", this.temp.toURI().toString());
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-fe", "foo",
+				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 
@@ -88,7 +92,8 @@ class WsdlOptionTests {
 	@Test
 	void databinding() {
 		this.option.getDatabinding().set("foo");
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-db", "foo", this.temp.toURI().toString());
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-db", "foo",
+				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 
@@ -98,7 +103,8 @@ class WsdlOptionTests {
 	@Test
 	void wsdlVersion() {
 		this.option.getWsdlVersion().set("foo");
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-wv", "foo", this.temp.toURI().toString());
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-wv", "foo",
+				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 
@@ -108,7 +114,7 @@ class WsdlOptionTests {
 	@Test
 	void catalog() {
 		this.option.getCatalog().set("foo");
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-catalog", "foo",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-catalog", "foo",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -119,7 +125,7 @@ class WsdlOptionTests {
 	@Test
 	void extendedSoapHeaders() {
 		this.option.getExtendedSoapHeaders().set(true);
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-exsh", "true",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-exsh", "true",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -130,7 +136,8 @@ class WsdlOptionTests {
 	@Test
 	void noTypes() {
 		this.option.getNoTypes().set(true);
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-noTypes", this.temp.toURI().toString());
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-noTypes",
+				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 
@@ -140,7 +147,7 @@ class WsdlOptionTests {
 	@Test
 	void allowElementRefs() {
 		this.option.getAllowElementRefs().set(true);
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-allowElementReferences",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-allowElementReferences",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -151,7 +158,7 @@ class WsdlOptionTests {
 	@Test
 	void validateWsdl() {
 		this.option.getValidateWsdl().set("foo");
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-validate=foo",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-validate=foo",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -162,7 +169,7 @@ class WsdlOptionTests {
 	@Test
 	void markGenerated() {
 		this.option.getMarkGenerated().set(true);
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-mark-generated",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-mark-generated",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -173,7 +180,7 @@ class WsdlOptionTests {
 	@Test
 	void suppressGeneratedDate() {
 		this.option.getSuppressGeneratedDate().set(true);
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-suppress-generated-date",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-suppress-generated-date",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -184,7 +191,8 @@ class WsdlOptionTests {
 	@Test
 	void defaultExcludesNamespace() {
 		this.option.getDefaultExcludesNamespace().set(true);
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-dex", "true", this.temp.toURI().toString());
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-dex", "true",
+				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 
@@ -194,7 +202,8 @@ class WsdlOptionTests {
 	@Test
 	void defaultNamespacePackingMapping() {
 		this.option.getDefaultNamespacePackageMapping().set(true);
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-dns", "true", this.temp.toURI().toString());
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-dns", "true",
+				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 
@@ -204,7 +213,8 @@ class WsdlOptionTests {
 	@Test
 	void serviceName() {
 		this.option.getServiceName().set("foo");
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-sn", "foo", this.temp.toURI().toString());
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-sn", "foo",
+				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 
@@ -214,7 +224,7 @@ class WsdlOptionTests {
 	@Test
 	void faultSerial() {
 		this.option.getFaultSerialVersionUid().set("1234");
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-faultSerialVersionUID", "1234",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-faultSerialVersionUID", "1234",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -225,7 +235,7 @@ class WsdlOptionTests {
 	@Test
 	void exceptionSuper() {
 		this.option.getExceptionSuper().set(UncheckedIOException.class.toString());
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-exceptionSuper",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-exceptionSuper",
 				UncheckedIOException.class.toString(), this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -236,8 +246,8 @@ class WsdlOptionTests {
 	@Test
 	void seiSuper() {
 		this.option.getSeiSuper().set(Arrays.asList("foo", "bar"));
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-seiSuper", "foo", "-seiSuper", "bar",
-				this.temp.toURI().toString());
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-seiSuper", "foo", "-seiSuper",
+				"bar", this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 
@@ -247,7 +257,7 @@ class WsdlOptionTests {
 	@Test
 	void autoNameResolution() {
 		this.option.getAutoNameResolution().set(true);
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-autoNameResolution",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-autoNameResolution",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -258,7 +268,7 @@ class WsdlOptionTests {
 	@Test
 	void noAddressBinding() {
 		this.option.getNoAddressBinding().set(true);
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-noAddressBinding",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-noAddressBinding",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -269,7 +279,7 @@ class WsdlOptionTests {
 	@Test
 	void xjcArgs() {
 		this.option.getXjcArgs().set(Arrays.asList("-Xts", "-Xwsdlextension"));
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-xjc-Xts", "-xjc-Xwsdlextension",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-xjc-Xts", "-xjc-Xwsdlextension",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -280,7 +290,7 @@ class WsdlOptionTests {
 	@Test
 	void extraArgs() {
 		this.option.getExtraArgs().set(Arrays.asList("-client", "-all"));
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-client", "-all",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-client", "-all",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -291,7 +301,7 @@ class WsdlOptionTests {
 	@Test
 	void wsdlLocation() {
 		this.option.getWsdlLocation().set("foo");
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-wsdlLocation", "foo",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-wsdlLocation", "foo",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -302,7 +312,8 @@ class WsdlOptionTests {
 	@Test
 	void wsdlList() {
 		this.option.getWsdlList().set(true);
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-wsdlList", this.temp.toURI().toString());
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-wsdlList",
+				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 
@@ -312,7 +323,8 @@ class WsdlOptionTests {
 	@Test
 	void verbose() {
 		this.option.getVerbose().set(true);
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-verbose", this.temp.toURI().toString());
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-verbose",
+				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 
@@ -322,7 +334,7 @@ class WsdlOptionTests {
 	@Test
 	void asyncMethods() {
 		this.option.getAsyncMethods().set(Arrays.asList("foo", "bar"));
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-asyncMethods=foo,bar",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-asyncMethods=foo,bar",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -333,7 +345,7 @@ class WsdlOptionTests {
 	@Test
 	void bareMethods() {
 		this.option.getBareMethods().set(Arrays.asList("foo", "bar"));
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-bareMethods=foo,bar",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-bareMethods=foo,bar",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -344,7 +356,7 @@ class WsdlOptionTests {
 	@Test
 	void mimeMethods() {
 		this.option.getMimeMethods().set(Arrays.asList("foo", "bar"));
-		List<String> expected = Arrays.asList("-d", "/generated-sources", "-mimeMethods=foo,bar",
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), "-mimeMethods=foo,bar",
 				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
@@ -354,7 +366,7 @@ class WsdlOptionTests {
 
 	@Test
 	void wsdlOnly() {
-		List<String> expected = Arrays.asList("-d", "/generated-sources", this.temp.toURI().toString());
+		List<String> expected = Arrays.asList("-d", this.outputDir.getAbsolutePath(), this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 
