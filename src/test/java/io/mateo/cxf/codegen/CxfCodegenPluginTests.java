@@ -30,7 +30,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -68,7 +67,7 @@ class CxfCodegenPluginTests {
 	@Test
 	void defaultDependencies() {
 		Spec<Dependency> spec = (dependency) -> dependency.getName().equals("cxf-tools-wsdlto-frontend-jaxws");
-		List<String> expectedDependencies = Arrays.asList("cxf-core", "cxf-tools-common", "cxf-tools-wsdlto-core",
+		List<String> expectedDependencies = List.of("cxf-core", "cxf-tools-common", "cxf-tools-wsdlto-core",
 				"cxf-tools-wsdlto-databinding-jaxb", "cxf-tools-wsdlto-frontend-jaxws");
 
 		Configuration configuration = this.project.getConfigurations()
