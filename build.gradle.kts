@@ -34,8 +34,10 @@ gradlePlugin {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
     withSourcesJar()
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(15))
+    }
 }
 
 spotless {
@@ -79,17 +81,16 @@ tasks {
         dependsOn(build)
     }
     withType<JavaCompile>().configureEach {
-        with(options) {
-            encoding = StandardCharsets.UTF_8.toString()
-            release.set(Integer.parseInt(JavaVersion.VERSION_1_8.majorVersion))
-        }
+        options.encoding = StandardCharsets.UTF_8.toString()
     }
 
     // https://docs.oracle.com/en/java/javase/15/docs/specs/man/javac.html
     compileJava {
+        options.release.set(JavaVersion.VERSION_1_8.majorVersion.toInt())
         options.compilerArgs.addAll(listOf("-Xlint:all", "-Werror"))
     }
     compileTestJava {
+        options.release.set(JavaVersion.VERSION_15.majorVersion.toInt())
         options.compilerArgs.addAll(listOf("-Xlint", "-Xlint:-overrides", "-Werror", "-parameters"))
     }
 
@@ -126,6 +127,9 @@ tasks {
             logging.captureStandardError(LogLevel.INFO)
             logging.captureStandardOutput(LogLevel.INFO)
         }
+        javadocTool.set(javaToolchains.javadocToolFor {
+            languageVersion.set(JavaLanguageVersion.of(15))
+        })
     }
     withType<Test>().configureEach {
         useJUnitPlatform {
@@ -138,6 +142,9 @@ tasks {
                     TestLogEvent.SKIPPED
             )
         }
+        javaLauncher.set(javaToolchains.launcherFor {
+            languageVersion.set(JavaLanguageVersion.of(15))
+        })
     }
     wrapper {
         distributionType = Wrapper.DistributionType.ALL
