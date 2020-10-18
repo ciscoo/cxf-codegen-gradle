@@ -93,7 +93,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 				task.setMain("org.apache.cxf.tools.wsdlto.WSDLToJava");
 				task.setClasspath(configuration.get());
 				task.setGroup(LifecycleBasePlugin.BUILD_GROUP);
-				task.setGroup("Generates Java sources for " + name);
+				task.setDescription("Generates Java sources for '" + option.getName() + "'");
 				task.setArgs(option.generateArgs());
 			});
 		});
