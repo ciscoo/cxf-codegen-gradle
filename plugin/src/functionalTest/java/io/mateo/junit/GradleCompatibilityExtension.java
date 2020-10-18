@@ -34,9 +34,9 @@ import java.util.stream.Stream;
  * <p>
  * Heavily based on the Spring Boot extension by Andy Wilkinson.
  */
-final class GradleCompatibilityExtension implements TestTemplateInvocationContextProvider {
+public final class GradleCompatibilityExtension implements TestTemplateInvocationContextProvider {
 
-	private static final List<String> GRADLE_VERSIONS;
+	private static List<String> GRADLE_VERSIONS;
 
 	static {
 		JavaVersion javaVersion = JavaVersion.current();
@@ -48,6 +48,18 @@ final class GradleCompatibilityExtension implements TestTemplateInvocationContex
 					"default");
 		}
 	}
+
+	public GradleCompatibilityExtension() {
+	}
+
+	public GradleCompatibilityExtension(String... versions) {
+		withVersions(versions);
+	}
+
+	static void withVersions(String... versions) {
+		GRADLE_VERSIONS = List.of(versions);
+	}
+
 	@Override
 	public boolean supportsTestTemplate(ExtensionContext context) {
 		return true;
