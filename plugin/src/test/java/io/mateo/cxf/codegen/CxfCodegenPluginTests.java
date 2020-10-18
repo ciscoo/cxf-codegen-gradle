@@ -35,8 +35,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 class CxfCodegenPluginTests {
 
@@ -99,6 +101,10 @@ class CxfCodegenPluginTests {
 		TaskContainer tasks = project.getTasks();
 
 		assertThat(tasks.withType(Wsdl2JavaTask.class)).hasSize(2);
+		assertThat(tasks.getByName("wsdl2javaFoo")).asInstanceOf(InstanceOfAssertFactories.type(Wsdl2JavaTask.class))
+				.satisfies((task) -> wsdl2javaTaskAssertions(task, "foo"));
+		assertThat(tasks.getByName("wsdl2javaBar")).asInstanceOf(InstanceOfAssertFactories.type(Wsdl2JavaTask.class))
+				.satisfies((task) -> wsdl2javaTaskAssertions(task, "bar"));
 		assertThat(tasks.findByName(CxfCodegenPlugin.WSDL2JAVA_TASK_NAME)).isNotNull().satisfies((wsdl2java) -> {
 			assertThat(wsdl2java).isInstanceOf(DefaultTask.class);
 			assertThat(wsdl2java.getDependsOn()).hasSize(2);
@@ -119,5 +125,17 @@ class CxfCodegenPluginTests {
 		});
 
 		assertThat(java.getSrcDirs()).hasSize(2);
+	}
+
+	private static void wsdl2javaTaskAssertions(Wsdl2JavaTask wsdl2Java, String sourceName) {
+		Set<File> outputs = wsdl2Java.getOutputs().getFiles().getFiles();
+		assertThat(outputs).hasSize(1);
+		assertThat(outputs.iterator().next().toPath().endsWith("build/generated-sources"));
+		assertThat(wsdl2Java.getMain()).isEqualTo("org.apache.cxf.tools.wsdlto.WSDLToJava");
+		// Can not resolve configuration in unit tests, so assert on error message.
+		assertThatCode(() -> wsdl2Java.getClasspath().getFiles()).hasMessageContaining("configuration ':cxfCodegen'");
+		assertThat(wsdl2Java.getGroup()).isEqualTo(LifecycleBasePlugin.BUILD_GROUP);
+		assertThat(wsdl2Java.getDescription()).isEqualTo("Generates Java sources for '%s'".formatted(sourceName));
+		assertThat(wsdl2Java.getArgs()).hasSize(3);
 	}
 }
