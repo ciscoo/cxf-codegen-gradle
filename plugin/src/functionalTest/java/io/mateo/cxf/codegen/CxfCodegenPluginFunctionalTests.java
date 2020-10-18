@@ -19,6 +19,7 @@ import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibility;
 import org.apache.commons.io.FileUtils;
 import org.gradle.testkit.runner.BuildResult;
+import org.gradle.testkit.runner.TaskOutcome;
 import org.junit.jupiter.api.TestTemplate;
 
 import java.io.File;
@@ -44,7 +45,8 @@ class CxfCodegenPluginFunctionalTests {
 	void generatesJavaFromWsdl(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.build("wsdl2javaCalculator");
 
-		assertThat(result.getOutput()).contains("Task :wsdl2javaCalculator");
+		assertThat(result.getTasks()).hasSize(1);
+		assertThat(result.getTasks().get(0).getOutcome()).isEqualTo(TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
 			File generatedSources = FileUtils.getFile(projectDir, "build", "generated-sources");
 			assertThat(generatedSources).exists();
