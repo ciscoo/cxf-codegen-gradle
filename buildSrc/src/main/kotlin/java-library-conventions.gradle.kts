@@ -6,6 +6,17 @@ plugins {
     `java-library`
 }
 
+configurations {
+    val internal by registering {
+        isVisible = false
+        isCanBeConsumed = false
+        isCanBeResolved = false
+    }
+    matching { name.endsWith("Classpath") }.configureEach {
+        extendsFrom(internal.get())
+    }
+}
+
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.7.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
