@@ -31,7 +31,7 @@ configurations {
 }
 
 dependencies {
-    "functionalTestImplementation"("commons-io:commons-io:2.8.0")
+    "functionalTestImplementation"("commons-io:commons-io")
 }
 
 tasks {

@@ -18,9 +18,9 @@ configurations {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.7.0"))
+    "internal"(platform(project(":dependencies")))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.assertj:assertj-core:3.17.2")
+    testImplementation("org.assertj:assertj-core")
 }
 
 java {
