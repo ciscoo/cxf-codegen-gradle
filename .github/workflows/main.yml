@@ -18,15 +18,15 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            /root/.gradle/caches/
-            /root/.gradle/wrapper/dists
+            ~/.gradle/caches/
+            ~/.gradle/wrapper/dists
           key: test-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', '**/gradle.properties', 'gradle/**') }}
           restore-keys: |
             test-${{ runner.os }}-gradle-
       - name: Cache local Maven repository
         uses: actions/cache@v2
         with:
-          path: /root/.m2/repository
+          path: ~/.m2/repository
           key: test-${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             test-${{ runner.os }}-maven-
