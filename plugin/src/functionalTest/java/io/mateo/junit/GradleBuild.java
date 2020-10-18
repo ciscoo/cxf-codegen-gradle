@@ -80,15 +80,32 @@ public class GradleBuild {
 		}
 	}
 
-	public GradleRunner prepareRunner(String... arguments) throws IOException {
-		String scriptContent = FileUtils.readFileToString(new File(this.script), StandardCharsets.UTF_8);
-		FileUtils.writeStringToFile(new File(this.projectDir, "build%s".formatted(this.dsl.getExtension())),
-				scriptContent, StandardCharsets.UTF_8);
+	public GradleRunner prepareRunner(String... arguments) {
+		String scriptContent;
+		try {
+			scriptContent = FileUtils.readFileToString(new File(this.script), StandardCharsets.UTF_8);
+		} catch (IOException ex) {
+			throw new UncheckedIOException(ex);
+		}
+
+		try {
+			FileUtils.writeStringToFile(new File(this.projectDir, "build%s".formatted(this.dsl.getExtension())),
+					scriptContent, StandardCharsets.UTF_8);
+		} catch (IOException ex) {
+			throw new UncheckedIOException(ex);
+		}
+
 		List<String> settingsLines = List.of("startParameter.showStacktrace = ShowStacktrace.ALWAYS_FULL",
 				"startParameter.warningMode = WarningMode.All");
-		FileUtils.writeLines(new File(this.projectDir, "settings.gradle"), StandardCharsets.UTF_8.name(),
-				settingsLines);
-		FileUtils.copyDirectoryToDirectory(new File("src/functionalTest/resources/wsdls"), this.projectDir);
+
+		try {
+			FileUtils.writeLines(new File(this.projectDir, "settings.gradle"), StandardCharsets.UTF_8.name(),
+					settingsLines);
+			FileUtils.copyDirectoryToDirectory(new File("src/functionalTest/resources/wsdls"), this.projectDir);
+		} catch (IOException ex) {
+			throw new UncheckedIOException(ex);
+		}
+
 		GradleRunner gradleRunner = GradleRunner.create().withProjectDir(this.projectDir).withPluginClasspath();
 		gradleRunner.withDebug(true);
 		if (this.gradleVersion != null) {
