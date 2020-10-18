@@ -24,6 +24,7 @@ import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
 import org.gradle.api.specs.Spec;
 import org.gradle.api.tasks.TaskContainer;
+import org.gradle.language.base.plugins.LifecycleBasePlugin;
 import org.gradle.testfixtures.ProjectBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -98,6 +99,8 @@ class CxfCodegenPluginTests {
 		assertThat(tasks.findByName(CxfCodegenPlugin.WSDL2JAVA_TASK_NAME)).isNotNull().satisfies((wsdl2java) -> {
 			assertThat(wsdl2java).isInstanceOf(DefaultTask.class);
 			assertThat(wsdl2java.getDependsOn()).hasSize(2);
+			assertThat(wsdl2java.getGroup()).isEqualTo(LifecycleBasePlugin.BUILD_GROUP);
+			assertThat(wsdl2java.getDescription()).isEqualTo("Runs all wsdl2java tasks");
 		});
 	}
 }
