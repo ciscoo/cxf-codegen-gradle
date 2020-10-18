@@ -22,7 +22,10 @@ import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
+import org.gradle.api.file.SourceDirectorySet;
 import org.gradle.api.specs.Spec;
+import org.gradle.api.tasks.SourceSet;
+import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.language.base.plugins.LifecycleBasePlugin;
 import org.gradle.testfixtures.ProjectBuilder;
@@ -102,5 +105,19 @@ class CxfCodegenPluginTests {
 			assertThat(wsdl2java.getGroup()).isEqualTo(LifecycleBasePlugin.BUILD_GROUP);
 			assertThat(wsdl2java.getDescription()).isEqualTo("Runs all wsdl2java tasks");
 		});
+	}
+
+	@Test
+	void addsToSourceSet(@TempDir File temp) {
+		project.getPluginManager().apply("java");
+		SourceSetContainer sourceSets = project.getExtensions().getByType(SourceSetContainer.class);
+		SourceDirectorySet java = sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME).getJava();
+		assertThat(java.getSrcDirs()).hasSize(1);
+
+		project.getExtensions().configure(CxfCodegenExtension.class, (cxfCodegen) -> {
+			cxfCodegen.getWsdl2java().register("foo", (foo) -> foo.getWsdl().set(temp));
+		});
+
+		assertThat(java.getSrcDirs()).hasSize(2);
 	}
 }
