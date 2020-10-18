@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Gradle wrapper and dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            /root/.gradle/caches/
+            /root/.gradle/wrapper/dists
+          key: test-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', '**/gradle.properties', 'gradle/**') }}
+          restore-keys: |
+            test-${{ runner.os }}-gradle-
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: /root/.m2/repository
+          key: test-${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            test-${{ runner.os }}-maven-
+      - name: Test
+        run: |
+          ./gradlew --version
+          ./gradlew build
