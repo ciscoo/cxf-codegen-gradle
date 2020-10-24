@@ -47,4 +47,15 @@ tasks {
     publishPlugins {
         dependsOn(build)
     }
+    withType<Jar>().configureEach {
+        manifest.attributes["Automatic-Module-Name"] = "cxf.codegen.gradle"
+    }
+    javadoc {
+        options {
+            header = "CXF Codegen Gradle"
+            windowTitle = "CXF Codegen Gradle $version API"
+            this as StandardJavadocDocletOptions
+            docTitle = "CXF Codegen Gradle $version API"
+        }
+    }
 }
