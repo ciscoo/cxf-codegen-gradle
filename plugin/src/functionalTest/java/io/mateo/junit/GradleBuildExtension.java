@@ -62,7 +62,7 @@ public class GradleBuildExtension implements BeforeEachCallback, AfterEachCallba
 	}
 
 	private URL getBuildScript(ExtensionContext context) {
-		String name = "%s%s".formatted(context.getRequiredTestMethod().getName(),
+		String name = String.format("%s%s", context.getRequiredTestMethod().getName(),
 				this.gradleBuild.getDsl().getExtension());
 		return context.getRequiredTestClass().getResource(name);
 	}

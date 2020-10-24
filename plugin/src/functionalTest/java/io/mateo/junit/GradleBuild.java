@@ -89,8 +89,8 @@ public class GradleBuild {
 		}
 
 		try {
-			FileUtils.writeStringToFile(new File(this.projectDir, "build%s".formatted(this.dsl.getExtension())),
-					scriptContent, StandardCharsets.UTF_8);
+			FileUtils.writeStringToFile(new File(this.projectDir, "build" + this.dsl.getExtension()), scriptContent,
+					StandardCharsets.UTF_8);
 		} catch (IOException ex) {
 			throw new UncheckedIOException(ex);
 		}

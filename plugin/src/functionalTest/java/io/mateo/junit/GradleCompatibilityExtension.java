@@ -86,10 +86,10 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 		@Override
 		public String getDisplayName(int invocationIndex) {
 			if (this.gradleVersionDsl.getVersion().equals("default")) {
-				return "Gradle %s - %s ".formatted(GradleVersion.current().getVersion(),
+				return String.format("Gradle %s - %s ", GradleVersion.current().getVersion(),
 						this.gradleVersionDsl.getDsl().getName());
 			}
-			return "Gradle %s - %s".formatted(this.gradleVersionDsl.getVersion(),
+			return String.format("Gradle %s - %s", this.gradleVersionDsl.getVersion(),
 					this.gradleVersionDsl.getDsl().getName());
 		}
 

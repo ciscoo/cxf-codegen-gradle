@@ -135,7 +135,7 @@ class CxfCodegenPluginTests {
 		// Can not resolve configuration in unit tests, so assert on error message.
 		assertThatCode(() -> wsdl2Java.getClasspath().getFiles()).hasMessageContaining("configuration ':cxfCodegen'");
 		assertThat(wsdl2Java.getGroup()).isEqualTo(LifecycleBasePlugin.BUILD_GROUP);
-		assertThat(wsdl2Java.getDescription()).isEqualTo("Generates Java sources for '%s'".formatted(sourceName));
+		assertThat(wsdl2Java.getDescription()).isEqualTo(String.format("Generates Java sources for '%s'", sourceName));
 		assertThat(wsdl2Java.getArgs()).hasSize(3);
 	}
 }
