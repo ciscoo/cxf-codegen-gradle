@@ -4,7 +4,7 @@ plugins {
 }
 
 cxfCodegen {
-    wsdl2java {
+    wsdl2java.configure {
         calculator
     }
 }

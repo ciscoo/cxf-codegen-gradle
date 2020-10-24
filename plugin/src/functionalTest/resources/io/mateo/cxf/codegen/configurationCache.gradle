@@ -13,7 +13,7 @@ dependencies {
 }
 
 cxfCodegen {
-    wsdl2java {
+    wsdl2java.configure {
         calculator {
             wsdl = file("wsdls/calculator.wsdl")
         }
