@@ -27,7 +27,7 @@ java {
     withJavadocJar()
     withSourcesJar()
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(15))
+        languageVersion.set(JavaLanguageVersion.of(11))
     }
 }
 
@@ -63,7 +63,7 @@ tasks {
             )
         }
         javaLauncher.set(javaToolchains.launcherFor {
-            languageVersion.set(JavaLanguageVersion.of(15))
+            languageVersion.set(JavaLanguageVersion.of(11))
         })
     }
 
@@ -73,7 +73,7 @@ tasks {
     }
 
     compileTestJava {
-        options.release.set(JavaVersion.VERSION_15.majorVersion.toInt())
+        options.release.set(JavaVersion.VERSION_11.majorVersion.toInt())
         options.compilerArgs.addAll(listOf("-Xlint", "-Xlint:-overrides", "-Werror", "-parameters"))
     }
 
@@ -85,7 +85,7 @@ tasks {
             locale = Locale.ENGLISH.language
             this as StandardJavadocDocletOptions
             links = listOf(
-                "https://docs.oracle.com/javase/8/docs/api/",
+                "https://docs.oracle.com/en/java/javase/11/docs/api/",
                 "https://docs.gradle.org/current/javadoc/"
             )
             addBooleanOption("Xdoclint:html,syntax", true)
@@ -97,7 +97,7 @@ tasks {
             logging.captureStandardOutput(LogLevel.INFO)
         }
         javadocTool.set(javaToolchains.javadocToolFor {
-            languageVersion.set(JavaLanguageVersion.of(15))
+            languageVersion.set(JavaLanguageVersion.of(11))
         })
     }
 }
