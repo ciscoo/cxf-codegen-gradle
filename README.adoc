@@ -5,7 +5,7 @@ https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html[CXF Codeg
 
 == Building from Source
 
-You will need https://jdk.java.net/15/[JDK 15] to build CXF Codegen Gradle.
+You will need https://openjdk.java.net/projects/jdk/11/[JDK 11] to build CXF Codegen Gradle.
 
 TIP: A comptible JDK will automatically be downloaded by Gradle if you do not have one.
 See https://docs.gradle.org/current/userguide/toolchains.html[Toolchains for JVM projects] for more details.
