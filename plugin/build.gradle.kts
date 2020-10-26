@@ -6,13 +6,13 @@ plugins {
     id("com.diffplug.spotless")
 }
 
-description = "CXF Codegen Gradle"
+description = "CXF Codegen"
 
 gradlePlugin {
     plugins {
         create("cxfCodegen") {
             id = "io.mateo.cxf-codegen"
-            displayName = "CXF Codegen Gradle"
+            displayName = "CXF Codegen"
             description = "Plugin to generate Java artifacts from WSDL"
             implementationClass = "io.mateo.cxf.codegen.CxfCodegenPlugin"
         }
@@ -52,10 +52,10 @@ tasks {
     }
     javadoc {
         options {
-            header = "CXF Codegen Gradle"
-            windowTitle = "CXF Codegen Gradle $version API"
+            header = "CXF Codegen"
+            windowTitle = "CXF Codegen Grade Plugin $version API"
             this as StandardJavadocDocletOptions
-            docTitle = "CXF Codegen Gradle $version API"
+            docTitle = "CXF Codegen Gradle Plugin $version API"
         }
     }
 }

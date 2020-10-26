@@ -6,7 +6,7 @@ plugins {
     id("org.asciidoctor.jvm.convert")
 }
 
-description = "CXF Codegen Gradle documentation"
+description = "CXF Codegen documentation"
 
 tasks {
     val copyJavadoc by registering(Copy::class) {

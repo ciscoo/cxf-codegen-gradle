@@ -1,11 +1,11 @@
-= CXF Codegen Gradle
+= CXF Codegen
 
-CXF Codegen Gradle is, as the name implies, a Gradle plugin implementation of the
+CXF Codegen is a Gradle plugin port of the
 https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html[CXF Codegen Maven plugin].
 
 == Building from Source
 
-You will need https://openjdk.java.net/projects/jdk/11/[JDK 11] to build CXF Codegen Gradle.
+You will need https://openjdk.java.net/projects/jdk/11/[JDK 11] to build CXF Codegen.
 
 TIP: A comptible JDK will automatically be downloaded by Gradle if you do not have one.
 See https://docs.gradle.org/current/userguide/toolchains.html[Toolchains for JVM projects] for more details.

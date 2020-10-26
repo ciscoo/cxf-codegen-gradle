@@ -1,5 +1,5 @@
 [[user-guide]]
-= CXF Codegen Gradle User Guide
+= CXF Codegen User Guide
 Francisco Mateo
 // Settings
 :doctype: book
