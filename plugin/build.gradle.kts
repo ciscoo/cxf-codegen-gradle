@@ -13,7 +13,7 @@ gradlePlugin {
         create("cxfCodegen") {
             id = "io.mateo.cxf-codegen"
             displayName = "CXF Codegen"
-            description = "Plugin to generate Java artifacts from WSDL"
+            description = "Plugin to generate code sources from WSDL."
             implementationClass = "io.mateo.cxf.codegen.CxfCodegenPlugin"
         }
     }
