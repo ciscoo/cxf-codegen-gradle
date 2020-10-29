@@ -48,7 +48,7 @@ tasks {
         dependsOn(build)
     }
     withType<Jar>().configureEach {
-        manifest.attributes["Automatic-Module-Name"] = "cxf.codegen.gradle"
+        manifest.attributes["Automatic-Module-Name"] = "io.mateo.cxf.codegen"
     }
     javadoc {
         options {
