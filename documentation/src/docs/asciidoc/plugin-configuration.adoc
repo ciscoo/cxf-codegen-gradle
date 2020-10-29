@@ -31,8 +31,10 @@ Out-of-the-box, the following dependencies are added:
 * `org.apache.cxf:cxf-tools-wsdlto-core`
 * `org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb`
 * `org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws`
+* `org.apache.cxf:cxf-tools-wsdlto-frontend-javascript`
+** `org.apache.cxf:cxf-rt-frontend-simple` is excluded.
 
-These are the same dependencies defined in the Maven plugin's https://github.com/apache/cxf/blob/master/maven-plugins/codegen-plugin/pom.xml[POM].
+These are the same dependencies defined in the Maven plugin's https://github.com/apache/cxf/blob/cxf-3.4.0/maven-plugins/codegen-plugin/pom.xml#L71..L106[POM].
 
 [[dependency-version-constraints]]
 ==== Managing Dependency Versions

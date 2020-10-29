@@ -119,10 +119,12 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-core:" + DEFAULT_CXF_VERSION));
 		dependencies.add(
 				dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:" + DEFAULT_CXF_VERSION));
+		dependencies
+				.add(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:" + DEFAULT_CXF_VERSION));
 
 		// The Maven plugin excludes cxf-rt-frontend-simple, so exclude it here as well.
 		ModuleDependency dependency = (ModuleDependency) dependencyHandler
-				.create("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:" + DEFAULT_CXF_VERSION);
+				.create("org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:" + DEFAULT_CXF_VERSION);
 		Map<String, String> excludeProperties = new HashMap<>();
 		excludeProperties.put("group", "org.apache.cxf");
 		excludeProperties.put("module", "cxf-rt-frontend-simple");
