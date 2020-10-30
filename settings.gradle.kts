@@ -10,4 +10,4 @@ rootProject.name = "cxf-codegen-gradle"
 
 include("dependencies")
 include("documentation")
-include("plugin")
+include("cxf-codegen-gradle")
