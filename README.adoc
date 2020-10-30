@@ -1,4 +1,4 @@
-= CXF Codegen
+= CXF Codegen image:https://github.com/ciscoo/cxf-codegen-gradle/workflows/Build/badge.svg?branch=master["Build Status", link="https://github.com/ciscoo/cxf-codegen-gradle/actions?query=workflow%3ABuild"]
 
 CXF Codegen is a Gradle plugin port of the
 https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html[CXF Codegen Maven plugin].
