@@ -53,7 +53,7 @@ tasks {
     javadoc {
         options {
             header = "CXF Codegen"
-            windowTitle = "CXF Codegen Grade Plugin $version API"
+            windowTitle = "CXF Codegen Gradle Plugin $version API"
             this as StandardJavadocDocletOptions
             docTitle = "CXF Codegen Gradle Plugin $version API"
         }
