@@ -325,7 +325,12 @@ With the above, you should now start to see a plethora of logs as shown below.
 22:14:06.043 [main] DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader - Found 1 databindings in <jaxb> plugin.
 22:14:06.043 [main] DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader - Loading <jaxb> databinding from <jaxb> plugin.
 22:14:06.043 [main] DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader - Loading plugin jar:file:~/.gradle/caches/modules-2/files-2.1/org.apache.cxf/cxf-tools-wsdlto-frontend-jaxws/3.4.0/.../cxf-tools-wsdlto-frontend-jaxws-3.4.0.jar!/META-INF/tools-plugin.xml
+
 ---- snip
+
+22:14:06.043 [main] DEBUG org.apache.velocity - Initializing Velocity, Calling init()...
+22:14:06.043 [main] DEBUG org.apache.velocity - Starting Apache Velocity v2.2
+22:14:06.043 [main] DEBUG org.apache.velocity - Default Properties resource: org/apache/velocity/runtime/defaults/velocity.properties
 ----
 
 [[disable-logs]]
