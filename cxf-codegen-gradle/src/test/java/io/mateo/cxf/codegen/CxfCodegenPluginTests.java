@@ -27,7 +27,6 @@ import org.gradle.api.specs.Spec;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.TaskContainer;
-import org.gradle.language.base.plugins.LifecycleBasePlugin;
 import org.gradle.testfixtures.ProjectBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -109,7 +108,7 @@ class CxfCodegenPluginTests {
 		assertThat(tasks.findByName(CxfCodegenPlugin.WSDL2JAVA_TASK_NAME)).isNotNull().satisfies((wsdl2java) -> {
 			assertThat(wsdl2java).isInstanceOf(DefaultTask.class);
 			assertThat(wsdl2java.getDependsOn()).hasSize(2);
-			assertThat(wsdl2java.getGroup()).isEqualTo(LifecycleBasePlugin.BUILD_GROUP);
+			assertThat(wsdl2java.getGroup()).isEqualTo(CxfCodegenPlugin.WSDL2JAVA_GROUP);
 			assertThat(wsdl2java.getDescription()).isEqualTo("Runs all wsdl2java tasks");
 		});
 	}
@@ -135,7 +134,7 @@ class CxfCodegenPluginTests {
 		assertThat(wsdl2Java.getMain()).isEqualTo("org.apache.cxf.tools.wsdlto.WSDLToJava");
 		// Can not resolve configuration in unit tests, so assert on error message.
 		assertThatCode(() -> wsdl2Java.getClasspath().getFiles()).hasMessageContaining("configuration ':cxfCodegen'");
-		assertThat(wsdl2Java.getGroup()).isEqualTo(LifecycleBasePlugin.BUILD_GROUP);
+		assertThat(wsdl2Java.getGroup()).isEqualTo(CxfCodegenPlugin.WSDL2JAVA_GROUP);
 		assertThat(wsdl2Java.getDescription()).isEqualTo(String.format("Generates Java sources for '%s'", sourceName));
 		assertThat(wsdl2Java.getArgs()).hasSize(3);
 	}

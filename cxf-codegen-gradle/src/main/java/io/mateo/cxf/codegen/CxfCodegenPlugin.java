@@ -25,7 +25,6 @@ import org.gradle.api.artifacts.ModuleDependency;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
-import org.gradle.language.base.plugins.LifecycleBasePlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +52,11 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	 */
 	public static final String WSDL2JAVA_TASK_NAME = "wsdl2java";
 
+	/**
+	 * Group name that all {@link Wsdl2JavaTask} tasks belong to.
+	 */
+	public static final String WSDL2JAVA_GROUP = "wsdl2java";
+
 	static final String DEFAULT_CXF_VERSION = "3.4.0";
 
 	@Override
@@ -67,7 +71,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	private void registerAggregateTask(Project project) {
 		project.getTasks().register(WSDL2JAVA_TASK_NAME, (task) -> {
 			task.setDependsOn(project.getTasks().withType(Wsdl2JavaTask.class));
-			task.setGroup(LifecycleBasePlugin.BUILD_GROUP);
+			task.setGroup(WSDL2JAVA_GROUP);
 			task.setDescription("Runs all wsdl2java tasks");
 		});
 	}
@@ -92,7 +96,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 				task.getOutputs().dir(option.getOutputDir().get());
 				task.setMain("org.apache.cxf.tools.wsdlto.WSDLToJava");
 				task.setClasspath(configuration.get());
-				task.setGroup(LifecycleBasePlugin.BUILD_GROUP);
+				task.setGroup(WSDL2JAVA_GROUP);
 				task.setDescription("Generates Java sources for '" + option.getName() + "'");
 				task.setArgs(option.generateArgs());
 			});
