@@ -59,13 +59,3 @@ tasks {
         }
     }
 }
-
-publishing {
-    repositories {
-        maven {
-            name = "bintray"
-            url = uri("https://api.bintray.com/maven/fmateo/maven/;publish=1")
-            credentials(PasswordCredentials::class)
-        }
-    }
-}
