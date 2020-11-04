@@ -2,6 +2,7 @@ plugins {
     `java-gradle-plugin`
     `java-library-conventions`
     `maven-publish`
+    signing
     id("com.gradle.plugin-publish")
     id("com.diffplug.spotless")
 }
@@ -58,4 +59,8 @@ tasks {
             docTitle = "CXF Codegen Gradle Plugin $version API"
         }
     }
+}
+
+signing {
+    sign(publishing.publications)
 }
