@@ -66,10 +66,7 @@ publishing {
         maven {
             name = "central"
             url = uri("https://oss.sonatype.org/content/repositories/snapshots")
-            credentials {
-                username = System.getenv("OSSRH_USER_TOKEN")
-                password = System.getenv("OSSRH_PWD_TOKEN")
-            }
+            credentials(PasswordCredentials::class)
         }
     }
 }
