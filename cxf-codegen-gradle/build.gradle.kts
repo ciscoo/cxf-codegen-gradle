@@ -69,8 +69,49 @@ publishing {
             credentials(PasswordCredentials::class)
         }
     }
+    publications.containerWithType(MavenPublication::class).configureEach {
+        pom {
+            url.set("https://github.com/ciscoo/cxf-codegen-gradle")
+            licenses {
+                name.set("Apache License, Version 2.0")
+                url.set("https://www.apache.org/licenses/LICENSE-2.0")
+            }
+            developers {
+                developer {
+                    name.set("Francisco Mateo")
+                    email.set("cisco21c@gmail.com")
+                }
+            }
+            scm {
+                connection.set("scm:git:github.com/ciscoo/cxf-codegen-gradle.git")
+                developerConnection.set("scm:git:ssh://github.com/ciscoo/cxf-codegen-gradle.git")
+                url.set("https://github.com/ciscoo/cxf-codegen-gradle")
+            }
+            issueManagement {
+                system.set("GitHub")
+                url.set("https://github.com/ciscoo/cxf-codegen-gradle/issues")
+            }
+        }
+    }
 }
 
 signing {
     sign(publishing.publications)
+}
+
+afterEvaluate {
+    publishing {
+        publications.named<MavenPublication>("pluginMaven") {
+            pom {
+                name.set("CXF Codegen Gradle Plugin")
+                description.set("Plugin to generate code sources from WSDL.")
+            }
+        }
+        publications.named<MavenPublication>("cxfCodegenPluginMarkerMaven") {
+            pom {
+                name.set("CXF Codegen Gradle Plugin Marker")
+                description.set("CXF Codegen Gradle plugin marker artifact.")
+            }
+        }
+    }
 }
