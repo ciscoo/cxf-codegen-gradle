@@ -15,6 +15,10 @@
  */
 package io.mateo.junit;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
 import org.gradle.api.JavaVersion;
 import org.gradle.util.GradleVersion;
 import org.junit.jupiter.api.TestTemplate;
@@ -23,14 +27,10 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestTemplateInvocationContext;
 import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
-
 /**
- * {@link Extension} that runs {@linkplain TestTemplate templated tests} against
- * multiple versions of Gradle for each DSL. Test classes using the extension
- * must have test methods that have a parameter of type {@link GradleBuild}.
+ * {@link Extension} that runs {@linkplain TestTemplate templated tests} against multiple
+ * versions of Gradle for each DSL. Test classes using the extension must have test
+ * methods that have a parameter of type {@link GradleBuild}.
  * <p>
  * Heavily based on the Spring Boot extension by Andy Wilkinson.
  */
@@ -43,7 +43,8 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 		if (javaVersion.isCompatibleWith(JavaVersion.VERSION_15)
 				|| javaVersion.isCompatibleWith(JavaVersion.VERSION_14)) {
 			GRADLE_VERSIONS = List.of("6.3", "6.4.1", "6.5.1", "6.6.1", "default");
-		} else {
+		}
+		else {
 			GRADLE_VERSIONS = List.of("5.5.1", "5.6.4", "6.0.1", "6.1.1", "6.2.2", "6.3", "6.4.1", "6.5.1", "6.6.1",
 					"default");
 		}
@@ -103,4 +104,5 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 		}
 
 	}
+
 }

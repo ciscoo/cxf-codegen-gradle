@@ -15,6 +15,8 @@
  */
 package io.mateo.junit;
 
+import java.net.URL;
+
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.Extension;
@@ -22,8 +24,6 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
-
-import java.net.URL;
 
 /**
  * {@link Extension} for managing the lifecycle of a {@link GradleBuild}.
@@ -66,4 +66,5 @@ public class GradleBuildExtension implements BeforeEachCallback, AfterEachCallba
 				this.gradleBuild.getDsl().getExtension());
 		return context.getRequiredTestClass().getResource(name);
 	}
+
 }

@@ -24,11 +24,10 @@ public interface GenericWsdlOption {
 
 	/**
 	 * Specifies the directory the generated code files are written.
-	 *
 	 * <p>
 	 * If not set, the convention is {@code "${project.buildDir}/generated-sources"}
-	 *
 	 * @return output directory
 	 */
 	DirectoryProperty getOutputDir();
+
 }

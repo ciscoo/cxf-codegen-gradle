@@ -36,4 +36,5 @@ public class GradleVersionDsl {
 	public GradleDsl getDsl() {
 		return this.dsl;
 	}
+
 }

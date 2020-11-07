@@ -15,9 +15,9 @@
  */
 package io.mateo.cxf.codegen.wsdl2java;
 
-import org.gradle.api.tasks.JavaExec;
-
 import javax.inject.Inject;
+
+import org.gradle.api.tasks.JavaExec;
 
 /**
  * Generates Java sources from WSDLs.
@@ -28,4 +28,5 @@ public class Wsdl2JavaTask extends JavaExec {
 	public Wsdl2JavaTask() {
 		super();
 	}
+
 }

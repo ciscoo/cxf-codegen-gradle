@@ -15,14 +15,15 @@
  */
 package io.mateo.cxf.codegen;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibilityExtension;
+
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.RegisterExtension;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class ConfigurationCacheFunctionalTests {
 
@@ -40,4 +41,5 @@ class ConfigurationCacheFunctionalTests {
 		assertThat(initialResult.getOutput()).contains("no configuration cache is available");
 		assertThat(finalResult.getOutput()).contains("Reusing configuration cache.");
 	}
+
 }

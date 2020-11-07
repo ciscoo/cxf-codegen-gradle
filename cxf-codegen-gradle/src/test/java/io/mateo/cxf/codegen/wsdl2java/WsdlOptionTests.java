@@ -15,17 +15,17 @@
  */
 package io.mateo.cxf.codegen.wsdl2java;
 
-import org.gradle.api.Project;
-import org.gradle.testfixtures.ProjectBuilder;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.io.UncheckedIOException;
 import java.util.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.gradle.api.Project;
+import org.gradle.testfixtures.ProjectBuilder;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class WsdlOptionTests {
 
@@ -372,4 +372,5 @@ class WsdlOptionTests {
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
+
 }

@@ -15,12 +15,7 @@
  */
 package io.mateo.cxf.codegen;
 
-import io.mateo.junit.GradleBuild;
-import io.mateo.junit.GradleCompatibility;
-import org.apache.commons.io.FileUtils;
-import org.gradle.testkit.runner.BuildResult;
-import org.gradle.testkit.runner.TaskOutcome;
-import org.junit.jupiter.api.TestTemplate;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.util.Arrays;
@@ -28,7 +23,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import io.mateo.junit.GradleBuild;
+import io.mateo.junit.GradleCompatibility;
+
+import org.apache.commons.io.FileUtils;
+import org.gradle.testkit.runner.BuildResult;
+import org.gradle.testkit.runner.TaskOutcome;
+import org.junit.jupiter.api.TestTemplate;
 
 @GradleCompatibility
 class CxfCodegenPluginFunctionalTests {
@@ -70,4 +71,5 @@ class CxfCodegenPluginFunctionalTests {
 			assertThat(generatedFiles).containsExactlyElementsOf(expectedFiles);
 		});
 	}
+
 }

@@ -15,6 +15,11 @@
  */
 package io.mateo.cxf.codegen.wsdl2java;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.gradle.api.GradleException;
 import org.gradle.api.Named;
 import org.gradle.api.file.DirectoryProperty;
@@ -25,10 +30,6 @@ import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.SetProperty;
-
-import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Default implementation for options for the {@code wsdl2java} command.
@@ -396,7 +397,6 @@ public class WsdlOption implements Option, Named {
 
 	/**
 	 * Generate arguments for {@code wsdl2java}.
-	 *
 	 * @return arguments
 	 */
 	public List<String> generateArgs() {
@@ -414,7 +414,8 @@ public class WsdlOption implements Option, Named {
 			});
 		}
 		command.add("-d");
-		command.add(this.outputDir.get().getAsFile().getAbsolutePath()); // always set by convention
+		command.add(this.outputDir.get().getAsFile().getAbsolutePath()); // always set by
+																			// convention
 		if (this.bindingFiles.isPresent()) {
 			this.bindingFiles.get().forEach((value) -> {
 				RegularFile bindingFile = this.layout.getProjectDirectory().file(value);
@@ -553,4 +554,5 @@ public class WsdlOption implements Option, Named {
 		command.add(this.wsdl.get().getAsFile().toURI().toString());
 		return command;
 	}
+
 }

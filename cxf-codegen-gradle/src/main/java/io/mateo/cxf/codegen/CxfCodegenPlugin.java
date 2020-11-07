@@ -15,7 +15,13 @@
  */
 package io.mateo.cxf.codegen;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask;
+
 import org.gradle.api.NamedDomainObjectProvider;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -26,19 +32,13 @@ import org.gradle.api.artifacts.dsl.DependencyHandler;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-
 /**
  * {@link Plugin} for code generation from WSDLs using Apache CXF.
  */
 public class CxfCodegenPlugin implements Plugin<Project> {
 
 	/**
-	 * Name of the {@link Configuration} where dependencies are used for code
-	 * generation.
+	 * Name of the {@link Configuration} where dependencies are used for code generation.
 	 */
 	public static final String CXF_CODEGEN_CONFIGURATION_NAME = "cxfCodegen";
 
@@ -137,4 +137,5 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 
 		return dependencies;
 	}
+
 }

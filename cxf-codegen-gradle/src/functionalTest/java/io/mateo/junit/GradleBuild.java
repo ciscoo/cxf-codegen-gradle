@@ -15,10 +15,6 @@
  */
 package io.mateo.junit;
 
-import org.apache.commons.io.FileUtils;
-import org.gradle.testkit.runner.BuildResult;
-import org.gradle.testkit.runner.GradleRunner;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -26,9 +22,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.gradle.testkit.runner.BuildResult;
+import org.gradle.testkit.runner.GradleRunner;
+
 /**
- * A {@code GradleBuild} is used to run a Gradle build using
- * {@link GradleRunner}.
+ * A {@code GradleBuild} is used to run a Gradle build using {@link GradleRunner}.
  * <p>
  * Heavily based on the Spring Boot implementation by Andy Wilkinson.
  */
@@ -45,7 +44,8 @@ public class GradleBuild {
 	void before() {
 		try {
 			this.projectDir = Files.createTempDirectory("gradle-").toFile();
-		} catch (IOException ex) {
+		}
+		catch (IOException ex) {
 			throw new UncheckedIOException(ex);
 		}
 	}
@@ -54,7 +54,8 @@ public class GradleBuild {
 		this.script = null;
 		try {
 			FileUtils.deleteDirectory(this.projectDir);
-		} catch (IOException ex) {
+		}
+		catch (IOException ex) {
 			throw new UncheckedIOException(ex);
 		}
 	}
@@ -67,7 +68,8 @@ public class GradleBuild {
 	public BuildResult build(String... arguments) {
 		try {
 			return prepareRunner(arguments).build();
-		} catch (Exception ex) {
+		}
+		catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}
 	}
@@ -75,7 +77,8 @@ public class GradleBuild {
 	public BuildResult buildAndFail(String... arguments) {
 		try {
 			return prepareRunner(arguments).buildAndFail();
-		} catch (Exception ex) {
+		}
+		catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}
 	}
@@ -84,14 +87,16 @@ public class GradleBuild {
 		String scriptContent;
 		try {
 			scriptContent = FileUtils.readFileToString(new File(this.script), StandardCharsets.UTF_8);
-		} catch (IOException ex) {
+		}
+		catch (IOException ex) {
 			throw new UncheckedIOException(ex);
 		}
 
 		try {
 			FileUtils.writeStringToFile(new File(this.projectDir, "build" + this.dsl.getExtension()), scriptContent,
 					StandardCharsets.UTF_8);
-		} catch (IOException ex) {
+		}
+		catch (IOException ex) {
 			throw new UncheckedIOException(ex);
 		}
 
@@ -102,7 +107,8 @@ public class GradleBuild {
 			FileUtils.writeLines(new File(this.projectDir, "settings.gradle"), StandardCharsets.UTF_8.name(),
 					settingsLines);
 			FileUtils.copyDirectoryToDirectory(new File("src/functionalTest/resources/wsdls"), this.projectDir);
-		} catch (IOException ex) {
+		}
+		catch (IOException ex) {
 			throw new UncheckedIOException(ex);
 		}
 
@@ -131,4 +137,5 @@ public class GradleBuild {
 	public GradleDsl getDsl() {
 		return this.dsl;
 	}
+
 }

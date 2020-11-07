@@ -15,11 +15,12 @@
  */
 package io.mateo.cxf.codegen;
 
+import javax.inject.Inject;
+
 import io.mateo.cxf.codegen.wsdl2java.WsdlOption;
+
 import org.gradle.api.NamedDomainObjectContainer;
 import org.gradle.api.model.ObjectFactory;
-
-import javax.inject.Inject;
 
 /**
  * Extension to configure WSDL sources.
@@ -35,7 +36,6 @@ public class CxfCodegenExtension {
 
 	/**
 	 * Returns the Java sources used for code generation.
-	 *
 	 * @return sources for Java code generation
 	 */
 	public NamedDomainObjectContainer<WsdlOption> getWsdl2java() {
