@@ -30,4 +30,8 @@ tasks {
             "idseparator" to "-"
         ))
     }
+
+    build {
+        dependsOn(asciidoctor)
+    }
 }
