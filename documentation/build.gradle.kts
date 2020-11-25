@@ -10,7 +10,7 @@ description = "CXF Codegen documentation"
 
 tasks {
     val copyJavadoc by registering(Copy::class) {
-        from("$rootDir/plugin/build/docs/javadoc")
+        from("$rootDir/cxf-codegen-gradle/build/docs/javadoc")
         into("$buildDir/docs/api")
     }
 
