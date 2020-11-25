@@ -119,13 +119,13 @@ class CxfCodegenPluginTests {
 		project.getPluginManager().apply("java");
 		SourceSetContainer sourceSets = project.getExtensions().getByType(SourceSetContainer.class);
 		SourceDirectorySet java = sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME).getJava();
-		assertThat(java.getSrcDirs()).hasSize(1);
+		int expectedSize = java.getSrcDirs().size() + 1;
 
 		project.getExtensions().configure(CxfCodegenExtension.class, (cxfCodegen) -> {
 			cxfCodegen.getWsdl2java().register("foo", (foo) -> foo.getWsdl().set(temp));
 		});
 
-		assertThat(java.getSrcDirs()).hasSize(2);
+		assertThat(java.getSrcDirs().size()).isEqualTo(expectedSize);
 	}
 
 	private static void wsdl2javaTaskAssertions(Wsdl2JavaTask wsdl2Java, String sourceName) {
