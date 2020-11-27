@@ -59,5 +59,6 @@ jobs:
         env:
           GRGIT_USER: ${{ secrets.GH_TOKEN }}
         run: |
-          ls -la
-          ./.github/workflows/maybePublishSnapshotDocs.sh
+          ls -la .github
+          ls -la .github/workflows
+          .github/workflows/maybePublishSnapshotDocs.sh
