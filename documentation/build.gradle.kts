@@ -4,9 +4,33 @@ plugins {
     `java-library-conventions`
     id("com.diffplug.spotless")
     id("org.asciidoctor.jvm.convert")
+    id("org.ajoberstar.git-publish")
 }
 
 description = "CXF Codegen documentation"
+
+val snapshot = rootProject.version.toString().contains("SNAPSHOT")
+val docsVersion = if (snapshot) "snapshot" else rootProject.version
+val docsDir = file("$buildDir/ghpages-docs")
+val replaceCurrentDocs = project.hasProperty("replaceCurrentDocs")
+
+gitPublish {
+    repoUri.set("https://github.com/ciscoo/cxf-codegen-gradle.git")
+    branch.set("gh-pages")
+
+    contents {
+        from(docsDir)
+        into("docs")
+    }
+
+    preserve {
+        include("**/*")
+        exclude("docs/$docsVersion/**")
+        if (replaceCurrentDocs) {
+            exclude("docs/current/**")
+        }
+    }
+}
 
 tasks {
     val copyJavadoc by registering(Copy::class) {
@@ -33,5 +57,27 @@ tasks {
 
     build {
         dependsOn(asciidoctor)
+    }
+
+    val prepareDocsForGitHubPages by registering(Copy::class) {
+        dependsOn(asciidoctor)
+        outputs.dir(docsDir)
+        from("$buildDir/docs") {
+            include("user-guide/**", "api/**")
+        }
+        into("$docsDir/$docsVersion")
+        includeEmptyDirs = false
+    }
+
+    val createCurrentDocsFolder by registering(Copy::class) {
+        dependsOn(prepareDocsForGitHubPages)
+        outputs.dir("$docsDir/current")
+        onlyIf { replaceCurrentDocs }
+        from("$docsDir/$docsVersion")
+        into("$docsDir/current")
+    }
+
+    gitPublishCommit {
+        dependsOn(prepareDocsForGitHubPages, createCurrentDocsFolder)
     }
 }
