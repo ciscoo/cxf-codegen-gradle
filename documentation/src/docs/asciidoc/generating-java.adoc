@@ -5,7 +5,7 @@ The {object-container}[`wsdl2java`] container can be used to define WSDL sources
 
 For each source added to the container a corresponding task will also be created. The created task is of type
 `{wsdl2java-task}` and is a subclass of `{javaexec-task}`. There is nothing special about the `{wsdl2java-task}` type,
-it primarily a marker type with no additional functionlty.
+it primarily a marker type with no additional functionality.
 
 For each WSDL source, the generated Java source is added to the {main-source-sets}[`main` source sets].
 
