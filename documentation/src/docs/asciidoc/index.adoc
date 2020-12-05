@@ -13,7 +13,7 @@ Francisco Mateo
 :wsdl2java-task: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html[Wsdl2JavaTask]
 :cxf-codegen-maven-plugin: https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html
 :wsdl2java-cli: https://cxf.apache.org/docs/wsdl-to-java.html
-:functional-test: https://github.com/ciscoo/cxf-codegen-gradle/tree/master/plugin/src/functionalTest
+:functional-test: https://github.com/ciscoo/cxf-codegen-gradle/tree/master/cxf-codegen-gradle/src/functionalTest
 :configuration-cache: https://docs.gradle.org/current/userguide/configuration_cache.html
 :object-container: https://docs.gradle.org/current/javadoc/org/gradle/api/NamedDomainObjectContainer.html
 :javaexec-task: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html[JavaExec]
