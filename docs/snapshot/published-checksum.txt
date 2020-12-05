@@ -8,6 +8,6 @@ a50297541302cf389f3d956c9ae684fa  cxf-codegen-gradle/src/main/java/io/mateo/cxf/
 a863f125a171e7a8e85cf332024cfd1e  documentation/src/docs/asciidoc/generating-java.adoc
 ab19e3b74acae054500bd2aa65246447  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/CxfCodegenExtension.java
 b6da40cf14856acdeaec5d62d6ff3790  documentation/src/docs/asciidoc/plugin-configuration.adoc
+bbf9abd74d490e2411471debdc39c826  documentation/build.gradle.kts
 bf78d17ab3814d38fcc8d3647fcac8ec  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/package-info.java
 d65304d93ff60414d7ad9d1f2d0a9ab6  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/CxfCodegenPlugin.java
-e0bc64d409e3b33a281d73c777068388  documentation/build.gradle.kts
