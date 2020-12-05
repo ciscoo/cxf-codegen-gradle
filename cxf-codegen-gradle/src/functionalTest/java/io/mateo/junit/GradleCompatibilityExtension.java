@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.gradle.api.JavaVersion;
 import org.gradle.util.GradleVersion;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.Extension;
@@ -36,19 +35,8 @@ import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
  */
 public final class GradleCompatibilityExtension implements TestTemplateInvocationContextProvider {
 
-	private static List<String> GRADLE_VERSIONS;
-
-	static {
-		JavaVersion javaVersion = JavaVersion.current();
-		if (javaVersion.isCompatibleWith(JavaVersion.VERSION_15)
-				|| javaVersion.isCompatibleWith(JavaVersion.VERSION_14)) {
-			GRADLE_VERSIONS = List.of("6.3", "6.4.1", "6.5.1", "6.6.1", "default");
-		}
-		else {
-			GRADLE_VERSIONS = List.of("5.5.1", "5.6.4", "6.0.1", "6.1.1", "6.2.2", "6.3", "6.4.1", "6.5.1", "6.6.1",
-					"6.7.1", "default");
-		}
-	}
+	private static List<String> GRADLE_VERSIONS = List.of("5.5.1", "5.6.4", "6.0.1", "6.1.1", "6.2.2", "6.3", "6.4.1",
+			"6.5.1", "6.6.1", "6.7.1", "default");
 
 	public GradleCompatibilityExtension() {
 	}
