@@ -44,7 +44,7 @@ Standard Gradle dependency management can be used to control the included depend
 For example, a resolve rule can be used to downgrade the CXF dependencies:
 
 CAUTION: You will need to ensure the version of CXF dependencies you specify is compatible with the
-<<options-usage, options>> used. Failure to do so will result in an error during code generation.
+<<generating-java.adoc#options-usage, options>> used. Failure to do so will result in an error during code generation.
 
 ++++
 <details open>
