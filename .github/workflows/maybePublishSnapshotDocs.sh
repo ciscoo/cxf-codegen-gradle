@@ -27,5 +27,5 @@ else
   echo "Creating and publishing snapshot documentation..."
   echo
   cp -f "${current_checksum}" "${published_checksum}"
-  ./gradlew gitPublishPush
+  ./gradlew gitPublishPush -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false
 fi
