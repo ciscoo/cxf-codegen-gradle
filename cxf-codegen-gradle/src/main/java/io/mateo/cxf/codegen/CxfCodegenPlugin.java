@@ -57,6 +57,9 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	 */
 	public static final String WSDL2JAVA_GROUP = "wsdl2java";
 
+	/**
+	 * Update documentation when updating version.
+	 */
 	static final String DEFAULT_CXF_VERSION = "3.4.1";
 
 	@Override
