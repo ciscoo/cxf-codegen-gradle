@@ -62,6 +62,9 @@ tasks {
     val prepareDocsForGitHubPages by registering(Copy::class) {
         dependsOn(asciidoctor)
         outputs.dir(docsDir)
+        from("$buildDir/checksum") {
+            include("published-checksum.txt")
+        }
         from("$buildDir/docs") {
             include("user-guide/**", "api/**")
         }
