@@ -57,6 +57,5 @@ jobs:
           java-version: 15
       - name: 'Publish Snapshot Documentation'
         env:
-          GRGIT_USER: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          .github/workflows/maybePublishSnapshotDocs.sh
+          GRGIT_USER: ${{ secrets.GH_TOKEN }}
+        run: .github/workflows/maybePublishSnapshotDocs.sh
