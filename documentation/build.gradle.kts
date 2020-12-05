@@ -33,6 +33,8 @@ gitPublish {
 }
 
 tasks {
+    listOf(jar, javadocJar, sourcesJar).forEach { it { enabled = false } }
+
     val copyJavadoc by registering(Copy::class) {
         from("$rootDir/cxf-codegen-gradle/build/docs/javadoc")
         into("$buildDir/docs/api")
