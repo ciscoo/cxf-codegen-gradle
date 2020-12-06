@@ -30,4 +30,5 @@ else
   ./gradlew gitPublishPush -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false
   echo "Published directory contents:"
   ls -l documentation/build/docs
+  ls -l cxf-codegen-gradle
 fi
