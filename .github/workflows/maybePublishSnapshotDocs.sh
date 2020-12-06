@@ -18,7 +18,7 @@ md5sum "${current_checksum}"
 curl --silent --output "${published_checksum}" "${github_pages_url}"
 md5sum "${published_checksum}"
 
-if [[ -n "$(cmp --silent ${current_checksum} ${published_checksum})" ]]; then
+if cmp --silent ${current_checksum} ${published_checksum}; then
   echo
   echo "Snapshot documentation already published with same source checksum."
   echo
