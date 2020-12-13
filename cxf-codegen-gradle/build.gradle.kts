@@ -95,8 +95,12 @@ publishing {
     }
 }
 
+val isSnapshot = project.version.toString().endsWith("SNAPSHOT")
+val isCIEnvironment = System.getenv("CI")?.toBoolean() ?: false
+
 signing {
     sign(publishing.publications)
+    isRequired = !(isSnapshot || isCIEnvironment)
 }
 
 afterEvaluate {
