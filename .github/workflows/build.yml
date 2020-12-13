@@ -23,6 +23,10 @@ jobs:
           key: test-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', '**/gradle.properties', 'gradle/**', 'buildSrc/src/main/**') }}
           restore-keys: |
             test-${{ runner.os }}-gradle-
+      - name: JDK 15 Install
+        uses: actions/setup-java@v1
+        with:
+          java-version: 15
       - name: Test
         run: |
           ./gradlew --version
