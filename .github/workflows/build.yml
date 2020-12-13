@@ -36,7 +36,7 @@ jobs:
     name: Publish Snapshot Artifacts
     needs: linux
     runs-on: ubuntu-20.04
-    if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && (startsWith(github.ref, 'refs/heads/releases/') || github.ref == 'refs/heads/master')
+    if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
       - name: Cache Gradle wrapper and dependencies
