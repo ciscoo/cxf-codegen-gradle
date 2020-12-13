@@ -3,6 +3,43 @@
 CXF Codegen is a Gradle plugin port of the
 https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html[CXF Codegen Maven plugin].
 
+== Getting Started
+
+The plugin is https://plugins.gradle.org/[published to Gradle's plugin portal] and can be applied
+using the https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block[plugins DSL] block:
+
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+plugins {
+	id "io.mateo.cxf-codegen" version "1.0.0-rc.1"
+}
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+----
+plugins {
+	id("io.mateo.cxf-codegen") version "1.0.0-rc.1"
+}
+----
+
+++++
+</details>
+++++
+
 == Building from Source
 
 You will need https://openjdk.java.net/projects/jdk/11/[JDK 11] to build CXF Codegen.
