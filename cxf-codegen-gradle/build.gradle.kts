@@ -60,12 +60,17 @@ tasks {
         }
     }
 }
+val isSnapshot = project.version.toString().endsWith("SNAPSHOT")
 
 publishing {
     repositories {
         maven {
             name = "sonatype"
-            url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+            url = if (isSnapshot) {
+                uri("https://oss.sonatype.org/content/repositories/snapshots")
+            } else {
+                uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+            }
             credentials(PasswordCredentials::class)
         }
     }
@@ -95,7 +100,6 @@ publishing {
     }
 }
 
-val isSnapshot = project.version.toString().endsWith("SNAPSHOT")
 val isCIEnvironment = System.getenv("CI")?.toBoolean() ?: false
 
 signing {
