@@ -9,9 +9,11 @@ plugins {
 
 description = "CXF Codegen"
 
+val pluginName = "cxfCodegen"
+
 gradlePlugin {
     plugins {
-        create("cxfCodegen") {
+        create(pluginName) {
             id = "io.mateo.cxf-codegen"
             displayName = "CXF Codegen"
             description = "Plugin to generate code sources from WSDL."
@@ -21,6 +23,19 @@ gradlePlugin {
 }
 
 val functionalTestSourceSet = sourceSets.create("functionalTest") {
+}
+
+pluginBundle {
+    website = "https://github.com/ciscoo/cxf-codegen-gradle"
+    vcsUrl = "https://github.com/ciscoo/cxf-codegen-gradle"
+    description = "Gradle plugin port of the Maven CXF Codegen plugin."
+    (plugins) {
+        named(pluginName) {
+            displayName = "CXF Codegen plugin"
+            description = "View the project's changelog for any notable changes."
+            tags = listOf("cxf", "wsdl2java")
+        }
+    }
 }
 
 gradlePlugin.testSourceSets(functionalTestSourceSet)
