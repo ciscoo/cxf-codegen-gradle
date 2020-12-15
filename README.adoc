@@ -40,6 +40,73 @@ plugins {
 </details>
 ++++
 
+=== Snapshots
+
+Snapshots of the next development version are published to the Sonatype OSSRH snapshot repository.
+
+Snapshots are published for every commit to the `master` branch.
+
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+// build.gradle
+plugins {
+	id "io.mateo.cxf-codegen" version "1.0.0-SNAPSHOT"
+}
+
+// settings.gradle
+pluginManagement {
+	repositories {
+		gradlePluginPortal()
+		maven {
+			url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+			mavenContent {
+				snapshotsOnly()
+			}
+		}
+	}
+}
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+----
+// build.gradle.kts
+
+plugins {
+	id("io.mateo.cxf-codegen") version "1.0.0-SNAPSHOT"
+}
+
+// settings.gradle.kts
+pluginManagement {
+	repositories {
+		gradlePluginPortal()
+		maven {
+			url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+			mavenContent {
+				snapshotsOnly()
+			}
+		}
+	}
+}
+----
+
+++++
+</details>
+++++
+
 == Building from Source
 
 You will need https://openjdk.java.net/projects/jdk/11/[JDK 11] to build CXF Codegen.
