@@ -5,10 +5,6 @@ plugins {
 allprojects {
     group = "io.mateo"
 
-    repositories {
-        mavenCentral()
-    }
-
     pluginManager.withPlugin("com.diffplug.spotless") {
         spotless {
             kotlinGradle {
