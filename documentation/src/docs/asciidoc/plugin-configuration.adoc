@@ -24,7 +24,7 @@ cxfCodegen { // <1>
 The plugin creates a configuration named `cxfCodegen` which can be used to add additional dependencies to the classpath
 for code generation.
 
-Out-of-the-box, the following dependencies are added (v3.4.1):
+Out-of-the-box, the following dependencies are added (v3.4.2):
 
 * `org.apache.cxf:cxf-core`
 * `org.apache.cxf:cxf-tools-common`

@@ -60,7 +60,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	/**
 	 * Update documentation when updating version.
 	 */
-	static final String DEFAULT_CXF_VERSION = "3.4.1";
+	static final String DEFAULT_CXF_VERSION = "3.4.2";
 
 	@Override
 	public void apply(Project project) {
