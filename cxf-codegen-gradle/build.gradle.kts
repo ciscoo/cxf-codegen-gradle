@@ -4,7 +4,6 @@ plugins {
     `maven-publish`
     signing
     id("com.gradle.plugin-publish")
-    id("com.diffplug.spotless")
 }
 
 description = "CXF Codegen"

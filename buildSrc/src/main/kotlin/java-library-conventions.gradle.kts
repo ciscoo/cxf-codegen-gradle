@@ -4,6 +4,7 @@ import java.util.Locale
 
 plugins {
     `java-library`
+    id("code-style-conventions")
 }
 
 configurations {
