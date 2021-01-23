@@ -31,7 +31,7 @@ pluginBundle {
     (plugins) {
         named(pluginName) {
             displayName = "CXF Codegen plugin"
-            description = "View the project's changelog for any notable changes."
+            description = "Gradle port of the Apache CXF Code Generation Maven2 plugin (cxf-codegen-plugin)."
             tags = listOf("cxf", "wsdl2java")
         }
     }
