@@ -55,20 +55,20 @@ Snapshots are published for every commit to the `master` branch.
 ----
 // build.gradle
 plugins {
-	id "io.mateo.cxf-codegen" version "1.0.0-SNAPSHOT"
+    id "io.mateo.cxf-codegen" version "1.0.0-SNAPSHOT"
 }
 
 // settings.gradle
 pluginManagement {
-	repositories {
-		gradlePluginPortal()
-		maven {
-			url = uri("https://oss.sonatype.org/content/repositories/snapshots")
-			mavenContent {
-				snapshotsOnly()
-			}
-		}
-	}
+    repositories {
+        gradlePluginPortal()
+        maven {
+            url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+            mavenContent {
+                snapshotsOnly()
+            }
+        }
+    }
 }
 ----
 
@@ -86,20 +86,20 @@ pluginManagement {
 // build.gradle.kts
 
 plugins {
-	id("io.mateo.cxf-codegen") version "1.0.0-SNAPSHOT"
+    id("io.mateo.cxf-codegen") version "1.0.0-SNAPSHOT"
 }
 
 // settings.gradle.kts
 pluginManagement {
-	repositories {
-		gradlePluginPortal()
-		maven {
-			url = uri("https://oss.sonatype.org/content/repositories/snapshots")
-			mavenContent {
-				snapshotsOnly()
-			}
-		}
-	}
+    repositories {
+        gradlePluginPortal()
+        maven {
+            url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+            mavenContent {
+                snapshotsOnly()
+            }
+        }
+    }
 }
 ----
 
