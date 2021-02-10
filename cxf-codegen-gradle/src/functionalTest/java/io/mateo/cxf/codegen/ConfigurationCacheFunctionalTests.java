@@ -29,7 +29,7 @@ class ConfigurationCacheFunctionalTests {
 
 	@RegisterExtension
 	static GradleCompatibilityExtension gradleCompatibilityExtension = new GradleCompatibilityExtension("6.6.1",
-			"6.7.1", "current");
+			"6.7.1", "current", "7.0-milestone-1");
 
 	@TestTemplate
 	void configurationCache(GradleBuild gradleBuild) {
