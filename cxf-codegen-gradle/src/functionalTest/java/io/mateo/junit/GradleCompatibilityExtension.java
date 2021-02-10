@@ -36,7 +36,7 @@ import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
 public final class GradleCompatibilityExtension implements TestTemplateInvocationContextProvider {
 
 	private static List<String> GRADLE_VERSIONS = List.of("5.5.1", "5.6.4", "6.0.1", "6.1.1", "6.2.2", "6.3", "6.4.1",
-			"6.5.1", "6.6.1", "6.7.1", "default");
+			"6.5.1", "6.6.1", "6.7.1", "current");
 
 	public GradleCompatibilityExtension() {
 	}
@@ -74,7 +74,7 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 
 		@Override
 		public String getDisplayName(int invocationIndex) {
-			if (this.gradleVersionDsl.getVersion().equals("default")) {
+			if (this.gradleVersionDsl.getVersion().equals("current")) {
 				return String.format("Gradle %s - %s ", GradleVersion.current().getVersion(),
 						this.gradleVersionDsl.getDsl().getName());
 			}
@@ -85,7 +85,7 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 		@Override
 		public List<Extension> getAdditionalExtensions() {
 			GradleBuild gradleBuild = new GradleBuild().dsl(this.gradleVersionDsl.getDsl());
-			if (!this.gradleVersionDsl.getVersion().equals("default")) {
+			if (!this.gradleVersionDsl.getVersion().equals("current")) {
 				gradleBuild.gradleVersion(this.gradleVersionDsl.getVersion());
 			}
 			return List.of(new GradleBuildExtension(gradleBuild));
