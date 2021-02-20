@@ -1,17 +1,18 @@
 [[overview]]
-== Overview
+= Overview
+include::attributes.adoc[]
 
 The goal of this document is to provide reference documentation for developers utilizing the CXF Codegen Gradle plugin.
 
 [[what-is-cxf-codegen-gradle]]
-=== What is CXF Codegen
+== What is CXF Codegen
 
 CXF Codegen is a Gradle plugin port of the {cxf-codegen-maven-plugin}[Maven plugin].
 The Gradle plugin offers an API similar to the one offered by the Maven plugin.
 The API is not a 1:1 port and leans heavily on Gradle idioms and conventions.
 
 [[supported-gradle-versions]]
-=== Supported Gradle Versions
+== Supported Gradle Versions
 
 The CXF Codegen Gradle plugin supports the following Gradle versions:
 

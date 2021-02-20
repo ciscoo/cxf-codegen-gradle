@@ -1,8 +1,9 @@
 [[plugin-configuration]]
-== Plugin Configuration
+= Plugin Configuration
+include::attributes.adoc[]
 
 [[plugin-extension]]
-=== Extension
+== Extension
 
 The plugin contributes a single extension to the project named `cxfCodegen`.
 
@@ -19,7 +20,7 @@ cxfCodegen { // <1>
 <2> WSDL sources container for generating Java. It is a {object-container}[`NamedDomainObjectContainer`] type.
 
 [[dependency-configuration]]
-=== Dependency Configuration
+== Dependency Configuration
 
 The plugin creates a configuration named `cxfCodegen` which can be used to add additional dependencies to the classpath
 for code generation.
@@ -37,7 +38,7 @@ Out-of-the-box, the following dependencies are added (v3.4.2):
 These are the same dependencies defined in the Maven plugin's https://github.com/apache/cxf/blob/cxf-3.4.1/maven-plugins/codegen-plugin/pom.xml#L71..L106[POM].
 
 [[dependency-version-constraints]]
-==== Managing Dependency Versions
+=== Managing Dependency Versions
 
 Standard Gradle dependency management can be used to control the included dependency versions.
 

@@ -42,18 +42,12 @@ tasks {
 
     asciidoctor {
         dependsOn(copyJavadoc)
+        baseDirFollowsSourceDir()
         setOutputDir("$buildDir/docs/user-guide")
         attributes(mapOf(
             "revnumber" to version,
             "current-gradle-version" to GradleVersion.current().version,
-            "outdir" to outputDir.absolutePath,
-            "source-highlighter" to "rouge",
-            "tabsize" to "4",
-            "toc" to "left",
-            "icons" to "font",
-            "sectanchors" to true,
-            "idprefix" to "",
-            "idseparator" to "-"
+            "outdir" to outputDir.absolutePath
         ))
     }
 

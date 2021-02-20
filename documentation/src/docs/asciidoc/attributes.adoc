@@ -1,0 +1,25 @@
+:doctype: book
+:idprefix:
+:idseparator: -
+:toc: left
+:toclevels: 4
+:tabsize: 4
+:numbered:
+:sectanchors:
+:sectnums:
+:icons: font
+:hide-uri-scheme:
+:source-highlighter: rouge
+:docinfo: shared,private
+
+:javadoc-root:  link:../api
+:wsdl-option: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/WsdlOption.html#method.summary[WsdlOption]
+:wsdl2java-task: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html[Wsdl2JavaTask]
+:cxf-codegen-maven-plugin: https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html
+:wsdl2java-cli: https://cxf.apache.org/docs/wsdl-to-java.html
+:functional-test: https://github.com/ciscoo/cxf-codegen-gradle/tree/master/cxf-codegen-gradle/src/functionalTest
+:configuration-cache: https://docs.gradle.org/current/userguide/configuration_cache.html
+:object-container: https://docs.gradle.org/current/javadoc/org/gradle/api/NamedDomainObjectContainer.html
+:javaexec-task: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html[JavaExec]
+:main-source-sets: https://docs.gradle.org/current/userguide/java_plugin.html#source_sets
+:configure-each: https://docs.gradle.org/current/javadoc/org/gradle/api/DomainObjectCollection.html#configureEach-org.gradle.api.Action-

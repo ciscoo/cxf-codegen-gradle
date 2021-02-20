@@ -1,25 +1,9 @@
 [[user-guide]]
 = CXF Codegen User Guide
-Francisco Mateo
-// Settings
-:doctype: book
-:toclevels: 4
-:numbered:
-:sectnums:
-:hide-uri-scheme:
-// Refs:
-:javadoc-root:  link:../api
-:wsdl-option: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/WsdlOption.html#method.summary[WsdlOption]
-:wsdl2java-task: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html[Wsdl2JavaTask]
-:cxf-codegen-maven-plugin: https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html
-:wsdl2java-cli: https://cxf.apache.org/docs/wsdl-to-java.html
-:functional-test: https://github.com/ciscoo/cxf-codegen-gradle/tree/master/cxf-codegen-gradle/src/functionalTest
-:configuration-cache: https://docs.gradle.org/current/userguide/configuration_cache.html
-:object-container: https://docs.gradle.org/current/javadoc/org/gradle/api/NamedDomainObjectContainer.html
-:javaexec-task: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html[JavaExec]
-:main-source-sets: https://docs.gradle.org/current/userguide/java_plugin.html#source_sets
-:configure-each: https://docs.gradle.org/current/javadoc/org/gradle/api/DomainObjectCollection.html#configureEach-org.gradle.api.Action-
+include::authors.adoc[]
+:docinfo: shared
+include::attributes.adoc[]
 
-include::{includedir}/overview.adoc[]
-include::{includedir}/plugin-configuration.adoc[]
-include::{includedir}/generating-java.adoc[]
+include::overview.adoc[leveloffset=+1]
+include::plugin-configuration.adoc[leveloffset=+1]
+include::generating-java.adoc[leveloffset=+1]
