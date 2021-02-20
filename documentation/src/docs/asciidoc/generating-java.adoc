@@ -7,6 +7,13 @@ For each source added to the container a corresponding task will also be created
 `{wsdl2java-task}` and is a subclass of `{javaexec-task}`. There is nothing special about the `{wsdl2java-task}` type,
 it primarily a marker type with no additional functionality.
 
+.Incremental Build
+****
+The `{javaexec-task}` supports up-to-date checks (aka incremental build). As mentioned above, `{wsdl2java-task}` is a subclass of `{javaexec-task}` and as a result, `{javaexec-task}` also supports up-to-date checks.
+
+However, depending on how your WSDLs are structured, you may run into scenarios where `wsdl2java*` tasks are out-of-date.
+****
+
 For each WSDL source, the generated Java source is added to the {main-source-sets}[`main` source sets].
 
 All `{wsdl2java-task}` task types are aggregated to a single task named `wsdl2java`.
