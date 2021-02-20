@@ -650,7 +650,7 @@ for code generation.</p>
 </td>
 <td class="content">
 You will need to ensure the version of CXF dependencies you specify is compatible with the
-<a href="generating-java.html#options-usage">options</a> used. Failure to do so will result in an error during code generation.
+<a href="#options-usage">options</a> used. Failure to do so will result in an error during code generation.
 </td>
 </tr>
 </table>
@@ -699,6 +699,17 @@ You will need to ensure the version of CXF dependencies you specify is compatibl
 <p>For each source added to the container a corresponding task will also be created. The created task is of type
 <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html">Wsdl2JavaTask</a></code> and is a subclass of <code><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html">JavaExec</a></code>. There is nothing special about the <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html">Wsdl2JavaTask</a></code> type,
 it primarily a marker type with no additional functionality.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Incremental Build</div>
+<div class="paragraph">
+<p>The <code><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html">JavaExec</a></code> supports up-to-date checks (aka incremental build). As mentioned above, <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html">Wsdl2JavaTask</a></code> is a subclass of <code><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html">JavaExec</a></code> and as a result, <code><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html">JavaExec</a></code> also supports up-to-date checks.</p>
+</div>
+<div class="paragraph">
+<p>However, depending on how your WSDLs are structured, you may run into scenarios where <code>wsdl2java*</code> tasks are out-of-date.</p>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>For each WSDL source, the generated Java source is added to the <a href="https://docs.gradle.org/current/userguide/java_plugin.html#source_sets"><code>main</code> source sets</a>.</p>
@@ -1088,7 +1099,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0-SNAPSHOT<br>
-Last updated 2021-02-10 03:42:15 UTC
+Last updated 2021-02-20 20:58:54 UTC
 </div>
 </div>
 <style>

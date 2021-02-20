@@ -437,15 +437,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="article toc2 toc-left">
+<body id="plugin-configuration" class="book toc2 toc-left">
 <div id="header">
+<h1>Plugin Configuration</h1>
+<div class="details">
+<span id="revnumber">version 1.0.0-SNAPSHOT</span>
+</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#plugin-configuration">Plugin Configuration</a>
+<li><a href="#plugin-extension">1. Extension</a></li>
+<li><a href="#dependency-configuration">2. Dependency Configuration</a>
 <ul class="sectlevel2">
-<li><a href="#plugin-extension">Extension</a></li>
-<li><a href="#dependency-configuration">Dependency Configuration</a></li>
+<li><a href="#dependency-version-constraints">2.1. Managing Dependency Versions</a></li>
 </ul>
 </li>
 </ul>
@@ -453,10 +457,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="plugin-configuration"><a class="anchor" href="#plugin-configuration"></a>Plugin Configuration</h2>
+<h2 id="plugin-extension"><a class="anchor" href="#plugin-extension"></a>1. Extension</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="plugin-extension"><a class="anchor" href="#plugin-extension"></a>Extension</h3>
 <div class="paragraph">
 <p>The plugin contributes a single extension to the project named <code>cxfCodegen</code>.</p>
 </div>
@@ -477,13 +479,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>WSDL sources container for generating Java. It is a {object-container}[<code>NamedDomainObjectContainer</code>] type.</td>
+<td>WSDL sources container for generating Java. It is a <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/NamedDomainObjectContainer.html"><code>NamedDomainObjectContainer</code></a> type.</td>
 </tr>
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="dependency-configuration"><a class="anchor" href="#dependency-configuration"></a>Dependency Configuration</h3>
+</div>
+<div class="sect1">
+<h2 id="dependency-configuration"><a class="anchor" href="#dependency-configuration"></a>2. Dependency Configuration</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The plugin creates a configuration named <code>cxfCodegen</code> which can be used to add additional dependencies to the classpath
 for code generation.</p>
@@ -523,8 +527,8 @@ for code generation.</p>
 <div class="paragraph">
 <p>These are the same dependencies defined in the Maven plugin&#8217;s <a href="https://github.com/apache/cxf/blob/cxf-3.4.1/maven-plugins/codegen-plugin/pom.xml#L71..L106">POM</a>.</p>
 </div>
-<div class="sect3">
-<h4 id="dependency-version-constraints"><a class="anchor" href="#dependency-version-constraints"></a>Managing Dependency Versions</h4>
+<div class="sect2">
+<h3 id="dependency-version-constraints"><a class="anchor" href="#dependency-version-constraints"></a>2.1. Managing Dependency Versions</h3>
 <div class="paragraph">
 <p>Standard Gradle dependency management can be used to control the included dependency versions.</p>
 </div>
@@ -578,11 +582,10 @@ You will need to ensure the version of CXF dependencies you specify is compatibl
 </div>
 </div>
 </div>
-</div>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0-SNAPSHOT<br>
-Last updated 2021-02-10 03:42:15 UTC
+Last updated 2021-02-20 20:58:54 UTC
 </div>
 </div>
 <style>
