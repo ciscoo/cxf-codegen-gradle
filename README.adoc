@@ -40,11 +40,17 @@ plugins {
 </details>
 ++++
 
-=== Snapshots
+== Documentation
+
+* https://ciscoo.github.io/cxf-codegen-gradle/docs/1.0.0-rc.1/user-guide/[User Guide]
+* https://ciscoo.github.io/cxf-codegen-gradle/docs/1.0.0-rc.1/api/index.html[Javadoc]
+* https://github.com/ciscoo/cxf-codegen-gradle/blob/master/CHANGELOG.adoc[Changelog]
+
+== Snapshots
 
 Snapshots of the next development version are published to the Sonatype OSSRH snapshot repository.
 
-Snapshots are published for every commit to the `master` branch.
+Snapshots are published for every commit to the `master` branch. Documentation for snapshots can be found https://ciscoo.github.io/cxf-codegen-gradle/docs/snapshot/user-guide/[here].
 
 ++++
 <details open>
