@@ -2,7 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog].
+== [1.0.0-rc.2] - ?
+
+* Support for Gradle 6.8.x
+* Early support for Gradle 7
 
 == [1.0.0-rc.1] - 2020-12-13
 
