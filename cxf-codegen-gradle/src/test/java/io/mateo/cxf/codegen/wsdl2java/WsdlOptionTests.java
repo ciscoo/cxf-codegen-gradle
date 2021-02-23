@@ -324,7 +324,7 @@ class WsdlOptionTests {
 	void encoding() {
 		this.option.getEncoding().set("UTF-8");
 		List<String> expected = List.of("-d", this.outputDir.getAbsolutePath(), "-encoding", "UTF-8",
-										this.temp.toURI().toString());
+				this.temp.toURI().toString());
 
 		List<String> actual = this.option.generateArgs();
 

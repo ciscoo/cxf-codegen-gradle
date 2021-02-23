@@ -515,7 +515,7 @@ public class WsdlOption implements Option, Named {
 		if (this.wsdlList.isPresent() && this.wsdlList.get()) {
 			command.add("-wsdlList");
 		}
-		if(this.encoding.isPresent()) {
+		if (this.encoding.isPresent()) {
 			command.add("-encoding");
 			command.add(this.encoding.get());
 		}
