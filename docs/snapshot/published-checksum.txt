@@ -1,15 +1,15 @@
+1bfa9257dff6cd5e947da1440f6ec649  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/WsdlOption.java
 3c6c67e71439f03e94885b9a4f2dcf79  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/CxfCodegenExtension.java
 4a3117a36f5252fd622a7d01757a1224  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/GenericWsdlOption.java
 6eb4f986d223d9f7db24f2c677a84902  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.java
 909ebf6d9d84538864419b8c4a0b378e  documentation/src/docs/asciidoc/attributes.adoc
-9d194b575b9c996a574b6e2d70fec85c  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/Option.java
 9d9d0ef151fa4f741443b25683baf028  documentation/build.gradle.kts
 a50297541302cf389f3d956c9ae684fa  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/package-info.java
 a75f059e5d9fc9c78eefb8596356b6c5  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/CxfCodegenPlugin.java
 bf78d17ab3814d38fcc8d3647fcac8ec  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/package-info.java
 c0d2577c8e578299c3b37f33dad0a060  documentation/src/docs/asciidoc/authors.adoc
-c5c49579341965913c7ec87e106bda42  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/WsdlOption.java
 e05f8c68203c90ba2dbf92914b8b06a6  documentation/src/docs/asciidoc/index.adoc
 ef7516e49b77371a4febdf9e5a4fc61e  documentation/src/docs/asciidoc/generating-java.adoc
 f13c3ecb1bf32eac5e397faed1b08b0f  documentation/src/docs/asciidoc/plugin-configuration.adoc
+f85a641d59bb617a73fb8a418689fa71  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/Option.java
 fce2434f1276e88f57d5ef92bd055755  documentation/src/docs/asciidoc/overview.adoc
