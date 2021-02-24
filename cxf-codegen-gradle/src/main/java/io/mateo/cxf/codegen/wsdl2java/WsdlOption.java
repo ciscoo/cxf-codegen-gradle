@@ -412,6 +412,10 @@ public class WsdlOption implements Option, Named {
 	 */
 	public List<String> generateArgs() {
 		List<String> command = new ArrayList<>();
+		if (this.encoding.isPresent()) {
+			command.add("-encoding");
+			command.add(this.encoding.get());
+		}
 		if (this.packageNames.isPresent()) {
 			this.packageNames.get().forEach((value) -> {
 				command.add("-p");
@@ -515,10 +519,6 @@ public class WsdlOption implements Option, Named {
 		}
 		if (this.wsdlList.isPresent() && this.wsdlList.get()) {
 			command.add("-wsdlList");
-		}
-		if (this.encoding.isPresent()) {
-			command.add("-encoding");
-			command.add(this.encoding.get());
 		}
 		if (this.verbose.isPresent() && this.verbose.get()) {
 			command.add("-verbose");
