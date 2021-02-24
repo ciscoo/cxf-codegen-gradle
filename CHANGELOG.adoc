@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 * Support for Gradle 6.8.x
 * Early support for Gradle 7
+* Add option 'encoding' for generated classes
 
 == [1.0.0-rc.1] - 2020-12-13
 

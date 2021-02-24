@@ -321,6 +321,17 @@ class WsdlOptionTests {
 	}
 
 	@Test
+	void encoding() {
+		this.option.getEncoding().set("UTF-8");
+		List<String> expected = List.of("-d", this.outputDir.getAbsolutePath(), "-encoding", "UTF-8",
+				this.temp.toURI().toString());
+
+		List<String> actual = this.option.generateArgs();
+
+		assertThat(actual).containsExactlyElementsOf(expected);
+	}
+
+	@Test
 	void verbose() {
 		this.option.getVerbose().set(true);
 		List<String> expected = List.of("-d", this.outputDir.getAbsolutePath(), "-verbose",

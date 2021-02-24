@@ -96,6 +96,8 @@ public class WsdlOption implements Option, Named {
 
 	private final Property<Boolean> allowElementRefs;
 
+	private final Property<String> encoding;
+
 	private final Property<Boolean> verbose;
 
 	private final DirectoryProperty outputDir;
@@ -136,6 +138,7 @@ public class WsdlOption implements Option, Named {
 		this.autoNameResolution = objects.property(Boolean.class);
 		this.noAddressBinding = objects.property(Boolean.class);
 		this.allowElementRefs = objects.property(Boolean.class);
+		this.encoding = objects.property(String.class);
 		this.verbose = objects.property(Boolean.class);
 	}
 
@@ -374,6 +377,13 @@ public class WsdlOption implements Option, Named {
 	/**
 	 * {@inheritDoc}
 	 */
+	public Property<String> getEncoding() {
+		return this.encoding;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Property<Boolean> getVerbose() {
 		return this.verbose;
@@ -504,6 +514,10 @@ public class WsdlOption implements Option, Named {
 		}
 		if (this.wsdlList.isPresent() && this.wsdlList.get()) {
 			command.add("-wsdlList");
+		}
+		if (this.encoding.isPresent()) {
+			command.add("-encoding");
+			command.add(this.encoding.get());
 		}
 		if (this.verbose.isPresent() && this.verbose.get()) {
 			command.add("-verbose");
