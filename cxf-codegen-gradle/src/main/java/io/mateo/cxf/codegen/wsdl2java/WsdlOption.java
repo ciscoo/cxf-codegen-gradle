@@ -377,6 +377,7 @@ public class WsdlOption implements Option, Named {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Property<String> getEncoding() {
 		return this.encoding;
 	}

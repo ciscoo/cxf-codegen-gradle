@@ -258,9 +258,8 @@ public interface Option extends GenericWsdlOption {
 	Property<Boolean> getAllowElementRefs();
 
 	/**
-	 * Sets the encoding for the generated files. This option has been added in CXF
-	 * version 2.5.4.
-	 * @return encoding indicator
+	 * Encoding to use for generated sources (since CXF version 2.5.4).
+	 * @return encoding
 	 */
 	Property<String> getEncoding();
 
