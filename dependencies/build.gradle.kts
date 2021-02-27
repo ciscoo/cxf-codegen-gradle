@@ -8,7 +8,7 @@ javaPlatform {
 }
 
 dependencies {
-    api(platform("org.junit:junit-bom:5.7.0"))
+    api(platform("org.junit:junit-bom:5.8.0-M1"))
     api("org.assertj:assertj-core:3.18.1")
     api("commons-io:commons-io:2.8.0")
 }
