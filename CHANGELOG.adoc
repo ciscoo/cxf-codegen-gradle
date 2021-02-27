@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-== [1.0.0-rc.2] - ?
+== [1.0.0-rc.2] - 2021-02-27
 
 * Support for Gradle 6.8.x
 * Early support for Gradle 7

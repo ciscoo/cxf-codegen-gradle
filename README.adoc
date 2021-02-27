@@ -16,7 +16,7 @@ using the https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_blo
 [source,groovy]
 ----
 plugins {
-    id "io.mateo.cxf-codegen" version "1.0.0-rc.1"
+    id "io.mateo.cxf-codegen" version "1.0.0-rc.2"
 }
 ----
 
@@ -32,7 +32,7 @@ plugins {
 [source,kotlin]
 ----
 plugins {
-    id("io.mateo.cxf-codegen") version "1.0.0-rc.1"
+    id("io.mateo.cxf-codegen") version "1.0.0-rc.2"
 }
 ----
 
@@ -42,8 +42,8 @@ plugins {
 
 == Documentation
 
-* https://ciscoo.github.io/cxf-codegen-gradle/docs/1.0.0-rc.1/user-guide/[User Guide]
-* https://ciscoo.github.io/cxf-codegen-gradle/docs/1.0.0-rc.1/api/index.html[Javadoc]
+* https://ciscoo.github.io/cxf-codegen-gradle/docs/1.0.0-rc.2/user-guide/[User Guide]
+* https://ciscoo.github.io/cxf-codegen-gradle/docs/1.0.0-rc.2/api/index.html[Javadoc]
 * https://github.com/ciscoo/cxf-codegen-gradle/blob/master/CHANGELOG.adoc[Changelog]
 
 == Snapshots
