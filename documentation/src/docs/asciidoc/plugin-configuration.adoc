@@ -25,7 +25,7 @@ cxfCodegen { // <1>
 The plugin creates a configuration named `cxfCodegen` which can be used to add additional dependencies to the classpath
 for code generation.
 
-Out-of-the-box, the following dependencies are added (v3.4.2):
+Out-of-the-box, the following dependencies are added (v3.4.3):
 
 * `org.apache.cxf:cxf-core`
 * `org.apache.cxf:cxf-tools-common`
@@ -35,7 +35,7 @@ Out-of-the-box, the following dependencies are added (v3.4.2):
 * `org.apache.cxf:cxf-tools-wsdlto-frontend-javascript`
 ** `org.apache.cxf:cxf-rt-frontend-simple` is excluded.
 
-These are the same dependencies defined in the Maven plugin's https://github.com/apache/cxf/blob/cxf-3.4.1/maven-plugins/codegen-plugin/pom.xml#L71..L106[POM].
+These are the same dependencies defined in the Maven plugin's https://github.com/apache/cxf/blob/cxf-3.4.3/maven-plugins/codegen-plugin/pom.xml#L71..L106[POM].
 
 [[dependency-version-constraints]]
 === Managing Dependency Versions
