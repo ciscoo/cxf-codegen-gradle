@@ -35,18 +35,17 @@ import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
  */
 public final class GradleCompatibilityExtension implements TestTemplateInvocationContextProvider {
 
-	private static List<String> GRADLE_VERSIONS = List.of("5.5.1", "5.6.4", "6.0.1", "6.1.1", "6.2.2", "6.3", "6.4.1",
-			"6.5.1", "6.6.1", "6.7.1", "current", "7.0-rc-1");
+	private static final List<String> DEFAULT_GRADLE_VERSIONS = List.of("5.5.1", "5.6.4", "6.0.1", "6.1.1", "6.2.2",
+			"6.3", "6.4.1", "6.5.1", "6.6.1", "6.7.1", "current", "7.0-rc-1");
+
+	private final List<String> gradleVersions;
 
 	public GradleCompatibilityExtension() {
+		this.gradleVersions = List.copyOf(DEFAULT_GRADLE_VERSIONS);
 	}
 
 	public GradleCompatibilityExtension(String... versions) {
-		withVersions(versions);
-	}
-
-	static void withVersions(String... versions) {
-		GRADLE_VERSIONS = List.of(versions);
+		this.gradleVersions = List.of(versions);
 	}
 
 	@Override
@@ -57,7 +56,7 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 	@Override
 	public Stream<TestTemplateInvocationContext> provideTestTemplateInvocationContexts(ExtensionContext context) {
 		List<GradleVersionDsl> versionToDsl = new ArrayList<>();
-		GRADLE_VERSIONS.forEach((version) -> {
+		this.gradleVersions.forEach((version) -> {
 			versionToDsl.add(new GradleVersionDsl(version, GradleDsl.GROOVY));
 			versionToDsl.add(new GradleVersionDsl(version, GradleDsl.KOTLIN));
 		});
