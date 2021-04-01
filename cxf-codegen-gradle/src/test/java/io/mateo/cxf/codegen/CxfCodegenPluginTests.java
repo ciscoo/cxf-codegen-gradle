@@ -96,8 +96,10 @@ class CxfCodegenPluginTests {
 	@Test
 	void registersTasks(@TempDir File temp) {
 		project.getExtensions().configure(CxfCodegenExtension.class, (cxfCodegen) -> {
-			cxfCodegen.getWsdl2java().register("foo", (foo) -> foo.getWsdl().set(temp));
-			cxfCodegen.getWsdl2java().register("bar", (bar) -> bar.getWsdl().set(temp));
+			cxfCodegen.wsdl2java((wsdl2Java) -> {
+				wsdl2Java.register("foo", (foo) -> foo.getWsdl().set(temp));
+				wsdl2Java.register("bar", (bar) -> bar.getWsdl().set(temp));
+			});
 		});
 		TaskContainer tasks = project.getTasks();
 
@@ -122,7 +124,7 @@ class CxfCodegenPluginTests {
 		int expectedSize = java.getSrcDirs().size() + 1;
 
 		project.getExtensions().configure(CxfCodegenExtension.class, (cxfCodegen) -> {
-			cxfCodegen.getWsdl2java().register("foo", (foo) -> foo.getWsdl().set(temp));
+			cxfCodegen.wsdl2java((wsdl2Java) -> wsdl2Java.register("foo", (foo) -> foo.getWsdl().set(temp)));
 		});
 
 		assertThat(java.getSrcDirs().size()).isEqualTo(expectedSize);

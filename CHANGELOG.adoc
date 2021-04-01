@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 == [1.0.0-rc.3] - ?
 
 - Upgrade to Apache CXF 3.4.3
+- Add configure method for wsdl2java container -- https://github.com/ciscoo/cxf-codegen-gradle/issues/6[#6]
 
 == [1.0.0-rc.2] - 2021-02-27
 
