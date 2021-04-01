@@ -30,7 +30,7 @@ jobs:
       - name: Test
         run: |
           ./gradlew --version
-          ./gradlew build
+          ./gradlew build --parallel
 
   publish_snapshot_artifacts:
     name: Publish Snapshot Artifacts
