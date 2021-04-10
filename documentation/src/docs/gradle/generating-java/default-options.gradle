@@ -1,0 +1,13 @@
+cxfCodegen {
+    wsdl2java {
+        first {
+            wsdl = file("path/to/first.wsdl")
+        }
+        second {
+            wsdl = file("path/to/second.wsdl")
+        }
+        third {
+            wsdl = file("path/to/third.wsdl")
+        }
+    }
+}

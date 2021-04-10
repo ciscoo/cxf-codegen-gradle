@@ -1,0 +1,11 @@
+cxfCodegen {
+    wsdl2java {
+        example {
+            wsdl = file("path/to/first.wsdl")
+            outputDir = file("$buildDir/generated-java") // <1>
+            markGenerated = true // <2>
+            packageNames = ["com.example", "com.foo.bar"] // <3>
+            asyncMethods = ["foo", "bar"] // <4>
+        }
+    }
+}

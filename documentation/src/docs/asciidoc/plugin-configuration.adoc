@@ -7,14 +7,33 @@ include::attributes.adoc[]
 
 The plugin contributes a single extension to the project named `cxfCodegen`.
 
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+include::../gradle/plugin-configuration/plugin-extension.gradle[]
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
 [source,kotlin]
 ----
-cxfCodegen { // <1>
-    wsdl2java { // <2>
-
-    }
-}
+include::../gradle/plugin-configuration/plugin-extension.gradle[]
 ----
+
+++++
+</details>
+++++
 
 <1> Primary entry point to the plugin configuration.
 <2> WSDL sources container for generating Java. It is a {object-container}[`NamedDomainObjectContainer`] type.
@@ -54,14 +73,7 @@ CAUTION: You will need to ensure the version of CXF dependencies you specify is 
 
 [source,groovy]
 ----
-configurations.cxfCodegen {
-    resolutionStrategy.eachDependency {
-        if (requested.group == "org.apache.cxf") {
-            useVersion "3.2.0"
-            because "We need a lower version."
-        }
-    }
-}
+include::../gradle/plugin-configuration/managing-dependency-versions.gradle[]
 ----
 
 ++++
@@ -75,14 +87,7 @@ configurations.cxfCodegen {
 
 [source,kotlin]
 ----
-configurations.cxfCodegen {
-    resolutionStrategy.eachDependency {
-        if (requested.group == "org.apache.cxf") {
-            useVersion("3.2.0")
-            because("We need a lower version.")
-        }
-    }
-}
+include::../gradle/plugin-configuration/managing-dependency-versions.gradle.kts[]
 ----
 
 ++++

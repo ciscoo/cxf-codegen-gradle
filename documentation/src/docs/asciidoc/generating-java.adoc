@@ -31,13 +31,7 @@ The minimum requirement for generating Java is a single WSDL file.
 
 [source,groovy]
 ----
-cxfCodegen {
-    wsdl2java {
-        example {
-            wsdl = file("path/to/example.wsdl")
-        }
-    }
-}
+include::../gradle/generating-java/minimal-usage.gradle[]
 ----
 
 ++++
@@ -51,13 +45,7 @@ cxfCodegen {
 
 [source,kotlin]
 ----
-cxfCodegen {
-    wsdl2java {
-        example {
-            wsdl.set(file("path/to/example.wsdl"))
-        }
-    }
-}
+include::../gradle/generating-java/minimal-usage.gradle.kts[]
 ----
 
 ++++
@@ -79,23 +67,8 @@ offered by the {cxf-codegen-maven-plugin}[Maven plugin].
 
 [source,groovy]
 ----
-cxfCodegen {
-    wsdl2java {
-        example {
-            wsdl = file("path/to/first.wsdl")
-            outputDir = file("$buildDir/generated-java") // <1>
-            markGenerated = true // <2>
-            packageNames = ["com.example", "com.foo.bar"] // <3>
-            asyncMethods = ["foo", "bar"] // <4>
-        }
-    }
-}
+include::../gradle/generating-java/options.gradle[]
 ----
-
-<1> Change the directory the generated code files are written to.
-<2> Adds the `@Generated` annotation to classes.
-<3> Package names to use for the generated code.
-<4> Specifies subsequently generated Java class methods to allow for client-side asynchronous calls, similar to `enableAsyncMapping` in a JAX-WS binding file.
 
 ++++
 </details>
@@ -108,27 +81,17 @@ cxfCodegen {
 
 [source,kotlin]
 ----
-cxfCodegen {
-    wsdl2java {
-        example {
-            wsdl.set(file("path/to/example.wsdl"))
-            outputDir.set(file("$buildDir/generated-java")) // <1>
-            markGenerated.set(true) // <2>
-            packageNames.set(listOf("com.example", "com.foo.bar")) // <3>
-            asyncMethods.set(listOf("foo", "bar")) // <4>
-        }
-    }
-}
+include::../gradle/generating-java/options.gradle.kts[]
 ----
+
+++++
+</details>
+++++
 
 <1> Change the directory the generated code files are written to.
 <2> Adds the `@Generated` annotation to classes.
 <3> Package names to use for the generated code.
 <4> Specifies subsequently generated Java class methods to allow for client-side asynchronous calls, similar to `enableAsyncMapping` in a JAX-WS binding file.
-
-++++
-</details>
-++++
 
 There are more options available than what is shown above. View the method summary section in the Javadoc
 for `{wsdl-option}` for more details.
@@ -147,19 +110,7 @@ First define some WSDL sources:
 
 [source,groovy]
 ----
-cxfCodegen {
-    wsdl2java {
-        first {
-            wsdl = file("path/to/first.wsdl")
-        }
-        second {
-            wsdl = file("path/to/second.wsdl")
-        }
-        third {
-            wsdl = file("path/to/third.wsdl")
-        }
-    }
-}
+include::../gradle/generating-java/default-options.gradle[]
 ----
 
 ++++
@@ -173,19 +124,7 @@ cxfCodegen {
 
 [source,kotlin]
 ----
-cxfCodegen {
-    wsdl2java {
-        first {
-            wsdl.set(file("path/to/first.wsdl"))
-        }
-        second {
-            wsdl.set(file("path/to/second.wsdl"))
-        }
-        third {
-            wsdl.set(file("path/to/third.wsdl"))
-        }
-    }
-}
+include::../gradle/generating-java/default-options.gradle.kts[]
 ----
 
 ++++
@@ -201,11 +140,7 @@ Then configure each one using the {configure-each}[`configureEach`] method on th
 
 [source,groovy]
 ----
-cxfCodegen {
-    wsdl2java.configureEach {
-        markGenerated = true
-    }
-}
+include::../gradle/generating-java/configure-each.gradle[]
 ----
 
 ++++
@@ -219,11 +154,7 @@ cxfCodegen {
 
 [source,kotlin]
 ----
-cxfCodegen {
-    wsdl2java.configureEach {
-        markGenerated.set(true)
-    }
-}
+include::../gradle/generating-java/configure-each.gradle.kts[]
 ----
 
 ++++
@@ -243,14 +174,8 @@ in Java 9 and eventually removed in Java 11. Refer to https://openjdk.java.net/j
 
 [source,groovy]
 ----
-dependencies {
-    cxfCodegen "jakarta.xml.ws:jakarta.xml.ws-api:2.3.3" // <1>
-    cxfCodegen "jakarta.annotation:jakarta.annotation-api:1.3.5" // <2>
-}
+include::../gradle/generating-java/java-nine.gradle[]
 ----
-
-<1> Replacement for `javax.xml.ws.Service`
-<2> Replacement for `javax.annotation.Resource`
 
 ++++
 </details>
@@ -263,18 +188,15 @@ dependencies {
 
 [source,kotlin]
 ----
-dependencies {
-    cxfCodegen("jakarta.xml.ws:jakarta.xml.ws-api:2.3.3") // <1>
-    cxfCodegen("jakarta.annotation:jakarta.annotation-api:1.3.5") // <2>
-}
+include::../gradle/generating-java/java-nine.gradle.kts[]
 ----
-
-<1> Replacement for `javax.xml.ws.Service`
-<2> Replacement for `javax.annotation.Resource`
 
 ++++
 </details>
 ++++
+
+<1> Replacement for `javax.xml.ws.Service`
+<2> Replacement for `javax.annotation.Resource`
 
 The above is just an example. Depending on your usage, there may be more dependencies required.
 
@@ -299,9 +221,7 @@ To enable logging for Apache CXF, include a SLF4J binding and logging framework.
 
 [source,groovy]
 ----
-dependencies {
-    cxfCodegen "ch.qos.logback:logback-classic:1.2.3"
-}
+include::../gradle/generating-java/logging.gradle[]
 ----
 
 ++++
@@ -315,9 +235,7 @@ dependencies {
 
 [source,kotlin]
 ----
-dependencies {
-    cxfCodegen("ch.qos.logback:logback-classic:1.2.3")
-}
+include::../gradle/generating-java/logging.gradle.kts[]
 ----
 
 ++++
@@ -353,11 +271,7 @@ Logs from Apache CXF can be disabled by specifying a `null` logger for each `{ws
 
 [source,groovy]
 ----
-import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask
-
-tasks.withType(Wsdl2JavaTask).configureEach {
-    jvmArgs = ["-Dorg.apache.cxf.Logger=null"]
-}
+include::../gradle/generating-java/disable-logs.gradle[]
 ----
 
 ++++
@@ -371,11 +285,7 @@ tasks.withType(Wsdl2JavaTask).configureEach {
 
 [source,kotlin]
 ----
-import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask
-
-tasks.withType(Wsdl2JavaTask::class).configureEach {
-    jvmArgs = listOf("-Dorg.apache.cxf.Logger=null")
-}
+include::../gradle/generating-java/disable-logs.gradle.kts[]
 ----
 
 ++++
@@ -400,11 +310,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 
 [source,groovy]
 ----
-import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask
-
-tasks.withType(Wsdl2JavaTask).configureEach {
-    jvmArgs = ["-Dlogback.configurationFile=logback.xml"]
-}
+include::../gradle/generating-java/disable-all-logs.gradle[]
 ----
 
 ++++
@@ -418,11 +324,7 @@ tasks.withType(Wsdl2JavaTask).configureEach {
 
 [source,kotlin]
 ----
-import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask
-
-tasks.withType(Wsdl2JavaTask::class).configureEach {
-    jvmArgs = listOf("-Dlogback.configurationFile=logback.xml")
-}
+include::../gradle/generating-java/disable-all-logs.gradle.kts[]
 ----
 
 ++++

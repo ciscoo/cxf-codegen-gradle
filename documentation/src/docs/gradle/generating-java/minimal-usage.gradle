@@ -1,0 +1,7 @@
+cxfCodegen {
+    wsdl2java {
+        example {
+            wsdl = file("path/to/example.wsdl")
+        }
+    }
+}
