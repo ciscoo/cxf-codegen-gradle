@@ -462,6 +462,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>The plugin contributes a single extension to the project named <code>cxfCodegen</code>.</p>
 </div>
+<details open>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="n">wsdl2java</span> <span class="o">{</span> <i class="conum" data-value="2"></i><b>(2)</b>
+
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">cxfCodegen</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
@@ -471,6 +485,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span class="p">}</span></code></pre>
 </div>
 </div>
+</details>
 <div class="colist arabic">
 <table>
 <tr>
@@ -556,7 +571,7 @@ You will need to ensure the version of CXF dependencies you specify is compatibl
     <span class="n">resolutionStrategy</span><span class="o">.</span><span class="na">eachDependency</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">requested</span><span class="o">.</span><span class="na">group</span> <span class="o">==</span> <span class="s2">"org.apache.cxf"</span><span class="o">)</span> <span class="o">{</span>
             <span class="n">useVersion</span> <span class="s2">"3.2.0"</span>
-            <span class="n">because</span> <span class="s2">"We need a lower version."</span>
+            <span class="n">because</span> <span class="s2">"3.3.0 breaks the build"</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre>
@@ -571,7 +586,7 @@ You will need to ensure the version of CXF dependencies you specify is compatibl
     <span class="n">resolutionStrategy</span><span class="p">.</span><span class="nf">eachDependency</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">requested</span><span class="p">.</span><span class="n">group</span> <span class="p">==</span> <span class="s">"org.apache.cxf"</span><span class="p">)</span> <span class="p">{</span>
             <span class="nf">useVersion</span><span class="p">(</span><span class="s">"3.2.0"</span><span class="p">)</span>
-            <span class="nf">because</span><span class="p">(</span><span class="s">"We need a lower version."</span><span class="p">)</span>
+            <span class="nf">because</span><span class="p">(</span><span class="s">"3.3.0 breaks the build"</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
@@ -585,7 +600,7 @@ You will need to ensure the version of CXF dependencies you specify is compatibl
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0-SNAPSHOT<br>
-Last updated 2021-04-06 23:15:40 UTC
+Last updated 2021-04-10 02:28:15 UTC
 </div>
 </div>
 <style>

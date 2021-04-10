@@ -571,6 +571,20 @@ to adapt the syntax.
 <div class="paragraph">
 <p>The plugin contributes a single extension to the project named <code>cxfCodegen</code>.</p>
 </div>
+<details open>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="n">wsdl2java</span> <span class="o">{</span> <i class="conum" data-value="2"></i><b>(2)</b>
+
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">cxfCodegen</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
@@ -580,6 +594,7 @@ to adapt the syntax.
 <span class="p">}</span></code></pre>
 </div>
 </div>
+</details>
 <div class="colist arabic">
 <table>
 <tr>
@@ -663,7 +678,7 @@ You will need to ensure the version of CXF dependencies you specify is compatibl
     <span class="n">resolutionStrategy</span><span class="o">.</span><span class="na">eachDependency</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">requested</span><span class="o">.</span><span class="na">group</span> <span class="o">==</span> <span class="s2">"org.apache.cxf"</span><span class="o">)</span> <span class="o">{</span>
             <span class="n">useVersion</span> <span class="s2">"3.2.0"</span>
-            <span class="n">because</span> <span class="s2">"We need a lower version."</span>
+            <span class="n">because</span> <span class="s2">"3.3.0 breaks the build"</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre>
@@ -678,7 +693,7 @@ You will need to ensure the version of CXF dependencies you specify is compatibl
     <span class="n">resolutionStrategy</span><span class="p">.</span><span class="nf">eachDependency</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">requested</span><span class="p">.</span><span class="n">group</span> <span class="p">==</span> <span class="s">"org.apache.cxf"</span><span class="p">)</span> <span class="p">{</span>
             <span class="nf">useVersion</span><span class="p">(</span><span class="s">"3.2.0"</span><span class="p">)</span>
-            <span class="nf">because</span><span class="p">(</span><span class="s">"We need a lower version."</span><span class="p">)</span>
+            <span class="nf">because</span><span class="p">(</span><span class="s">"3.3.0 breaks the build"</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
@@ -742,7 +757,7 @@ it primarily a marker type with no additional functionality.</p>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">cxfCodegen</span> <span class="p">{</span>
     <span class="nf">wsdl2java</span> <span class="p">{</span>
-        <span class="nf">example</span> <span class="p">{</span>
+        <span class="nf">register</span><span class="p">(</span><span class="s">"example"</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/example.wsdl"</span><span class="p">))</span>
         <span class="p">}</span>
     <span class="p">}</span>
@@ -777,26 +792,6 @@ offered by the <a href="https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsd
 <span class="o">}</span></code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Change the directory the generated code files are written to.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Adds the <code>@Generated</code> annotation to classes.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Package names to use for the generated code.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Specifies subsequently generated Java class methods to allow for client-side asynchronous calls, similar to <code>enableAsyncMapping</code> in a JAX-WS binding file.</td>
-</tr>
-</table>
-</div>
 </details>
 <details>
 <summary>Kotlin</summary>
@@ -804,7 +799,7 @@ offered by the <a href="https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsd
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">cxfCodegen</span> <span class="p">{</span>
     <span class="nf">wsdl2java</span> <span class="p">{</span>
-        <span class="nf">example</span> <span class="p">{</span>
+        <span class="nf">register</span><span class="p">(</span><span class="s">"example"</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/example.wsdl"</span><span class="p">))</span>
             <span class="n">outputDir</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"$buildDir/generated-java"</span><span class="p">))</span> <i class="conum" data-value="1"></i><b>(1)</b>
             <span class="n">markGenerated</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
@@ -815,6 +810,7 @@ offered by the <a href="https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsd
 <span class="p">}</span></code></pre>
 </div>
 </div>
+</details>
 <div class="colist arabic">
 <table>
 <tr>
@@ -835,7 +831,6 @@ offered by the <a href="https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsd
 </tr>
 </table>
 </div>
-</details>
 <div class="paragraph">
 <p>There are more options available than what is shown above. View the method summary section in the Javadoc
 for <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/WsdlOption.html#method.summary">WsdlOption</a></code> for more details.</p>
@@ -875,13 +870,13 @@ for <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/WsdlOption.html#method.
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">cxfCodegen</span> <span class="p">{</span>
     <span class="nf">wsdl2java</span> <span class="p">{</span>
-        <span class="nf">first</span> <span class="p">{</span>
+        <span class="nf">register</span><span class="p">(</span><span class="s">"first"</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/first.wsdl"</span><span class="p">))</span>
         <span class="p">}</span>
-        <span class="nf">second</span> <span class="p">{</span>
+        <span class="nf">register</span><span class="p">(</span><span class="s">"second"</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/second.wsdl"</span><span class="p">))</span>
         <span class="p">}</span>
-        <span class="nf">third</span> <span class="p">{</span>
+        <span class="nf">register</span><span class="p">(</span><span class="s">"third"</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/third.wsdl"</span><span class="p">))</span>
         <span class="p">}</span>
     <span class="p">}</span>
@@ -933,18 +928,6 @@ in Java 9 and eventually removed in Java 11. Refer to <a href="https://openjdk.j
 <span class="o">}</span></code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Replacement for <code>javax.xml.ws.Service</code></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Replacement for <code>javax.annotation.Resource</code></td>
-</tr>
-</table>
-</div>
 </details>
 <details>
 <summary>Kotlin</summary>
@@ -956,6 +939,7 @@ in Java 9 and eventually removed in Java 11. Refer to <a href="https://openjdk.j
 <span class="p">}</span></code></pre>
 </div>
 </div>
+</details>
 <div class="colist arabic">
 <table>
 <tr>
@@ -968,7 +952,6 @@ in Java 9 and eventually removed in Java 11. Refer to <a href="https://openjdk.j
 </tr>
 </table>
 </div>
-</details>
 <div class="paragraph">
 <p>The above is just an example. Depending on your usage, there may be more dependencies required.</p>
 </div>
@@ -1099,7 +1082,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0-SNAPSHOT<br>
-Last updated 2021-04-06 23:15:40 UTC
+Last updated 2021-04-10 02:28:15 UTC
 </div>
 </div>
 <style>
