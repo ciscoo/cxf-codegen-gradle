@@ -36,7 +36,9 @@ tasks {
     listOf(jar, javadocJar, sourcesJar).forEach { it { enabled = false } }
 
     val copyJavadoc by registering(Copy::class) {
-        from("$rootDir/cxf-codegen-gradle/build/docs/javadoc")
+        // https://docs.gradle.org/7.0/userguide/validation_problems.html#implicit_dependency
+        // TODO: https://docs.gradle.org/current/userguide/cross_project_publications.html
+        from(project(":cxf-codegen-gradle").tasks.javadoc)
         into("$buildDir/docs/api")
     }
 
