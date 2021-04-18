@@ -140,7 +140,7 @@ Then configure each one using the {configure-each}[`configureEach`] method on th
 
 [source,groovy]
 ----
-include::../gradle/generating-java/configure-each.gradle[]
+include::../gradle/generating-java/configure-each.gradle[tags=code]
 ----
 
 ++++
@@ -154,7 +154,7 @@ include::../gradle/generating-java/configure-each.gradle[]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/configure-each.gradle.kts[]
+include::../gradle/generating-java/configure-each.gradle.kts[tags=code]
 ----
 
 ++++
