@@ -62,6 +62,9 @@ public class GradleBuild {
 
 	public GradleBuild script(String script) {
 		this.script = script;
+		if (!script.endsWith(this.dsl.getExtension())) {
+			this.script = script + this.dsl.getExtension();
+		}
 		return this;
 	}
 

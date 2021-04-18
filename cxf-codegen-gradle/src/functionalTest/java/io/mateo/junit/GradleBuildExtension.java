@@ -40,7 +40,10 @@ public class GradleBuildExtension implements BeforeEachCallback, AfterEachCallba
 
 	@Override
 	public void beforeEach(ExtensionContext context) throws Exception {
-		this.gradleBuild.script(getBuildScript(context).getFile());
+		URL buildScript = getBuildScript(context);
+		if (buildScript != null) {
+			this.gradleBuild.script(buildScript.getFile());
+		}
 		this.gradleBuild.before();
 	}
 
