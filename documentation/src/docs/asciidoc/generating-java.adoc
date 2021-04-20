@@ -310,7 +310,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 
 [source,groovy]
 ----
-include::../gradle/generating-java/disable-all-logs.gradle[]
+include::../gradle/generating-java/disable-all-logs.gradle[tags=code]
 ----
 
 ++++
@@ -324,7 +324,7 @@ include::../gradle/generating-java/disable-all-logs.gradle[]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/disable-all-logs.gradle.kts[]
+include::../gradle/generating-java/disable-all-logs.gradle.kts[tags=code]
 ----
 
 ++++
