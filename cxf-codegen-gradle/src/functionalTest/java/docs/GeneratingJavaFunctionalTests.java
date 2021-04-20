@@ -33,11 +33,11 @@ class GeneratingJavaFunctionalTests {
 	static GradleCompatibilityExtension extension = new GradleCompatibilityExtension("current");
 
 	@TestTemplate
-	void configureEach(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.script(scriptFor("configure-each")).build("verify");
+	void defaultOptions(GradleBuild gradleBuild) {
+		BuildResult result = gradleBuild.script(scriptFor("default-options")).build("verify");
 
-		assertThat(result.getOutput()).contains("example markGenerated true")
-				.contains("anotherExample markGenerated true");
+		assertThat(result.getOutput()).contains("first markGenerated true").contains("second markGenerated true")
+				.contains("third markGenerated true");
 	}
 
 	String scriptFor(String name) {

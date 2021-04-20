@@ -110,7 +110,7 @@ First define some WSDL sources:
 
 [source,groovy]
 ----
-include::../gradle/generating-java/default-options.gradle[]
+include::../gradle/generating-java/default-options.gradle[tags=primary]
 ----
 
 ++++
@@ -124,7 +124,7 @@ include::../gradle/generating-java/default-options.gradle[]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/default-options.gradle.kts[]
+include::../gradle/generating-java/default-options.gradle.kts[tags=primary]
 ----
 
 ++++
@@ -140,7 +140,7 @@ Then configure each one using the {configure-each}[`configureEach`] method on th
 
 [source,groovy]
 ----
-include::../gradle/generating-java/configure-each.gradle[tags=code]
+include::../gradle/generating-java/default-options.gradle[tags=secondary]
 ----
 
 ++++
@@ -154,7 +154,7 @@ include::../gradle/generating-java/configure-each.gradle[tags=code]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/configure-each.gradle.kts[tags=code]
+include::../gradle/generating-java/default-options.gradle.kts[tags=secondary]
 ----
 
 ++++
