@@ -28,7 +28,7 @@ java {
     withJavadocJar()
     withSourcesJar()
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(11))
+        languageVersion.set(JavaLanguageVersion.of(16))
     }
 }
 
@@ -64,7 +64,7 @@ tasks {
             )
         }
         javaLauncher.set(javaToolchains.launcherFor {
-            languageVersion.set(JavaLanguageVersion.of(11))
+            languageVersion.set(JavaLanguageVersion.of(16))
         })
     }
 
@@ -98,7 +98,7 @@ tasks {
             logging.captureStandardOutput(LogLevel.INFO)
         }
         javadocTool.set(javaToolchains.javadocToolFor {
-            languageVersion.set(JavaLanguageVersion.of(11))
+            languageVersion.set(JavaLanguageVersion.of(16))
         })
     }
 }
