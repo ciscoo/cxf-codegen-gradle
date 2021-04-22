@@ -115,7 +115,7 @@ pluginManagement {
 
 == Building from Source
 
-You will need https://openjdk.java.net/projects/jdk/16/[JDK 16] to build CXF Codegen.
+You will need https://openjdk.java.net/projects/jdk/11/[JDK 11] to build CXF Codegen.
 
 TIP: A compatible JDK will automatically be downloaded by Gradle if you do not have one.
 See https://docs.gradle.org/current/userguide/toolchains.html[Toolchains for JVM projects] for more details.
