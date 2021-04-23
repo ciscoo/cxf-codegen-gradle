@@ -23,10 +23,10 @@ jobs:
           key: test-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', '**/gradle.properties', 'gradle/**', 'buildSrc/src/main/**') }}
           restore-keys: |
             test-${{ runner.os }}-gradle-
-      - name: JDK 15 Install
+      - name: JDK 11 Install
         uses: actions/setup-java@v1
         with:
-          java-version: 15
+          java-version: 11
       - name: Test
         run: |
           ./gradlew --version
@@ -48,10 +48,10 @@ jobs:
           key: assemble-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', '**/gradle.properties', 'gradle/**', 'buildSrc/src/main/**') }}
           restore-keys: |
             assemble-${{ runner.os }}-gradle-
-      - name: JDK 15 Install
+      - name: JDK 11 Install
         uses: actions/setup-java@v1
         with:
-          java-version: 15
+          java-version: 11
       - name: Publish
         env:
           ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
@@ -74,10 +74,10 @@ jobs:
           key: assemble-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', '**/gradle.properties', 'gradle/**', 'buildSrc/src/main/**') }}
           restore-keys: |
             assemble-${{ runner.os }}-gradle-
-      - name: JDK 15 Install
+      - name: JDK 11 Install
         uses: actions/setup-java@v1
         with:
-          java-version: 15
+          java-version: 11
       - name: 'Publish Snapshot Documentation'
         env:
           GRGIT_USER: ${{ secrets.GH_TOKEN }}
