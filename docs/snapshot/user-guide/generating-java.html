@@ -819,9 +819,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 <summary>Groovy</summary>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="kn">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask</span>
-
-<span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">(</span><span class="n">Wsdl2JavaTask</span><span class="o">).</span><span class="na">configureEach</span> <span class="o">{</span>
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">(</span><span class="n">Wsdl2JavaTask</span><span class="o">).</span><span class="na">configureEach</span> <span class="o">{</span>
     <span class="n">jvmArgs</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"-Dlogback.configurationFile=logback.xml"</span><span class="o">]</span>
 <span class="o">}</span></code></pre>
 </div>
@@ -831,9 +829,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="k">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask</span>
-
-<span class="n">tasks</span><span class="p">.</span><span class="nf">withType</span><span class="p">(</span><span class="nc">Wsdl2JavaTask</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="nf">configureEach</span> <span class="p">{</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="n">tasks</span><span class="p">.</span><span class="nf">withType</span><span class="p">(</span><span class="nc">Wsdl2JavaTask</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="nf">configureEach</span> <span class="p">{</span>
     <span class="n">jvmArgs</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="s">"-Dlogback.configurationFile=logback.xml"</span><span class="p">)</span>
 <span class="p">}</span></code></pre>
 </div>
@@ -846,7 +842,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0-SNAPSHOT<br>
-Last updated 2021-04-18 23:17:03 UTC
+Last updated 2021-04-23 00:32:19 UTC
 </div>
 </div>
 <style>
