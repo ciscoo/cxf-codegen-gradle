@@ -17,8 +17,8 @@ package docs;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -47,12 +47,8 @@ class GeneratingJavaFunctionalTests {
 	@TestTemplate
 	void disableAllLogs(GradleBuild gradleBuild) throws IOException {
 		GradleRunner runner = gradleBuild.script(scriptFor("disable-all-logs")).prepareRunner("wsdl2java");
-		String logback = """
-				<?xml version="1.0" encoding="UTF-8"?>
-				<configuration>
-				</configuration>
-				""";
-		Files.writeString(Path.of(gradleBuild.getProjectDir().getAbsolutePath(), "logback.xml"), logback);
+		FileUtils.copyFile(new File("src/functionalTest/resources/emptyLogback.xml"),
+				new File(gradleBuild.getProjectDir(), "logback.xml"));
 		FileUtils.moveFile(FileUtils.getFile(gradleBuild.getProjectDir(), "wsdls/calculator.wsdl"),
 				FileUtils.getFile(gradleBuild.getProjectDir(), "example.wsdl"));
 		FileUtils.moveFile(FileUtils.getFile(gradleBuild.getProjectDir(), "wsdls/calculator.xsd"),
