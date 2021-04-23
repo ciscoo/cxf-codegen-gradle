@@ -60,6 +60,16 @@ class GeneratingJavaFunctionalTests {
 				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader", "DEBUG org.apache.velocity");
 	}
 
+	@TestTemplate
+	void disableLogs(GradleBuild gradleBuild) throws IOException {
+		GradleRunner runner = gradleBuild.script(scriptFor("disable-logs")).prepareRunner("wsdl2java");
+
+		BuildResult result = runner.build();
+
+		assertThat(result.getOutput()).doesNotContain("DEBUG org.apache.cxf.common.logging.LogUtils",
+				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader").contains("DEBUG org.apache.velocity");
+	}
+
 	String scriptFor(String name) {
 		final Path rootDir = Paths.get("").toAbsolutePath().getParent();
 		Path scriptPath = Paths.get(rootDir.toString(), "documentation", "src", "docs", "gradle", "generating-java",

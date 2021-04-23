@@ -271,7 +271,7 @@ Logs from Apache CXF can be disabled by specifying a `null` logger for each `{ws
 
 [source,groovy]
 ----
-include::../gradle/generating-java/disable-logs.gradle[]
+include::../gradle/generating-java/disable-logs.gradle[tags=code]
 ----
 
 ++++
@@ -285,7 +285,7 @@ include::../gradle/generating-java/disable-logs.gradle[]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/disable-logs.gradle.kts[]
+include::../gradle/generating-java/disable-logs.gradle.kts[tags=code]
 ----
 
 ++++
