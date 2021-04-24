@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibilityExtension;
@@ -68,6 +69,13 @@ class GeneratingJavaFunctionalTests {
 
 		assertThat(result.getOutput()).doesNotContain("DEBUG org.apache.cxf.common.logging.LogUtils",
 				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader").contains("DEBUG org.apache.velocity");
+	}
+
+	@TestTemplate
+	void javaNine(GradleBuild gradleBuild) {
+		BuildResult result = gradleBuild.script(scriptFor("java-nine")).prepareRunner("verify").build();
+
+		assertThat(result.getOutput()).contains(List.of("jakarta.xml.ws-api", "jakarta.annotation-api"));
 	}
 
 	String scriptFor(String name) {

@@ -174,7 +174,7 @@ in Java 9 and eventually removed in Java 11. Refer to https://openjdk.java.net/j
 
 [source,groovy]
 ----
-include::../gradle/generating-java/java-nine.gradle[]
+include::../gradle/generating-java/java-nine.gradle[tags=code]
 ----
 
 ++++
@@ -188,7 +188,7 @@ include::../gradle/generating-java/java-nine.gradle[]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/java-nine.gradle.kts[]
+include::../gradle/generating-java/java-nine.gradle.kts[tags=code]
 ----
 
 ++++
