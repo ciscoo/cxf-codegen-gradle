@@ -10,9 +10,9 @@ it primarily a marker type with no additional functionality.
 
 .Incremental Build
 ****
-The `{javaexec-task}` supports up-to-date checks (aka incremental build). As mentioned above, `{wsdl2java-task}` is a subclass of `{javaexec-task}` and as a result, `{javaexec-task}` also supports up-to-date checks.
+The `{javaexec-task}` supports up-to-date checks (aka incremental build). As mentioned above, `{wsdl2java-task}` is a subclass of `{javaexec-task}` and as a result, `{wsdl2java-task}` also supports up-to-date checks.
 
-However, depending on how your WSDLs are structured, you may run into scenarios where `wsdl2java*` tasks are out-of-date.
+However, depending on how your WSDLs are structured, you may encounter scenarios where `wsdl2java*` tasks are out-of-date.
 ****
 
 For each WSDL source, the generated Java source is added to the {main-source-sets}[`main` source sets].
