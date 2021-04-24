@@ -78,6 +78,14 @@ class GeneratingJavaFunctionalTests {
 		assertThat(result.getOutput()).contains(List.of("jakarta.xml.ws-api", "jakarta.annotation-api"));
 	}
 
+	@TestTemplate
+	void logging(GradleBuild gradleBuild) {
+		BuildResult result = gradleBuild.script(scriptFor("logging")).prepareRunner("wsdl2java").build();
+
+		assertThat(result.getOutput()).contains("DEBUG org.apache.cxf.common.logging.LogUtils",
+				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader", "DEBUG org.apache.velocity");
+	}
+
 	String scriptFor(String name) {
 		final Path rootDir = Paths.get("").toAbsolutePath().getParent();
 		Path scriptPath = Paths.get(rootDir.toString(), "documentation", "src", "docs", "gradle", "generating-java",

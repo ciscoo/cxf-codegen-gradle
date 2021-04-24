@@ -221,7 +221,7 @@ To enable logging for Apache CXF, include a SLF4J binding and logging framework.
 
 [source,groovy]
 ----
-include::../gradle/generating-java/logging.gradle[]
+include::../gradle/generating-java/logging.gradle[tags=code]
 ----
 
 ++++
@@ -235,7 +235,7 @@ include::../gradle/generating-java/logging.gradle[]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/logging.gradle.kts[]
+include::../gradle/generating-java/logging.gradle.kts[tags=code]
 ----
 
 ++++
