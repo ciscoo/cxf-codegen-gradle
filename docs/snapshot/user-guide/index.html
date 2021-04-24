@@ -554,8 +554,9 @@ the source of the <a href="https://github.com/ciscoo/cxf-codegen-gradle/tree/mas
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-All examples are written for Gradle 7.0. Depending on your Gradle version, you may need
-to adapt the syntax.
+All examples are written for <em>and</em> are tested for Gradle 7.0.
+Depending on your Gradle version, you may need to adapt the example to a syntax that is compatible
+with your Gradle version.
 </td>
 </tr>
 </table>
@@ -719,10 +720,10 @@ it primarily a marker type with no additional functionality.</p>
 <div class="content">
 <div class="title">Incremental Build</div>
 <div class="paragraph">
-<p>The <code><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html">JavaExec</a></code> supports up-to-date checks (aka incremental build). As mentioned above, <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html">Wsdl2JavaTask</a></code> is a subclass of <code><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html">JavaExec</a></code> and as a result, <code><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html">JavaExec</a></code> also supports up-to-date checks.</p>
+<p>The <code><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html">JavaExec</a></code> supports up-to-date checks (aka incremental build). As mentioned above, <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html">Wsdl2JavaTask</a></code> is a subclass of <code><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html">JavaExec</a></code> and as a result, <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html">Wsdl2JavaTask</a></code> also supports up-to-date checks.</p>
 </div>
 <div class="paragraph">
-<p>However, depending on how your WSDLs are structured, you may run into scenarios where <code>wsdl2java*</code> tasks are out-of-date.</p>
+<p>However, depending on how your WSDLs are structured, you may encounter scenarios where <code>wsdl2java*</code> tasks are out-of-date.</p>
 </div>
 </div>
 </div>
@@ -782,7 +783,7 @@ offered by the <a href="https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsd
 <pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span>
     <span class="n">wsdl2java</span> <span class="o">{</span>
         <span class="n">example</span> <span class="o">{</span>
-            <span class="n">wsdl</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s2">"path/to/first.wsdl"</span><span class="o">)</span>
+            <span class="n">wsdl</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">)</span>
             <span class="n">outputDir</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s2">"$buildDir/generated-java"</span><span class="o">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
             <span class="n">markGenerated</span> <span class="o">=</span> <span class="kc">true</span> <i class="conum" data-value="2"></i><b>(2)</b>
             <span class="n">packageNames</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"com.example"</span><span class="o">,</span> <span class="s2">"com.foo.bar"</span><span class="o">]</span> <i class="conum" data-value="3"></i><b>(3)</b>
@@ -1074,7 +1075,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0-SNAPSHOT<br>
-Last updated 2021-04-23 00:49:59 UTC
+Last updated 2021-04-24 03:38:45 UTC
 </div>
 </div>
 <style>
