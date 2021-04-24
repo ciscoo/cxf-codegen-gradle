@@ -42,8 +42,10 @@ class PluginConfigurationFunctionalTests {
 	}
 
 	@TestTemplate
-	void pluginExtension() {
+	void pluginExtension(GradleBuild gradleBuild) {
+		BuildResult result = gradleBuild.script(scriptFor("plugin-extension")).build();
 
+		assertThat(result.getOutput()).contains("BUILD SUCCESSFUL");
 	}
 
 	String scriptFor(String name) {

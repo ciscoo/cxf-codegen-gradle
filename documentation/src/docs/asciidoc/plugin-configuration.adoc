@@ -14,7 +14,7 @@ The plugin contributes a single extension to the project named `cxfCodegen`.
 
 [source,groovy]
 ----
-include::../gradle/plugin-configuration/plugin-extension.gradle[]
+include::../gradle/plugin-configuration/plugin-extension.gradle[tags=code]
 ----
 
 ++++
@@ -28,7 +28,7 @@ include::../gradle/plugin-configuration/plugin-extension.gradle[]
 
 [source,kotlin]
 ----
-include::../gradle/plugin-configuration/plugin-extension.gradle[]
+include::../gradle/plugin-configuration/plugin-extension.gradle[tags=code]
 ----
 
 ++++
