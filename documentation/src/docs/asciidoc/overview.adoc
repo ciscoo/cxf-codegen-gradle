@@ -34,5 +34,6 @@ the source of the {functional-test}[functional tests] for more details.
 
 Gradle's {configuration-cache}[configuration cache] is supported when using Gradle 6.6 or later.
 
-WARNING: All examples are written for Gradle {current-gradle-version}. Depending on your Gradle version, you may need
-to adapt the syntax.
+WARNING: All examples are written for _and_ are tested for Gradle {current-gradle-version}.
+Depending on your Gradle version, you may need to adapt the example to a syntax that is compatible
+with your Gradle version.
