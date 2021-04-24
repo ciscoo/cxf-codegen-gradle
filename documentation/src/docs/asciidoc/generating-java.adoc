@@ -67,7 +67,7 @@ offered by the {cxf-codegen-maven-plugin}[Maven plugin].
 
 [source,groovy]
 ----
-include::../gradle/generating-java/options.gradle[]
+include::../gradle/generating-java/options.gradle[tags=code]
 ----
 
 ++++
@@ -81,7 +81,7 @@ include::../gradle/generating-java/options.gradle[]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/options.gradle.kts[]
+include::../gradle/generating-java/options.gradle.kts[tags=code]
 ----
 
 ++++

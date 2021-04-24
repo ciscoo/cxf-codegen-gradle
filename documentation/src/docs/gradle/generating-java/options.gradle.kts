@@ -1,3 +1,9 @@
+plugins {
+    java
+    id("io.mateo.cxf-codegen")
+}
+
+// tag::code[]
 cxfCodegen {
     wsdl2java {
         register("example") {
@@ -7,5 +13,17 @@ cxfCodegen {
             packageNames.set(listOf("com.example", "com.foo.bar")) // <3>
             asyncMethods.set(listOf("foo", "bar")) // <4>
         }
+    }
+}
+// end::code[]
+
+tasks.register("verify") {
+    doLast {
+        val example = cxfCodegen.wsdl2java.getByName("example")
+        println("wsdl=${example.wsdl.get()}")
+        println("outputDir=${example.outputDir.get()}")
+        println("markGenerated=${example.markGenerated.get()}")
+        println("packageNames=${example.packageNames.get()}")
+        println("asyncMethods=${example.asyncMethods.get()}")
     }
 }

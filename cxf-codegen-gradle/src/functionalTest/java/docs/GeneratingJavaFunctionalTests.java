@@ -93,6 +93,14 @@ class GeneratingJavaFunctionalTests {
 		assertThat(result.getOutput()).contains("/path/to/example.wsdl");
 	}
 
+	@TestTemplate
+	void options(GradleBuild gradleBuild) {
+		BuildResult result = gradleBuild.script(scriptFor("options")).prepareRunner("verify").build();
+
+		assertThat(result.getOutput()).contains("/path/to/example.wsdl", "/build/generated-java", "markGenerated=true",
+				"packageNames=[com.example, com.foo.bar]", "asyncMethods=[foo, bar]");
+	}
+
 	String scriptFor(String name) {
 		final Path rootDir = Paths.get("").toAbsolutePath().getParent();
 		Path scriptPath = Paths.get(rootDir.toString(), "documentation", "src", "docs", "gradle", "generating-java",
