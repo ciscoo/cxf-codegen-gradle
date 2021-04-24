@@ -73,7 +73,7 @@ CAUTION: You will need to ensure the version of CXF dependencies you specify is 
 
 [source,groovy]
 ----
-include::../gradle/plugin-configuration/managing-dependency-versions.gradle[]
+include::../gradle/plugin-configuration/managing-dependency-versions.gradle[tags=code]
 ----
 
 ++++
@@ -87,7 +87,7 @@ include::../gradle/plugin-configuration/managing-dependency-versions.gradle[]
 
 [source,kotlin]
 ----
-include::../gradle/plugin-configuration/managing-dependency-versions.gradle.kts[]
+include::../gradle/plugin-configuration/managing-dependency-versions.gradle.kts[tags=code]
 ----
 
 ++++

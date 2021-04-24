@@ -1,3 +1,13 @@
+plugins {
+    java
+    id("io.mateo.cxf-codegen")
+}
+
+repositories {
+    mavenCentral()
+}
+
+// tag::code[]
 configurations.cxfCodegen {
     resolutionStrategy.eachDependency {
         if (requested.group == "org.apache.cxf") {
@@ -6,3 +16,4 @@ configurations.cxfCodegen {
         }
     }
 }
+// end::code[]
