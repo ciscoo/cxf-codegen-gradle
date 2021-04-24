@@ -31,7 +31,7 @@ The minimum requirement for generating Java is a single WSDL file.
 
 [source,groovy]
 ----
-include::../gradle/generating-java/minimal-usage.gradle[]
+include::../gradle/generating-java/minimal-usage.gradle[tags=code]
 ----
 
 ++++
@@ -45,7 +45,7 @@ include::../gradle/generating-java/minimal-usage.gradle[]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/minimal-usage.gradle.kts[]
+include::../gradle/generating-java/minimal-usage.gradle.kts[tags=code]
 ----
 
 ++++

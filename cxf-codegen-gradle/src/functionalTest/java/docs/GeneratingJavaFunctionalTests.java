@@ -86,6 +86,13 @@ class GeneratingJavaFunctionalTests {
 				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader", "DEBUG org.apache.velocity");
 	}
 
+	@TestTemplate
+	void minimalUsage(GradleBuild gradleBuild) {
+		BuildResult result = gradleBuild.script(scriptFor("minimal-usage")).prepareRunner("verify").build();
+
+		assertThat(result.getOutput()).contains("/path/to/example.wsdl");
+	}
+
 	String scriptFor(String name) {
 		final Path rootDir = Paths.get("").toAbsolutePath().getParent();
 		Path scriptPath = Paths.get(rootDir.toString(), "documentation", "src", "docs", "gradle", "generating-java",
