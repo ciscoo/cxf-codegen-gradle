@@ -55,6 +55,9 @@ tasks {
         testClassesDirs = functionalTestSourceSet.output.classesDirs
         classpath = functionalTestSourceSet.runtimeClasspath
         group = LifecycleBasePlugin.VERIFICATION_GROUP
+        testLogging {
+            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        }
     }
     check {
         dependsOn(functionalTest)
