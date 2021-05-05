@@ -58,6 +58,8 @@ tasks {
         testLogging {
             exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
         }
+        // TODO: Drop support for older versions of Gradle.
+        systemProperty("firstSix", System.getProperty("firstSix"))
     }
     check {
         dependsOn(functionalTest)

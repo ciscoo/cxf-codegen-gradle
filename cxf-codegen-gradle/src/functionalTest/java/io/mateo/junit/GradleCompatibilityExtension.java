@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.gradle.util.GradleVersion;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.Extension;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -41,7 +42,17 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 	private final List<String> gradleVersions;
 
 	public GradleCompatibilityExtension() {
-		this.gradleVersions = List.copyOf(DEFAULT_GRADLE_VERSIONS);
+		// Attempt to reduce amount of work done in CI.
+		// TODO: Drop support for older versions of Gradle.
+		if (Boolean.parseBoolean(System.getProperty("firstSix"))) {
+			this.gradleVersions = List.of("5.5.1", "5.6.4", "6.0.1", "6.1.1", "6.2.2", "6.3");
+		}
+		else {
+			this.gradleVersions = List.of("6.4.1", "6.5.1", "6.6.1", "6.7.1", "6.8.3", "6.9-rc-1", "current");
+		}
+		System.err.println("Testing against the following Gradle versions " + this.gradleVersions);
+		Assertions.assertTrue(DEFAULT_GRADLE_VERSIONS.containsAll(this.gradleVersions),
+				"GradleCompatibilityExtension version defaults mismatch");
 	}
 
 	public GradleCompatibilityExtension(String... versions) {

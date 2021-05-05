@@ -30,7 +30,11 @@ jobs:
       - name: Test
         run: |
           ./gradlew --version
-          ./gradlew build --parallel
+          ./gradlew build -x functionalTest --parallel
+      - name: Functional Test (5.5.1 - 6.3)
+        run: ./gradlew functionalTest --parallel -DfirstSix=true
+      - name: Functional Test (6.4.1 - current)
+        run: ./gradlew functionalTest --parallel -DfirstSix=false
 
   publish_snapshot_artifacts:
     name: Publish Snapshot Artifacts
