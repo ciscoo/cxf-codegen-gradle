@@ -103,12 +103,19 @@ public class GradleBuild {
 			throw new UncheckedIOException(ex);
 		}
 
-		List<String> settingsLines = List.of("startParameter.showStacktrace = ShowStacktrace.ALWAYS_FULL",
+		List<String> settingsLines = List.of(
+				"pluginManagement {\n" + "    repositories {\n" + "        maven {\n"
+						+ "            url = uri(\"https://plugins.gradle.org/m2/\")\n" + "        }\n"
+						+ "        mavenLocal()\n" + "    }\n" + "}",
+				"startParameter.showStacktrace = ShowStacktrace.ALWAYS_FULL",
 				"startParameter.warningMode = WarningMode.All");
 
+		List<String> properties = List.of("micronautVersion=2.0.1");
 		try {
 			FileUtils.writeLines(new File(this.projectDir, "settings.gradle"), StandardCharsets.UTF_8.name(),
 					settingsLines);
+			FileUtils.writeLines(new File(this.projectDir, "gradle.properties"), StandardCharsets.UTF_8.name(),
+					properties);
 			FileUtils.copyDirectoryToDirectory(new File("src/functionalTest/resources/wsdls"), this.projectDir);
 		}
 		catch (IOException ex) {

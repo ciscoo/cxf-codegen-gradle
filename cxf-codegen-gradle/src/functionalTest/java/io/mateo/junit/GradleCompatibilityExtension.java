@@ -68,7 +68,7 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 	public Stream<TestTemplateInvocationContext> provideTestTemplateInvocationContexts(ExtensionContext context) {
 		List<GradleVersionDsl> versionToDsl = new ArrayList<>();
 		this.gradleVersions.forEach((version) -> {
-			versionToDsl.add(new GradleVersionDsl(version, GradleDsl.GROOVY));
+			// versionToDsl.add(new GradleVersionDsl(version, GradleDsl.GROOVY));
 			versionToDsl.add(new GradleVersionDsl(version, GradleDsl.KOTLIN));
 		});
 		return versionToDsl.stream().map(GradleVersionTestTemplateInvocationContext::new);
