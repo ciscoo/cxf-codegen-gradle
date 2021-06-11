@@ -38,7 +38,6 @@ class CxfCodegenPluginFunctionalTests {
 	void failForMissingWsdl(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.buildAndFail("wsdl2javaCalculator");
 
-		assertThat(result.getOutput()).contains("Could not create task ':wsdl2javaCalculator'");
 		assertThat(result.getOutput()).contains("'wsdl' property is not present");
 	}
 
