@@ -3,6 +3,10 @@ plugins {
     id "io.mateo.cxf-codegen"
 }
 
+repositories {
+    mavenCentral()
+}
+
 cxfCodegen {
     wsdl2java.configure {
         calculator
