@@ -543,6 +543,19 @@ The API is not a 1:1 port and leans heavily on Gradle idioms and conventions.</p
 </li>
 </ul>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Gradle Version Support</div>
+<div class="paragraph">
+<p>To keep the plugin as simple as possible, there will not be any version specific workarounds for older versions
+of Gradle or any Gradle version for that matter.</p>
+</div>
+<div class="paragraph">
+<p>However, the recommended minimum Gradle version is Gradle 6 (6.3 or later). This recommended minimum aligns with Spring
+Boot Gradle Plugin 2.4.5, but without the strict requirement.</p>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>The plugin is fully tested against the above versions to ensure compatibility. View
 the source of the <a href="https://github.com/ciscoo/cxf-codegen-gradle/tree/master/cxf-codegen-gradle/src/functionalTest">functional tests</a> for more details.</p>
@@ -619,7 +632,7 @@ with your Gradle version.
 for code generation.</p>
 </div>
 <div class="paragraph">
-<p>Out-of-the-box, the following dependencies are added (v3.4.3):</p>
+<p>Out-of-the-box, the following dependencies are added (v3.4.4):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -651,7 +664,7 @@ for code generation.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>These are the same dependencies defined in the Maven plugin&#8217;s <a href="https://github.com/apache/cxf/blob/cxf-3.4.3/maven-plugins/codegen-plugin/pom.xml#L71..L106">POM</a>.</p>
+<p>These are the same dependencies defined in the Maven plugin&#8217;s <a href="https://github.com/apache/cxf/blob/cxf-3.4.4/maven-plugins/codegen-plugin/pom.xml#L71..L106">POM</a>.</p>
 </div>
 <div class="sect3">
 <h4 id="dependency-version-constraints"><a class="anchor" href="#dependency-version-constraints"></a>2.2.1. Managing Dependency Versions</h4>
@@ -1078,7 +1091,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0-SNAPSHOT<br>
-Last updated 2021-06-11 04:48:56 UTC
+Last updated 2021-06-12 19:32:04 UTC
 </div>
 </div>
 <style>
