@@ -30,6 +30,15 @@ The CXF Codegen Gradle plugin supports the following Gradle versions:
 - 6.9
 - {current-gradle-version}
 
+.Gradle Version Support
+****
+To keep the plugin as simple as possible, there will not be any version specific workarounds for older versions
+of Gradle or any Gradle version for that matter.
+
+However, the recommended minimum Gradle version is Gradle 6 (6.3 or later). This recommended minimum aligns with Spring
+Boot Gradle Plugin 2.4.5, but without the strict requirement.
+****
+
 The plugin is fully tested against the above versions to ensure compatibility. View
 the source of the {functional-test}[functional tests] for more details.
 
