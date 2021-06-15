@@ -1,6 +1,5 @@
 015219e3a31b49cff96dde0d02ba273b  documentation/src/docs/gradle/generating-java/disable-logs.gradle.kts
 03ef4bd498044b5b1bd9c2177c59c29f  documentation/src/docs/gradle/plugin-configuration/plugin-extension.gradle.kts
-0a21f0563f1dc31d429e39baaf7cebb4  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/CxfCodegenPlugin.java
 179212cc0bdf902b32c16bc4a3ebfe8f  documentation/src/docs/gradle/plugin-configuration/plugin-extension.gradle
 17fd0dbbfbd51eee8818fcb75a10c52e  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/WsdlOption.java
 1c30144ea8b1f50e0dd8316d8b00a31b  documentation/src/docs/gradle/generating-java/disable-logs.gradle
@@ -14,11 +13,11 @@
 71645c83dc4af68bdb0cab334ad2aa79  documentation/src/docs/gradle/generating-java/java-nine.gradle.kts
 78be4fcf32c0908f57b4409aea412f42  documentation/src/docs/gradle/plugin-configuration/managing-dependency-versions.gradle
 7a6a6ad7fd61e8e8d0c64a45aab36f7f  documentation/src/docs/gradle/generating-java/disable-all-logs.gradle
+8278c7a4c6b1ec2a1ed73b27a108bdf0  documentation/src/docs/asciidoc/overview.adoc
 85aba32cdc48c35e0095a9f5aafc11e8  documentation/src/docs/gradle/generating-java/disable-all-logs.gradle.kts
 8cbe6609f120bfbf7a246dd53cbcdd43  documentation/src/docs/gradle/generating-java/options.gradle.kts
 909ebf6d9d84538864419b8c4a0b378e  documentation/src/docs/asciidoc/attributes.adoc
 9ea5d31c006f4f1a7475c1ea2decc019  documentation/src/docs/gradle/plugin-configuration/managing-dependency-versions.gradle.kts
-a149bb7a791d323fc63d870093c63314  documentation/src/docs/asciidoc/overview.adoc
 a50297541302cf389f3d956c9ae684fa  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/package-info.java
 aa48da47bb94748e93adf5c88866c2fb  documentation/src/docs/gradle/generating-java/minimal-usage.gradle.kts
 bf78d17ab3814d38fcc8d3647fcac8ec  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/package-info.java
@@ -27,6 +26,7 @@ c910670b851d3791e4cac9cc739cfdb8  documentation/build.gradle.kts
 d11ad92d9b539a554b6d75c98b4fe405  documentation/src/docs/gradle/generating-java/minimal-usage.gradle
 d36c5943319c803984b0ac6d2cb41647  documentation/src/docs/gradle/generating-java/logging.gradle.kts
 d39d2f5036c85ea06417a17f0cb389f5  documentation/src/docs/gradle/generating-java/logging.gradle
+dd1ef6a53a04a2bcec567d1d1b5542ad  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/CxfCodegenPlugin.java
 e05f8c68203c90ba2dbf92914b8b06a6  documentation/src/docs/asciidoc/index.adoc
 e2951f5409f405869e8991eb9ef08e29  documentation/src/docs/gradle/generating-java/default-options.gradle.kts
 eae5b2345b83232364418e226ae21f50  documentation/src/docs/asciidoc/generating-java.adoc
