@@ -28,6 +28,7 @@ The CXF Codegen Gradle plugin supports the following Gradle versions:
 - 6.7.1
 - 6.8.3
 - 6.9
+- 7.0.2
 - {current-gradle-version}
 
 .Gradle Version Support
