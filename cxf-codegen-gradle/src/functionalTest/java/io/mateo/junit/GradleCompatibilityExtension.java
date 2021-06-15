@@ -37,7 +37,7 @@ import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
 public final class GradleCompatibilityExtension implements TestTemplateInvocationContextProvider {
 
 	private static final List<String> DEFAULT_GRADLE_VERSIONS = List.of("5.5.1", "5.6.4", "6.0.1", "6.1.1", "6.2.2",
-			"6.3", "6.4.1", "6.5.1", "6.6.1", "6.7.1", "6.8.3", "6.9", "current", "7.1-rc-2");
+			"6.3", "6.4.1", "6.5.1", "6.6.1", "6.7.1", "6.8.3", "6.9", "current", "7.1");
 
 	private final List<String> gradleVersions;
 
@@ -48,7 +48,7 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 			this.gradleVersions = List.of("5.5.1", "5.6.4", "6.0.1", "6.1.1", "6.2.2", "6.3");
 		}
 		else {
-			this.gradleVersions = List.of("6.4.1", "6.5.1", "6.6.1", "6.7.1", "6.8.3", "6.9", "current", "7.1-rc-2");
+			this.gradleVersions = List.of("6.4.1", "6.5.1", "6.6.1", "6.7.1", "6.8.3", "6.9", "current", "7.1");
 		}
 		System.err.println("Testing against the following Gradle versions " + this.gradleVersions);
 		Assertions.assertTrue(DEFAULT_GRADLE_VERSIONS.containsAll(this.gradleVersions),
