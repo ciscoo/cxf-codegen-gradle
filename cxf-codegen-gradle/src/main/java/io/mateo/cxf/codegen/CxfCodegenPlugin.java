@@ -94,13 +94,20 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		});
 	}
 
+	@SuppressWarnings("deprecation") // setMain()
 	private void registerCodegenTasks(Project project, CxfCodegenExtension extension,
 			NamedDomainObjectProvider<Configuration> configuration) {
 		extension.getWsdl2java().all((option) -> {
 			String name = option.getName().substring(0, 1).toUpperCase() + option.getName().substring(1);
 			project.getTasks().register("wsdl2java" + name, Wsdl2JavaTask.class, (task) -> {
 				task.getOutputs().dir(option.getOutputDir().get());
-				task.setMain("org.apache.cxf.tools.wsdlto.WSDLToJava");
+				try {
+					task.getMainClass().set("org.apache.cxf.tools.wsdlto.WSDLToJava");
+				}
+				catch (NoSuchMethodError ignored) {
+					// < Gradle 6.4
+					task.setMain("org.apache.cxf.tools.wsdlto.WSDLToJava");
+				}
 				task.setClasspath(configuration.get());
 				task.setGroup(WSDL2JAVA_GROUP);
 				task.setDescription("Generates Java sources for '" + option.getName() + "'");
