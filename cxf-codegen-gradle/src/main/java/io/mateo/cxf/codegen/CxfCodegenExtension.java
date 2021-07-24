@@ -15,13 +15,19 @@
  */
 package io.mateo.cxf.codegen;
 
+import static io.mateo.cxf.codegen.CxfCodegenPlugin.WSDL2JAVA_GROUP;
+
 import javax.inject.Inject;
 
+import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask;
 import io.mateo.cxf.codegen.wsdl2java.WsdlOption;
 
-import org.gradle.api.Action;
-import org.gradle.api.NamedDomainObjectContainer;
+import org.gradle.api.*;
+import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.model.ObjectFactory;
+import org.gradle.api.tasks.SourceSet;
+import org.gradle.api.tasks.SourceSetContainer;
+import org.gradle.api.tasks.TaskProvider;
 
 /**
  * Extension to configure WSDL sources.
@@ -30,9 +36,16 @@ public class CxfCodegenExtension {
 
 	private final NamedDomainObjectContainer<WsdlOption> wsdl2java;
 
+	private final Project project;
+
+	private final NamedDomainObjectProvider<Configuration> configuration;
+
 	@Inject
-	public CxfCodegenExtension(ObjectFactory objects) {
+	public CxfCodegenExtension(ObjectFactory objects, Project project,
+			NamedDomainObjectProvider<Configuration> configuration) {
 		this.wsdl2java = objects.domainObjectContainer(WsdlOption.class);
+		this.project = project;
+		this.configuration = configuration;
 	}
 
 	/**
@@ -49,6 +62,52 @@ public class CxfCodegenExtension {
 	 */
 	public void wsdl2java(Action<? super NamedDomainObjectContainer<WsdlOption>> configure) {
 		configure.execute(this.wsdl2java);
+
+		this.addToSourceSet();
+		this.registerCodegenTasks();
+	}
+
+	private void addToSourceSet() {
+		this.project.getPluginManager().withPlugin("java-base", (plugin) -> {
+			this.wsdl2java.all((option) -> {
+				this.project.getExtensions().configure(SourceSetContainer.class, (sourceSets) -> {
+					sourceSets.named(SourceSet.MAIN_SOURCE_SET_NAME, (main) -> {
+						main.getJava().srcDir(this.project.provider(() -> option.getOutputDir().getAsFile()));
+					});
+				});
+			});
+		});
+	}
+
+	@SuppressWarnings("deprecation") // setMain()
+	private void registerCodegenTasks() {
+		this.wsdl2java.all((option) -> {
+			String name = option.getName().substring(0, 1).toUpperCase() + option.getName().substring(1);
+			String taskName = "wsdl2java" + name;
+			TaskProvider<Wsdl2JavaTask> task;
+			try {
+				task = this.project.getTasks().named(taskName, Wsdl2JavaTask.class);
+			}
+			catch (UnknownTaskException e) {
+				task = this.project.getTasks().register(taskName, Wsdl2JavaTask.class);
+			}
+			task.configure((it) -> {
+				it.getOutputs().dir(option.getOutputDir().get());
+				it.getSource().value(option.getWsdl());
+
+				try {
+					it.getMainClass().set("org.apache.cxf.tools.wsdlto.WSDLToJava");
+				}
+				catch (NoSuchMethodError ignored) {
+					// < Gradle 6.4
+					it.setMain("org.apache.cxf.tools.wsdlto.WSDLToJava");
+				}
+				it.setClasspath(this.configuration.get());
+				it.setGroup(WSDL2JAVA_GROUP);
+				it.setDescription("Generates Java sources for '" + option.getName() + "'");
+				it.setArgs(option.generateArgs());
+			});
+		});
 	}
 
 }

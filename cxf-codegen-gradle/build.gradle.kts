@@ -46,6 +46,8 @@ configurations {
 }
 
 dependencies {
+    implementation("wsdl4j:wsdl4j:1.6.3")
+
     "functionalTestImplementation"("commons-io:commons-io")
 }
 

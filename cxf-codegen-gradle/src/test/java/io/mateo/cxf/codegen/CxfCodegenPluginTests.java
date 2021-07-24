@@ -140,8 +140,8 @@ class CxfCodegenPluginTests {
 		assertThatCode(() -> wsdl2Java.getClasspath().getFiles()).hasMessageContaining("configuration ':cxfCodegen'");
 		assertThat(wsdl2Java.getGroup()).isEqualTo(CxfCodegenPlugin.WSDL2JAVA_GROUP);
 		assertThat(wsdl2Java.getDescription()).isEqualTo(String.format("Generates Java sources for '%s'", sourceName));
-		assertThat(wsdl2Java.getTaskActions()).hasSize(2).first().extracting(Describable::getDisplayName).asString()
-				.contains("Execute generateArgsFor");
+		assertThat(wsdl2Java.getTaskActions()).hasSize(1).first().extracting(Describable::getDisplayName).asString()
+				.contains("Execute exec");
 	}
 
 }

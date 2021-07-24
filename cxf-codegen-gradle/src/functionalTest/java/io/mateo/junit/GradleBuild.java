@@ -70,7 +70,7 @@ public class GradleBuild {
 
 	public BuildResult build(String... arguments) {
 		try {
-			return prepareRunner(arguments).build();
+			return prepareRunnerDebug(arguments).build();
 		}
 		catch (Exception ex) {
 			throw new RuntimeException(ex);
@@ -79,7 +79,7 @@ public class GradleBuild {
 
 	public BuildResult buildAndFail(String... arguments) {
 		try {
-			return prepareRunner(arguments).buildAndFail();
+			return prepareRunnerDebug(arguments).buildAndFail();
 		}
 		catch (Exception ex) {
 			throw new RuntimeException(ex);
@@ -116,11 +116,16 @@ public class GradleBuild {
 		}
 
 		GradleRunner gradleRunner = GradleRunner.create().withProjectDir(this.projectDir).withPluginClasspath();
-		gradleRunner.withDebug(true);
 		if (this.gradleVersion != null) {
 			gradleRunner.withGradleVersion(this.gradleVersion);
 		}
 		return gradleRunner.withArguments(List.of(arguments));
+	}
+
+	public GradleRunner prepareRunnerDebug(String... arguments) {
+		GradleRunner runner = prepareRunner(arguments);
+		runner.withDebug(true);
+		return runner;
 	}
 
 	public GradleBuild gradleVersion(String version) {

@@ -41,7 +41,7 @@ class AdditionalPluginsFunctionalTests {
 
 	@TestTemplate // gh-7
 	void micronautApplicationPlugin(GradleBuild gradleBuild) {
-		GradleRunner runner = gradleBuild.prepareRunner("wsdl2java", "-i", "-PmicronautVersion=2.0.1");
+		GradleRunner runner = gradleBuild.prepareRunnerDebug("wsdl2java", "-i", "-PmicronautVersion=2.0.1");
 
 		BuildResult result = runner.build();
 

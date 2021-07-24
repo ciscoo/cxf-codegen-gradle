@@ -8,7 +8,7 @@ repositories {
 }
 
 cxfCodegen {
-    wsdl2java.configure {
+    wsdl2java {
         calculator
     }
 }

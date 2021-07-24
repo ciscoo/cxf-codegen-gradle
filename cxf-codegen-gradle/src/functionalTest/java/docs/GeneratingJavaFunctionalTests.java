@@ -47,7 +47,7 @@ class GeneratingJavaFunctionalTests {
 
 	@TestTemplate
 	void disableAllLogs(GradleBuild gradleBuild) throws IOException {
-		GradleRunner runner = gradleBuild.script(scriptFor("disable-all-logs")).prepareRunner("wsdl2java");
+		GradleRunner runner = gradleBuild.script(scriptFor("disable-all-logs")).prepareRunnerDebug("wsdl2java");
 		FileUtils.copyFile(new File("src/functionalTest/resources/emptyLogback.xml"),
 				new File(gradleBuild.getProjectDir(), "logback.xml"));
 		FileUtils.moveFile(FileUtils.getFile(gradleBuild.getProjectDir(), "wsdls/calculator.wsdl"),
@@ -63,7 +63,7 @@ class GeneratingJavaFunctionalTests {
 
 	@TestTemplate
 	void disableLogs(GradleBuild gradleBuild) throws IOException {
-		GradleRunner runner = gradleBuild.script(scriptFor("disable-logs")).prepareRunner("wsdl2java");
+		GradleRunner runner = gradleBuild.script(scriptFor("disable-logs")).prepareRunnerDebug("wsdl2java");
 
 		BuildResult result = runner.build();
 
@@ -73,14 +73,14 @@ class GeneratingJavaFunctionalTests {
 
 	@TestTemplate
 	void javaNine(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.script(scriptFor("java-nine")).prepareRunner("verify").build();
+		BuildResult result = gradleBuild.script(scriptFor("java-nine")).prepareRunnerDebug("verify").build();
 
 		assertThat(result.getOutput()).contains(List.of("jakarta.xml.ws-api", "jakarta.annotation-api"));
 	}
 
 	@TestTemplate
 	void logging(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.script(scriptFor("logging")).prepareRunner("wsdl2java").build();
+		BuildResult result = gradleBuild.script(scriptFor("logging")).prepareRunnerDebug("wsdl2java").build();
 
 		assertThat(result.getOutput()).contains("DEBUG org.apache.cxf.common.logging.LogUtils",
 				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader", "DEBUG org.apache.velocity");
@@ -88,14 +88,14 @@ class GeneratingJavaFunctionalTests {
 
 	@TestTemplate
 	void minimalUsage(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.script(scriptFor("minimal-usage")).prepareRunner("verify").build();
+		BuildResult result = gradleBuild.script(scriptFor("minimal-usage")).prepareRunnerDebug("verify").build();
 
 		assertThat(result.getOutput()).contains("/path/to/example.wsdl");
 	}
 
 	@TestTemplate
 	void options(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.script(scriptFor("options")).prepareRunner("verify").build();
+		BuildResult result = gradleBuild.script(scriptFor("options")).prepareRunnerDebug("verify").build();
 
 		assertThat(result.getOutput()).contains("/path/to/example.wsdl", "/build/generated-java", "markGenerated=true",
 				"packageNames=[com.example, com.foo.bar]", "asyncMethods=[foo, bar]");

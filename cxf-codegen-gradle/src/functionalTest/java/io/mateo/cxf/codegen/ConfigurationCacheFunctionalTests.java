@@ -33,7 +33,7 @@ class ConfigurationCacheFunctionalTests {
 
 	@TestTemplate
 	void configurationCache(GradleBuild gradleBuild) {
-		GradleRunner runner = gradleBuild.prepareRunner("--configuration-cache", "wsdl2javaCalculator");
+		GradleRunner runner = gradleBuild.prepareRunnerDebug("--configuration-cache", "wsdl2javaCalculator");
 
 		BuildResult initialResult = runner.build();
 		BuildResult finalResult = runner.build();

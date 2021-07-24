@@ -21,19 +21,14 @@ import java.util.List;
 import java.util.Map;
 
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask;
-import io.mateo.cxf.codegen.wsdl2java.WsdlOption;
 
-import org.gradle.api.Action;
 import org.gradle.api.NamedDomainObjectProvider;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
-import org.gradle.api.Task;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
-import org.gradle.api.tasks.SourceSet;
-import org.gradle.api.tasks.SourceSetContainer;
 
 /**
  * {@link Plugin} for code generation from WSDLs using Apache CXF.
@@ -67,10 +62,8 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {
-		CxfCodegenExtension extension = project.getExtensions().create(CXF_CODEGEN_EXTENSION_NAME,
-				CxfCodegenExtension.class);
-		registerCodegenTasks(project, extension, createConfiguration(project));
-		addToSourceSet(project, extension);
+		NamedDomainObjectProvider<Configuration> configuration = createConfiguration(project);
+		project.getExtensions().create(CXF_CODEGEN_EXTENSION_NAME, CxfCodegenExtension.class, project, configuration);
 		registerAggregateTask(project);
 	}
 
@@ -79,42 +72,6 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 			task.setDependsOn(project.getTasks().withType(Wsdl2JavaTask.class));
 			task.setGroup(WSDL2JAVA_GROUP);
 			task.setDescription("Runs all wsdl2java tasks");
-		});
-	}
-
-	private void addToSourceSet(Project project, CxfCodegenExtension extension) {
-		project.getPluginManager().withPlugin("java-base", (plugin) -> {
-			extension.getWsdl2java().all((option) -> {
-				project.getExtensions().configure(SourceSetContainer.class, (sourceSets) -> {
-					sourceSets.named(SourceSet.MAIN_SOURCE_SET_NAME, (main) -> {
-						main.getJava().srcDir(project.provider(() -> option.getOutputDir().getAsFile()));
-					});
-				});
-			});
-		});
-	}
-
-	@SuppressWarnings("deprecation") // setMain()
-	private void registerCodegenTasks(Project project, CxfCodegenExtension extension,
-			NamedDomainObjectProvider<Configuration> configuration) {
-		extension.getWsdl2java().all((option) -> {
-			String name = option.getName().substring(0, 1).toUpperCase() + option.getName().substring(1);
-			project.getTasks().register("wsdl2java" + name, Wsdl2JavaTask.class, (task) -> {
-				task.getOutputs().dir(option.getOutputDir().get());
-				try {
-					task.getMainClass().set("org.apache.cxf.tools.wsdlto.WSDLToJava");
-				}
-				catch (NoSuchMethodError ignored) {
-					// < Gradle 6.4
-					task.setMain("org.apache.cxf.tools.wsdlto.WSDLToJava");
-				}
-				task.setClasspath(configuration.get());
-				task.setGroup(WSDL2JAVA_GROUP);
-				task.setDescription("Generates Java sources for '" + option.getName() + "'");
-				// Generate arguments at the very last moment to avoid
-				// any potential realization issues.
-				task.doFirst("generateArgsFor" + name, new GenerateToolArgsAction(option));
-			});
 		});
 	}
 
@@ -151,21 +108,6 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		dependencies.add(dependency);
 
 		return dependencies;
-	}
-
-	static class GenerateToolArgsAction implements Action<Task> {
-
-		private final WsdlOption option;
-
-		public GenerateToolArgsAction(WsdlOption option) {
-			this.option = option;
-		}
-
-		@Override
-		public void execute(Task task) {
-			((Wsdl2JavaTask) task).setArgs(this.option.generateArgs());
-		}
-
 	}
 
 }
