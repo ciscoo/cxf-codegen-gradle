@@ -19,11 +19,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask;
 import io.mateo.cxf.codegen.wsdl2java.WsdlOption;
 
 import org.gradle.api.Action;
+import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.NamedDomainObjectProvider;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -39,6 +41,10 @@ import org.gradle.api.tasks.SourceSetContainer;
  * {@link Plugin} for code generation from WSDLs using Apache CXF.
  */
 public class CxfCodegenPlugin implements Plugin<Project> {
+
+	private static final String VALID_CONTAINER_NAME_REGEX = "[A-Za-z0-9_\\-.]+";
+
+	private static final Pattern CONTAINER_NAME_PATTERN = Pattern.compile(VALID_CONTAINER_NAME_REGEX);
 
 	/**
 	 * Name of the {@link Configuration} where dependencies are used for code generation.
@@ -72,6 +78,20 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		registerCodegenTasks(project, extension, createConfiguration(project));
 		addToSourceSet(project, extension);
 		registerAggregateTask(project);
+		validateWsdlContainerWhenComplete(project, extension);
+	}
+
+	private void validateWsdlContainerWhenComplete(Project project, CxfCodegenExtension extension) {
+		project.afterEvaluate(evaluated -> {
+			for (WsdlOption wsdlOption : extension.getWsdl2java()) {
+				final String name = wsdlOption.getName();
+				if (!CONTAINER_NAME_PATTERN.matcher(name).matches()) {
+					throw new InvalidUserDataException(
+							"Name '" + name + "' is not valid for the cxfCodegen container. Must match match regex "
+									+ VALID_CONTAINER_NAME_REGEX);
+				}
+			}
+		});
 	}
 
 	private void registerAggregateTask(Project project) {

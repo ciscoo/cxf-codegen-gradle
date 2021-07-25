@@ -17,6 +17,7 @@ package io.mateo.cxf.codegen;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.io.File;
 import java.util.List;
@@ -27,7 +28,9 @@ import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Describable;
+import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.Project;
+import org.gradle.api.ProjectConfigurationException;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
@@ -40,6 +43,8 @@ import org.gradle.testfixtures.ProjectBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class CxfCodegenPluginTests {
 
@@ -129,6 +134,20 @@ class CxfCodegenPluginTests {
 		});
 
 		assertThat(java.getSrcDirs().size()).isEqualTo(expectedSize);
+	}
+
+	@ValueSource(strings = { "bad name", "bad:name" })
+	@ParameterizedTest
+	void badContainerNamesResultInError(String candidate, @TempDir File temp) {
+		project.getExtensions().configure(CxfCodegenExtension.class, cxfCodegen -> cxfCodegen
+				.wsdl2java(wsdl2Java -> wsdl2Java.register(candidate, it -> it.getWsdl().set(temp))));
+
+		// @formatter:off
+		assertThatExceptionOfType(ProjectConfigurationException.class)
+				.isThrownBy(() -> project.getAllTasks(false)) // forces project evaluation
+				.withCause(new InvalidUserDataException("Name '" + candidate
+						+ "' is not valid for the cxfCodegen container. Must match match regex [A-Za-z0-9_\\-.]+"));
+		// @formatter:on
 	}
 
 	private static void wsdl2javaTaskAssertions(Wsdl2JavaTask wsdl2Java, String sourceName) {
