@@ -525,6 +525,11 @@ it primarily a marker type with no additional functionality.</p>
 <div class="paragraph">
 <p>With the above configuration, the plugin will create a task named <code>wsdl2javaExample</code> and output to <code>build/generated-sources/</code>.</p>
 </div>
+<div class="paragraph">
+<p>For each <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html">Wsdl2JavaTask</a></code>, there is a corresponding <code><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Delete.html">Delete</a></code> task that shares the name of the generator task.
+For the above example, the task name is <code>wsdl2javaExample</code>, so the <code><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Delete.html">Delete</a></code> task name would be <code>cleanWsdl2javaExample</code>
+Standard <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:adding_dependencies_to_tasks">task dependencies</a> configuration can be used to clean outputs before the task is executed.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -838,7 +843,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0-SNAPSHOT<br>
-Last updated 2021-06-15 03:12:47 UTC
+Last updated 2021-07-31 14:47:10 UTC
 </div>
 </div>
 <style>
