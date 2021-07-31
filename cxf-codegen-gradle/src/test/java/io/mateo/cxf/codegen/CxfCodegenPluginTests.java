@@ -34,8 +34,10 @@ import org.gradle.api.ProjectConfigurationException;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
+import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.SourceDirectorySet;
 import org.gradle.api.specs.Spec;
+import org.gradle.api.tasks.Delete;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.TaskContainer;
@@ -114,6 +116,14 @@ class CxfCodegenPluginTests {
 				.satisfies((task) -> wsdl2javaTaskAssertions(task, "foo"));
 		assertThat(tasks.getByName("wsdl2javaBar")).asInstanceOf(InstanceOfAssertFactories.type(Wsdl2JavaTask.class))
 				.satisfies((task) -> wsdl2javaTaskAssertions(task, "bar"));
+		assertThat(tasks.withType(Delete.class).matching(it -> it.getName().toLowerCase().contains("wsdl2java")))
+				.hasSize(2);
+		assertThat(tasks.getByName("cleanWsdl2javaFoo")).asInstanceOf(InstanceOfAssertFactories.type(Delete.class))
+				.satisfies(
+						(task) -> wsdl2javaDeleteTaskAssertions(task, (Wsdl2JavaTask) tasks.getByName("wsdl2javaFoo")));
+		assertThat(tasks.getByName("cleanWsdl2javaBar")).asInstanceOf(InstanceOfAssertFactories.type(Delete.class))
+				.satisfies(
+						(task) -> wsdl2javaDeleteTaskAssertions(task, (Wsdl2JavaTask) tasks.getByName("wsdl2javaBar")));
 		assertThat(tasks.findByName(CxfCodegenPlugin.WSDL2JAVA_TASK_NAME)).isNotNull().satisfies((wsdl2java) -> {
 			assertThat(wsdl2java).isInstanceOf(DefaultTask.class);
 			assertThat(wsdl2java.getDependsOn()).hasSize(2);
@@ -161,6 +171,13 @@ class CxfCodegenPluginTests {
 		assertThat(wsdl2Java.getDescription()).isEqualTo(String.format("Generates Java sources for '%s'", sourceName));
 		assertThat(wsdl2Java.getTaskActions()).hasSize(2).first().extracting(Describable::getDisplayName).asString()
 				.contains("Execute generateArgsFor");
+	}
+
+	private void wsdl2javaDeleteTaskAssertions(Delete delete, Wsdl2JavaTask wsdl2Java) {
+		assertThat(delete.getDelete()).as("Delete").hasSize(1);
+		File expected = wsdl2Java.getOutputs().getFiles().getSingleFile();
+		File actual = ((DirectoryProperty) delete.getDelete().iterator().next()).get().getAsFile();
+		assertThat(actual).isEqualTo(expected);
 	}
 
 }

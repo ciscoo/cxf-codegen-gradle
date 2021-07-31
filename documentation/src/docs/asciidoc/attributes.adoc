@@ -23,3 +23,5 @@
 :javaexec-task: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html[JavaExec]
 :main-source-sets: https://docs.gradle.org/current/userguide/java_plugin.html#source_sets
 :configure-each: https://docs.gradle.org/current/javadoc/org/gradle/api/DomainObjectCollection.html#configureEach-org.gradle.api.Action-
+:delete-task: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Delete.html[Delete]
+:task-dependencies: https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:adding_dependencies_to_tasks

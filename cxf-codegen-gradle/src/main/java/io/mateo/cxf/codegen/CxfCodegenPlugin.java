@@ -34,6 +34,7 @@ import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
+import org.gradle.api.tasks.Delete;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
 
@@ -119,6 +120,8 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 			NamedDomainObjectProvider<Configuration> configuration) {
 		extension.getWsdl2java().all((option) -> {
 			String name = option.getName().substring(0, 1).toUpperCase() + option.getName().substring(1);
+			project.getTasks().register("cleanWsdl2java" + name, Delete.class,
+					task -> task.delete(option.getOutputDir()));
 			project.getTasks().register("wsdl2java" + name, Wsdl2JavaTask.class, (task) -> {
 				task.getOutputs().dir(option.getOutputDir().get());
 				try {

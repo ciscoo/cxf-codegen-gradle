@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Support for Gradle 7.1 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/10[#10]
 - Support for Gradle 7.1.1 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/10[#11]
 - Check container names for validity -- https://github.com/ciscoo/cxf-codegen-gradle/issues/17[#17]
+- Create a clean task for each wsdl2java task -- https://github.com/ciscoo/cxf-codegen-gradle/issues/15
 
 == [1.0.0-rc.3] - 2021-05-04
 

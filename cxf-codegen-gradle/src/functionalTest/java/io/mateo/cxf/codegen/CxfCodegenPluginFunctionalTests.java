@@ -71,4 +71,22 @@ class CxfCodegenPluginFunctionalTests {
 		});
 	}
 
+	@TestTemplate
+	void deleteGeneratedJava(GradleBuild gradleBuild) {
+		gradleBuild.build("wsdl2javaCalculator");
+		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
+			File generatedSources = FileUtils.getFile(projectDir, "build", "generated-sources");
+			assertThat(generatedSources).exists();
+			assertThat(generatedSources).isNotEmptyDirectory();
+		});
+
+		BuildResult result = gradleBuild.build("cleanWsdl2javaCalculator");
+		assertThat(result.getTasks()).hasSize(1);
+		assertThat(result.getTasks().get(0).getOutcome()).isEqualTo(TaskOutcome.SUCCESS);
+		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
+			File generatedSources = FileUtils.getFile(projectDir, "build", "generated-sources");
+			assertThat(generatedSources).doesNotExist();
+		});
+	}
+
 }
