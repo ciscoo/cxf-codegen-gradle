@@ -108,7 +108,8 @@ public class WsdlOption implements Option, Named {
 	public WsdlOption(String name, ObjectFactory objects, ProjectLayout layout) {
 		this.name = name;
 		this.layout = layout;
-		this.outputDir = objects.directoryProperty().convention(layout.getBuildDirectory().dir("generated-sources"));
+		this.outputDir = objects.directoryProperty()
+				.convention(layout.getBuildDirectory().dir("generated-sources/cxf/" + name));
 		this.wsdl = objects.fileProperty();
 		this.packageNames = objects.listProperty(String.class);
 		this.extraArgs = objects.listProperty(String.class);

@@ -39,7 +39,7 @@ class WsdlOptionTests {
 	void setUp(@TempDir File temp) {
 		Project project = ProjectBuilder.builder().withProjectDir(temp).build();
 		this.temp = temp;
-		this.outputDir = project.getLayout().getBuildDirectory().dir("generated-sources").get().getAsFile();
+		this.outputDir = project.getLayout().getBuildDirectory().dir("generated-sources/cxf/sample").get().getAsFile();
 		this.option = new WsdlOption("sample", project.getObjects(), project.getLayout());
 		this.option.getWsdl().set(this.temp);
 	}

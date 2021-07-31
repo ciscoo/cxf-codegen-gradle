@@ -48,7 +48,7 @@ class CxfCodegenPluginFunctionalTests {
 		assertThat(result.getTasks()).hasSize(1);
 		assertThat(result.getTasks().get(0).getOutcome()).isEqualTo(TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
-			File generatedSources = FileUtils.getFile(projectDir, "build", "generated-sources");
+			File generatedSources = FileUtils.getFile(projectDir, "build", "generated-sources", "cxf", "calculator");
 			assertThat(generatedSources).exists();
 			assertThat(generatedSources).isNotEmptyDirectory();
 
@@ -75,7 +75,7 @@ class CxfCodegenPluginFunctionalTests {
 	void deleteGeneratedJava(GradleBuild gradleBuild) {
 		gradleBuild.build("wsdl2javaCalculator");
 		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
-			File generatedSources = FileUtils.getFile(projectDir, "build", "generated-sources");
+			File generatedSources = FileUtils.getFile(projectDir, "build", "generated-sources", "cxf", "calculator");
 			assertThat(generatedSources).exists();
 			assertThat(generatedSources).isNotEmptyDirectory();
 		});
@@ -84,7 +84,7 @@ class CxfCodegenPluginFunctionalTests {
 		assertThat(result.getTasks()).hasSize(1);
 		assertThat(result.getTasks().get(0).getOutcome()).isEqualTo(TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
-			File generatedSources = FileUtils.getFile(projectDir, "build", "generated-sources");
+			File generatedSources = FileUtils.getFile(projectDir, "build", "generated-sources", "cxf", "calculator");
 			assertThat(generatedSources).doesNotExist();
 		});
 	}
