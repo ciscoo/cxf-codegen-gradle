@@ -27,7 +27,6 @@ import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask;
 
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.gradle.api.DefaultTask;
-import org.gradle.api.Describable;
 import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.Project;
 import org.gradle.api.ProjectConfigurationException;
@@ -169,8 +168,7 @@ class CxfCodegenPluginTests {
 		assertThatCode(() -> wsdl2Java.getClasspath().getFiles()).hasMessageContaining("configuration ':cxfCodegen'");
 		assertThat(wsdl2Java.getGroup()).isEqualTo(CxfCodegenPlugin.WSDL2JAVA_GROUP);
 		assertThat(wsdl2Java.getDescription()).isEqualTo(String.format("Generates Java sources for '%s'", sourceName));
-		assertThat(wsdl2Java.getTaskActions()).hasSize(2).first().extracting(Describable::getDisplayName).asString()
-				.contains("Execute generateArgsFor");
+		assertThat(wsdl2Java.getArgs()).hasSize(3);
 	}
 
 	private void wsdl2javaDeleteTaskAssertions(Delete delete, Wsdl2JavaTask wsdl2Java) {

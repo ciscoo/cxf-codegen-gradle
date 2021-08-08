@@ -5,7 +5,6 @@ All notable changes to this project will be documented in this file.
 == [1.0.0] - ?
 
 - Support for Gradle 6.9
-- Generate tool arguments at task execution time -- https://github.com/ciscoo/cxf-codegen-gradle/issues/7[#7]
 - Upgrade to Apache CXF 3.4.4 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/8[#8]
 - Support for Gradle 7.1 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/10[#10]
 - Support for Gradle 7.1.1 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/10[#11]

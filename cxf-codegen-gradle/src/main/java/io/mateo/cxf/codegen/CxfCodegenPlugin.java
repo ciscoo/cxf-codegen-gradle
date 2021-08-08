@@ -24,12 +24,10 @@ import java.util.regex.Pattern;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask;
 import io.mateo.cxf.codegen.wsdl2java.WsdlOption;
 
-import org.gradle.api.Action;
 import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.NamedDomainObjectProvider;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
-import org.gradle.api.Task;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
@@ -134,9 +132,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 				task.setClasspath(configuration.get());
 				task.setGroup(WSDL2JAVA_GROUP);
 				task.setDescription("Generates Java sources for '" + option.getName() + "'");
-				// Generate arguments at the very last moment to avoid
-				// any potential realization issues.
-				task.doFirst("generateArgsFor" + name, new GenerateToolArgsAction(option));
+				task.setArgs(option.generateArgs());
 			});
 		});
 	}
@@ -174,21 +170,6 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		dependencies.add(dependency);
 
 		return dependencies;
-	}
-
-	static class GenerateToolArgsAction implements Action<Task> {
-
-		private final WsdlOption option;
-
-		public GenerateToolArgsAction(WsdlOption option) {
-			this.option = option;
-		}
-
-		@Override
-		public void execute(Task task) {
-			((Wsdl2JavaTask) task).setArgs(this.option.generateArgs());
-		}
-
 	}
 
 }

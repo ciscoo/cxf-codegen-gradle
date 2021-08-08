@@ -21,9 +21,7 @@ import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibilityExtension;
 
 import org.gradle.testkit.runner.BuildResult;
-import org.gradle.testkit.runner.BuildTask;
 import org.gradle.testkit.runner.GradleRunner;
-import org.gradle.testkit.runner.TaskOutcome;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
@@ -43,10 +41,9 @@ class AdditionalPluginsFunctionalTests {
 	void micronautApplicationPlugin(GradleBuild gradleBuild) {
 		GradleRunner runner = gradleBuild.prepareRunner("wsdl2java", "-i", "-PmicronautVersion=2.0.1");
 
-		BuildResult result = runner.build();
+		BuildResult result = runner.buildAndFail();
 
-		assertThat(result.getTasks()).hasSize(2).map(BuildTask::getOutcome)
-				.allMatch(outcome -> outcome == TaskOutcome.SUCCESS);
+		assertThat(result.getOutput()).contains("'wsdl' property is not present");
 	}
 
 }
