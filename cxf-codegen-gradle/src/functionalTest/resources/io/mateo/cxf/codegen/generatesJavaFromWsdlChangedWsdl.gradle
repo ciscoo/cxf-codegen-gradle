@@ -14,7 +14,7 @@ dependencies {
 cxfCodegen {
     wsdl2java.configure {
         calculator {
-            wsdl.set(file("wsdls/calculator.wsdl"))
+            wsdl = file("wsdls/calculatorCopy.wsdl")
             markGenerated = false
         }
     }

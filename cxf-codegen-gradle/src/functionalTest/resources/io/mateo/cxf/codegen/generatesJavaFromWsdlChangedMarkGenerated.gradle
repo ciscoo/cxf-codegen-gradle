@@ -15,7 +15,7 @@ cxfCodegen {
     wsdl2java.configure {
         calculator {
             wsdl.set(file("wsdls/calculator.wsdl"))
-            markGenerated = false
+            markGenerated = true
         }
     }
 }
