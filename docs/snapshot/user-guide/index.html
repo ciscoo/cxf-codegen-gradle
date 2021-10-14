@@ -793,6 +793,20 @@ it primarily a marker type with no additional functionality.</p>
 For the above example, the task name is <code>wsdl2javaExample</code>, so the <code><a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Delete.html">Delete</a></code> task name would be <code>cleanWsdl2javaExample</code>
 Standard <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:adding_dependencies_to_tasks">task dependencies</a> configuration can be used to clean outputs before the task is executed.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The WSDL is added to the <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:task_inputs_outputs">task&#8217;s inputs</a>.
+Any changes to the WSDL will cause the task to be out-of-date. If your WSDL imports a schema (XSD), consider adding that file to the
+task inputs as well so that it can be considered during Gradle&#8217;s <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:up_to_date_checks">up-to-date checks</a>.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="options-usage"><a class="anchor" href="#options-usage"></a>3.2. Options</h3>
@@ -1099,7 +1113,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0-SNAPSHOT<br>
-Last updated 2021-08-08 01:25:08 UTC
+Last updated 2021-10-14 04:04:13 UTC
 </div>
 </div>
 <style>
