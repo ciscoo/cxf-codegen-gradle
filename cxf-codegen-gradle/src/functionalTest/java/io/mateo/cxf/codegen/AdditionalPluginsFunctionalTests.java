@@ -43,7 +43,7 @@ class AdditionalPluginsFunctionalTests {
 
 		BuildResult result = runner.buildAndFail();
 
-		assertThat(result.getOutput()).contains("'wsdl' property is not present");
+		assertThat(result.getTasks()).isEmpty();
 	}
 
 }

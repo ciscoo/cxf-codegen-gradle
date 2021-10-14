@@ -58,6 +58,10 @@ For each `{wsdl2java-task}`, there is a corresponding `{delete-task}` task that 
 For the above example, the task name is `wsdl2javaExample`, so the `{delete-task}` task name would be `cleanWsdl2javaExample`
 Standard {task-dependencies}[task dependencies] configuration can be used to clean outputs before the task is executed.
 
+TIP: The WSDL is added to the https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:task_inputs_outputs[task's inputs].
+Any changes to the WSDL will cause the task to be out-of-date. If your WSDL imports a schema (XSD), consider adding that file to the
+task inputs as well so that it can be considered during Gradle's https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:up_to_date_checks[up-to-date checks].
+
 [[options-usage]]
 == Options
 

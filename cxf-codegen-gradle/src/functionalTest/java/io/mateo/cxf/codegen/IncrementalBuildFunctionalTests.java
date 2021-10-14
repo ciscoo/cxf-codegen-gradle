@@ -17,6 +17,12 @@ package io.mateo.cxf.codegen;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibility;
 
@@ -35,6 +41,25 @@ class IncrementalBuildFunctionalTests {
 	@TestTemplate
 	void generatesJavaFromWsdl(GradleBuild gradleBuild) {
 		doTest(gradleBuild);
+	}
+
+	@TestTemplate
+	void wsdlFileInput(GradleBuild gradleBuild) throws IOException {
+		GradleRunner runner = gradleBuild.prepareRunner("wsdl2javaCalculator", "-i");
+		BuildResult result = runner.build();
+
+		assertThat(result.getOutput()).contains("Task ':wsdl2javaCalculator' is not up-to-date");
+
+		// Simulate changes to the file by adding a new line.
+		Path wsdl = Paths.get(gradleBuild.getProjectDir().getAbsolutePath(), "wsdls", "calculator.wsdl");
+		BufferedWriter writer = new BufferedWriter(new FileWriter(wsdl.toFile(), true));
+		writer.newLine();
+		writer.close();
+
+		result = runner.build();
+
+		assertThat(result.getOutput()).contains("Task ':wsdl2javaCalculator' is not up-to-date",
+				"Input property '$1' file /tmp/gradle-");
 	}
 
 	void doTest(GradleBuild gradleBuild) {

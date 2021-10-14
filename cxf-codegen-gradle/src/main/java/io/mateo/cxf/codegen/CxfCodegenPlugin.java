@@ -122,6 +122,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 					task -> task.delete(option.getOutputDir()));
 			project.getTasks().register("wsdl2java" + name, Wsdl2JavaTask.class, (task) -> {
 				task.getOutputs().dir(option.getOutputDir().get());
+				task.getInputs().file(option.getWsdl().get());
 				try {
 					task.getMainClass().set("org.apache.cxf.tools.wsdlto.WSDLToJava");
 				}
