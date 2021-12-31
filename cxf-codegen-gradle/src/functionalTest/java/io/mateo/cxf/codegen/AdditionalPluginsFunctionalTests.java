@@ -21,7 +21,9 @@ import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibilityExtension;
 
 import org.gradle.testkit.runner.BuildResult;
+import org.gradle.testkit.runner.BuildTask;
 import org.gradle.testkit.runner.GradleRunner;
+import org.gradle.testkit.runner.TaskOutcome;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
@@ -44,6 +46,16 @@ class AdditionalPluginsFunctionalTests {
 		BuildResult result = runner.buildAndFail();
 
 		assertThat(result.getTasks()).isEmpty();
+	}
+
+	@TestTemplate // gh-7
+	void micronautApplicationPluginCompatibility(GradleBuild gradleBuild) {
+		GradleRunner runner = gradleBuild.prepareRunner("calculator", "-i", "-PmicronautVersion=3.1.1");
+
+		BuildResult result = runner.build();
+
+		assertThat(result.task(":calculator")).isNotNull().extracting(BuildTask::getOutcome)
+				.isEqualTo(TaskOutcome.SUCCESS);
 	}
 
 }

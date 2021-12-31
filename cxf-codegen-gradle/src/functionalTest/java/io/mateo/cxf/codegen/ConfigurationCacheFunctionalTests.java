@@ -42,4 +42,15 @@ class ConfigurationCacheFunctionalTests {
 		assertThat(finalResult.getOutput()).contains("Reusing configuration cache.");
 	}
 
+	@TestTemplate
+	void configurationCacheCompatibility(GradleBuild gradleBuild) {
+		GradleRunner runner = gradleBuild.prepareRunner("--configuration-cache", "calculator");
+
+		BuildResult initialResult = runner.build();
+		BuildResult finalResult = runner.build();
+
+		assertThat(initialResult.getOutput()).contains("no configuration cache is available");
+		assertThat(finalResult.getOutput()).contains("Reusing configuration cache.");
+	}
+
 }

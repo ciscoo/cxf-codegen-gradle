@@ -13,8 +13,9 @@
 :docinfo: shared,private
 
 :javadoc-root:  link:../api
-:wsdl-option: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/WsdlOption.html#method.summary[WsdlOption]
+:wsdl-option: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaOptions.html#method.summary[Wsdl2JavaOptions]
 :wsdl2java-task: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html[Wsdl2JavaTask]
+:wsdl2java-task-type: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2Java.html[Wsdl2Java]
 :cxf-codegen-maven-plugin: https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html
 :wsdl2java-cli: https://cxf.apache.org/docs/wsdl-to-java.html
 :functional-test: https://github.com/ciscoo/cxf-codegen-gradle/tree/master/cxf-codegen-gradle/src/functionalTest

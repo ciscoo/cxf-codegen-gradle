@@ -2,42 +2,6 @@
 = Plugin Configuration
 include::attributes.adoc[]
 
-[[plugin-extension]]
-== Extension
-
-The plugin contributes a single extension to the project named `cxfCodegen`.
-
-++++
-<details open>
-<summary>Groovy</summary>
-++++
-
-[source,groovy]
-----
-include::../gradle/plugin-configuration/plugin-extension.gradle[tags=code]
-----
-
-++++
-</details>
-++++
-
-++++
-<details>
-<summary>Kotlin</summary>
-++++
-
-[source,kotlin]
-----
-include::../gradle/plugin-configuration/plugin-extension.gradle[tags=code]
-----
-
-++++
-</details>
-++++
-
-<1> Primary entry point to the plugin configuration.
-<2> WSDL sources container for generating Java. It is a {object-container}[`NamedDomainObjectContainer`] type.
-
 [[dependency-configuration]]
 == Dependency Configuration
 

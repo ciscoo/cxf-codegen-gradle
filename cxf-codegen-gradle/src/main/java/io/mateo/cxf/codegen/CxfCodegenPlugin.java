@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask;
 import io.mateo.cxf.codegen.wsdl2java.WsdlOption;
 
@@ -35,6 +36,7 @@ import org.gradle.api.artifacts.dsl.DependencyHandler;
 import org.gradle.api.tasks.Delete;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
+import org.gradle.api.tasks.TaskCollection;
 
 /**
  * {@link Plugin} for code generation from WSDLs using Apache CXF.
@@ -74,10 +76,29 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	public void apply(Project project) {
 		CxfCodegenExtension extension = project.getExtensions().create(CXF_CODEGEN_EXTENSION_NAME,
 				CxfCodegenExtension.class);
-		registerCodegenTasks(project, extension, createConfiguration(project));
+		NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration = createConfiguration(project);
+		configureWsdl2JavaTaskConventions(project, cxfCodegenConfiguration);
+		registerCodegenTasks(project, extension, cxfCodegenConfiguration);
 		addToSourceSet(project, extension);
 		registerAggregateTask(project);
 		validateWsdlContainerWhenComplete(project, extension);
+	}
+
+	@SuppressWarnings("deprecation") // setMain()
+	private void configureWsdl2JavaTaskConventions(Project project,
+			NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration) {
+		project.getTasks().withType(Wsdl2Java.class).configureEach(task -> {
+			try {
+				task.getMainClass().set("org.apache.cxf.tools.wsdlto.WSDLToJava");
+			}
+			catch (NoSuchMethodError ignored) {
+				// < Gradle 6.4
+				task.setMain("org.apache.cxf.tools.wsdlto.WSDLToJava");
+			}
+			task.setClasspath(cxfCodegenConfiguration.get());
+			task.setGroup(WSDL2JAVA_GROUP);
+			task.setDescription("Generates Java sources for '" + task.getName() + "'");
+		});
 	}
 
 	private void validateWsdlContainerWhenComplete(Project project, CxfCodegenExtension extension) {
@@ -94,8 +115,10 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	}
 
 	private void registerAggregateTask(Project project) {
+		TaskCollection<Wsdl2JavaTask> wsdl2JavaTasks = project.getTasks().withType(Wsdl2JavaTask.class);
+		TaskCollection<Wsdl2Java> wsdl2Javas = project.getTasks().withType(Wsdl2Java.class);
 		project.getTasks().register(WSDL2JAVA_TASK_NAME, (task) -> {
-			task.setDependsOn(project.getTasks().withType(Wsdl2JavaTask.class));
+			task.dependsOn(wsdl2JavaTasks, wsdl2Javas);
 			task.setGroup(WSDL2JAVA_GROUP);
 			task.setDescription("Runs all wsdl2java tasks");
 		});
@@ -107,6 +130,13 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 				project.getExtensions().configure(SourceSetContainer.class, (sourceSets) -> {
 					sourceSets.named(SourceSet.MAIN_SOURCE_SET_NAME, (main) -> {
 						main.getJava().srcDir(project.provider(() -> option.getOutputDir().getAsFile()));
+					});
+				});
+			});
+			project.getTasks().withType(Wsdl2Java.class).all(wsdl2Java -> {
+				project.getExtensions().configure(SourceSetContainer.class, sourceSets -> {
+					sourceSets.named(SourceSet.MAIN_SOURCE_SET_NAME, main -> {
+						main.getJava().srcDir(wsdl2Java.getWsdl2JavaOptions().getOutputDir());
 					});
 				});
 			});

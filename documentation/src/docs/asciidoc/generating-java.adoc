@@ -2,22 +2,19 @@
 = Generating Java Sources
 include::attributes.adoc[]
 
-The {object-container}[`wsdl2java`] container can be used to define WSDL sources to generate Java sources.
-
-For each source added to the container a corresponding task will also be created. The created task is of type
-`{wsdl2java-task}` and is a subclass of `{javaexec-task}`. There is nothing special about the `{wsdl2java-task}` type,
-it primarily a marker type with no additional functionality.
+To generate Java sources from a WSDL, define task of type `{wsdl2java-task-type}` and configure the `toolOptions`. Note that the task is a subclass of `{javaexec-task}`.
 
 .Incremental Build
 ****
-The `{javaexec-task}` supports up-to-date checks (aka incremental build). As mentioned above, `{wsdl2java-task}` is a subclass of `{javaexec-task}` and as a result, `{wsdl2java-task}` also supports up-to-date checks.
+The `{javaexec-task}` supports up-to-date checks (aka incremental build). As mentioned above, `{wsdl2java-task-type}` is a subclass of `{javaexec-task}` and as a result, also supports up-to-date checks.
 
-However, depending on how your WSDLs are structured, you may encounter scenarios where `wsdl2java*` tasks are out-of-date.
+However, depending on how your WSDLs are structured, you may encounter scenarios where tasks are out-of-date.
 ****
 
-For each WSDL source, the generated Java source is added to the {main-source-sets}[`main` source sets].
+Additionally, when defining a task:
 
-All `{wsdl2java-task}` task types are aggregated to a single task named `wsdl2java`.
+. For each task, the generated Java source (the task output) is added to the {main-source-sets}[`main` source sets].
+. All `{wsdl2java-task-type}` task types are aggregated to a single task named `wsdl2java`.
 
 [[minimal-usage]]
 == Minimal Usage
@@ -31,7 +28,7 @@ The minimum requirement for generating Java is a single WSDL file.
 
 [source,groovy]
 ----
-include::../gradle/generating-java/minimal-usage.gradle[tags=code]
+include::../gradle/generating-java/minimal-task-usage.gradle[tags=code]
 ----
 
 ++++
@@ -45,21 +42,24 @@ include::../gradle/generating-java/minimal-usage.gradle[tags=code]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/minimal-usage.gradle.kts[tags=code]
+include::../gradle/generating-java/minimal-task-usage.gradle.kts[tags=code]
 ----
 
 ++++
 </details>
 ++++
 
-With the above configuration, the plugin will create a task named `wsdl2javaExample` and output to `build/generated-sources/`.
+++++
+</details>
+++++
 
-For each `{wsdl2java-task}`, there is a corresponding `{delete-task}` task that shares the name of the generator task.
-For the above example, the task name is `wsdl2javaExample`, so the `{delete-task}` task name would be `cleanWsdl2javaExample`
-Standard {task-dependencies}[task dependencies] configuration can be used to clean outputs before the task is executed.
+<1> Creates a task named `example` of type `{wsdl2java-task-type}`.
+<2> Use the `toolOptions` to configure all available options for code generation.
+<3> Configure the WSDL to use for code generation.
+<4> Configure a custom locale. +
+Remember that `{wsdl2java-task-type}` is a subclass of `{javaexec-task}`. All configurations you can do to `{javaexec-task}` can be done here as well.
 
-TIP: The WSDL is added to the https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:task_inputs_outputs[task's inputs].
-Any changes to the WSDL will cause the task to be out-of-date. If your WSDL imports a schema (XSD), consider adding that file to the
+TIP: The WSDL property is annotated with https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/InputFile.html[`@InputFile`] therefore any changes to the WSDL will cause the task to be out-of-date. If your WSDL imports a schema (XSD) or something else, consider adding that file to the
 task inputs as well so that it can be considered during Gradle's https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:up_to_date_checks[up-to-date checks].
 
 [[options-usage]]
@@ -75,7 +75,7 @@ offered by the {cxf-codegen-maven-plugin}[Maven plugin].
 
 [source,groovy]
 ----
-include::../gradle/generating-java/options.gradle[tags=code]
+include::../gradle/generating-java/tool-options.gradle[tags=code]
 ----
 
 ++++
@@ -89,7 +89,7 @@ include::../gradle/generating-java/options.gradle[tags=code]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/options.gradle.kts[tags=code]
+include::../gradle/generating-java/tool-options.gradle.kts[tags=code]
 ----
 
 ++++
@@ -107,9 +107,9 @@ for `{wsdl-option}` for more details.
 [[default-options]]
 == Default Options
 
-You may want to configure options that apply to all WSDL sources. This is easily accomplished using native Gradle functionality.
+You may want to configure options that apply to all tasks. This is easily accomplished using native Gradle functionality.
 
-First define some WSDL sources:
+First define some tasks:
 
 ++++
 <details open>
@@ -118,7 +118,7 @@ First define some WSDL sources:
 
 [source,groovy]
 ----
-include::../gradle/generating-java/default-options.gradle[tags=primary]
+include::../gradle/generating-java/default-tool-options.gradle[tags=primary]
 ----
 
 ++++
@@ -132,7 +132,7 @@ include::../gradle/generating-java/default-options.gradle[tags=primary]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/default-options.gradle.kts[tags=primary]
+include::../gradle/generating-java/default-tool-options.gradle.kts[tags=primary]
 ----
 
 ++++
@@ -148,7 +148,7 @@ Then configure each one using the {configure-each}[`configureEach`] method on th
 
 [source,groovy]
 ----
-include::../gradle/generating-java/default-options.gradle[tags=secondary]
+include::../gradle/generating-java/default-tool-options.gradle[tags=secondary]
 ----
 
 ++++
@@ -162,7 +162,7 @@ include::../gradle/generating-java/default-options.gradle[tags=secondary]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/default-options.gradle.kts[tags=secondary]
+include::../gradle/generating-java/default-tool-options.gradle.kts[tags=secondary]
 ----
 
 ++++
@@ -211,7 +211,7 @@ The above is just an example. Depending on your usage, there may be more depende
 [[logging]]
 == Logging
 
-Without any additional configuration, when executing any `wsdl2java` tasks, the following lines will be printed to the console:
+Without any additional configuration, when executing any of the created tasks, the following lines will be printed to the console:
 
 [source,log]
 ----
@@ -229,7 +229,7 @@ To enable logging for Apache CXF, include a SLF4J binding and logging framework.
 
 [source,groovy]
 ----
-include::../gradle/generating-java/logging.gradle[tags=code]
+include::../gradle/generating-java/logging-task.gradle[tags=code]
 ----
 
 ++++
@@ -243,7 +243,7 @@ include::../gradle/generating-java/logging.gradle[tags=code]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/logging.gradle.kts[tags=code]
+include::../gradle/generating-java/logging-task.gradle.kts[tags=code]
 ----
 
 ++++
@@ -279,7 +279,7 @@ Logs from Apache CXF can be disabled by specifying a `null` logger for each `{ws
 
 [source,groovy]
 ----
-include::../gradle/generating-java/disable-logs.gradle[tags=code]
+include::../gradle/generating-java/disable-task-logs.gradle[tags=code]
 ----
 
 ++++
@@ -293,7 +293,7 @@ include::../gradle/generating-java/disable-logs.gradle[tags=code]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/disable-logs.gradle.kts[tags=code]
+include::../gradle/generating-java/disable-task-logs.gradle.kts[tags=code]
 ----
 
 ++++
@@ -318,7 +318,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 
 [source,groovy]
 ----
-include::../gradle/generating-java/disable-all-logs.gradle[tags=code]
+include::../gradle/generating-java/disable-all-task-logs.gradle[tags=code]
 ----
 
 ++++
@@ -332,7 +332,7 @@ include::../gradle/generating-java/disable-all-logs.gradle[tags=code]
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/disable-all-logs.gradle.kts[tags=code]
+include::../gradle/generating-java/disable-all-task-logs.gradle.kts[tags=code]
 ----
 
 ++++

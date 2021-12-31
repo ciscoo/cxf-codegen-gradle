@@ -28,6 +28,7 @@ import io.mateo.junit.GradleCompatibility;
 
 import org.apache.commons.io.FileUtils;
 import org.gradle.testkit.runner.BuildResult;
+import org.gradle.testkit.runner.BuildTask;
 import org.gradle.testkit.runner.TaskOutcome;
 import org.junit.jupiter.api.TestTemplate;
 
@@ -39,6 +40,14 @@ class CxfCodegenPluginFunctionalTests {
 		BuildResult result = gradleBuild.buildAndFail("wsdl2javaCalculator");
 
 		assertThat(result.getTasks()).isEmpty();
+	}
+
+	@TestTemplate
+	void skipWhenWsdlIsMissing(GradleBuild gradleBuild) {
+		BuildResult result = gradleBuild.build("calculator");
+
+		assertThat(result.task(":calculator")).isNotNull().extracting(BuildTask::getOutcome)
+				.isEqualTo(TaskOutcome.NO_SOURCE);
 	}
 
 	@TestTemplate
@@ -68,6 +77,32 @@ class CxfCodegenPluginFunctionalTests {
 					"package-info.java");
 
 			assertThat(generatedFiles).containsExactlyElementsOf(expectedFiles);
+		});
+	}
+
+	@TestTemplate
+	void javaSourceGenerationFromWsdl(GradleBuild gradleBuild) {
+		BuildResult result = gradleBuild.build("calculator");
+
+		assertThat(result.task(":calculator")).isNotNull().extracting(BuildTask::getOutcome)
+				.isEqualTo(TaskOutcome.SUCCESS);
+		assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
+			File generatedSources = FileUtils.getFile(projectDir, "build", "calculator-wsdl2java-generated-sources");
+			assertThat(generatedSources).exists().isNotEmptyDirectory();
+
+			File packageDir = FileUtils.getFile(generatedSources, "org", "tempuri");
+			assertThat(packageDir).exists().isNotEmptyDirectory();
+
+			File[] sourcesDir = Objects.requireNonNull(packageDir.listFiles(), "sources dir");
+			assertThat(sourcesDir).isNotEmpty().hasSize(12);
+
+			List<String> generatedFiles = Arrays.stream(sourcesDir).map(File::getName).collect(Collectors.toList());
+			List<String> expectedFiles = List.of("Add.java", "AddResponse.java", "Calculator.java",
+					"CalculatorSoap.java", "Divide.java", "DivideResponse.java", "Multiply.java",
+					"MultiplyResponse.java", "ObjectFactory.java", "Subtract.java", "SubtractResponse.java",
+					"package-info.java");
+
+			assertThat(generatedFiles).containsExactlyInAnyOrderElementsOf(expectedFiles);
 		});
 	}
 

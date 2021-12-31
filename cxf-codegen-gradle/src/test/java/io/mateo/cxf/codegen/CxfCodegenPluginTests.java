@@ -20,9 +20,13 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import io.mateo.cxf.codegen.junit.TaskNameGenerator;
+import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask;
 
 import org.assertj.core.api.InstanceOfAssertFactories;
@@ -30,6 +34,7 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.Project;
 import org.gradle.api.ProjectConfigurationException;
+import org.gradle.api.Task;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
@@ -42,11 +47,14 @@ import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.testfixtures.ProjectBuilder;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+@DisplayNameGeneration(TaskNameGenerator.class)
 class CxfCodegenPluginTests {
 
 	private Project project;
@@ -101,7 +109,7 @@ class CxfCodegenPluginTests {
 	}
 
 	@Test
-	void registersTasks(@TempDir File temp) {
+	void registersTasksForExtension(@TempDir File temp) {
 		project.getExtensions().configure(CxfCodegenExtension.class, (cxfCodegen) -> {
 			cxfCodegen.wsdl2java((wsdl2Java) -> {
 				wsdl2Java.register("foo", (foo) -> foo.getWsdl().set(temp));
@@ -132,7 +140,7 @@ class CxfCodegenPluginTests {
 	}
 
 	@Test
-	void addsToSourceSet(@TempDir File temp) {
+	void addsToSourceSetForTasksCreatedByExtension(@TempDir File temp) {
 		project.getPluginManager().apply("java");
 		SourceSetContainer sourceSets = project.getExtensions().getByType(SourceSetContainer.class);
 		SourceDirectorySet java = sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME).getJava();
@@ -157,6 +165,54 @@ class CxfCodegenPluginTests {
 				.withCause(new InvalidUserDataException("Name '" + candidate
 						+ "' is not valid for the cxfCodegen container. Must match match regex [A-Za-z0-9_\\-.]+"));
 		// @formatter:on
+	}
+
+	@Test
+	void configureWsdl2JavaDefaults(TestInfo testInfo) {
+		project.getTasks().register(testInfo.getDisplayName(), Wsdl2Java.class);
+
+		project.getTasks().withType(Wsdl2Java.class).all(wsdl2Java -> {
+			Set<File> outputs = wsdl2Java.getOutputs().getFiles().getFiles();
+			assertThat(outputs).hasSize(1);
+			assertThat(outputs.iterator().next().toPath()
+					.endsWith("build/" + wsdl2Java.getName() + "-wsdl2java-generated-sources")).isTrue();
+			assertThat(wsdl2Java.getMainClass().get()).isEqualTo("org.apache.cxf.tools.wsdlto.WSDLToJava");
+			// Can not resolve configuration in unit tests, so assert on error message.
+			assertThatCode(() -> wsdl2Java.getClasspath().getFiles())
+					.hasMessageContaining("configuration ':cxfCodegen'");
+			assertThat(wsdl2Java.getGroup()).isEqualTo(CxfCodegenPlugin.WSDL2JAVA_GROUP);
+			assertThat(wsdl2Java.getDescription())
+					.isEqualTo(String.format("Generates Java sources for '%s'", testInfo.getDisplayName()));
+			assertThat(wsdl2Java.getArgumentProviders()).singleElement().extracting(it -> it.getClass().getSimpleName())
+					.isEqualTo("Wsdl2JavaArgumentProvider");
+		});
+	}
+
+	@Test
+	void addsToSourceSetForWsdl2JavaTasks(TestInfo testInfo) {
+		project.getPluginManager().apply("java");
+		SourceSetContainer sourceSets = project.getExtensions().getByType(SourceSetContainer.class);
+		SourceDirectorySet java = sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME).getJava();
+		int expectedSize = java.getSrcDirs().size() + 1;
+
+		project.getTasks().register(testInfo.getDisplayName(), Wsdl2Java.class);
+
+		assertThat(java.getSrcDirs().size()).isEqualTo(expectedSize);
+
+		List<String> paths = java.getSrcDirs().stream().map(File::getAbsolutePath).collect(Collectors.toList());
+		String outputDir = Path
+				.of(project.getBuildDir().getAbsolutePath(), testInfo.getDisplayName() + "-wsdl2java-generated-sources")
+				.toFile().getAbsolutePath();
+		assertThat(paths).contains(outputDir);
+	}
+
+	@Test
+	void aggregateTaskWillRunWsdl2JavaTaskTypes() {
+		project.getTasks().register("a", Wsdl2Java.class);
+		project.getTasks().register("b", Wsdl2Java.class);
+
+		Task wsdl2java = project.getTasks().getByName(CxfCodegenPlugin.WSDL2JAVA_TASK_NAME);
+		assertThat(wsdl2java.getDependsOn()).satisfies(dependencies -> assertThat(dependencies).hasSize(2));
 	}
 
 	private static void wsdl2javaTaskAssertions(Wsdl2JavaTask wsdl2Java, String sourceName) {

@@ -1,0 +1,40 @@
+import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java
+
+plugins {
+    id "java"
+    id "io.mateo.cxf-codegen"
+}
+
+//tag::primary[]
+tasks.register("first", Wsdl2Java) {
+    toolOptions {
+        wsdl.set(file("path/to/first.wsdl"))
+    }
+}
+tasks.register("second", Wsdl2Java) {
+    toolOptions {
+        wsdl.set(file("path/to/second.wsdl"))
+    }
+}
+tasks.register("third", Wsdl2Java) {
+    toolOptions {
+        wsdl.set(file("path/to/third.wsdl"))
+    }
+}
+//end::primary[]
+
+//tag::secondary[]
+tasks.withType(Wsdl2Java).configureEach {
+    toolOptions {
+        markGenerated.set(true)
+    }
+}
+//end::secondary[]
+
+tasks.register("verify") {
+    doLast {
+        tasks.withType(Wsdl2Java).all {
+            println("$name markGenerated ${wsdl2JavaOptions.markGenerated.get()}")
+        }
+    }
+}
