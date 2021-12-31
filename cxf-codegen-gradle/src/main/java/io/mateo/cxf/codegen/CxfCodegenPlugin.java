@@ -56,12 +56,14 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	public static final String CXF_CODEGEN_EXTENSION_NAME = "cxfCodegen";
 
 	/**
-	 * Task name to execute all {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask} and {@link Wsdl2Java} tasks.
+	 * Task name to execute all {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask} and
+	 * {@link Wsdl2Java} tasks.
 	 */
 	public static final String WSDL2JAVA_TASK_NAME = "wsdl2java";
 
 	/**
-	 * Group name that all {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask} and {@link Wsdl2Java} tasks belong to.
+	 * Group name that all {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask} and
+	 * {@link Wsdl2Java} tasks belong to.
 	 */
 	public static final String WSDL2JAVA_GROUP = "wsdl2java";
 
@@ -116,7 +118,8 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 
 	@SuppressWarnings("deprecation")
 	private void registerAggregateTask(Project project) {
-		TaskCollection<io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask> wsdl2JavaTasks = project.getTasks().withType(io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask.class);
+		TaskCollection<io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask> wsdl2JavaTasks = project.getTasks()
+				.withType(io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask.class);
 		TaskCollection<Wsdl2Java> wsdl2Javas = project.getTasks().withType(Wsdl2Java.class);
 		project.getTasks().register(WSDL2JAVA_TASK_NAME, (task) -> {
 			task.dependsOn(wsdl2JavaTasks, wsdl2Javas);
@@ -152,21 +155,22 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 			String name = option.getName().substring(0, 1).toUpperCase() + option.getName().substring(1);
 			project.getTasks().register("cleanWsdl2java" + name, Delete.class,
 					task -> task.delete(option.getOutputDir()));
-			project.getTasks().register("wsdl2java" + name, io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask.class, (task) -> {
-				task.getOutputs().dir(option.getOutputDir().get());
-				task.getInputs().file(option.getWsdl().get());
-				try {
-					task.getMainClass().set("org.apache.cxf.tools.wsdlto.WSDLToJava");
-				}
-				catch (NoSuchMethodError ignored) {
-					// < Gradle 6.4
-					task.setMain("org.apache.cxf.tools.wsdlto.WSDLToJava");
-				}
-				task.setClasspath(configuration.get());
-				task.setGroup(WSDL2JAVA_GROUP);
-				task.setDescription("Generates Java sources for '" + option.getName() + "'");
-				task.setArgs(option.generateArgs());
-			});
+			project.getTasks().register("wsdl2java" + name, io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask.class,
+					(task) -> {
+						task.getOutputs().dir(option.getOutputDir().get());
+						task.getInputs().file(option.getWsdl().get());
+						try {
+							task.getMainClass().set("org.apache.cxf.tools.wsdlto.WSDLToJava");
+						}
+						catch (NoSuchMethodError ignored) {
+							// < Gradle 6.4
+							task.setMain("org.apache.cxf.tools.wsdlto.WSDLToJava");
+						}
+						task.setClasspath(configuration.get());
+						task.setGroup(WSDL2JAVA_GROUP);
+						task.setDescription("Generates Java sources for '" + option.getName() + "'");
+						task.setArgs(option.generateArgs());
+					});
 		});
 	}
 

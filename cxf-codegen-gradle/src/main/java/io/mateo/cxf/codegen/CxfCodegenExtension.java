@@ -23,8 +23,8 @@ import org.gradle.api.model.ObjectFactory;
 
 /**
  * Extension to configure WSDL sources.
- *
- * @deprecated since 1.0.0 for removal in 1.1.0 in favor of {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2Java} tasks
+ * @deprecated since 1.0.0 for removal in 1.1.0 in favor of
+ * {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2Java} tasks
  */
 @Deprecated
 public class CxfCodegenExtension {
@@ -48,7 +48,8 @@ public class CxfCodegenExtension {
 	 * Configures the WSDL sources to use for code generation.
 	 * @param configure action or closure to configure the WSDL sources with
 	 */
-	public void wsdl2java(Action<? super NamedDomainObjectContainer<io.mateo.cxf.codegen.wsdl2java.WsdlOption>> configure) {
+	public void wsdl2java(
+			Action<? super NamedDomainObjectContainer<io.mateo.cxf.codegen.wsdl2java.WsdlOption>> configure) {
 		configure.execute(this.wsdl2java);
 	}
 

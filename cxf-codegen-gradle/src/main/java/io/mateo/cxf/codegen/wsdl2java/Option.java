@@ -22,8 +22,8 @@ import org.gradle.api.provider.SetProperty;
 
 /**
  * Options for the {@code wsdl2java} command.
- *
- * @deprecated since 1.0.0 for removal in 1.1.0 in favor of {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2Java} tasks
+ * @deprecated since 1.0.0 for removal in 1.1.0 in favor of
+ * {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2Java} tasks
  */
 @Deprecated
 public interface Option extends io.mateo.cxf.codegen.GenericWsdlOption {
