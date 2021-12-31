@@ -36,20 +36,37 @@ import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
  */
 public final class GradleCompatibilityExtension implements TestTemplateInvocationContextProvider {
 
-	private static final List<String> DEFAULT_GRADLE_VERSIONS = List.of("5.5.1", "5.6.4", "6.0.1", "6.1.1", "6.2.2",
-			"6.3", "6.4.1", "6.5.1", "6.6.1", "6.7.1", "6.8.3", "6.9.1", "7.0.2", "7.1.1", "7.2", "current");
+	private static final List<String> GRADLE_5_VERSIONS = List.of("5.5.1", "5.6.4");
+
+	private static final List<String> GRADLE_6_VERSIONS = List.of("6.0.1", "6.1.1", "6.2.2", "6.3", "6.4.1", "6.5.1",
+			"6.6.1", "6.7.1", "6.8.3", "6.9.1");
+
+	private static final List<String> GRADLE_7_VERSIONS = List.of("7.0.2", "7.1.1", "7.2", "current");
+
+	private static final List<String> DEFAULT_GRADLE_VERSIONS;
+
+	static {
+		List<String> defaultVersions = new ArrayList<>(
+				GRADLE_5_VERSIONS.size() + GRADLE_6_VERSIONS.size() + GRADLE_7_VERSIONS.size());
+		defaultVersions.addAll(GRADLE_5_VERSIONS);
+		defaultVersions.addAll(GRADLE_6_VERSIONS);
+		defaultVersions.addAll(GRADLE_7_VERSIONS);
+		DEFAULT_GRADLE_VERSIONS = List.copyOf(defaultVersions);
+	}
 
 	private final List<String> gradleVersions;
 
 	public GradleCompatibilityExtension() {
 		// Attempt to reduce amount of work done in CI.
 		// TODO: Drop support for older versions of Gradle.
-		if (Boolean.parseBoolean(System.getProperty("firstSix"))) {
-			this.gradleVersions = List.of("5.5.1", "5.6.4", "6.0.1", "6.1.1", "6.2.2", "6.3");
+		if (Boolean.parseBoolean(System.getProperty("gradle5"))) {
+			this.gradleVersions = GRADLE_5_VERSIONS;
+		}
+		else if (Boolean.parseBoolean(System.getProperty("gradle6"))) {
+			this.gradleVersions = GRADLE_6_VERSIONS;
 		}
 		else {
-			this.gradleVersions = List.of("6.4.1", "6.5.1", "6.6.1", "6.7.1", "6.8.3", "6.9.1", "7.0.2", "7.1.1", "7.2",
-					"current");
+			this.gradleVersions = GRADLE_7_VERSIONS;
 		}
 		System.err.println("Testing against the following Gradle versions " + this.gradleVersions);
 		Assertions.assertTrue(DEFAULT_GRADLE_VERSIONS.containsAll(this.gradleVersions),
