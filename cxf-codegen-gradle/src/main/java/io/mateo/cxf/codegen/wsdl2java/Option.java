@@ -15,8 +15,6 @@
  */
 package io.mateo.cxf.codegen.wsdl2java;
 
-import io.mateo.cxf.codegen.GenericWsdlOption;
-
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Property;
@@ -24,8 +22,11 @@ import org.gradle.api.provider.SetProperty;
 
 /**
  * Options for the {@code wsdl2java} command.
+ *
+ * @deprecated since 1.0.0 for removal in 1.1.0 in favor of {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2Java} tasks
  */
-public interface Option extends GenericWsdlOption {
+@Deprecated
+public interface Option extends io.mateo.cxf.codegen.GenericWsdlOption {
 
 	/**
 	 * WSDL file to process.

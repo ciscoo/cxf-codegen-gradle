@@ -22,8 +22,6 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
-import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask;
-import io.mateo.cxf.codegen.wsdl2java.WsdlOption;
 
 import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.NamedDomainObjectProvider;
@@ -58,12 +56,12 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	public static final String CXF_CODEGEN_EXTENSION_NAME = "cxfCodegen";
 
 	/**
-	 * Task name to execute all {@link Wsdl2JavaTask} tasks.
+	 * Task name to execute all {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask} and {@link Wsdl2Java} tasks.
 	 */
 	public static final String WSDL2JAVA_TASK_NAME = "wsdl2java";
 
 	/**
-	 * Group name that all {@link Wsdl2JavaTask} tasks belong to.
+	 * Group name that all {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask} and {@link Wsdl2Java} tasks belong to.
 	 */
 	public static final String WSDL2JAVA_GROUP = "wsdl2java";
 
@@ -72,6 +70,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	 */
 	static final String DEFAULT_CXF_VERSION = "3.4.5";
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void apply(Project project) {
 		CxfCodegenExtension extension = project.getExtensions().create(CXF_CODEGEN_EXTENSION_NAME,
@@ -101,9 +100,10 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		});
 	}
 
+	@SuppressWarnings("deprecation")
 	private void validateWsdlContainerWhenComplete(Project project, CxfCodegenExtension extension) {
 		project.afterEvaluate(evaluated -> {
-			for (WsdlOption wsdlOption : extension.getWsdl2java()) {
+			for (io.mateo.cxf.codegen.wsdl2java.WsdlOption wsdlOption : extension.getWsdl2java()) {
 				final String name = wsdlOption.getName();
 				if (!CONTAINER_NAME_PATTERN.matcher(name).matches()) {
 					throw new InvalidUserDataException(
@@ -114,8 +114,9 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		});
 	}
 
+	@SuppressWarnings("deprecation")
 	private void registerAggregateTask(Project project) {
-		TaskCollection<Wsdl2JavaTask> wsdl2JavaTasks = project.getTasks().withType(Wsdl2JavaTask.class);
+		TaskCollection<io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask> wsdl2JavaTasks = project.getTasks().withType(io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask.class);
 		TaskCollection<Wsdl2Java> wsdl2Javas = project.getTasks().withType(Wsdl2Java.class);
 		project.getTasks().register(WSDL2JAVA_TASK_NAME, (task) -> {
 			task.dependsOn(wsdl2JavaTasks, wsdl2Javas);
@@ -124,6 +125,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		});
 	}
 
+	@SuppressWarnings("deprecation")
 	private void addToSourceSet(Project project, CxfCodegenExtension extension) {
 		project.getPluginManager().withPlugin("java-base", (plugin) -> {
 			extension.getWsdl2java().all((option) -> {
@@ -150,7 +152,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 			String name = option.getName().substring(0, 1).toUpperCase() + option.getName().substring(1);
 			project.getTasks().register("cleanWsdl2java" + name, Delete.class,
 					task -> task.delete(option.getOutputDir()));
-			project.getTasks().register("wsdl2java" + name, Wsdl2JavaTask.class, (task) -> {
+			project.getTasks().register("wsdl2java" + name, io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask.class, (task) -> {
 				task.getOutputs().dir(option.getOutputDir().get());
 				task.getInputs().file(option.getWsdl().get());
 				try {
