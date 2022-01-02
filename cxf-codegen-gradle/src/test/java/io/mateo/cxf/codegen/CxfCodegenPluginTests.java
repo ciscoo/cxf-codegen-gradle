@@ -21,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -69,7 +70,6 @@ class CxfCodegenPluginTests {
 	void extensionCreated() {
 		Object extension = this.project.getExtensions().findByName(CxfCodegenPlugin.CXF_CODEGEN_EXTENSION_NAME);
 
-		assertThat(extension).isNotNull();
 		assertThat(extension).isInstanceOf(CxfCodegenExtension.class);
 	}
 
@@ -179,8 +179,8 @@ class CxfCodegenPluginTests {
 		project.getTasks().withType(Wsdl2Java.class).all(wsdl2Java -> {
 			Set<File> outputs = wsdl2Java.getOutputs().getFiles().getFiles();
 			assertThat(outputs).hasSize(1);
-			assertThat(outputs.iterator().next().toPath()
-					.endsWith("build/" + wsdl2Java.getName() + "-wsdl2java-generated-sources")).isTrue();
+			assertThat(outputs.iterator().next().toPath())
+					.endsWithRaw(Paths.get("build/" + wsdl2Java.getName() + "-wsdl2java-generated-sources"));
 			assertThat(wsdl2Java.getMainClass().get()).isEqualTo("org.apache.cxf.tools.wsdlto.WSDLToJava");
 			// Can not resolve configuration in unit tests, so assert on error message.
 			assertThatCode(() -> wsdl2Java.getClasspath().getFiles())
@@ -225,7 +225,8 @@ class CxfCodegenPluginTests {
 			String sourceName) {
 		Set<File> outputs = wsdl2Java.getOutputs().getFiles().getFiles();
 		assertThat(outputs).hasSize(1);
-		assertThat(outputs.iterator().next().toPath().endsWith("build/generated-sources/cxf/" + sourceName)).isTrue();
+		assertThat(outputs.iterator().next().toPath())
+				.endsWithRaw(Paths.get("build/generated-sources/cxf/" + sourceName));
 		assertThat(wsdl2Java.getMainClass().get()).isEqualTo("org.apache.cxf.tools.wsdlto.WSDLToJava");
 		// Can not resolve configuration in unit tests, so assert on error message.
 		assertThatCode(() -> wsdl2Java.getClasspath().getFiles()).hasMessageContaining("configuration ':cxfCodegen'");

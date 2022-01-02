@@ -75,13 +75,13 @@ public class Wsdl2Java extends JavaExec {
 				arguments.add(options.getEncoding().get());
 			}
 			if (options.getPackageNames().isPresent()) {
-				options.getPackageNames().get().forEach((value) -> {
+				options.getPackageNames().get().forEach(value -> {
 					arguments.add("-p");
 					arguments.add(value);
 				});
 			}
 			if (options.getNamespaceExcludes().isPresent()) {
-				options.getNamespaceExcludes().get().forEach((value) -> {
+				options.getNamespaceExcludes().get().forEach(value -> {
 					arguments.add("-nexclude");
 					arguments.add(value);
 				});
@@ -113,23 +113,25 @@ public class Wsdl2Java extends JavaExec {
 				arguments.add("-catalog");
 				arguments.add(options.getCatalog().get());
 			}
-			if (options.getExtendedSoapHeaders().isPresent() && options.getExtendedSoapHeaders().get()) {
+			if (options.getExtendedSoapHeaders().isPresent()
+					&& Boolean.TRUE.equals(options.getExtendedSoapHeaders().get())) {
 				arguments.add("-exsh");
 				arguments.add("true");
 			}
-			if (options.getNoTypes().isPresent() && options.getNoTypes().get()) {
+			if (options.getNoTypes().isPresent() && Boolean.TRUE.equals(options.getNoTypes().get())) {
 				arguments.add("-noTypes");
 			}
-			if (options.getAllowElementRefs().isPresent() && options.getAllowElementRefs().get()) {
+			if (options.getAllowElementRefs().isPresent() && Boolean.TRUE.equals(options.getAllowElementRefs().get())) {
 				arguments.add("-allowElementReferences");
 			}
 			if (options.getValidateWsdl().isPresent()) {
 				arguments.add("-validate=" + options.getValidateWsdl().get());
 			}
-			if (options.getMarkGenerated().isPresent() && options.getMarkGenerated().get()) {
+			if (options.getMarkGenerated().isPresent() && Boolean.TRUE.equals(options.getMarkGenerated().get())) {
 				arguments.add("-mark-generated");
 			}
-			if (options.getSuppressGeneratedDate().isPresent() && options.getSuppressGeneratedDate().get()) {
+			if (options.getSuppressGeneratedDate().isPresent()
+					&& Boolean.TRUE.equals(options.getSuppressGeneratedDate().get())) {
 				arguments.add("-suppress-generated-date");
 			}
 			if (options.getDefaultExcludesNamespace().isPresent()) {
@@ -158,10 +160,11 @@ public class Wsdl2Java extends JavaExec {
 					arguments.add(value);
 				});
 			}
-			if (options.getAutoNameResolution().isPresent() && options.getAutoNameResolution().get()) {
+			if (options.getAutoNameResolution().isPresent()
+					&& Boolean.TRUE.equals(options.getAutoNameResolution().get())) {
 				arguments.add("-autoNameResolution");
 			}
-			if (options.getNoAddressBinding().isPresent() && options.getNoAddressBinding().get()) {
+			if (options.getNoAddressBinding().isPresent() && Boolean.TRUE.equals(options.getNoAddressBinding().get())) {
 				arguments.add("-noAddressBinding");
 			}
 			if (options.getXjcArgs().isPresent()) {
@@ -174,10 +177,10 @@ public class Wsdl2Java extends JavaExec {
 				arguments.add("-wsdlLocation");
 				arguments.add(options.getWsdlLocation().get());
 			}
-			if (options.getWsdlList().isPresent() && options.getWsdlList().get()) {
+			if (options.getWsdlList().isPresent() && Boolean.TRUE.equals(options.getWsdlList().get())) {
 				arguments.add("-wsdlList");
 			}
-			if (options.getVerbose().isPresent() && options.getVerbose().get()) {
+			if (options.getVerbose().isPresent() && Boolean.TRUE.equals(options.getVerbose().get())) {
 				arguments.add("-verbose");
 			}
 			if (options.getAsyncMethods().isPresent()) {

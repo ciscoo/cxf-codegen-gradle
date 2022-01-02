@@ -45,6 +45,8 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 
 	private static final Pattern CONTAINER_NAME_PATTERN = Pattern.compile(VALID_CONTAINER_NAME_REGEX);
 
+	private static final String WSDL2JAVA_TOOL_MAIN_CLASS = "org.apache.cxf.tools.wsdlto.WSDLToJava";
+
 	/**
 	 * Name of the {@link Configuration} where dependencies are used for code generation.
 	 */
@@ -90,11 +92,11 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 			NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration) {
 		project.getTasks().withType(Wsdl2Java.class).configureEach(task -> {
 			try {
-				task.getMainClass().set("org.apache.cxf.tools.wsdlto.WSDLToJava");
+				task.getMainClass().set(WSDL2JAVA_TOOL_MAIN_CLASS);
 			}
 			catch (NoSuchMethodError ignored) {
 				// < Gradle 6.4
-				task.setMain("org.apache.cxf.tools.wsdlto.WSDLToJava");
+				task.setMain(WSDL2JAVA_TOOL_MAIN_CLASS);
 			}
 			task.setClasspath(cxfCodegenConfiguration.get());
 			task.setGroup(WSDL2JAVA_GROUP);
@@ -121,7 +123,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		TaskCollection<io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask> wsdl2JavaTasks = project.getTasks()
 				.withType(io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask.class);
 		TaskCollection<Wsdl2Java> wsdl2Javas = project.getTasks().withType(Wsdl2Java.class);
-		project.getTasks().register(WSDL2JAVA_TASK_NAME, (task) -> {
+		project.getTasks().register(WSDL2JAVA_TASK_NAME, task -> {
 			task.dependsOn(wsdl2JavaTasks, wsdl2Javas);
 			task.setGroup(WSDL2JAVA_GROUP);
 			task.setDescription("Runs all wsdl2java tasks");
@@ -130,41 +132,35 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 
 	@SuppressWarnings("deprecation")
 	private void addToSourceSet(Project project, CxfCodegenExtension extension) {
-		project.getPluginManager().withPlugin("java-base", (plugin) -> {
-			extension.getWsdl2java().all((option) -> {
-				project.getExtensions().configure(SourceSetContainer.class, (sourceSets) -> {
-					sourceSets.named(SourceSet.MAIN_SOURCE_SET_NAME, (main) -> {
-						main.getJava().srcDir(project.provider(() -> option.getOutputDir().getAsFile()));
-					});
-				});
-			});
-			project.getTasks().withType(Wsdl2Java.class).all(wsdl2Java -> {
-				project.getExtensions().configure(SourceSetContainer.class, sourceSets -> {
-					sourceSets.named(SourceSet.MAIN_SOURCE_SET_NAME, main -> {
-						main.getJava().srcDir(wsdl2Java.getWsdl2JavaOptions().getOutputDir());
-					});
-				});
-			});
+		project.getPluginManager().withPlugin("java-base", plugin -> {
+			extension.getWsdl2java().all(option -> project.getExtensions().configure(SourceSetContainer.class,
+					sourceSets -> sourceSets.named(SourceSet.MAIN_SOURCE_SET_NAME,
+							main -> main.getJava().srcDir(project.provider(() -> option.getOutputDir().getAsFile())))));
+			project.getTasks().withType(Wsdl2Java.class)
+					.all(wsdl2Java -> project.getExtensions().configure(SourceSetContainer.class,
+							sourceSets -> sourceSets.named(SourceSet.MAIN_SOURCE_SET_NAME, main -> {
+								main.getJava().srcDir(wsdl2Java.getWsdl2JavaOptions().getOutputDir());
+							})));
 		});
 	}
 
 	@SuppressWarnings("deprecation") // setMain()
 	private void registerCodegenTasks(Project project, CxfCodegenExtension extension,
 			NamedDomainObjectProvider<Configuration> configuration) {
-		extension.getWsdl2java().all((option) -> {
+		extension.getWsdl2java().all(option -> {
 			String name = option.getName().substring(0, 1).toUpperCase() + option.getName().substring(1);
 			project.getTasks().register("cleanWsdl2java" + name, Delete.class,
 					task -> task.delete(option.getOutputDir()));
 			project.getTasks().register("wsdl2java" + name, io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask.class,
-					(task) -> {
+					task -> {
 						task.getOutputs().dir(option.getOutputDir().get());
 						task.getInputs().file(option.getWsdl().get());
 						try {
-							task.getMainClass().set("org.apache.cxf.tools.wsdlto.WSDLToJava");
+							task.getMainClass().set(WSDL2JAVA_TOOL_MAIN_CLASS);
 						}
 						catch (NoSuchMethodError ignored) {
 							// < Gradle 6.4
-							task.setMain("org.apache.cxf.tools.wsdlto.WSDLToJava");
+							task.setMain(WSDL2JAVA_TOOL_MAIN_CLASS);
 						}
 						task.setClasspath(configuration.get());
 						task.setGroup(WSDL2JAVA_GROUP);
@@ -175,7 +171,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	}
 
 	private NamedDomainObjectProvider<Configuration> createConfiguration(Project project) {
-		return project.getConfigurations().register(CXF_CODEGEN_CONFIGURATION_NAME, (configuration) -> {
+		return project.getConfigurations().register(CXF_CODEGEN_CONFIGURATION_NAME, configuration -> {
 			configuration.setVisible(false);
 			configuration.setCanBeConsumed(false);
 			configuration.setCanBeResolved(true);
