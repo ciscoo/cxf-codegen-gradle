@@ -26,8 +26,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6,"i17":6,"i18":6,"i19":6,"i20":6,"i21":6,"i22":6,"i23":6,"i24":6,"i25":6,"i26":6,"i27":6,"i28":6,"i29":6,"i30":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var data = {"i0":38,"i1":38,"i2":38,"i3":38,"i4":38,"i5":38,"i6":38,"i7":38,"i8":38,"i9":38,"i10":38,"i11":38,"i12":38,"i13":38,"i14":38,"i15":38,"i16":38,"i17":38,"i18":38,"i19":38,"i20":38,"i21":38,"i22":38,"i23":38,"i24":38,"i25":38,"i26":38,"i27":38,"i28":38,"i29":38,"i30":38};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -132,8 +132,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd><code><a href="WsdlOption.html" title="class in io.mateo.cxf.codegen.wsdl2java">WsdlOption</a></code></dd>
 </dl>
 <hr>
-<pre>public interface <span class="typeNameLabel">Option</span>
+<pre><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang" class="externalLink">@Deprecated</a>
+public interface <span class="typeNameLabel">Option</span>
 extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.codegen">GenericWsdlOption</a></pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">since 1.0.0 for removal in 1.1.0 in favor of
+ <a href="Wsdl2Java.html" title="class in io.mateo.cxf.codegen.wsdl2java"><code>Wsdl2Java</code></a> tasks</div>
+</div>
 <div class="block">Options for the <code>wsdl2java</code> command.</div>
 </li>
 </ul>
@@ -149,7 +154,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
@@ -159,6 +164,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAllowElementRefs()">getAllowElementRefs</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables disregarding the rule given in section 2.3.1.2(v) of the JAX-WS
  2.2 specification disallowing element references when using wrapper-style mapping.</div>
 </td>
@@ -167,6 +173,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAsyncMethods()">getAsyncMethods</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies subsequently generated Java class methods to allow for client-side
  asynchronous calls, similar to <code>enableAsyncMapping</code> in a JAX-WS binding file.</div>
 </td>
@@ -175,6 +182,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAutoNameResolution()">getAutoNameResolution</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables automatically resolving naming conflicts without requiring the
  use of binding customizations.</div>
 </td>
@@ -183,6 +191,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getBareMethods()">getBareMethods</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies subsequently generated Java class methods to have wrapper style, similar
  to <code>enableWrapperStyle</code> in JAX-WS binding file.</div>
 </td>
@@ -191,6 +200,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/SetProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">SetProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getBindingFiles()">getBindingFiles</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies JAX-WS or JAXB binding files or XMLBeans context files.</div>
 </td>
 </tr>
@@ -198,6 +208,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCatalog()">getCatalog</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specify catalog file to map the imported WSDL/schema.</div>
 </td>
 </tr>
@@ -205,6 +216,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDatabinding()">getDatabinding</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the databinding.</div>
 </td>
 </tr>
@@ -212,6 +224,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDefaultExcludesNamespace()">getDefaultExcludesNamespace</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables the loading of the default excludes namespace mapping.</div>
 </td>
 </tr>
@@ -219,6 +232,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDefaultNamespacePackageMapping()">getDefaultNamespacePackageMapping</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables the loading of the default namespace package name mapping.</div>
 </td>
 </tr>
@@ -226,6 +240,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getEncoding()">getEncoding</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Encoding to use for generated sources (since CXF version 2.5.4).</div>
 </td>
 </tr>
@@ -233,6 +248,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getExceptionSuper()">getExceptionSuper</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the superclass for fault beans generated from <code>wsdl:fault</code> elements</div>
 </td>
 </tr>
@@ -240,6 +256,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getExtendedSoapHeaders()">getExtendedSoapHeaders</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables processing of implicit SOAP headers (i.e.</div>
 </td>
 </tr>
@@ -247,6 +264,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getExtraArgs()">getExtraArgs</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies extra arguments to pass to the command-line code generator.</div>
 </td>
 </tr>
@@ -254,6 +272,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getFaultSerialVersionUid()">getFaultSerialVersionUid</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies how to generate serial version UID of fault exceptions.</div>
 </td>
 </tr>
@@ -261,6 +280,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getFrontend()">getFrontend</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the frontend.</div>
 </td>
 </tr>
@@ -268,6 +288,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMarkGenerated()">getMarkGenerated</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables adding the <code>@Generated</code> annotation to classes generated.</div>
 </td>
 </tr>
@@ -275,6 +296,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMimeMethods()">getMimeMethods</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies subsequently generated Java class methods to enable mime:content mapping,
  similar to <code>enableMIMEContent</code> in JAX-WS binding file.</div>
 </td>
@@ -283,6 +305,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNamespaceExcludes()">getNamespaceExcludes</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Ignore the specified WSDL schema namespace when generating code.</div>
 </td>
 </tr>
@@ -290,6 +313,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNoAddressBinding()">getNoAddressBinding</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">For compatibility with CXF 2.0, this flag directs the code generator to generate
  the older CXF proprietary WS-Addressing types instead of the JAX-WS 2.1 compliant
  WS-Addressing types.</div>
@@ -299,6 +323,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNoTypes()">getNoTypes</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables generation of the type classes.</div>
 </td>
 </tr>
@@ -306,6 +331,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPackageNames()">getPackageNames</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies zero, or more, package names to use for the generated code.</div>
 </td>
 </tr>
@@ -313,6 +339,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSeiSuper()">getSeiSuper</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the superinterfaces to use for generated SEIs.</div>
 </td>
 </tr>
@@ -320,6 +347,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getServiceName()">getServiceName</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the WSDL service name to use for the generated code.</div>
 </td>
 </tr>
@@ -327,6 +355,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSuppressGeneratedDate()">getSuppressGeneratedDate</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables writing the current timestamp in the generated file (since CXF
  version 3.2.2).</div>
 </td>
@@ -335,6 +364,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getValidateWsdl()">getValidateWsdl</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables validating the WSDL before generating the code.</div>
 </td>
 </tr>
@@ -342,6 +372,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVerbose()">getVerbose</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables verbosity.</div>
 </td>
 </tr>
@@ -349,6 +380,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/file/RegularFileProperty.html?is-external=true" title="class or interface in org.gradle.api.file" class="externalLink">RegularFileProperty</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getWsdl()">getWsdl</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">WSDL file to process.</div>
 </td>
 </tr>
@@ -356,6 +388,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getWsdlList()">getWsdlList</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies that the <code>wsdlurl</code> contains a plain text, new line delimited, list
  of <code>wsdlurl</code>s instead of the WSDL itself.</div>
 </td>
@@ -364,6 +397,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getWsdlLocation()">getWsdlLocation</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the value of the <code>@WebServiceClient</code> annotation's
  <code>wsdlLocation</code> property.</div>
 </td>
@@ -372,6 +406,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getWsdlVersion()">getWsdlVersion</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the WSDL version.</div>
 </td>
 </tr>
@@ -379,6 +414,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <td class="colFirst"><code><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getXjcArgs()">getXjcArgs</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies
  <a href="https://javaee.github.io/jaxb-v2/doc/user-guide/ch04.html">arguments</a>
  that are passed directly to the XJC processor when using the JAXB data binding.</div>
@@ -415,6 +451,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getWsdl</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/file/RegularFileProperty.html?is-external=true" title="class or interface in org.gradle.api.file" class="externalLink">RegularFileProperty</a>&nbsp;getWsdl()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">WSDL file to process.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -429,6 +466,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getPackageNames</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getPackageNames()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies zero, or more, package names to use for the generated code.
  <p>
  Optionally specifies the WSDL namespace to package name mapping.</div>
@@ -445,6 +483,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getExtraArgs</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getExtraArgs()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies extra arguments to pass to the command-line code generator.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -459,6 +498,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getXjcArgs</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getXjcArgs()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies
  <a href="https://javaee.github.io/jaxb-v2/doc/user-guide/ch04.html">arguments</a>
  that are passed directly to the XJC processor when using the JAXB data binding.</div>
@@ -475,6 +515,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getAsyncMethods</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getAsyncMethods()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies subsequently generated Java class methods to allow for client-side
  asynchronous calls, similar to <code>enableAsyncMapping</code> in a JAX-WS binding file.</div>
 <dl>
@@ -490,6 +531,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getBareMethods</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getBareMethods()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies subsequently generated Java class methods to have wrapper style, similar
  to <code>enableWrapperStyle</code> in JAX-WS binding file.</div>
 <dl>
@@ -505,6 +547,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getMimeMethods</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getMimeMethods()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies subsequently generated Java class methods to enable mime:content mapping,
  similar to <code>enableMIMEContent</code> in JAX-WS binding file.</div>
 <dl>
@@ -520,6 +563,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getNamespaceExcludes</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getNamespaceExcludes()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Ignore the specified WSDL schema namespace when generating code.
  <p>
  Optionally specifies the Java package name used by types described in the excluded
@@ -537,6 +581,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getDefaultExcludesNamespace</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;&nbsp;getDefaultExcludesNamespace()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables the loading of the default excludes namespace mapping.
  <p>
  If not set, <code>wsdl2java</code> defaults to <code>true</code>.</div>
@@ -553,6 +598,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getDefaultNamespacePackageMapping</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;&nbsp;getDefaultNamespacePackageMapping()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables the loading of the default namespace package name mapping.
  <p>
  If not set, <code>wsdl2java</code> defaults to <code>true</code> and <a href="http://www.w3.org/2005/08/addressing=org.apache.cxf.ws.addressingnamespace">http://www.w3.org/2005/08/addressing</a>
@@ -570,6 +616,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getBindingFiles</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/SetProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">SetProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getBindingFiles()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies JAX-WS or JAXB binding files or XMLBeans context files.
  <p>
  The values are evaluated as per <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/file/Directory.html?is-external=true#file(java.lang.String)" title="class or interface in org.gradle.api.file" class="externalLink"><code>Directory.file(String)</code></a>
@@ -587,6 +634,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getWsdlLocation</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getWsdlLocation()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the value of the <code>@WebServiceClient</code> annotation's
  <code>wsdlLocation</code> property.</div>
 <dl>
@@ -602,6 +650,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getWsdlList</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;&nbsp;getWsdlList()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies that the <code>wsdlurl</code> contains a plain text, new line delimited, list
  of <code>wsdlurl</code>s instead of the WSDL itself.</div>
 <dl>
@@ -617,6 +666,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getFrontend</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getFrontend()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the frontend. Currently only supports JAX-WS CXF frontends and a
  <code>jaxws21</code> frontend to generate JAX-WS 2.1 compliant code.
  <p>
@@ -634,6 +684,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getDatabinding</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getDatabinding()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the databinding. Currently supports JAXB, XMLBeans, SDO (sdo-static * and
  sdo-dynamic), and JiBX.
  <p>
@@ -651,6 +702,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getWsdlVersion</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getWsdlVersion()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the WSDL version.
  <p>
  If not set, <code>wsdl2java</code> defaults to <code>WSDL1.1</code>; currently supports only
@@ -668,6 +720,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getCatalog</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getCatalog()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specify catalog file to map the imported WSDL/schema.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -682,6 +735,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getExtendedSoapHeaders</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;&nbsp;getExtendedSoapHeaders()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables processing of implicit SOAP headers (i.e. SOAP headers defined
  in the <code>wsdl:binding</code>, but not <code>wsdl:portType</code> section.)
  <p>
@@ -703,6 +757,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getValidateWsdl</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getValidateWsdl()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables validating the WSDL before generating the code.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -717,6 +772,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getNoTypes</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;&nbsp;getNoTypes()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables generation of the type classes.
  <p>
  If not set, <code>wsdl2java</code> defaults to <code>false</code>.</div>
@@ -733,6 +789,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getFaultSerialVersionUid</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getFaultSerialVersionUid()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies how to generate serial version UID of fault exceptions.
  <p>
  Use one of the following:
@@ -757,6 +814,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getExceptionSuper</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getExceptionSuper()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the superclass for fault beans generated from <code>wsdl:fault</code> elements
  <p>
  If not set, <code>wsdl2java</code> defaults to <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Exception.html?is-external=true" title="class or interface in java.lang" class="externalLink"><code>Exception</code></a>.</div>
@@ -773,6 +831,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getSeiSuper</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getSeiSuper()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the superinterfaces to use for generated SEIs.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -787,6 +846,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getMarkGenerated</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;&nbsp;getMarkGenerated()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables adding the <code>@Generated</code> annotation to classes generated.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -801,6 +861,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getSuppressGeneratedDate</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;&nbsp;getSuppressGeneratedDate()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables writing the current timestamp in the generated file (since CXF
  version 3.2.2).</div>
 <dl>
@@ -816,6 +877,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getServiceName</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getServiceName()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the WSDL service name to use for the generated code.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -830,6 +892,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getAutoNameResolution</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;&nbsp;getAutoNameResolution()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables automatically resolving naming conflicts without requiring the
  use of binding customizations.</div>
 <dl>
@@ -845,6 +908,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getNoAddressBinding</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;&nbsp;getNoAddressBinding()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">For compatibility with CXF 2.0, this flag directs the code generator to generate
  the older CXF proprietary WS-Addressing types instead of the JAX-WS 2.1 compliant
  WS-Addressing types.</div>
@@ -861,6 +925,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getAllowElementRefs</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;&nbsp;getAllowElementRefs()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables disregarding the rule given in section 2.3.1.2(v) of the JAX-WS
  2.2 specification disallowing element references when using wrapper-style mapping.</div>
 <dl>
@@ -876,6 +941,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getEncoding</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;getEncoding()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Encoding to use for generated sources (since CXF version 2.5.4).</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -890,6 +956,7 @@ extends <a href="../GenericWsdlOption.html" title="interface in io.mateo.cxf.cod
 <li class="blockList">
 <h4>getVerbose</h4>
 <pre class="methodSignature"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html?is-external=true" title="class or interface in org.gradle.api.provider" class="externalLink">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;&nbsp;getVerbose()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables verbosity.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
