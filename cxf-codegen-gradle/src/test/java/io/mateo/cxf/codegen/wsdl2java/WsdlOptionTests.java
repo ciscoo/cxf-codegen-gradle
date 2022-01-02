@@ -29,12 +29,14 @@ import org.junit.jupiter.api.io.TempDir;
 
 class WsdlOptionTests {
 
+	@SuppressWarnings("deprecation")
 	private WsdlOption option;
 
 	private File temp;
 
 	private File outputDir;
 
+	@SuppressWarnings("deprecation")
 	@BeforeEach
 	void setUp(@TempDir File temp) {
 		Project project = ProjectBuilder.builder().withProjectDir(temp).build();

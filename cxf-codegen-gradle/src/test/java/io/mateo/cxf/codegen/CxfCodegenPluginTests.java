@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 
 import io.mateo.cxf.codegen.junit.TaskNameGenerator;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
-import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask;
 
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.gradle.api.DefaultTask;
@@ -65,6 +64,7 @@ class CxfCodegenPluginTests {
 		this.project.getPlugins().apply("io.mateo.cxf-codegen");
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	void extensionCreated() {
 		Object extension = this.project.getExtensions().findByName(CxfCodegenPlugin.CXF_CODEGEN_EXTENSION_NAME);
@@ -108,6 +108,7 @@ class CxfCodegenPluginTests {
 				});
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	void registersTasksForExtension(@TempDir File temp) {
 		project.getExtensions().configure(CxfCodegenExtension.class, (cxfCodegen) -> {
@@ -118,19 +119,21 @@ class CxfCodegenPluginTests {
 		});
 		TaskContainer tasks = project.getTasks();
 
-		assertThat(tasks.withType(Wsdl2JavaTask.class)).hasSize(2);
-		assertThat(tasks.getByName("wsdl2javaFoo")).asInstanceOf(InstanceOfAssertFactories.type(Wsdl2JavaTask.class))
+		assertThat(tasks.withType(io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask.class)).hasSize(2);
+		assertThat(tasks.getByName("wsdl2javaFoo"))
+				.asInstanceOf(InstanceOfAssertFactories.type(io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask.class))
 				.satisfies((task) -> wsdl2javaTaskAssertions(task, "foo"));
-		assertThat(tasks.getByName("wsdl2javaBar")).asInstanceOf(InstanceOfAssertFactories.type(Wsdl2JavaTask.class))
+		assertThat(tasks.getByName("wsdl2javaBar"))
+				.asInstanceOf(InstanceOfAssertFactories.type(io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask.class))
 				.satisfies((task) -> wsdl2javaTaskAssertions(task, "bar"));
 		assertThat(tasks.withType(Delete.class).matching(it -> it.getName().toLowerCase().contains("wsdl2java")))
 				.hasSize(2);
 		assertThat(tasks.getByName("cleanWsdl2javaFoo")).asInstanceOf(InstanceOfAssertFactories.type(Delete.class))
-				.satisfies(
-						(task) -> wsdl2javaDeleteTaskAssertions(task, (Wsdl2JavaTask) tasks.getByName("wsdl2javaFoo")));
+				.satisfies((task) -> wsdl2javaDeleteTaskAssertions(task,
+						(io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask) tasks.getByName("wsdl2javaFoo")));
 		assertThat(tasks.getByName("cleanWsdl2javaBar")).asInstanceOf(InstanceOfAssertFactories.type(Delete.class))
-				.satisfies(
-						(task) -> wsdl2javaDeleteTaskAssertions(task, (Wsdl2JavaTask) tasks.getByName("wsdl2javaBar")));
+				.satisfies((task) -> wsdl2javaDeleteTaskAssertions(task,
+						(io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask) tasks.getByName("wsdl2javaBar")));
 		assertThat(tasks.findByName(CxfCodegenPlugin.WSDL2JAVA_TASK_NAME)).isNotNull().satisfies((wsdl2java) -> {
 			assertThat(wsdl2java).isInstanceOf(DefaultTask.class);
 			assertThat(wsdl2java.getDependsOn()).hasSize(2);
@@ -139,6 +142,7 @@ class CxfCodegenPluginTests {
 		});
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	void addsToSourceSetForTasksCreatedByExtension(@TempDir File temp) {
 		project.getPluginManager().apply("java");
@@ -153,6 +157,7 @@ class CxfCodegenPluginTests {
 		assertThat(java.getSrcDirs().size()).isEqualTo(expectedSize);
 	}
 
+	@SuppressWarnings("deprecation")
 	@ValueSource(strings = { "bad name", "bad:name" })
 	@ParameterizedTest
 	void badContainerNamesResultInError(String candidate, @TempDir File temp) {
@@ -215,7 +220,9 @@ class CxfCodegenPluginTests {
 		assertThat(wsdl2java.getDependsOn()).satisfies(dependencies -> assertThat(dependencies).hasSize(2));
 	}
 
-	private static void wsdl2javaTaskAssertions(Wsdl2JavaTask wsdl2Java, String sourceName) {
+	@SuppressWarnings("deprecation")
+	private static void wsdl2javaTaskAssertions(io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask wsdl2Java,
+			String sourceName) {
 		Set<File> outputs = wsdl2Java.getOutputs().getFiles().getFiles();
 		assertThat(outputs).hasSize(1);
 		assertThat(outputs.iterator().next().toPath().endsWith("build/generated-sources/cxf/" + sourceName)).isTrue();
@@ -227,7 +234,8 @@ class CxfCodegenPluginTests {
 		assertThat(wsdl2Java.getArgs()).hasSize(3);
 	}
 
-	private void wsdl2javaDeleteTaskAssertions(Delete delete, Wsdl2JavaTask wsdl2Java) {
+	@SuppressWarnings("deprecation")
+	private void wsdl2javaDeleteTaskAssertions(Delete delete, io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask wsdl2Java) {
 		assertThat(delete.getDelete()).as("Delete").hasSize(1);
 		File expected = wsdl2Java.getOutputs().getFiles().getSingleFile();
 		File actual = ((DirectoryProperty) delete.getDelete().iterator().next()).get().getAsFile();
