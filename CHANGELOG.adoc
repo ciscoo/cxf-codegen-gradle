@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-== [1.0.0] - ?
+== [1.0.0] - 2022-01-07
 
 - Upgrade to Apache CXF 3.5.0 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/26[#26]
 - Introduce new task type -- https://github.com/ciscoo/cxf-codegen-gradle/issues/25[#25]
