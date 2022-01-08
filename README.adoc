@@ -61,7 +61,7 @@ Snapshots are published for every commit to the `master` branch. Documentation f
 ----
 // build.gradle
 plugins {
-    id "io.mateo.cxf-codegen" version "1.0.0-SNAPSHOT"
+    id "io.mateo.cxf-codegen" version "1.0.1-SNAPSHOT"
 }
 
 // settings.gradle
@@ -92,7 +92,7 @@ pluginManagement {
 // build.gradle.kts
 
 plugins {
-    id("io.mateo.cxf-codegen") version "1.0.0-SNAPSHOT"
+    id("io.mateo.cxf-codegen") version "1.0.1-SNAPSHOT"
 }
 
 // settings.gradle.kts
