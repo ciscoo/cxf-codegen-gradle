@@ -40,6 +40,8 @@ jobs:
         run: |
           ./gradlew --version
           ./gradlew build sonarqube -x functionalTest --parallel --info
+      - name: Functional Test (Gradle 7)
+        run: ./gradlew functionalTest --parallel
       - name: Functional Test (Gradle 5)
         run: ./gradlew functionalTest --parallel -Dgradle5=true
       - name: Functional Test (Gradle 6)
