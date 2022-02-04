@@ -14,6 +14,7 @@ However, depending on how your WSDLs are structured, you may encounter scenarios
 Additionally, when defining a task:
 
 . For each task, the generated Java source (the task output) is added to the {main-source-sets}[`main` source sets].
+.. This can be disabled when creating the task via `addToMainSourceSet.set(false)`
 . All `{wsdl2java-task-type}` task types are aggregated to a single task named `wsdl2java`.
 
 [[minimal-usage]]

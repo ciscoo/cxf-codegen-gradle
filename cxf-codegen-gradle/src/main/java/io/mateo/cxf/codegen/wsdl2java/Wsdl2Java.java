@@ -21,7 +21,9 @@ import java.util.List;
 
 import org.gradle.api.Action;
 import org.gradle.api.file.RegularFile;
+import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.CacheableTask;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.Nested;
 import org.gradle.process.CommandLineArgumentProvider;
@@ -33,6 +35,9 @@ import org.gradle.process.CommandLineArgumentProvider;
 public class Wsdl2Java extends JavaExec {
 
 	private final Wsdl2JavaOptions wsdl2JavaOptions;
+
+	private final Property<Boolean> addToMainSourceSet = getProject().getObjects().property(Boolean.class)
+			.convention(true);
 
 	public Wsdl2Java() {
 		Wsdl2JavaOptions options;
@@ -54,6 +59,16 @@ public class Wsdl2Java extends JavaExec {
 	@Nested
 	public Wsdl2JavaOptions getWsdl2JavaOptions() {
 		return this.wsdl2JavaOptions;
+	}
+
+	/**
+	 * Whether to add the generated Java sources to the
+	 * {@value org.gradle.api.tasks.SourceSet#MAIN_SOURCE_SET_NAME} or not.
+	 * @return whether to add to source set
+	 */
+	@Internal
+	public Property<Boolean> getAddToMainSourceSet() {
+		return this.addToMainSourceSet;
 	}
 
 	/**

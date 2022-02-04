@@ -190,11 +190,12 @@ class CxfCodegenPluginTests {
 					.isEqualTo(String.format("Generates Java sources for '%s'", testInfo.getDisplayName()));
 			assertThat(wsdl2Java.getArgumentProviders()).singleElement().extracting(it -> it.getClass().getSimpleName())
 					.isEqualTo("Wsdl2JavaArgumentProvider");
+			assertThat(wsdl2Java.getAddToMainSourceSet().get()).isTrue();
 		});
 	}
 
 	@Test
-	void addsToSourceSetForWsdl2JavaTasks(TestInfo testInfo) {
+	void addsToMainSourceSetForWsdl2JavaTasks(TestInfo testInfo) {
 		project.getPluginManager().apply("java");
 		SourceSetContainer sourceSets = project.getExtensions().getByType(SourceSetContainer.class);
 		SourceDirectorySet java = sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME).getJava();
@@ -209,6 +210,25 @@ class CxfCodegenPluginTests {
 				.of(project.getBuildDir().getAbsolutePath(), testInfo.getDisplayName() + "-wsdl2java-generated-sources")
 				.toFile().getAbsolutePath();
 		assertThat(paths).contains(outputDir);
+	}
+
+	@Test
+	void doesNotAddToMainSourceSetForWsdl2JavaTasksWhenConfiguredFalse(TestInfo testInfo) {
+		project.getPluginManager().apply("java");
+		SourceSetContainer sourceSets = project.getExtensions().getByType(SourceSetContainer.class);
+		SourceDirectorySet java = sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME).getJava();
+		int expectedSize = java.getSrcDirs().size();
+
+		project.getTasks().register(testInfo.getDisplayName(), Wsdl2Java.class,
+				wsdl2java -> wsdl2java.getAddToMainSourceSet().set(false));
+
+		assertThat(java.getSrcDirs().size()).isEqualTo(expectedSize);
+
+		List<String> paths = java.getSrcDirs().stream().map(File::getAbsolutePath).collect(Collectors.toList());
+		String outputDir = Path
+				.of(project.getBuildDir().getAbsolutePath(), testInfo.getDisplayName() + "-wsdl2java-generated-sources")
+				.toFile().getAbsolutePath();
+		assertThat(paths).doesNotContain(outputDir);
 	}
 
 	@Test

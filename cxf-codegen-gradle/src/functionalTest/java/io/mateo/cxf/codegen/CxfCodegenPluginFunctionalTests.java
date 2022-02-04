@@ -124,4 +124,11 @@ class CxfCodegenPluginFunctionalTests {
 		});
 	}
 
+	@TestTemplate
+	void generatedJavaIsNotAddedToMainWhenConfiguredFalse(GradleBuild gradleBuild) {
+		BuildResult result = gradleBuild.build("verify");
+
+		assertThat(result.getOutput()).contains("Source directories size match: true");
+	}
+
 }

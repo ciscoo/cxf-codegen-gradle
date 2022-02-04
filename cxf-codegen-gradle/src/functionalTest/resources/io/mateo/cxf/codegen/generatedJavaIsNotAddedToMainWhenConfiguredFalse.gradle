@@ -1,0 +1,33 @@
+import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java
+
+plugins {
+    id "java"
+    id "io.mateo.cxf-codegen"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    cxfCodegen "jakarta.xml.ws:jakarta.xml.ws-api:2.3.3"
+    cxfCodegen "jakarta.annotation:jakarta.annotation-api:1.3.5"
+}
+
+def mainSourceSet = sourceSets.main
+def initialSize = mainSourceSet.java.srcDirs.size()
+
+tasks.register("calculator", Wsdl2Java) {
+    addToMainSourceSet.set(false)
+    toolOptions {
+        wsdl.set(file("wsdls/calculator.wsdl"))
+    }
+}
+
+tasks.register("verify") {
+    doLast {
+        def actualSize = mainSourceSet.java.srcDirs.size()
+        println "Initial size: $initialSize - Actual size: $actualSize}"
+        println "Source directories size match: ${initialSize == actualSize}"
+    }
+}
