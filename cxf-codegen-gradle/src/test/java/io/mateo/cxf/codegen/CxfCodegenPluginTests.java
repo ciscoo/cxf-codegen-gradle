@@ -203,13 +203,13 @@ class CxfCodegenPluginTests {
 
 		project.getTasks().register(testInfo.getDisplayName(), Wsdl2Java.class);
 
-		assertThat(java.getSrcDirs().size()).isEqualTo(expectedSize);
-
-		List<String> paths = java.getSrcDirs().stream().map(File::getAbsolutePath).collect(Collectors.toList());
-		String outputDir = Path
-				.of(project.getBuildDir().getAbsolutePath(), testInfo.getDisplayName() + "-wsdl2java-generated-sources")
-				.toFile().getAbsolutePath();
-		assertThat(paths).contains(outputDir);
+		project.afterEvaluate(evaluated -> {
+			assertThat(java.getSrcDirs().size()).isEqualTo(expectedSize);
+			List<String> paths = java.getSrcDirs().stream().map(File::getAbsolutePath).collect(Collectors.toList());
+			String outputDir = Path.of(evaluated.getBuildDir().getAbsolutePath(),
+					testInfo.getDisplayName() + "-wsdl2java-generated-sources").toFile().getAbsolutePath();
+			assertThat(paths).contains(outputDir);
+		});
 	}
 
 	@Test
