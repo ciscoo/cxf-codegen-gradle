@@ -32,6 +32,30 @@ java {
     }
 }
 
+testing {
+    suites {
+        withType(JvmTestSuite::class) {
+            targets.configureEach {
+                testTask.configure {
+                    useJUnitPlatform {
+                        includeEngines("junit-jupiter")
+                    }
+                    testLogging {
+                        events = setOf(
+                            TestLogEvent.FAILED,
+                            TestLogEvent.STANDARD_ERROR,
+                            TestLogEvent.SKIPPED
+                        )
+                    }
+                    javaLauncher.set(javaToolchains.launcherFor {
+                        languageVersion.set(JavaLanguageVersion.of(11))
+                    })
+                }
+            }
+        }
+    }
+}
+
 tasks {
     withType<Jar>().configureEach {
         from(rootDir) {
@@ -50,22 +74,6 @@ tasks {
 
     withType<JavaCompile>().configureEach {
         options.encoding = StandardCharsets.UTF_8.toString()
-    }
-
-    withType<Test>().configureEach {
-        useJUnitPlatform {
-            includeEngines("junit-jupiter")
-        }
-        testLogging {
-            events = setOf(
-                TestLogEvent.FAILED,
-                TestLogEvent.STANDARD_ERROR,
-                TestLogEvent.SKIPPED
-            )
-        }
-        javaLauncher.set(javaToolchains.launcherFor {
-            languageVersion.set(JavaLanguageVersion.of(11))
-        })
     }
 
     compileJava {

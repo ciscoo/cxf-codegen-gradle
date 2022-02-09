@@ -21,7 +21,26 @@ gradlePlugin {
     }
 }
 
-val functionalTestSourceSet = sourceSets.create("functionalTest") {
+testing {
+    suites {
+        register("functionalTest", JvmTestSuite::class) {
+            dependencies {
+                implementation(project)
+                implementation("commons-io:commons-io")
+            }
+            targets.configureEach {
+                testTask.configure {
+                    testLogging {
+                        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+                    }
+                    // TODO: Drop support for older versions of Gradle.
+                    systemProperty("gradle5", System.getProperty("gradle5", false.toString()))
+                    systemProperty("gradle6", System.getProperty("gradle6", false.toString()))
+                    shouldRunAfter(named("test"))
+                }
+            }
+        }
+    }
 }
 
 pluginBundle {
@@ -37,33 +56,11 @@ pluginBundle {
     }
 }
 
-gradlePlugin.testSourceSets(functionalTestSourceSet)
-
-configurations {
-    "functionalTestImplementation" {
-        extendsFrom(testImplementation.get())
-    }
-}
-
-dependencies {
-    "functionalTestImplementation"("commons-io:commons-io")
-}
+gradlePlugin.testSourceSets(sourceSets["functionalTest"])
 
 tasks {
-    val functionalTest by registering(Test::class) {
-        description = "Runs the functional tests."
-        testClassesDirs = functionalTestSourceSet.output.classesDirs
-        classpath = functionalTestSourceSet.runtimeClasspath
-        group = LifecycleBasePlugin.VERIFICATION_GROUP
-        testLogging {
-            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
-        }
-        // TODO: Drop support for older versions of Gradle.
-        systemProperty("gradle5", System.getProperty("gradle5", false.toString()))
-        systemProperty("gradle6", System.getProperty("gradle6", false.toString()))
-    }
     check {
-        dependsOn(functionalTest)
+        dependsOn(testing.suites.named("functionalTest"))
     }
     publishPlugins {
         dependsOn(build)
