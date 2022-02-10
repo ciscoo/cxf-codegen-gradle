@@ -23,6 +23,7 @@ import org.gradle.api.model.ObjectFactory;
 
 /**
  * Extension to configure WSDL sources.
+ *
  * @deprecated since 1.0.0 for removal in 1.1.0 in favor of
  * {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2Java} tasks
  */

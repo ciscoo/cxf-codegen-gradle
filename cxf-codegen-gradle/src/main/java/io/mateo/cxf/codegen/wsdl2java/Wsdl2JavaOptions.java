@@ -32,6 +32,7 @@ import org.gradle.api.tasks.SkipWhenEmpty;
 
 /**
  * Options for the {@code wsdl2java} tool.
+ *
  * @see <a href="https://cxf.apache.org/docs/wsdl-to-java.html#WSDLtoJava-Options">WSDL to
  * Java options</a>
  */

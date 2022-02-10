@@ -21,6 +21,7 @@ import org.gradle.api.tasks.JavaExec;
 
 /**
  * Generates Java sources from WSDLs.
+ *
  * @deprecated since 1.0.0 for removal in 1.1.0 in favor of
  * {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2Java} tasks
  */
