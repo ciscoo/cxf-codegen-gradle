@@ -44,11 +44,13 @@ tasks {
         dependsOn(copyJavadoc)
         baseDirFollowsSourceDir()
         setOutputDir("$buildDir/docs/user-guide")
-        attributes(mapOf(
-            "revnumber" to version,
-            "current-gradle-version" to GradleVersion.current().version,
-            "outdir" to outputDir.absolutePath
-        ))
+        attributes(
+            mapOf(
+                "revnumber" to version,
+                "current-gradle-version" to GradleVersion.current().version,
+                "outdir" to outputDir.absolutePath
+            )
+        )
         forkOptions {
             // To avoid warning, see https://github.com/asciidoctor/asciidoctor-gradle-plugin/issues/597
             jvmArgs(
