@@ -40,12 +40,15 @@ class Wsdl2JavaOptionsTests {
 
 	private Project project;
 
+	private File projectDir;
+
 	private File outputDir;
 
 	private File wsdl;
 
 	@BeforeAll
 	void beforeAll(@TempDir File projectDir, @TempDir File wsdl) {
+		this.projectDir = projectDir;
 		this.project = ProjectBuilder.builder().withProjectDir(projectDir).build();
 		this.outputDir = this.project.getLayout().getBuildDirectory().get().getAsFile();
 		this.wsdl = wsdl;
@@ -83,8 +86,8 @@ class Wsdl2JavaOptionsTests {
 	@Test
 	void bindingFiles(TestInfo testInfo) {
 		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-b",
-				new File(this.wsdl, "foo").toURI().toString(), "-b", new File(this.wsdl, "bar").toURI().toString(),
-				this.wsdl.toURI().toString());
+				new File(this.projectDir, "foo").toURI().toString(), "-b",
+				new File(this.projectDir, "bar").toURI().toString(), this.wsdl.toURI().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
 				options -> options.getBindingFiles().set(List.of("foo", "bar"))).getArgumentProviders().get(0)
