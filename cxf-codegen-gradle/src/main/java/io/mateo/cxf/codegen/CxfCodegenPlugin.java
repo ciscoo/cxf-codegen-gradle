@@ -154,7 +154,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 			String name = option.getName().substring(0, 1).toUpperCase() + option.getName().substring(1);
 			project.getTasks().register("cleanWsdl2java" + name, Delete.class,
 					task -> task.delete(option.getOutputDir()));
-			project.getTasks().register("wsdl2java" + name, io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask.class,
+			project.getTasks().register(WSDL2JAVA_TASK_NAME + name, io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask.class,
 					task -> {
 						task.getOutputs().dir(option.getOutputDir().get());
 						task.getInputs().file(option.getWsdl().get());

@@ -154,7 +154,7 @@ class CxfCodegenPluginTests {
 			cxfCodegen.wsdl2java((wsdl2Java) -> wsdl2Java.register("foo", (foo) -> foo.getWsdl().set(temp)));
 		});
 
-		assertThat(java.getSrcDirs().size()).isEqualTo(expectedSize);
+		assertThat(java.getSrcDirs()).hasSize(expectedSize);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -204,7 +204,7 @@ class CxfCodegenPluginTests {
 		project.getTasks().register(testInfo.getDisplayName(), Wsdl2Java.class);
 
 		project.afterEvaluate(evaluated -> {
-			assertThat(java.getSrcDirs().size()).isEqualTo(expectedSize);
+			assertThat(java.getSrcDirs()).hasSize(expectedSize);
 			List<String> paths = java.getSrcDirs().stream().map(File::getAbsolutePath).collect(Collectors.toList());
 			String outputDir = Path.of(evaluated.getBuildDir().getAbsolutePath(),
 					testInfo.getDisplayName() + "-wsdl2java-generated-sources").toFile().getAbsolutePath();
@@ -222,7 +222,7 @@ class CxfCodegenPluginTests {
 		project.getTasks().register(testInfo.getDisplayName(), Wsdl2Java.class,
 				wsdl2java -> wsdl2java.getAddToMainSourceSet().set(false));
 
-		assertThat(java.getSrcDirs().size()).isEqualTo(expectedSize);
+		assertThat(java.getSrcDirs()).hasSize(expectedSize);
 
 		List<String> paths = java.getSrcDirs().stream().map(File::getAbsolutePath).collect(Collectors.toList());
 		String outputDir = Path
