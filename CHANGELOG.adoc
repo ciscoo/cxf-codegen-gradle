@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 - Make adding generated Java to `main` source set configurable -- https://github.com/ciscoo/cxf-codegen-gradle/issues/28[#28]
 - Test against Gradle 7.4 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/29[#29]
+- Update Gradle version recommendation -- https://github.com/ciscoo/cxf-codegen-gradle/issues/30[#30]
 
 == [1.0.0] - 2022-01-07
 
