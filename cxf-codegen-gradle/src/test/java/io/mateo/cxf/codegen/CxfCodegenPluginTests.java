@@ -228,7 +228,7 @@ class CxfCodegenPluginTests {
 		String outputDir = Path
 				.of(project.getBuildDir().getAbsolutePath(), testInfo.getDisplayName() + "-wsdl2java-generated-sources")
 				.toFile().getAbsolutePath();
-		assertThat(paths).doesNotContain(outputDir);
+		assertThat(paths).isNotEmpty().doesNotContain(outputDir);
 	}
 
 	@Test

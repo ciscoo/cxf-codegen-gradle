@@ -132,12 +132,14 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 
 	@SuppressWarnings("deprecation")
 	private void addToSourceSet(Project project, CxfCodegenExtension extension) {
-		project.getPluginManager().withPlugin("java-base", plugin -> {
+		// @formatter:off
+		project.getPluginManager().withPlugin("java-base", plugin ->
 			extension.getWsdl2java().all(option -> project.getExtensions().configure(SourceSetContainer.class,
 					sourceSets -> sourceSets.named(SourceSet.MAIN_SOURCE_SET_NAME,
-							main -> main.getJava().srcDir(project.provider(() -> option.getOutputDir().getAsFile())))));
+							main -> main.getJava().srcDir(project.provider(() -> option.getOutputDir().getAsFile())))))
 
-		});
+		);
+		// @formatter:on
 		project.afterEvaluate(evaluated -> evaluated.getTasks().withType(Wsdl2Java.class).all(wsdl2Java -> {
 			if (wsdl2Java.getAddToMainSourceSet().get()) {
 				evaluated.getExtensions().configure(SourceSetContainer.class,
