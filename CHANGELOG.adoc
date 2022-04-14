@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 == [1.0.1] - ?
 
+- Test against Gradle 7.4.2 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/34[#34]
 - Upgrade to Apache CXF 3.5.2 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/33[#33]
 - Upgrade to Apache CXF 3.5.1 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/31[#31]
 - Test against Gradle 7.4.1 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/32[#32]
