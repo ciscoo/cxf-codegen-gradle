@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-== [1.0.1] - ?
+== [1.0.1] - 2022-04-14
 
 - Test against Gradle 7.4.2 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/34[#34]
 - Upgrade to Apache CXF 3.5.2 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/33[#33]

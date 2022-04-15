@@ -16,7 +16,7 @@ using the https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_blo
 [source,groovy]
 ----
 plugins {
-    id "io.mateo.cxf-codegen" version "1.0.0"
+    id "io.mateo.cxf-codegen" version "1.0.1"
 }
 ----
 
@@ -32,7 +32,7 @@ plugins {
 [source,kotlin]
 ----
 plugins {
-    id("io.mateo.cxf-codegen") version "1.0.0"
+    id("io.mateo.cxf-codegen") version "1.0.1"
 }
 ----
 
