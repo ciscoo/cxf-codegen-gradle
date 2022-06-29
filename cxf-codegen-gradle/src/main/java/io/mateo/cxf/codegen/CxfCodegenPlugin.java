@@ -72,7 +72,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	/**
 	 * Update documentation when updating version.
 	 */
-	static final String DEFAULT_CXF_VERSION = "3.5.2";
+	static final String DEFAULT_CXF_VERSION = "3.5.3";
 
 	@SuppressWarnings("deprecation")
 	@Override
