@@ -1,0 +1,20 @@
+name: Run Gradle
+description: Sets up Gradle JDKs and runs Gradle with specified arguments
+inputs:
+  arguments:
+    required: true
+    description: Gradle arguments
+    default: check
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-java@v3
+      id: setup-gradle-jdk
+      with:
+        distribution: temurin
+        java-version: 11
+    - uses: gradle/gradle-build-action@v2
+      env:
+        JAVA_HOME: ${{ steps.setup-gradle-jdk.outputs.path }}
+      with:
+        arguments: ${{ inputs.arguments }}
