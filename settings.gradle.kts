@@ -17,3 +17,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
