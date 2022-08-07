@@ -36,7 +36,6 @@ testing {
                     // TODO: Drop support for older versions of Gradle.
                     systemProperty("gradle5", System.getProperty("gradle5", false.toString()))
                     systemProperty("gradle6", System.getProperty("gradle6", false.toString()))
-                    shouldRunAfter(named("test"))
                 }
             }
         }
@@ -59,9 +58,6 @@ pluginBundle {
 gradlePlugin.testSourceSets(sourceSets["functionalTest"])
 
 tasks {
-    check {
-        dependsOn(testing.suites.named("functionalTest"))
-    }
     publishPlugins {
         dependsOn(build)
     }
