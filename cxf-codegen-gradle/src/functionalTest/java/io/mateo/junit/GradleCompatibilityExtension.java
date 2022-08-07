@@ -87,7 +87,11 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 		List<GradleVersionDsl> versionToDsl = new ArrayList<>();
 		this.gradleVersions.forEach((version) -> {
 			versionToDsl.add(new GradleVersionDsl(version, GradleDsl.GROOVY));
-			versionToDsl.add(new GradleVersionDsl(version, GradleDsl.KOTLIN));
+			// Ignore Kotlin DSL due to some leak in CI.
+			// Works fine when running each test individually.
+			if (!Boolean.parseBoolean(System.getenv("CI"))) {
+				versionToDsl.add(new GradleVersionDsl(version, GradleDsl.KOTLIN));
+			}
 		});
 		return versionToDsl.stream().map(GradleVersionTestTemplateInvocationContext::new);
 	}
