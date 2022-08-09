@@ -19,3 +19,6 @@ dependencyResolutionManagement {
 }
 
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
+
+startParameter.showStacktrace = ShowStacktrace.ALWAYS_FULL
+startParameter.warningMode = WarningMode.Summary
