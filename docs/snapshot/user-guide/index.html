@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>CXF Codegen User Guide</h1>
 <div class="details">
 <span id="author" class="author">Francisco Mateo</span><br>
-<span id="revnumber">version 1.0.1-SNAPSHOT</span>
+<span id="revnumber">version 1.0.2-SNAPSHOT</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -499,7 +499,22 @@ The API is not a 1:1 port and leans heavily on Gradle idioms and conventions.</p
 <div class="paragraph">
 <p>The CXF Codegen Gradle plugin supports the following Gradle versions:</p>
 </div>
-<div class="ulist">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Gradle 5</th>
+<th class="tableblock halign-left valign-top">Gradle 6</th>
+<th class="tableblock halign-left valign-top">Gradle 7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
 <ul>
 <li>
 <p>5.5.1</p>
@@ -507,6 +522,10 @@ The API is not a 1:1 port and leans heavily on Gradle idioms and conventions.</p
 <li>
 <p>5.6.4</p>
 </li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
 <li>
 <p>6.0.1</p>
 </li>
@@ -537,6 +556,10 @@ The API is not a 1:1 port and leans heavily on Gradle idioms and conventions.</p
 <li>
 <p>6.9</p>
 </li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
 <li>
 <p>7.0.2</p>
 </li>
@@ -552,8 +575,14 @@ The API is not a 1:1 port and leans heavily on Gradle idioms and conventions.</p
 <li>
 <p>7.4.2</p>
 </li>
+<li>
+<p>7.5.1</p>
+</li>
 </ul>
-</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock">
 <div class="content">
 <div class="title">Gradle Version Support</div>
@@ -581,7 +610,7 @@ the source of the <a href="https://github.com/ciscoo/cxf-codegen-gradle/tree/mas
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-All examples are written for <em>and</em> are tested for Gradle 7.4.2.
+All examples are written for <em>and</em> are tested for Gradle 7.5.1.
 Depending on your Gradle version, you may need to adapt the example to a syntax that is compatible
 with your Gradle version.
 </td>
@@ -601,7 +630,7 @@ with your Gradle version.
 for code generation.</p>
 </div>
 <div class="paragraph">
-<p>Out-of-the-box, the following dependencies are added (v3.5.2):</p>
+<p>Out-of-the-box, the following dependencies are added (v3.5.3):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -633,7 +662,7 @@ for code generation.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>These are the same dependencies defined in the Maven plugin&#8217;s <a href="https://github.com/apache/cxf/blob/cxf-3.5.2/maven-plugins/codegen-plugin/pom.xml#L71..L106">POM</a>.</p>
+<p>These are the same dependencies defined in the Maven plugin&#8217;s <a href="https://github.com/apache/cxf/blob/cxf-3.5.3/maven-plugins/codegen-plugin/pom.xml#L71..L106">POM</a>.</p>
 </div>
 <div class="sect3">
 <h4 id="dependency-version-constraints"><a class="anchor" href="#dependency-version-constraints"></a>2.1.1. Managing Dependency Versions</h4>
@@ -1108,8 +1137,8 @@ that essentially overrides all logging levels. For example, an empty Logback con
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.1-SNAPSHOT<br>
-Last updated 2022-04-14 21:55:52 UTC
+Version 1.0.2-SNAPSHOT<br>
+Last updated 2022-08-09 02:39:28 UTC
 </div>
 </div>
 <style>
