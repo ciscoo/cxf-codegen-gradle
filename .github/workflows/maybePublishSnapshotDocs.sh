@@ -27,5 +27,5 @@ else
   echo "Creating and publishing snapshot documentation..."
   echo
   cp -f "${current_checksum}" "${published_checksum}"
-  ./gradlew :cxf-codegen-gradle:javadoc gitPublishPush -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false
+  ./gradlew gitPublishPush -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false
 fi

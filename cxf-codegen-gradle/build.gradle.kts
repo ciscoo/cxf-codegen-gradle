@@ -75,6 +75,15 @@ tasks {
 }
 val isSnapshot = project.version.toString().endsWith("SNAPSHOT")
 
+configurations.register("apiDocs") {
+    isCanBeConsumed = true
+    isCanBeResolved = false
+}
+
+artifacts {
+    add("apiDocs", tasks.javadoc)
+}
+
 publishing {
     repositories {
         maven {
