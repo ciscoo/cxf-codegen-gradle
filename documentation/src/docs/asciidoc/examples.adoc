@@ -1,0 +1,207 @@
+[[Examples]]
+= Examples
+include::attributes.adoc[]
+
+This section provides Gradle examples translated from the https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html[Maven plugin examples].
+
+[CAUTION]
+====
+You will need to ensure you have the appropriate dependencies when generating code  for Java 9+; see the
+<<generating-java#java-9, Java 9+>> section for more details. In addition, there may be more dependencies the CXF Codegen
+tool requires. Review <<plugin-configuration#dependency-configuration, dependency configuration>> documentation on how to
+add additional dependencies to the CXF Codegen tool classpath.
+
+In addition to the tool dependencies, your application may require additional dependencies as well.
+====
+
+CAUTION: All examples are written for _and_ tested for Gradle {current-gradle-version}.
+Depending on your Gradle version, you may need to adapt the example to a syntax that is compatible
+with your Gradle version.
+
+[INFO]
+====
+The following examples have been omitted:
+
+. https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html#Mavencxfcodegenplugin(WSDLtoJava)-Example5:UsingwsdlRootwithincludes/excludespatterns[Using wsdlRoot with includes/excludes patterns]
+.. It is a design decision of the plugin to omit the functionality to define a `wsdlRoot` or "base path" to locate WSDL(s).
+It is responsibility of the user to provide the location a WSDL. This keeps the plugin codebase simpler.
+. https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html#Mavencxfcodegenplugin(WSDLtoJava)-Example4:UsingdefaultOptiontoavoidrepetition[Using defaultOption to avoid repetition]
+.. The `defaultOptions` configuration does not exist in this Gradle plugin. Instead, use native Gradle APIs to accomplish
+the same thing. Refer to the <<generating-java#default-options, default options>> section for details.
+====
+
+[[examples.jaxws-binding-file]]
+== JAX-WS Binding File
+
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+include::../gradle/examples/jaxws-binding-file.gradle[tags=code]
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+----
+include::../gradle/examples/jaxws-binding-file.gradle.kts[tags=code]
+----
+
+++++
+</details>
+++++
+
+<1> Add the path of the binding file to the list property of binding files.
+
+[[examples.specify-data-binding]]
+== Specify Data Binding
+
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+include::../gradle/examples/specify-data-binding.gradle[tags=code]
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+----
+include::../gradle/examples/specify-data-binding.gradle.kts[tags=code]
+----
+
+++++
+</details>
+++++
+
+<1> Add required dependency to tool classpath for JiBX data binding.
+<2> Specify JiBX data binding.
+
+[[examples.specify-service-to-generate-artifacts-for]]
+== Specify Service to Generate Artifacts For
+
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+include::../gradle/examples/service-name.gradle[tags=code]
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+----
+include::../gradle/examples/service-name.gradle.kts[tags=code]
+----
+
+++++
+</details>
+++++
+
+<1> Specify to generate artifacts only for the service named `Calculator`.
+
+[[examples-loading-a-wsdl-from-a-maven-repository]]
+== Loading A WSDL From A Maven Repository
+
+Loading a WSDL from an artifact can be accomplished using Gradle APIs as shown below.
+For example, to use the WSDL published in the `cxf-testutils` JAR artifact:
+
+
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+include::../gradle/examples/loading-wsdl.gradle[tags=code]
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+----
+include::../gradle/examples/loading-wsdl.gradle.kts[tags=code]
+----
+
+++++
+</details>
+++++
+
+<1> Define a configuration to hold the dependency.
+<2> Add the dependency containing a WSDL to the configuration.
+<3> Define a task to copy the dependency that contains the WSDL
+<4> Extract the WSDL from the artifact
+<5> Use the task output as input to the `Wsdl2Java` task
+
+[[examples.using-xjc-extensions]]
+== Using XJC Extensions
+
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+include::../gradle/examples/using-xjc-extensions.gradle[tags=code]
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+----
+include::../gradle/examples/using-xjc-extensions.gradle.kts[tags=code]
+----
+
+++++
+</details>
+++++
+
+<1> Add the required CXF JXC dependency to your application dependencies.
+<2> Add the extension dependency to the tool classpath.
+<3> Specify extension ID that corresponds to the added dependency from (2); the `-xjc` prefix is not required when using the `xjcArgs` property.

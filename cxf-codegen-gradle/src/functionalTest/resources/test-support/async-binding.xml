@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<bindings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/jaxws/wsdl_customizationschema_2_0.xsd">
+    <bindings node="wsdl:definitions">
+        <enableAsyncMapping>true</enableAsyncMapping>
+    </bindings>
+</bindings>

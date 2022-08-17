@@ -110,6 +110,7 @@ public class GradleBuild {
 			FileUtils.writeLines(new File(this.projectDir, "settings.gradle"), StandardCharsets.UTF_8.name(),
 					settingsLines);
 			FileUtils.copyDirectoryToDirectory(new File("src/functionalTest/resources/wsdls"), this.projectDir);
+			FileUtils.copyDirectory(new File("src/functionalTest/resources/test-support"), this.projectDir);
 		}
 		catch (IOException ex) {
 			throw new UncheckedIOException(ex);
