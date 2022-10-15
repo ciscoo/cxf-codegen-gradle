@@ -61,12 +61,14 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	 * Task name to execute all {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask} and
 	 * {@link Wsdl2Java} tasks.
 	 */
+	@SuppressWarnings("deprecation")
 	public static final String WSDL2JAVA_TASK_NAME = "wsdl2java";
 
 	/**
 	 * Group name that all {@link io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaTask} and
 	 * {@link Wsdl2Java} tasks belong to.
 	 */
+	@SuppressWarnings("deprecation")
 	public static final String WSDL2JAVA_GROUP = "wsdl2java";
 
 	/**
