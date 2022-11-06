@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+== [1.0.3] - ?
+
+
+
 == [1.0.2] - 2022-11-06
 
 - Document Jakarta usage -- https://github.com/ciscoo/cxf-codegen-gradle/issues/49[#49]
