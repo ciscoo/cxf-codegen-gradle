@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-== [1.0.2] - ?
+== [1.0.2] - 2022-11-06
 
 - Document Jakarta usage -- https://github.com/ciscoo/cxf-codegen-gradle/issues/49[#49]
 - Test against Gradle 7.6-rc-1 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/48[#48]
