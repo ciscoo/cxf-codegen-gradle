@@ -450,9 +450,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#options-usage">2. Options</a></li>
 <li><a href="#default-options">3. Default Options</a></li>
 <li><a href="#java-9">4. Java 9+</a></li>
-<li><a href="#logging">5. Logging</a>
+<li><a href="#jakarta">5. Jakarta</a></li>
+<li><a href="#logging">6. Logging</a>
 <ul class="sectlevel2">
-<li><a href="#disable-logs">5.1. Disable Logs</a></li>
+<li><a href="#disable-logs">6.1. Disable Logs</a></li>
 </ul>
 </li>
 </ul>
@@ -770,7 +771,92 @@ in Java 9 and eventually removed in Java 11. Refer to <a href="https://openjdk.j
 </div>
 </div>
 <div class="sect1">
-<h2 id="logging"><a class="anchor" href="#logging"></a>5. Logging</h2>
+<h2 id="jakarta"><a class="anchor" href="#jakarta"></a>5. Jakarta</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It is possible to generate Java using the <code>jakarta</code> namespace instead of <code>javax</code>. In order to do so, you must use the latest snapshots of Apache CXF along with Jakarta specific artifacts.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Jakarta support will be generally available in the next major release of Apache CXF.
+Using Jakarta as part of the Java code generation should be done so with caution. See
+<a href="https://issues.apache.org/jira/browse/CXF-8371">CXF-8371</a> for more details.
+</td>
+</tr>
+</table>
+</div>
+<details open>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">repositories</span> <span class="o">{</span>
+    <span class="n">mavenCentral</span><span class="o">()</span>
+    <span class="n">maven</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">uri</span><span class="o">(</span><span class="s2">"https://repository.apache.org/content/groups/snapshots-group/"</span><span class="o">)</span>
+        <span class="n">content</span> <span class="o">{</span>
+            <span class="n">includeGroup</span><span class="o">(</span><span class="s2">"org.apache.cxf"</span><span class="o">)</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">cxfCodegen</span> <span class="nf">platform</span><span class="o">(</span><span class="s2">"org.apache.cxf:cxf-bom:4.0.0-SNAPSHOT"</span><span class="o">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="n">cxfCodegen</span> <span class="s2">"jakarta.xml.ws:jakarta.xml.ws-api:4.0.0"</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="n">cxfCodegen</span> <span class="s2">"jakarta.annotation:jakarta.annotation-api:2.1.1"</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Kotlin</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">repositories</span> <span class="p">{</span>
+    <span class="nf">mavenCentral</span><span class="p">()</span>
+    <span class="nf">maven</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="n">url</span> <span class="p">=</span> <span class="nf">uri</span><span class="p">(</span><span class="s">"https://repository.apache.org/content/groups/snapshots-group/"</span><span class="p">)</span>
+        <span class="nf">content</span> <span class="p">{</span>
+            <span class="nf">includeGroup</span><span class="p">(</span><span class="s">"org.apache.cxf"</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nf">dependencies</span> <span class="p">{</span>
+    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="nf">platform</span><span class="p">(</span><span class="s">"org.apache.cxf:cxf-bom:4.0.0-SNAPSHOT"</span><span class="p">))</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"jakarta.xml.ws:jakarta.xml.ws-api:4.0.0"</span><span class="p">)</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"jakarta.annotation:jakarta.annotation-api:2.1.1"</span><span class="p">)</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Define repository for Apache CXF snapshots; filter only for CXF artifacts.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Import/Use the 4.0.0 platform (BOM) for all CXF artifacts in the <code>cxfCodegen</code> classpath.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Use Jakarta specific artifacts that use the <code>jakarta</code> namespace.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The above is just an example. Depending on your usage, there may be more dependencies or configuration required.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="logging"><a class="anchor" href="#logging"></a>6. Logging</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Without any additional configuration, when executing any of the created tasks, the following lines will be printed to the console:</p>
@@ -824,7 +910,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 </div>
 </div>
 <div class="sect2">
-<h3 id="disable-logs"><a class="anchor" href="#disable-logs"></a>5.1. Disable Logs</h3>
+<h3 id="disable-logs"><a class="anchor" href="#disable-logs"></a>6.1. Disable Logs</h3>
 <div class="paragraph">
 <p>Logs from Apache CXF can be disabled by specifying a <code>null</code> logger for each <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html">Wsdl2JavaTask</a></code> task type as JVM argument.</p>
 </div>
@@ -887,7 +973,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 <div id="footer">
 <div id="footer-text">
 Version 1.0.2-SNAPSHOT<br>
-Last updated 2022-11-05 16:57:30 UTC
+Last updated 2022-11-06 17:07:53 UTC
 </div>
 </div>
 <style>
