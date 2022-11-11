@@ -24,9 +24,9 @@
 6992027e80f40e1f2a595ff1075a9738  documentation/src/docs/gradle/generating-java/java-nine.gradle
 71645c83dc4af68bdb0cab334ad2aa79  documentation/src/docs/gradle/generating-java/java-nine.gradle.kts
 72c8c9404eb17146fd7243bd34b2e4b2  documentation/src/docs/asciidoc/examples.adoc
-7445944822e7479ccf5cf2e0d302f704  documentation/src/docs/asciidoc/overview.adoc
 78be4fcf32c0908f57b4409aea412f42  documentation/src/docs/gradle/plugin-configuration/managing-dependency-versions.gradle
 7a6a6ad7fd61e8e8d0c64a45aab36f7f  documentation/src/docs/gradle/generating-java/disable-all-logs.gradle
+7b5c2d0dfa070e731318184cd001dc7d  documentation/src/docs/asciidoc/overview.adoc
 81315843ab1dff1ad91592819a1a9001  documentation/src/docs/gradle/examples/loading-wsdl.gradle
 85aba32cdc48c35e0095a9f5aafc11e8  documentation/src/docs/gradle/generating-java/disable-all-logs.gradle.kts
 8cbe6609f120bfbf7a246dd53cbcdd43  documentation/src/docs/gradle/generating-java/options.gradle.kts
