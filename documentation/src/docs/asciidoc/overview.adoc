@@ -43,7 +43,7 @@ a|
 - 7.3.3
 - 7.4.2
 - {current-gradle-version}
-- 7.6-rc-2
+- 7.6-rc-3
 |===
 
 .Gradle Version Support
