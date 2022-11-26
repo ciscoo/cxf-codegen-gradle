@@ -1,4 +1,8 @@
 pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
     plugins {
         id("com.gradle.plugin-publish") version "0.14.0"
         id("org.asciidoctor.jvm.convert") version "3.3.2"
