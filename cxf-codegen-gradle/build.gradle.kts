@@ -25,7 +25,7 @@ testing {
     suites {
         register("functionalTest", JvmTestSuite::class) {
             dependencies {
-                implementation(project)
+                implementation(project())
                 implementation("commons-io:commons-io")
             }
             targets.configureEach {
