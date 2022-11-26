@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 == [1.0.3] - ?
 
-
+- Test against Gradle 7.6 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/50[#50]
 
 == [1.0.2] - 2022-11-06
 
