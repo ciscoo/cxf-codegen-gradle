@@ -28,7 +28,6 @@ import org.apache.commons.io.FileUtils;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
 
-
 /**
  * A {@code GradleBuild} is used to run a Gradle build using {@link GradleRunner}.
  * <p>
