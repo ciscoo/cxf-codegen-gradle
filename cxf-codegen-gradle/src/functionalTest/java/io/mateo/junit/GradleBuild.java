@@ -20,11 +20,14 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
+
 
 /**
  * A {@code GradleBuild} is used to run a Gradle build using {@link GradleRunner}.
@@ -36,6 +39,8 @@ public class GradleBuild {
 	private File projectDir;
 
 	private String script;
+
+	private String settings;
 
 	private String gradleVersion;
 
@@ -64,6 +69,14 @@ public class GradleBuild {
 		this.script = script;
 		if (!script.endsWith(this.dsl.getExtension())) {
 			this.script = script + this.dsl.getExtension();
+		}
+		return this;
+	}
+
+	public GradleBuild settings(String settings) {
+		this.settings = settings;
+		if (!settings.endsWith(this.dsl.getExtension())) {
+			this.settings = settings + this.dsl.getExtension();
 		}
 		return this;
 	}
@@ -103,12 +116,10 @@ public class GradleBuild {
 			throw new UncheckedIOException(ex);
 		}
 
-		List<String> settingsLines = List.of("startParameter.showStacktrace = ShowStacktrace.ALWAYS_FULL",
-				"startParameter.warningMode = WarningMode.All");
+		Path settingsContent = getSettingsContent();
 
 		try {
-			FileUtils.writeLines(new File(this.projectDir, "settings.gradle"), StandardCharsets.UTF_8.name(),
-					settingsLines);
+			FileUtils.copyToDirectory(settingsContent.toFile(), this.projectDir);
 			FileUtils.copyDirectoryToDirectory(new File("src/functionalTest/resources/wsdls"), this.projectDir);
 			FileUtils.copyDirectory(new File("src/functionalTest/resources/test-support"), this.projectDir);
 		}
@@ -140,6 +151,13 @@ public class GradleBuild {
 
 	public GradleDsl getDsl() {
 		return this.dsl;
+	}
+
+	private Path getSettingsContent() {
+		String scriptPathName = this.settings != null ? this.settings : "settings" + this.dsl.getExtension();
+		String parentPath = Paths.get("").toAbsolutePath().toString();
+		return Paths.get(parentPath, "src", "functionalTest", "resources", "io", "mateo", "cxf", "codegen",
+				scriptPathName);
 	}
 
 }
