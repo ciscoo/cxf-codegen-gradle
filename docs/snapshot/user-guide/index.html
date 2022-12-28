@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>CXF Codegen User Guide</h1>
 <div class="details">
 <span id="author" class="author">Francisco Mateo</span><br>
-<span id="revnumber">version 1.0.3-SNAPSHOT</span>
+<span id="revnumber">version 1.1.0-SNAPSHOT</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -604,8 +604,8 @@ The API is not a 1:1 port and leans heavily on Gradle idioms and conventions.</p
 of Gradle or any Gradle version for that matter. Trivial or simple workarounds are fine.</p>
 </div>
 <div class="paragraph">
-<p>However, the recommended minimum Gradle version is Gradle 6 (6.8 or later). This recommended minimum aligns with Spring
-Boot Gradle Plugin 2.6.3, but without the strict requirement.</p>
+<p>However, the recommended minimum Gradle version is Gradle 6.8, 6.9, or 7.x. This recommended minimum aligns with Spring
+Boot Gradle Plugin 2.7.7, but without the strict requirement.</p>
 </div>
 </div>
 </div>
@@ -1036,21 +1036,7 @@ in Java 9 and eventually removed in Java 11. Refer to <a href="https://openjdk.j
 <div class="sect2">
 <h3 id="jakarta"><a class="anchor" href="#jakarta"></a>3.5. Jakarta</h3>
 <div class="paragraph">
-<p>It is possible to generate Java using the <code>jakarta</code> namespace instead of <code>javax</code>. In order to do so, you must use the latest snapshots of Apache CXF along with Jakarta specific artifacts.</p>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-Jakarta support will be generally available in the next major release of Apache CXF.
-Using Jakarta as part of the Java code generation should be done so with caution. See
-<a href="https://issues.apache.org/jira/browse/CXF-8371">CXF-8371</a> for more details.
-</td>
-</tr>
-</table>
+<p>It is possible to generate Java using the <code>jakarta</code> namespace instead of <code>javax</code>. In order to do so, you must use Apache CXF 4 along with Jakarta specific artifacts.</p>
 </div>
 <details open>
 <summary>Groovy</summary>
@@ -1058,17 +1044,11 @@ Using Jakarta as part of the Java code generation should be done so with caution
 <div class="content">
 <pre class="rouge highlight"><code data-lang="groovy"><span class="n">repositories</span> <span class="o">{</span>
     <span class="n">mavenCentral</span><span class="o">()</span>
-    <span class="n">maven</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">uri</span><span class="o">(</span><span class="s2">"https://repository.apache.org/content/groups/snapshots-group/"</span><span class="o">)</span>
-        <span class="n">content</span> <span class="o">{</span>
-            <span class="n">includeGroup</span><span class="o">(</span><span class="s2">"org.apache.cxf"</span><span class="o">)</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">cxfCodegen</span> <span class="nf">platform</span><span class="o">(</span><span class="s2">"org.apache.cxf:cxf-bom:4.0.0-SNAPSHOT"</span><span class="o">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="n">cxfCodegen</span> <span class="s2">"jakarta.xml.ws:jakarta.xml.ws-api:4.0.0"</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="n">cxfCodegen</span> <span class="nf">platform</span><span class="o">(</span><span class="s2">"org.apache.cxf:cxf-bom:4.0.0"</span><span class="o">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="n">cxfCodegen</span> <span class="s2">"jakarta.xml.ws:jakarta.xml.ws-api:4.0.0"</span> <i class="conum" data-value="2"></i><b>(2)</b>
     <span class="n">cxfCodegen</span> <span class="s2">"jakarta.annotation:jakarta.annotation-api:2.1.1"</span>
 <span class="o">}</span></code></pre>
 </div>
@@ -1080,17 +1060,11 @@ Using Jakarta as part of the Java code generation should be done so with caution
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">repositories</span> <span class="p">{</span>
     <span class="nf">mavenCentral</span><span class="p">()</span>
-    <span class="nf">maven</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
-        <span class="n">url</span> <span class="p">=</span> <span class="nf">uri</span><span class="p">(</span><span class="s">"https://repository.apache.org/content/groups/snapshots-group/"</span><span class="p">)</span>
-        <span class="nf">content</span> <span class="p">{</span>
-            <span class="nf">includeGroup</span><span class="p">(</span><span class="s">"org.apache.cxf"</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="nf">dependencies</span> <span class="p">{</span>
-    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="nf">platform</span><span class="p">(</span><span class="s">"org.apache.cxf:cxf-bom:4.0.0-SNAPSHOT"</span><span class="p">))</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"jakarta.xml.ws:jakarta.xml.ws-api:4.0.0"</span><span class="p">)</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="nf">platform</span><span class="p">(</span><span class="s">"org.apache.cxf:cxf-bom:4.0.0"</span><span class="p">))</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"jakarta.xml.ws:jakarta.xml.ws-api:4.0.0"</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
     <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"jakarta.annotation:jakarta.annotation-api:2.1.1"</span><span class="p">)</span>
 <span class="p">}</span></code></pre>
 </div>
@@ -1100,14 +1074,10 @@ Using Jakarta as part of the Java code generation should be done so with caution
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Define repository for Apache CXF snapshots; filter only for CXF artifacts.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>Import/Use the 4.0.0 platform (BOM) for all CXF artifacts in the <code>cxfCodegen</code> classpath.</td>
 </tr>
 <tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>Use Jakarta specific artifacts that use the <code>jakarta</code> namespace.</td>
 </tr>
 </table>
@@ -1641,8 +1611,8 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.3-SNAPSHOT<br>
-Last updated 2022-12-17 18:20:55 UTC
+Version 1.1.0-SNAPSHOT<br>
+Last updated 2022-12-28 17:48:47 UTC
 </div>
 </div>
 <style>
