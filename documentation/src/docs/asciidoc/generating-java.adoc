@@ -212,11 +212,7 @@ The above is just an example. Depending on your usage, there may be more depende
 [[jakarta]]
 == Jakarta
 
-It is possible to generate Java using the `jakarta` namespace instead of `javax`. In order to do so, you must use the latest snapshots of Apache CXF along with Jakarta specific artifacts.
-
-CAUTION: Jakarta support will be generally available in the next major release of Apache CXF.
-Using Jakarta as part of the Java code generation should be done so with caution. See
-https://issues.apache.org/jira/browse/CXF-8371[CXF-8371] for more details.
+It is possible to generate Java using the `jakarta` namespace instead of `javax`. In order to do so, you must use Apache CXF 4 along with Jakarta specific artifacts.
 
 ++++
 <details open>
@@ -246,9 +242,8 @@ include::../gradle/generating-java/jakarta.gradle.kts[tags=code]
 </details>
 ++++
 
-<1> Define repository for Apache CXF snapshots; filter only for CXF artifacts.
-<2> Import/Use the 4.0.0 platform (BOM) for all CXF artifacts in the `cxfCodegen` classpath.
-<3> Use Jakarta specific artifacts that use the `jakarta` namespace.
+<1> Import/Use the 4.0.0 platform (BOM) for all CXF artifacts in the `cxfCodegen` classpath.
+<2> Use Jakarta specific artifacts that use the `jakarta` namespace.
 
 The above is just an example. Depending on your usage, there may be more dependencies or configuration required.
 
