@@ -51,8 +51,8 @@ a|
 To keep the plugin as simple as possible, there will not be any _extensive_ version specific workarounds for older versions
 of Gradle or any Gradle version for that matter. Trivial or simple workarounds are fine.
 
-However, the recommended minimum Gradle version is Gradle 6 (6.8 or later). This recommended minimum aligns with Spring
-Boot Gradle Plugin 2.6.3, but without the strict requirement.
+However, the recommended minimum Gradle version is Gradle 6.8, 6.9, or 7.x. This recommended minimum aligns with Spring
+Boot Gradle Plugin 2.7.7, but without the strict requirement.
 ****
 
 The plugin is fully tested against the above versions to ensure compatibility. View
