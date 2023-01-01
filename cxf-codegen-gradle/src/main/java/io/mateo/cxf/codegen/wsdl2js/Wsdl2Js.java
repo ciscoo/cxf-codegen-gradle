@@ -34,7 +34,7 @@ public abstract class Wsdl2Js extends JavaExec {
 	private final Wsdl2JsOptions wsdl2JsOptions;
 
 	public Wsdl2Js() {
-		this.wsdl2JsOptions = getObjectFactory().newInstance(Wsdl2JsOptions.class, getName());
+		this.wsdl2JsOptions = getProject().getObjects().newInstance(Wsdl2JsOptions.class, getName());
 		getArgumentProviders().add(new Wsdl2Js.Wsdl2JsArgumentProvider());
 	}
 
