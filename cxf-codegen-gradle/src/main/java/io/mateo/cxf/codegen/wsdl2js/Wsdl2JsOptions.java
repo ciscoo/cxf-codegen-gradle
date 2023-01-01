@@ -113,6 +113,7 @@ public abstract class Wsdl2JsOptions {
 	 * @return catalog
 	 */
 	@InputFile
+	@PathSensitive(PathSensitivity.RELATIVE)
 	@Optional
 	public RegularFileProperty getCatalog() {
 		return this.catalog;
