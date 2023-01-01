@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 import io.mateo.cxf.codegen.junit.TaskNameGenerator;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 
+import io.mateo.cxf.codegen.wsdl2js.Wsdl2Js;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.InvalidUserDataException;
@@ -44,6 +45,7 @@ import org.gradle.api.specs.Spec;
 import org.gradle.api.tasks.Delete;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
+import org.gradle.api.tasks.TaskCollection;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.testfixtures.ProjectBuilder;
 import org.junit.jupiter.api.BeforeEach;
@@ -238,6 +240,41 @@ class CxfCodegenPluginTests {
 
 		Task wsdl2java = project.getTasks().getByName(CxfCodegenPlugin.WSDL2JAVA_TASK_NAME);
 		assertThat(wsdl2java.getDependsOn()).satisfies(dependencies -> assertThat(dependencies).hasSize(2));
+	}
+
+	@Test
+	void configureWsdl2JsDefaults(TestInfo testInfo) {
+		project.getTasks().register(testInfo.getDisplayName(), Wsdl2Js.class);
+
+		project.getTasks().withType(Wsdl2Js.class).all(wsdl2Js -> {
+			Set<File> outputs = wsdl2Js.getOutputs().getFiles().getFiles();
+			assertThat(outputs).hasSize(1);
+			assertThat(outputs.iterator().next().toPath())
+					.endsWithRaw(Path.of("build", wsdl2Js.getName() + "-wsdl2js-generated-sources"));
+			assertThat(wsdl2Js.getMainClass().get())
+					.isEqualTo("org.apache.cxf.tools.wsdlto.javascript.WSDLToJavaScript");
+			// Can not resolve configuration in unit tests, so assert on error message.
+			assertThatCode(() -> wsdl2Js.getClasspath().getFiles()).hasMessageContaining("configuration ':cxfCodegen'");
+			assertThat(wsdl2Js.getGroup()).isEqualTo(CxfCodegenPlugin.WSDL2JS_GROUP);
+			assertThat(wsdl2Js.getDescription())
+					.isEqualTo(String.format("Generates JavaScript sources for '%s'", testInfo.getDisplayName()));
+			assertThat(wsdl2Js.getArgumentProviders()).singleElement().extracting(it -> it.getClass().getSimpleName())
+					.isEqualTo("Wsdl2JsArgumentProvider");
+		});
+	}
+
+	@SuppressWarnings("unchecked") // TaskCollection cast
+	@Test
+	void aggregateTaskWillRunWsdl2JsTaskTypes() {
+		project.getTasks().register("a", Wsdl2Js.class);
+		project.getTasks().register("b", Wsdl2Js.class);
+
+		var wsdl2java = project.getTasks().getByName(CxfCodegenPlugin.WSDL2JS_TASK_NAME);
+		assertThat(wsdl2java.getDependsOn()).singleElement().satisfies(candidate -> {
+			var dependencies = (TaskCollection<Task>) candidate;
+			var taskNames = dependencies.stream().map(Task::toString).collect(Collectors.toList());
+			assertThat(taskNames).containsExactlyElementsOf(List.of("task ':a'", "task ':b'"));
+		});
 	}
 
 	@SuppressWarnings("deprecation")

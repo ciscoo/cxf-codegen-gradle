@@ -1,5 +1,5 @@
-[[Examples]]
-= Examples
+[[java-examples]]
+= Java Examples
 include::attributes.adoc[]
 
 This section provides Gradle examples translated from the https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html[Maven plugin examples].

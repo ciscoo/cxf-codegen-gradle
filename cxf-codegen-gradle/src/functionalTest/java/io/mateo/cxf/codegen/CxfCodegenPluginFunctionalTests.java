@@ -18,6 +18,8 @@ package io.mateo.cxf.codegen;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -129,6 +131,27 @@ class CxfCodegenPluginFunctionalTests {
 		BuildResult result = gradleBuild.build("verify");
 
 		assertThat(result.getOutput()).contains("Source directories size match: true");
+	}
+
+	@TestTemplate
+	void jsSourceGenerationFromWsdl(GradleBuild gradleBuild) {
+		BuildResult result = gradleBuild.build("calculator");
+
+		assertThat(result.task(":calculator")).isNotNull().extracting(BuildTask::getOutcome)
+				.isEqualTo(TaskOutcome.SUCCESS);
+		assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
+			var generatedSources = projectDir.toPath()
+					.resolve(Path.of("build", "calculator-wsdl2js-generated-sources"));
+			assertThat(generatedSources).exists().isNotEmptyDirectory();
+
+			try (var files = Files.list(generatedSources)) {
+				var generatedFiles = files.map(Path::getFileName).map(Path::toString).collect(Collectors.toList());
+				var expectedFiles = List.of("Calculator.js");
+
+				assertThat(generatedFiles).containsExactlyInAnyOrderElementsOf(expectedFiles);
+			}
+
+		});
 	}
 
 }

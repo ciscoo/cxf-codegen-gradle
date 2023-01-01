@@ -14,9 +14,12 @@
 
 :javadoc-root:  link:../api
 :wsdl-option: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaOptions.html#method.summary[Wsdl2JavaOptions]
+:wsdl2js-options: {javadoc-root}/io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#method.summary[Wsdl2JsOptions]
 :wsdl2java-task: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html[Wsdl2JavaTask]
 :wsdl2java-task-type: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2Java.html[Wsdl2Java]
+:wsdl2js-task-type: {javadoc-root}/io/mateo/cxf/codegen/wsdl2js/Wsdl2Js.html[Wsdl2Js]
 :cxf-codegen-maven-plugin: https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html
+:wsdl2js-tool-docs: https://cxf.apache.org/docs/wsdl-to-javascript.html
 :wsdl2java-cli: https://cxf.apache.org/docs/wsdl-to-java.html
 :functional-test: https://github.com/ciscoo/cxf-codegen-gradle/tree/master/cxf-codegen-gradle/src/functionalTest
 :configuration-cache: https://docs.gradle.org/current/userguide/configuration_cache.html

@@ -1,0 +1,112 @@
+[[generating-javascript-sources]]
+= Generating JavaScript Sources
+include::attributes.adoc[]
+
+To generate JavaScript sources from a WSDL, define task of type `{wsdl2js-task-type}` and configure the `toolOptions`. Note that the task is a subclass of `{javaexec-task}`.
+
+All `{wsdl2js-task-type}` task types are aggregated to a single task named `wsdl2js`.
+
+[[generating-javascript-sources.minimal-usage]]
+== Minimal Usage
+
+The minimum requirement for generating JavaScript is a single WSDL file.
+
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+include::../gradle/generating-javascript/minimal-task-usage.gradle[tags=code]
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+----
+include::../gradle/generating-javascript/minimal-task-usage.gradle.kts[tags=code]
+----
+
+++++
+</details>
+++++
+
+++++
+</details>
+++++
+
+<1> Creates a task named `example` of type `{wsdl2js-task-type}`.
+<2> Use the `toolOptions` to configure all available options for code generation.
+<3> Configure the WSDL to use for code generation.
+
+[[generating-javascript-sources.options-usage]]
+== Options
+
+There are quite a few options that can be specified that alter the generated JavaScript. These are identical to ones
+offered by the {wsdl2js-tool-docs}[`wsdl2js`] tool.
+
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+include::../gradle/generating-javascript/tool-options.gradle[tags=code]
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+----
+include::../gradle/generating-javascript/tool-options.gradle.kts[tags=code]
+----
+
+++++
+</details>
+++++
+
+<1> Change the directory the generated code files are written to.
+<2> Specifies the XML catalog to use for resolving imported schemas and WSDL documents.
+<3> Specifies a mapping between the namespaces used in the WSDL document and the prefixes used in the generated JavaScript.
+<4> Displays comments during the code generation process.
+
+There are more options available than what is shown above. View the method summary section in the Javadoc
+for `{wsdl2js-options}` for more details.
+
+[[generating-javascript-sources.default-options]]
+== Default Options
+
+You may want to configure options that apply to all tasks. This is can be accomplished using native Gradle functionality. Refer to the <<generating-java#default-options, default options>> section in the documentation for generating Java sources for examples. Replace `Wsdl2Java` with `Wsdl2Js` in the examples.
+
+[[generating-javascript-sources.java-9]]
+== Java 9+
+
+If you are using Java 9+, the `cxfCodegen` configuration to add back the Java EE modules that were removed in Java 11. Refer to <<generating-java#java-9, Java 9>> documentation for more details.
+
+TIP: The Java EE (or Jakarta) dependencies are required regardless if a JVM plugin (`java`, `groovy`, `scala`, `kotlin("jvm")`, etc) is applied. This is because the underlying code generation tool is based on Java.
+
+[[generating-javascript-sources.jakarta]]
+== Jakarta
+
+When using Apache CXF 4 or greater, you must include Jakarta specific artifacts instead of Java EE. Refer to the <<generating-java#jakarta, Java Jakarta>> documentation for more details.
+
+[[generating-javascript-sources.logging]]
+== Logging
+
+Refer to the <<generating-java#logging, documentation>> for generating Java sources. The process for enabling or disabling logs is the same. Replace `Wsdl2Java` with `Wsdl2Js`.
