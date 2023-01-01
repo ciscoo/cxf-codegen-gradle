@@ -112,7 +112,7 @@ public abstract class Wsdl2JsOptions {
 	 * Specifies the XML catalog to use for resolving imported schemas and WSDL documents.
 	 * @return catalog
 	 */
-	@Input
+	@InputFile
 	@Optional
 	public RegularFileProperty getCatalog() {
 		return this.catalog;
