@@ -94,7 +94,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </nav>
 </header>
 <main role="main">
-<div class="contentContainer"><a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a><a id="I:A">
+<div class="contentContainer"><a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a><a id="I:A">
 <!--   -->
 </a>
 <h2 class="title">A</h2>
@@ -250,6 +250,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specify catalog file to map the imported WSDL/schema.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#getCatalog()">getCatalog()</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions</a></dt>
+<dd>
+<div class="block">Specifies the XML catalog to use for resolving imported schemas and WSDL documents.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2java/Option.html#getDatabinding()">getDatabinding()</a></span> - Method in interface io.mateo.cxf.codegen.wsdl2java.<a href="io/mateo/cxf/codegen/wsdl2java/Option.html" title="interface in io.mateo.cxf.codegen.wsdl2java">Option</a></dt>
 <dd>
@@ -474,6 +478,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the directory the generated code files are written.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#getOutputDir()">getOutputDir()</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions</a></dt>
+<dd>
+<div class="block">Specifies the directory the generated code files are written.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2java/Option.html#getPackageNames()">getPackageNames()</a></span> - Method in interface io.mateo.cxf.codegen.wsdl2java.<a href="io/mateo/cxf/codegen/wsdl2java/Option.html" title="interface in io.mateo.cxf.codegen.wsdl2java">Option</a></dt>
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
@@ -487,6 +495,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies zero, or more, package names to use for the generated code.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#getPackagePrefixes()">getPackagePrefixes()</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions</a></dt>
+<dd>
+<div class="block">Specifies a mapping between the namespaces used in the WSDL document and the
+ prefixes used in the generated JavaScript.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html#getPrefix()">getPrefix()</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions.UriPrefixPair</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#getQuiet()">getQuiet()</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions</a></dt>
+<dd>
+<div class="block">Enables or disables quiet mode.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2java/Option.html#getSeiSuper()">getSeiSuper()</a></span> - Method in interface io.mateo.cxf.codegen.wsdl2java.<a href="io/mateo/cxf/codegen/wsdl2java/Option.html" title="interface in io.mateo.cxf.codegen.wsdl2java">Option</a></dt>
 <dd>
@@ -533,6 +552,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Enables or disables writing the current timestamp in the generated file (since CXF
  version 3.2.2).</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html#getUri()">getUri()</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions.UriPrefixPair</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#getValidate()">getValidate()</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions</a></dt>
+<dd>
+<div class="block">Enables validating the WSDL before generating the code.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2java/Option.html#getValidateWsdl()">getValidateWsdl()</a></span> - Method in interface io.mateo.cxf.codegen.wsdl2java.<a href="io/mateo/cxf/codegen/wsdl2java/Option.html" title="interface in io.mateo.cxf.codegen.wsdl2java">Option</a></dt>
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
@@ -561,6 +586,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Enables or disables verbosity.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#getVerbose()">getVerbose()</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions</a></dt>
+<dd>
+<div class="block">Enables or disables verbosity.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2java/Option.html#getWsdl()">getWsdl()</a></span> - Method in interface io.mateo.cxf.codegen.wsdl2java.<a href="io/mateo/cxf/codegen/wsdl2java/Option.html" title="interface in io.mateo.cxf.codegen.wsdl2java">Option</a></dt>
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
@@ -575,6 +604,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">WSDL file to process.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#getWsdl()">getWsdl()</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions</a></dt>
+<dd>
+<div class="block">Specifies the WSDL document from which JavaScript is generated from</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/CxfCodegenExtension.html#getWsdl2java()">getWsdl2java()</a></span> - Method in class io.mateo.cxf.codegen.<a href="io/mateo/cxf/codegen/CxfCodegenExtension.html" title="class in io.mateo.cxf.codegen">CxfCodegenExtension</a></dt>
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
@@ -583,6 +616,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2java/Wsdl2Java.html#getWsdl2JavaOptions()">getWsdl2JavaOptions()</a></span> - Method in class io.mateo.cxf.codegen.wsdl2java.<a href="io/mateo/cxf/codegen/wsdl2java/Wsdl2Java.html" title="class in io.mateo.cxf.codegen.wsdl2java">Wsdl2Java</a></dt>
 <dd>
 <div class="block">Options to configure the <code>wsdl2java</code> tool.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2Js.html#getWsdl2JsOptions()">getWsdl2JsOptions()</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2Js.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2Js</a></dt>
+<dd>
+<div class="block">Options to configure the <code>wsdl2js</code> tool.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2java/Option.html#getWsdlList()">getWsdlList()</a></span> - Method in interface io.mateo.cxf.codegen.wsdl2java.<a href="io/mateo/cxf/codegen/wsdl2java/Option.html" title="interface in io.mateo.cxf.codegen.wsdl2java">Option</a></dt>
 <dd>
@@ -632,6 +669,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Specifies the WSDL version.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#getWsdlVersion()">getWsdlVersion()</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions</a></dt>
+<dd>
+<div class="block">Specifies the WSDL version the tool expects.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2java/Option.html#getXjcArgs()">getXjcArgs()</a></span> - Method in interface io.mateo.cxf.codegen.wsdl2java.<a href="io/mateo/cxf/codegen/wsdl2java/Option.html" title="interface in io.mateo.cxf.codegen.wsdl2java">Option</a></dt>
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
@@ -666,6 +707,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Classes related to Java code generation.</div>
 </dd>
+<dt><a href="io/mateo/cxf/codegen/wsdl2js/package-summary.html">io.mateo.cxf.codegen.wsdl2js</a> - package io.mateo.cxf.codegen.wsdl2js</dt>
+<dd>&nbsp;</dd>
 </dl>
 <a id="I:O">
 <!--   -->
@@ -680,6 +723,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </div>
 </dd>
 </dl>
+<a id="I:S">
+<!--   -->
+</a>
+<h2 class="title">S</h2>
+<dl>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html#setPrefix(java.lang.String)">setPrefix(String)</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions.UriPrefixPair</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html#setUri(java.lang.String)">setUri(String)</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions.UriPrefixPair</a></dt>
+<dd>&nbsp;</dd>
+</dl>
 <a id="I:T">
 <!--   -->
 </a>
@@ -689,6 +742,22 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Configures the <code>wsdl2java</code> tool options.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2Js.html#toolOptions(org.gradle.api.Action)">toolOptions(Action&lt;? super Wsdl2JsOptions&gt;)</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2Js.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2Js</a></dt>
+<dd>
+<div class="block">Configures the <code>wsdl2js</code> tool options.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html#toString()">toString()</a></span> - Method in class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions.UriPrefixPair</a></dt>
+<dd>&nbsp;</dd>
+</dl>
+<a id="I:U">
+<!--   -->
+</a>
+<h2 class="title">U</h2>
+<dl>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html#%3Cinit%3E()">UriPrefixPair()</a></span> - Constructor for class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions.UriPrefixPair</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html#%3Cinit%3E(java.lang.String,java.lang.String)">UriPrefixPair(String, String)</a></span> - Constructor for class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions.UriPrefixPair</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <a id="I:W">
 <!--   -->
@@ -733,6 +802,30 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 &nbsp;</dd>
+<dt><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2Js.html" title="class in io.mateo.cxf.codegen.wsdl2js"><span class="typeNameLink">Wsdl2Js</span></a> - Class in <a href="io/mateo/cxf/codegen/wsdl2js/package-summary.html">io.mateo.cxf.codegen.wsdl2js</a></dt>
+<dd>
+<div class="block">Generates JavaScript sources from WSDLs.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2Js.html#%3Cinit%3E()">Wsdl2Js()</a></span> - Constructor for class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2Js.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2Js</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/CxfCodegenPlugin.html#WSDL2JS_GROUP">WSDL2JS_GROUP</a></span> - Static variable in class io.mateo.cxf.codegen.<a href="io/mateo/cxf/codegen/CxfCodegenPlugin.html" title="class in io.mateo.cxf.codegen">CxfCodegenPlugin</a></dt>
+<dd>
+<div class="block">Group name that all <a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2Js.html" title="class in io.mateo.cxf.codegen.wsdl2js"><code>Wsdl2Js</code></a> tasks belong to.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/CxfCodegenPlugin.html#WSDL2JS_TASK_NAME">WSDL2JS_TASK_NAME</a></span> - Static variable in class io.mateo.cxf.codegen.<a href="io/mateo/cxf/codegen/CxfCodegenPlugin.html" title="class in io.mateo.cxf.codegen">CxfCodegenPlugin</a></dt>
+<dd>
+<div class="block">Task name to execute all <a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2Js.html" title="class in io.mateo.cxf.codegen.wsdl2js"><code>Wsdl2Js</code></a> tasks.</div>
+</dd>
+<dt><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html" title="class in io.mateo.cxf.codegen.wsdl2js"><span class="typeNameLink">Wsdl2JsOptions</span></a> - Class in <a href="io/mateo/cxf/codegen/wsdl2js/package-summary.html">io.mateo.cxf.codegen.wsdl2js</a></dt>
+<dd>
+<div class="block">Options for the <code>wsdl2js</code> tool.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#%3Cinit%3E(java.lang.String,org.gradle.api.model.ObjectFactory,org.gradle.api.file.ProjectLayout)">Wsdl2JsOptions(String, ObjectFactory, ProjectLayout)</a></span> - Constructor for class io.mateo.cxf.codegen.wsdl2js.<a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html" title="class in io.mateo.cxf.codegen.wsdl2js">Wsdl2JsOptions</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.UriPrefixPair.html" title="class in io.mateo.cxf.codegen.wsdl2js"><span class="typeNameLink">Wsdl2JsOptions.UriPrefixPair</span></a> - Class in <a href="io/mateo/cxf/codegen/wsdl2js/package-summary.html">io.mateo.cxf.codegen.wsdl2js</a></dt>
+<dd>
+<div class="block">Container class for URI.</div>
+</dd>
 <dt><a href="io/mateo/cxf/codegen/wsdl2java/WsdlOption.html" title="class in io.mateo.cxf.codegen.wsdl2java"><span class="typeNameLink">WsdlOption</span></a> - Class in <a href="io/mateo/cxf/codegen/wsdl2java/package-summary.html">io.mateo.cxf.codegen.wsdl2java</a></dt>
 <dd>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
@@ -745,7 +838,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 &nbsp;</dd>
 </dl>
-<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a></div>
+<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a></div>
 </main>
 <footer role="contentinfo">
 <nav role="navigation">
