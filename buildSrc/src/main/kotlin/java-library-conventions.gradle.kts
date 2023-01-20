@@ -35,11 +35,9 @@ java {
 testing {
     suites {
         withType(JvmTestSuite::class) {
+            useJUnitJupiter()
             targets.configureEach {
                 testTask.configure {
-                    useJUnitPlatform {
-                        includeEngines("junit-jupiter")
-                    }
                     testLogging {
                         events = setOf(
                             TestLogEvent.FAILED,

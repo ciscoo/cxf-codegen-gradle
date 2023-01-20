@@ -16,9 +16,9 @@ The API is not a 1:1 port and leans heavily on Gradle idioms and conventions.
 
 The CXF Codegen Gradle plugin supports the following Gradle versions:
 
-[cols="1,1,1"]
+[cols="1,1,1,1"]
 |===
-| Gradle 5 | Gradle 6 | Gradle 7
+| Gradle 5 | Gradle 6 | Gradle 7 | Gradle 8
 
 a|
 - 5.5.1
@@ -43,6 +43,9 @@ a|
 - 7.3.3
 - 7.4.2
 - 7.5.1
+- 7.6
+
+a|
 - {current-gradle-version}
 |===
 

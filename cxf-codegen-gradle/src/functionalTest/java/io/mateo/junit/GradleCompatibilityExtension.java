@@ -42,16 +42,19 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 			"6.6.1", "6.7.1", "6.8.3", "6.9.3");
 
 	private static final List<String> GRADLE_7_VERSIONS = List.of("7.0.2", "7.1.1", "7.2", "7.3.3", "7.4.2", "7.5.1",
-			"current");
+			"7.6");
+
+	private static final List<String> GRADLE_8_VERSIONS = List.of("current");
 
 	private static final List<String> DEFAULT_GRADLE_VERSIONS;
 
 	static {
-		List<String> defaultVersions = new ArrayList<>(
-				GRADLE_5_VERSIONS.size() + GRADLE_6_VERSIONS.size() + GRADLE_7_VERSIONS.size());
+		List<String> defaultVersions = new ArrayList<>(GRADLE_5_VERSIONS.size() + GRADLE_6_VERSIONS.size()
+				+ GRADLE_7_VERSIONS.size() + GRADLE_8_VERSIONS.size());
 		defaultVersions.addAll(GRADLE_5_VERSIONS);
 		defaultVersions.addAll(GRADLE_6_VERSIONS);
 		defaultVersions.addAll(GRADLE_7_VERSIONS);
+		defaultVersions.addAll(GRADLE_8_VERSIONS);
 		DEFAULT_GRADLE_VERSIONS = List.copyOf(defaultVersions);
 	}
 
@@ -66,8 +69,11 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 		else if (Boolean.parseBoolean(System.getProperty("gradle6"))) {
 			this.gradleVersions = GRADLE_6_VERSIONS;
 		}
-		else {
+		else if (Boolean.parseBoolean(System.getProperty("gradle7"))) {
 			this.gradleVersions = GRADLE_7_VERSIONS;
+		}
+		else {
+			this.gradleVersions = GRADLE_8_VERSIONS;
 		}
 		System.err.println("Testing against the following Gradle versions " + this.gradleVersions);
 		Assertions.assertTrue(DEFAULT_GRADLE_VERSIONS.containsAll(this.gradleVersions),
