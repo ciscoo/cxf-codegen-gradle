@@ -9,6 +9,7 @@
 19ad8d67a9cdb5f24e6e20ea4d80331b  documentation/src/docs/gradle/generating-java/jakarta.gradle.kts
 1c30144ea8b1f50e0dd8316d8b00a31b  documentation/src/docs/gradle/generating-java/disable-logs.gradle
 1dfef6f4514be822e788c9a532da9558  documentation/src/docs/gradle/generating-java/minimal-task-usage.gradle.kts
+1f6ee8c9608d341b4c7820abad5b6a9d  documentation/src/docs/asciidoc/overview.adoc
 23c2347242605c158f6a533c43a5fdbe  documentation/src/docs/gradle/generating-java/disable-task-logs.gradle.kts
 2445b3f6843d4f064a6020b305d1f846  documentation/src/docs/gradle/examples/loading-wsdl.gradle.kts
 26fe2b1d313e8cfa09d984ec1ecee73c  documentation/src/docs/asciidoc/examples.adoc
@@ -28,7 +29,6 @@
 5ad65a3b9f639058107bbacc0c3aa381  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2js/package-info.java
 5c832620c04100462a73d4dc4597bcbf  documentation/src/docs/asciidoc/plugin-configuration.adoc
 672915d3918ae01ee300e8cb56687af2  documentation/src/docs/gradle/generating-java/default-options.gradle
-68b01dd3055f6794367dfb7e97fe276c  documentation/src/docs/asciidoc/overview.adoc
 6992027e80f40e1f2a595ff1075a9738  documentation/src/docs/gradle/generating-java/java-nine.gradle
 71645c83dc4af68bdb0cab334ad2aa79  documentation/src/docs/gradle/generating-java/java-nine.gradle.kts
 78be4fcf32c0908f57b4409aea412f42  documentation/src/docs/gradle/plugin-configuration/managing-dependency-versions.gradle
