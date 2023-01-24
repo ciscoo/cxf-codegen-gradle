@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 
+import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaOptions;
 import io.mateo.cxf.codegen.wsdl2js.Wsdl2Js;
 import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.NamedDomainObjectProvider;
@@ -131,10 +132,33 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 				// < Gradle 6.4
 				task.setMain(WSDL2JAVA_TOOL_MAIN_CLASS);
 			}
+			configureOnlyIf(task);
 			task.setClasspath(cxfCodegenConfiguration.get());
 			task.setGroup(WSDL2JAVA_GROUP);
 			task.setDescription("Generates Java sources for '" + task.getName() + "'");
 		});
+	}
+
+	private void configureOnlyIf(Wsdl2Java wsdl2Java) {
+		try {
+			wsdl2Java.onlyIf("run only if 'wsdl' or 'wsdlUrl' is set", self -> {
+				Wsdl2JavaOptions options = ((Wsdl2Java) self).getWsdl2JavaOptions();
+				return options.getWsdl().isPresent() || options.getWsdlUrl().isPresent();
+			});
+		}
+		catch (NoSuchMethodError ignored) {
+			// < Gradle 7.6
+			wsdl2Java.onlyIf(task -> {
+				Wsdl2JavaOptions options = ((Wsdl2Java) task).getWsdl2JavaOptions();
+				boolean shouldExecute = options.getWsdl().isPresent() || options.getWsdlUrl().isPresent();
+				if (!shouldExecute) {
+					if (task.getLogger().isInfoEnabled()) {
+						task.getLogger().info("run only if 'wsdl' or 'wsdlUrl' is set");
+					}
+				}
+				return shouldExecute;
+			});
+		}
 	}
 
 	@SuppressWarnings("deprecation")

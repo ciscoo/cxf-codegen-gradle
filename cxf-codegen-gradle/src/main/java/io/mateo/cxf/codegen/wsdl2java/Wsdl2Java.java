@@ -83,8 +83,13 @@ public class Wsdl2Java extends JavaExec {
 
 		@Override
 		public Iterable<String> asArguments() {
-			List<String> arguments = new ArrayList<>();
 			Wsdl2JavaOptions options = Wsdl2Java.this.getWsdl2JavaOptions();
+			// Don't rely on just onlyIf spec.
+			if (!options.getWsdl().isPresent() && !options.getWsdlUrl().isPresent()) {
+				throw new IllegalStateException("Cannot generate arguments for task '" + Wsdl2Java.this.getName()
+						+ "' because 'wsdl' and 'wsdlUrl' have no value; at least one of the options must be configured");
+			}
+			List<String> arguments = new ArrayList<>();
 			if (options.getEncoding().isPresent()) {
 				arguments.add("-encoding");
 				arguments.add(options.getEncoding().get());
@@ -248,7 +253,8 @@ public class Wsdl2Java extends JavaExec {
 					arguments.add(sb.toString());
 				}
 			}
-			arguments.add(options.getWsdl().getAsFile().get().toURI().toString());
+			// The convention of 'wsdlUrl' is the 'wsdl' file.
+			arguments.add(options.getWsdlUrl().get());
 			return Collections.unmodifiableList(arguments);
 		}
 

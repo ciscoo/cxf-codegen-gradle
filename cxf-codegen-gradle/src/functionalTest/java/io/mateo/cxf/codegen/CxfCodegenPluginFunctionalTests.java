@@ -49,7 +49,7 @@ class CxfCodegenPluginFunctionalTests {
 		BuildResult result = gradleBuild.build("calculator");
 
 		assertThat(result.task(":calculator")).isNotNull().extracting(BuildTask::getOutcome)
-				.isEqualTo(TaskOutcome.NO_SOURCE);
+				.isEqualTo(TaskOutcome.SKIPPED);
 	}
 
 	@TestTemplate

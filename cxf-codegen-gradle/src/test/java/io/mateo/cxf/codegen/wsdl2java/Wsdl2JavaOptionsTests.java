@@ -16,6 +16,7 @@
 package io.mateo.cxf.codegen.wsdl2java;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.io.File;
 import java.io.UncheckedIOException;
@@ -391,12 +392,32 @@ class Wsdl2JavaOptionsTests {
 	}
 
 	@Test
-	void wsdlOnly(TestInfo testInfo) {
+	void wsdlOnly(TestInfo testInfo) { // also tests convention of wsdlUrl
 		List<String> expected = List.of("-d", getOutputDirFor(testInfo), this.wsdl.toURI().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName()).getArgumentProviders().get(0).asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
+	}
+
+	@Test
+	void wsdlUrlOnly(TestInfo testInfo) {
+		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "https://example.com/example?wsdl");
+
+		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> {
+			options.getWsdlUrl().set("https://example.com/example?wsdl");
+		}).getArgumentProviders().get(0).asArguments();
+
+		assertThat(actual).containsExactlyElementsOf(expected);
+	}
+
+	@Test
+	void bothWsdlFileAndWsdlUrlMissingResultsInFailure(TestInfo testInfo) {
+		assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> {
+			createTaskWithConfiguration(testInfo.getDisplayName(), options -> {
+			}).getArgumentProviders().get(0).asArguments();
+		}).withMessage(
+				"Cannot generate arguments for task 'bothWsdlFileAndWsdlUrlMissingResultsInFailure' because 'wsdl' and 'wsdlUrl' have no value; at least one of the options must be configured");
 	}
 
 	private String getOutputDirFor(TestInfo testInfo) {
@@ -414,6 +435,11 @@ class Wsdl2JavaOptionsTests {
 	private Wsdl2Java createTask(String taskName) {
 		return this.project.getTasks().create(taskName, Wsdl2Java.class,
 				wsdl2java -> wsdl2java.toolOptions(options -> options.getWsdl().set(this.wsdl)));
+	}
+
+	private Wsdl2Java createTaskWithConfiguration(String taskName, Action<? super Wsdl2JavaOptions> configurer) {
+		return this.project.getTasks().create(taskName, Wsdl2Java.class,
+				wsdl2java -> wsdl2java.toolOptions(configurer));
 	}
 
 }

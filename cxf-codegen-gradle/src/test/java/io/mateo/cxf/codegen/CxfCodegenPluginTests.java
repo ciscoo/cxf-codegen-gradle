@@ -32,6 +32,7 @@ import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 import io.mateo.cxf.codegen.wsdl2js.Wsdl2Js;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.gradle.api.DefaultTask;
+import org.gradle.api.Describable;
 import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.Project;
 import org.gradle.api.ProjectConfigurationException;
@@ -193,6 +194,9 @@ class CxfCodegenPluginTests {
 			assertThat(wsdl2Java.getArgumentProviders()).singleElement().extracting(it -> it.getClass().getSimpleName())
 					.isEqualTo("Wsdl2JavaArgumentProvider");
 			assertThat(wsdl2Java.getAddToMainSourceSet().get()).isTrue();
+			assertThat(wsdl2Java.getOnlyIf().getSpecs()).hasSize(2).element(1)
+					.asInstanceOf(InstanceOfAssertFactories.type(Describable.class))
+					.extracting(Describable::getDisplayName).isEqualTo("run only if 'wsdl' or 'wsdlUrl' is set");
 		});
 	}
 

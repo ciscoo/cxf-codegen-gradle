@@ -28,7 +28,6 @@ import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
-import org.gradle.api.tasks.SkipWhenEmpty;
 
 /**
  * Options for the {@code wsdl2java} tool.
@@ -39,6 +38,8 @@ import org.gradle.api.tasks.SkipWhenEmpty;
 public class Wsdl2JavaOptions {
 
 	private final RegularFileProperty wsdl;
+
+	private final Property<String> wsdlUrl;
 
 	private final ListProperty<String> packageNames;
 
@@ -106,6 +107,8 @@ public class Wsdl2JavaOptions {
 		this.outputDir = objects.directoryProperty()
 				.convention(layout.getBuildDirectory().dir(taskName + "-wsdl2java-generated-sources"));
 		this.wsdl = objects.fileProperty();
+		this.wsdlUrl = objects.property(String.class)
+				.convention(this.wsdl.map(it -> it.getAsFile().toURI().toString()));
 		this.packageNames = objects.listProperty(String.class);
 		this.extraArgs = objects.listProperty(String.class);
 		this.xjcArgs = objects.listProperty(String.class);
@@ -144,9 +147,23 @@ public class Wsdl2JavaOptions {
 	 */
 	@InputFile
 	@PathSensitive(PathSensitivity.RELATIVE)
-	@SkipWhenEmpty
+	@Optional
 	public RegularFileProperty getWsdl() {
 		return this.wsdl;
+	}
+
+	/**
+	 * WSDL to process. The value can either be a direct path to a file on a local system
+	 * or URL to a remote file.
+	 * <p>
+	 * If no value is specified, the <em>convention</em> is the value of
+	 * {@link #getWsdl()}.
+	 * @return wsdl url
+	 */
+	@Input
+	@Optional
+	public Property<String> getWsdlUrl() {
+		return this.wsdlUrl;
 	}
 
 	/**
