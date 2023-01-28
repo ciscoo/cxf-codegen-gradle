@@ -49,9 +49,9 @@ class PluginConfigurationFunctionalTests {
 	}
 
 	String scriptFor(String name) {
-		final Path rootDir = Paths.get("").toAbsolutePath().getParent();
-		Path scriptPath = Paths.get(rootDir.toString(), "documentation", "src", "docs", "gradle",
-				"plugin-configuration", name);
+		final Path rootDir = Path.of("").toAbsolutePath().getParent();
+		Path scriptPath = rootDir
+				.resolve(Path.of("documentation", "src", "docs", "gradle", "plugin-configuration", name));
 		return scriptPath.toString();
 	}
 
