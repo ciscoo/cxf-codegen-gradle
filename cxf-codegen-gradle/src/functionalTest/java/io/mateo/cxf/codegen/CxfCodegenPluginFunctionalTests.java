@@ -17,18 +17,14 @@ package io.mateo.cxf.codegen;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibility;
 
-import org.apache.commons.io.FileUtils;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.BuildTask;
 import org.gradle.testkit.runner.TaskOutcome;
@@ -59,19 +55,20 @@ class CxfCodegenPluginFunctionalTests {
 		assertThat(result.getTasks()).hasSize(1);
 		assertThat(result.getTasks().get(0).getOutcome()).isEqualTo(TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
-			File generatedSources = FileUtils.getFile(projectDir, "build", "generated-sources", "cxf", "calculator");
+			Path generatedSources = projectDir.toPath()
+					.resolve(Path.of("build", "generated-sources", "cxf", "calculator"));
 			assertThat(generatedSources).exists();
 			assertThat(generatedSources).isNotEmptyDirectory();
 
-			File packageDir = FileUtils.getFile(generatedSources, "org", "tempuri");
+			Path packageDir = generatedSources.resolve(Path.of("org", "tempuri"));
 			assertThat(packageDir).exists();
 			assertThat(packageDir).isNotEmptyDirectory();
 
-			File[] sourcesDir = Objects.requireNonNull(packageDir.listFiles(), "sources dir");
+			List<Path> sourcesDir = Files.list(packageDir).collect(Collectors.toUnmodifiableList());
 			assertThat(sourcesDir).isNotEmpty();
 			assertThat(sourcesDir).hasSize(12);
 
-			List<String> generatedFiles = Arrays.stream(sourcesDir).map(File::getName).sorted()
+			List<String> generatedFiles = sourcesDir.stream().map(Path::getFileName).map(Path::toString).sorted()
 					.collect(Collectors.toList());
 			List<String> expectedFiles = List.of("Add.java", "AddResponse.java", "Calculator.java",
 					"CalculatorSoap.java", "Divide.java", "DivideResponse.java", "Multiply.java",
@@ -89,16 +86,18 @@ class CxfCodegenPluginFunctionalTests {
 		assertThat(result.task(":calculator")).isNotNull().extracting(BuildTask::getOutcome)
 				.isEqualTo(TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
-			File generatedSources = FileUtils.getFile(projectDir, "build", "calculator-wsdl2java-generated-sources");
+			Path generatedSources = projectDir.toPath()
+					.resolve(Path.of("build", "calculator-wsdl2java-generated-sources"));
 			assertThat(generatedSources).exists().isNotEmptyDirectory();
 
-			File packageDir = FileUtils.getFile(generatedSources, "org", "tempuri");
+			Path packageDir = generatedSources.resolve(Path.of("org", "tempuri"));
 			assertThat(packageDir).exists().isNotEmptyDirectory();
 
-			File[] sourcesDir = Objects.requireNonNull(packageDir.listFiles(), "sources dir");
+			List<Path> sourcesDir = Files.list(packageDir).collect(Collectors.toUnmodifiableList());
 			assertThat(sourcesDir).isNotEmpty().hasSize(12);
 
-			List<String> generatedFiles = Arrays.stream(sourcesDir).map(File::getName).collect(Collectors.toList());
+			List<String> generatedFiles = sourcesDir.stream().map(Path::getFileName).map(Path::toString).sorted()
+					.collect(Collectors.toList());
 			List<String> expectedFiles = List.of("Add.java", "AddResponse.java", "Calculator.java",
 					"CalculatorSoap.java", "Divide.java", "DivideResponse.java", "Multiply.java",
 					"MultiplyResponse.java", "ObjectFactory.java", "Subtract.java", "SubtractResponse.java",
@@ -112,7 +111,8 @@ class CxfCodegenPluginFunctionalTests {
 	void deleteGeneratedJava(GradleBuild gradleBuild) {
 		gradleBuild.build("wsdl2javaCalculator");
 		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
-			File generatedSources = FileUtils.getFile(projectDir, "build", "generated-sources", "cxf", "calculator");
+			Path generatedSources = projectDir.toPath()
+					.resolve(Path.of("build", "generated-sources", "cxf", "calculator"));
 			assertThat(generatedSources).exists();
 			assertThat(generatedSources).isNotEmptyDirectory();
 		});
@@ -121,7 +121,8 @@ class CxfCodegenPluginFunctionalTests {
 		assertThat(result.getTasks()).hasSize(1);
 		assertThat(result.getTasks().get(0).getOutcome()).isEqualTo(TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
-			File generatedSources = FileUtils.getFile(projectDir, "build", "generated-sources", "cxf", "calculator");
+			Path generatedSources = projectDir.toPath()
+					.resolve(Path.of("build", "generated-sources", "cxf", "calculator"));
 			assertThat(generatedSources).doesNotExist();
 		});
 	}

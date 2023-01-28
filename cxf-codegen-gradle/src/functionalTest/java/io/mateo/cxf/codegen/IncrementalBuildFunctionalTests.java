@@ -18,17 +18,17 @@ package io.mateo.cxf.codegen;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibility;
 import io.mateo.junit.GradleDsl;
 
-import org.apache.commons.io.FileUtils;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
 import org.junit.jupiter.api.TestTemplate;
@@ -155,15 +155,16 @@ class IncrementalBuildFunctionalTests {
 	}
 
 	void overwriteBuildSpec(GradleBuild build, String newBuildFileBase) throws IOException {
+		final Path buildScriptPath = Path.of("src", "functionalTest", "resources", "io", "mateo", "cxf", "codegen");
 		if (build.getDsl() == GradleDsl.GROOVY) {
-			FileUtils.copyFile(
-					new File("src/functionalTest/resources/io/mateo/cxf/codegen", newBuildFileBase + ".gradle"),
-					new File(build.getProjectDir(), "build.gradle"));
+			Files.copy(buildScriptPath.resolve(Path.of(newBuildFileBase + ".gradle")),
+					build.getProjectDir().toPath().resolve("build.gradle"), StandardCopyOption.COPY_ATTRIBUTES,
+					StandardCopyOption.REPLACE_EXISTING);
 		}
 		else {
-			FileUtils.copyFile(
-					new File("src/functionalTest/resources/io/mateo/cxf/codegen", newBuildFileBase + ".gradle.kts"),
-					new File(build.getProjectDir(), "build.gradle.kts"));
+			Files.copy(buildScriptPath.resolve(Path.of(newBuildFileBase + ".gradle.kts")),
+					build.getProjectDir().toPath().resolve("build.gradle.kts"), StandardCopyOption.COPY_ATTRIBUTES,
+					StandardCopyOption.REPLACE_EXISTING);
 		}
 
 	}
