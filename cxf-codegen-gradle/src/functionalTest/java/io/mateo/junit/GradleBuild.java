@@ -15,7 +15,6 @@
  */
 package io.mateo.junit;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
