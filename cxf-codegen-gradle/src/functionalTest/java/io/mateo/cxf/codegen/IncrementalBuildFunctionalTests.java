@@ -22,7 +22,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import io.mateo.junit.GradleBuild;
@@ -59,7 +58,7 @@ class IncrementalBuildFunctionalTests {
 		assertThat(result.getOutput()).contains("Task ':wsdl2javaCalculator' is not up-to-date");
 
 		// Simulate changes to the file by adding a new line.
-		Path wsdl = Paths.get(gradleBuild.getProjectDir().toAbsolutePath().toString(), "wsdls", "calculator.wsdl");
+		Path wsdl = gradleBuild.getProjectDir().resolve(Path.of("wsdls", "calculator.wsdl"));
 		BufferedWriter writer = new BufferedWriter(new FileWriter(wsdl.toFile(), true));
 		writer.newLine();
 		writer.close();
@@ -78,7 +77,8 @@ class IncrementalBuildFunctionalTests {
 		assertThat(result.getOutput()).contains("Task ':calculator' is not up-to-date because");
 
 		// Simulate changes to the file by adding a new line.
-		Path wsdl = Paths.get(gradleBuild.getProjectDir().toAbsolutePath().toString(), "wsdls", "calculator.wsdl");
+		Path calculatorWsdlPath = Path.of("wsdls", "calculator.wsdl");
+		Path wsdl = gradleBuild.getProjectDir().resolve(calculatorWsdlPath);
 		BufferedWriter writer = new BufferedWriter(new FileWriter(wsdl.toFile(), true));
 		writer.newLine();
 		writer.close();
@@ -87,9 +87,7 @@ class IncrementalBuildFunctionalTests {
 
 		assertThat(result.getOutput()).contains("Task ':calculator' is not up-to-date because",
 				"Input property 'wsdl2JavaOptions.wsdl' file "
-						+ Paths.get(gradleBuild.getProjectDir().toAbsolutePath().toString(), "wsdls", "calculator.wsdl")
-								.toAbsolutePath()
-						+ " has changed");
+						+ gradleBuild.getProjectDir().resolve(calculatorWsdlPath).toAbsolutePath() + " has changed");
 	}
 
 	@TestTemplate

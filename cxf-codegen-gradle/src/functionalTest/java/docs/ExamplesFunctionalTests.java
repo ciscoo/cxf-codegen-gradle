@@ -21,7 +21,7 @@ import org.gradle.testkit.runner.TaskOutcome;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import java.nio.file.Paths;
+import java.nio.file.Path;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -56,9 +56,8 @@ class ExamplesFunctionalTests {
 	}
 
 	private void doTestForScript(String name, GradleBuild gradleBuild) {
-		final var rootDir = Paths.get("").toAbsolutePath().getParent();
-		final var scriptPath = Paths.get(rootDir.toString(), "documentation", "src", "docs", "gradle", "examples",
-				name);
+		final var rootDir = Path.of("").toAbsolutePath().getParent();
+		final var scriptPath = rootDir.resolve(Path.of("documentation", "src", "docs", "gradle", "examples", name));
 
 		var runner = gradleBuild.script(scriptPath.toString()).prepareRunner("wsdl2java");
 
