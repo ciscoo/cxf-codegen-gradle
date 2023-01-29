@@ -59,7 +59,7 @@ class IncrementalBuildFunctionalTests {
 		assertThat(result.getOutput()).contains("Task ':wsdl2javaCalculator' is not up-to-date");
 
 		// Simulate changes to the file by adding a new line.
-		Path wsdl = Paths.get(gradleBuild.getProjectDir().getAbsolutePath(), "wsdls", "calculator.wsdl");
+		Path wsdl = Paths.get(gradleBuild.getProjectDir().toAbsolutePath().toString(), "wsdls", "calculator.wsdl");
 		BufferedWriter writer = new BufferedWriter(new FileWriter(wsdl.toFile(), true));
 		writer.newLine();
 		writer.close();
@@ -78,7 +78,7 @@ class IncrementalBuildFunctionalTests {
 		assertThat(result.getOutput()).contains("Task ':calculator' is not up-to-date because");
 
 		// Simulate changes to the file by adding a new line.
-		Path wsdl = Paths.get(gradleBuild.getProjectDir().getAbsolutePath(), "wsdls", "calculator.wsdl");
+		Path wsdl = Paths.get(gradleBuild.getProjectDir().toAbsolutePath().toString(), "wsdls", "calculator.wsdl");
 		BufferedWriter writer = new BufferedWriter(new FileWriter(wsdl.toFile(), true));
 		writer.newLine();
 		writer.close();
@@ -86,8 +86,9 @@ class IncrementalBuildFunctionalTests {
 		result = runner.build();
 
 		assertThat(result.getOutput()).contains("Task ':calculator' is not up-to-date because",
-				"Input property 'wsdl2JavaOptions.wsdl' file " + Paths
-						.get(gradleBuild.getProjectDir().getAbsolutePath(), "wsdls", "calculator.wsdl").toAbsolutePath()
+				"Input property 'wsdl2JavaOptions.wsdl' file "
+						+ Paths.get(gradleBuild.getProjectDir().toAbsolutePath().toString(), "wsdls", "calculator.wsdl")
+								.toAbsolutePath()
 						+ " has changed");
 	}
 
@@ -158,12 +159,12 @@ class IncrementalBuildFunctionalTests {
 		final Path buildScriptPath = Path.of("src", "functionalTest", "resources", "io", "mateo", "cxf", "codegen");
 		if (build.getDsl() == GradleDsl.GROOVY) {
 			Files.copy(buildScriptPath.resolve(Path.of(newBuildFileBase + ".gradle")),
-					build.getProjectDir().toPath().resolve("build.gradle"), StandardCopyOption.COPY_ATTRIBUTES,
+					build.getProjectDir().resolve("build.gradle"), StandardCopyOption.COPY_ATTRIBUTES,
 					StandardCopyOption.REPLACE_EXISTING);
 		}
 		else {
 			Files.copy(buildScriptPath.resolve(Path.of(newBuildFileBase + ".gradle.kts")),
-					build.getProjectDir().toPath().resolve("build.gradle.kts"), StandardCopyOption.COPY_ATTRIBUTES,
+					build.getProjectDir().resolve("build.gradle.kts"), StandardCopyOption.COPY_ATTRIBUTES,
 					StandardCopyOption.REPLACE_EXISTING);
 		}
 

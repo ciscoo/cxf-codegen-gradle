@@ -55,8 +55,7 @@ class CxfCodegenPluginFunctionalTests {
 		assertThat(result.getTasks()).hasSize(1);
 		assertThat(result.getTasks().get(0).getOutcome()).isEqualTo(TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
-			Path generatedSources = projectDir.toPath()
-					.resolve(Path.of("build", "generated-sources", "cxf", "calculator"));
+			Path generatedSources = projectDir.resolve(Path.of("build", "generated-sources", "cxf", "calculator"));
 			assertThat(generatedSources).exists();
 			assertThat(generatedSources).isNotEmptyDirectory();
 
@@ -86,8 +85,7 @@ class CxfCodegenPluginFunctionalTests {
 		assertThat(result.task(":calculator")).isNotNull().extracting(BuildTask::getOutcome)
 				.isEqualTo(TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
-			Path generatedSources = projectDir.toPath()
-					.resolve(Path.of("build", "calculator-wsdl2java-generated-sources"));
+			Path generatedSources = projectDir.resolve(Path.of("build", "calculator-wsdl2java-generated-sources"));
 			assertThat(generatedSources).exists().isNotEmptyDirectory();
 
 			Path packageDir = generatedSources.resolve(Path.of("org", "tempuri"));
@@ -111,8 +109,7 @@ class CxfCodegenPluginFunctionalTests {
 	void deleteGeneratedJava(GradleBuild gradleBuild) {
 		gradleBuild.build("wsdl2javaCalculator");
 		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
-			Path generatedSources = projectDir.toPath()
-					.resolve(Path.of("build", "generated-sources", "cxf", "calculator"));
+			Path generatedSources = projectDir.resolve(Path.of("build", "generated-sources", "cxf", "calculator"));
 			assertThat(generatedSources).exists();
 			assertThat(generatedSources).isNotEmptyDirectory();
 		});
@@ -121,8 +118,7 @@ class CxfCodegenPluginFunctionalTests {
 		assertThat(result.getTasks()).hasSize(1);
 		assertThat(result.getTasks().get(0).getOutcome()).isEqualTo(TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
-			Path generatedSources = projectDir.toPath()
-					.resolve(Path.of("build", "generated-sources", "cxf", "calculator"));
+			Path generatedSources = projectDir.resolve(Path.of("build", "generated-sources", "cxf", "calculator"));
 			assertThat(generatedSources).doesNotExist();
 		});
 	}
@@ -141,8 +137,7 @@ class CxfCodegenPluginFunctionalTests {
 		assertThat(result.task(":calculator")).isNotNull().extracting(BuildTask::getOutcome)
 				.isEqualTo(TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
-			var generatedSources = projectDir.toPath()
-					.resolve(Path.of("build", "calculator-wsdl2js-generated-sources"));
+			var generatedSources = projectDir.resolve(Path.of("build", "calculator-wsdl2js-generated-sources"));
 			assertThat(generatedSources).exists().isNotEmptyDirectory();
 
 			try (var files = Files.list(generatedSources)) {

@@ -58,14 +58,12 @@ class GeneratingJavaFunctionalTests {
 	void disableAllLogs(GradleBuild gradleBuild) throws IOException {
 		GradleRunner runner = gradleBuild.script(scriptFor("disable-all-logs")).prepareRunner("wsdl2java");
 		Files.copy(Path.of("src", "functionalTest", "resources", "emptyLogback.xml"),
-				gradleBuild.getProjectDir().toPath().resolve("logback.xml"), StandardCopyOption.COPY_ATTRIBUTES,
+				gradleBuild.getProjectDir().resolve("logback.xml"), StandardCopyOption.COPY_ATTRIBUTES,
 				StandardCopyOption.REPLACE_EXISTING);
-		Files.copy(gradleBuild.getProjectDir().toPath().resolve(Path.of("wsdls", "calculator.wsdl")),
-				gradleBuild.getProjectDir().toPath().resolve(Path.of("example.wsdl")),
-				StandardCopyOption.COPY_ATTRIBUTES);
-		Files.copy(gradleBuild.getProjectDir().toPath().resolve(Path.of("wsdls", "calculator.xsd")),
-				gradleBuild.getProjectDir().toPath().resolve(Path.of("example.xsd")),
-				StandardCopyOption.COPY_ATTRIBUTES);
+		Files.copy(gradleBuild.getProjectDir().resolve(Path.of("wsdls", "calculator.wsdl")),
+				gradleBuild.getProjectDir().resolve(Path.of("example.wsdl")), StandardCopyOption.COPY_ATTRIBUTES);
+		Files.copy(gradleBuild.getProjectDir().resolve(Path.of("wsdls", "calculator.xsd")),
+				gradleBuild.getProjectDir().resolve(Path.of("example.xsd")), StandardCopyOption.COPY_ATTRIBUTES);
 
 		BuildResult result = runner.build();
 
@@ -77,14 +75,12 @@ class GeneratingJavaFunctionalTests {
 	void disableAllTaskLogs(GradleBuild gradleBuild) throws IOException {
 		GradleRunner runner = gradleBuild.script(scriptFor("disable-all-task-logs")).prepareRunner("wsdl2java");
 		Files.copy(Path.of("src", "functionalTest", "resources", "emptyLogback.xml"),
-				gradleBuild.getProjectDir().toPath().resolve("logback.xml"), StandardCopyOption.COPY_ATTRIBUTES,
+				gradleBuild.getProjectDir().resolve("logback.xml"), StandardCopyOption.COPY_ATTRIBUTES,
 				StandardCopyOption.REPLACE_EXISTING);
-		Files.copy(gradleBuild.getProjectDir().toPath().resolve(Path.of("wsdls", "calculator.wsdl")),
-				gradleBuild.getProjectDir().toPath().resolve(Path.of("example.wsdl")),
-				StandardCopyOption.COPY_ATTRIBUTES);
-		Files.copy(gradleBuild.getProjectDir().toPath().resolve(Path.of("wsdls", "calculator.xsd")),
-				gradleBuild.getProjectDir().toPath().resolve(Path.of("example.xsd")),
-				StandardCopyOption.COPY_ATTRIBUTES);
+		Files.copy(gradleBuild.getProjectDir().resolve(Path.of("wsdls", "calculator.wsdl")),
+				gradleBuild.getProjectDir().resolve(Path.of("example.wsdl")), StandardCopyOption.COPY_ATTRIBUTES);
+		Files.copy(gradleBuild.getProjectDir().resolve(Path.of("wsdls", "calculator.xsd")),
+				gradleBuild.getProjectDir().resolve(Path.of("example.xsd")), StandardCopyOption.COPY_ATTRIBUTES);
 
 		BuildResult result = runner.build();
 
@@ -126,8 +122,7 @@ class GeneratingJavaFunctionalTests {
 		assertThat(result.getTasks()).extracting(BuildTask::getOutcome)
 				.allMatch(outcome -> outcome == TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
-			Path generatedSources = projectDir.toPath()
-					.resolve(Path.of("build", "calculator-wsdl2java-generated-sources"));
+			Path generatedSources = projectDir.resolve(Path.of("build", "calculator-wsdl2java-generated-sources"));
 			assertThat(generatedSources).exists().isNotEmptyDirectory();
 
 			Path packageDir = generatedSources.resolve(Path.of("org", "tempuri"));

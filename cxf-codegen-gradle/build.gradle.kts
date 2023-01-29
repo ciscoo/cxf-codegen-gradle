@@ -26,7 +26,6 @@ testing {
         register("functionalTest", JvmTestSuite::class) {
             dependencies {
                 implementation(project())
-                implementation("commons-io:commons-io")
             }
             targets.configureEach {
                 testTask.configure {

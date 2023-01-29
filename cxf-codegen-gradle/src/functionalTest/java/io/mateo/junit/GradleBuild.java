@@ -19,12 +19,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
+import java.util.Objects;
 
-import org.apache.commons.io.FileUtils;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
 
@@ -35,7 +38,7 @@ import org.gradle.testkit.runner.GradleRunner;
  */
 public class GradleBuild {
 
-	private File projectDir;
+	private Path projectDir;
 
 	private String script;
 
@@ -47,7 +50,7 @@ public class GradleBuild {
 
 	void before() {
 		try {
-			this.projectDir = Files.createTempDirectory("gradle-").toFile();
+			this.projectDir = Files.createTempDirectory("gradle-");
 		}
 		catch (IOException ex) {
 			throw new UncheckedIOException(ex);
@@ -57,7 +60,7 @@ public class GradleBuild {
 	void after() {
 		this.script = null;
 		try {
-			FileUtils.deleteDirectory(this.projectDir);
+			deleteDirectory(this.projectDir);
 		}
 		catch (IOException ex) {
 			throw new UncheckedIOException(ex);
@@ -101,14 +104,14 @@ public class GradleBuild {
 	public GradleRunner prepareRunner(String... arguments) {
 		String scriptContent;
 		try {
-			scriptContent = FileUtils.readFileToString(new File(this.script), StandardCharsets.UTF_8);
+			scriptContent = Files.readString(Path.of(this.script), StandardCharsets.UTF_8);
 		}
 		catch (IOException ex) {
 			throw new UncheckedIOException(ex);
 		}
 
 		try {
-			FileUtils.writeStringToFile(new File(this.projectDir, "build" + this.dsl.getExtension()), scriptContent,
+			Files.writeString(this.projectDir.resolve("build" + this.dsl.getExtension()), scriptContent,
 					StandardCharsets.UTF_8);
 		}
 		catch (IOException ex) {
@@ -118,15 +121,18 @@ public class GradleBuild {
 		Path settingsContent = getSettingsContent();
 
 		try {
-			FileUtils.copyToDirectory(settingsContent.toFile(), this.projectDir);
-			FileUtils.copyDirectoryToDirectory(new File("src/functionalTest/resources/wsdls"), this.projectDir);
-			FileUtils.copyDirectory(new File("src/functionalTest/resources/test-support"), this.projectDir);
+			Files.copy(settingsContent, this.projectDir.resolve(settingsContent.getFileName()),
+					StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
+			final Path functionalTestResources = Path.of("src", "functionalTest", "resources");
+			copyDirectoryToDirectory(functionalTestResources.resolve("wsdls"), this.projectDir);
+			copyDirectory(functionalTestResources.resolve("test-support"), this.projectDir);
 		}
 		catch (IOException ex) {
 			throw new UncheckedIOException(ex);
 		}
-
-		GradleRunner gradleRunner = GradleRunner.create().withProjectDir(this.projectDir).withPluginClasspath();
+		// https://github.com/gradle/gradle/issues/23348
+		GradleRunner gradleRunner = GradleRunner.create().withProjectDir(this.projectDir.toFile())
+				.withPluginClasspath();
 		gradleRunner.withDebug(true);
 		if (this.gradleVersion != null) {
 			gradleRunner.withGradleVersion(this.gradleVersion);
@@ -144,7 +150,7 @@ public class GradleBuild {
 		return this;
 	}
 
-	public File getProjectDir() {
+	public Path getProjectDir() {
 		return this.projectDir;
 	}
 
@@ -152,11 +158,60 @@ public class GradleBuild {
 		return this.dsl;
 	}
 
+	private void copyDirectory(Path source, Path target) throws IOException {
+		Files.walkFileTree(source, new SimpleFileVisitor<>() {
+
+			@Override
+			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+				Objects.requireNonNull(file);
+				Files.copy(file, target.resolve(file.getFileName()), StandardCopyOption.COPY_ATTRIBUTES,
+						StandardCopyOption.REPLACE_EXISTING);
+				return FileVisitResult.CONTINUE;
+			}
+
+		});
+
+	}
+
+	private void copyDirectoryToDirectory(Path source, Path target) throws IOException {
+		Files.walkFileTree(source, new SimpleFileVisitor<>() {
+			@Override
+			public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+				Files.createDirectories(target.resolve(dir.getFileName()));
+				return FileVisitResult.CONTINUE;
+			}
+
+			@Override
+			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+				Objects.requireNonNull(file);
+				Files.copy(file, target.resolve(file.getParent().getFileName().resolve(file.getFileName())),
+						StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
+				return FileVisitResult.CONTINUE;
+			}
+		});
+	}
+
+	private void deleteDirectory(Path target) throws IOException {
+		Files.walkFileTree(target, new SimpleFileVisitor<>() {
+			@Override
+			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+				Files.delete(Objects.requireNonNull(file));
+				return FileVisitResult.CONTINUE;
+			}
+
+			@Override
+			public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+				Files.delete(Objects.requireNonNull(dir));
+				return FileVisitResult.CONTINUE;
+			}
+		});
+	}
+
 	private Path getSettingsContent() {
 		String scriptPathName = this.settings != null ? this.settings : "settings" + this.dsl.getExtension();
-		String parentPath = Paths.get("").toAbsolutePath().toString();
-		return Paths.get(parentPath, "src", "functionalTest", "resources", "io", "mateo", "cxf", "codegen",
-				scriptPathName);
+		Path parentPath = Path.of("").toAbsolutePath();
+		return parentPath.resolve(
+				Path.of("src", "functionalTest", "resources", "io", "mateo", "cxf", "codegen", scriptPathName));
 	}
 
 }
