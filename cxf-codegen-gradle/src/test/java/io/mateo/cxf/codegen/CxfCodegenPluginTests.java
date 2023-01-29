@@ -182,7 +182,7 @@ class CxfCodegenPluginTests {
 			Set<File> outputs = wsdl2Java.getOutputs().getFiles().getFiles();
 			assertThat(outputs).hasSize(1);
 			assertThat(outputs.iterator().next().toPath())
-					.endsWithRaw(Path.of("build", wsdl2Java.getName(), "-wsdl2java-generated-sources"));
+					.endsWithRaw(Path.of("build", wsdl2Java.getName() + "-wsdl2java-generated-sources"));
 			assertThat(wsdl2Java.getMainClass().get()).isEqualTo("org.apache.cxf.tools.wsdlto.WSDLToJava");
 			// Can not resolve configuration in unit tests, so assert on error message.
 			assertThatCode(() -> wsdl2Java.getClasspath().getFiles())
