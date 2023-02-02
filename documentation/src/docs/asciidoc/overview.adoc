@@ -11,6 +11,46 @@ CXF Codegen is a Gradle plugin port of the {cxf-codegen-maven-plugin}[Maven plug
 The Gradle plugin offers an API similar to the one offered by the Maven plugin.
 The API is not a 1:1 port and leans heavily on Gradle idioms and conventions.
 
+[[getting-started]]
+== Getting Started
+
+To get started with the plugin it needs to be applied to your project.
+
+The plugin is https://plugins.gradle.org/plugin/io.mateo.cxf-codegen[published to Gradle's plugin portal] and can be applied
+using the https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block[plugins DSL] block:
+
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy,subs="verbatim,attributes"]
+----
+include::../gradle/overview/plugin-application.gradle[]
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin,subs="verbatim,attributes"]
+----
+include::../gradle/overview/plugin-application.gradle.kts[]
+----
+
+++++
+</details>
+++++
+
+++++
+</details>
+++++
+
 [[supported-gradle-versions]]
 == Supported Gradle Versions
 
