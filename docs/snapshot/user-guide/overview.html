@@ -447,7 +447,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#what-is-cxf-codegen-gradle">1. What is CXF Codegen</a></li>
-<li><a href="#supported-gradle-versions">2. Supported Gradle Versions</a></li>
+<li><a href="#getting-started">2. Getting Started</a></li>
+<li><a href="#supported-gradle-versions">3. Supported Gradle Versions</a></li>
 </ul>
 </div>
 </div>
@@ -470,7 +471,42 @@ The API is not a 1:1 port and leans heavily on Gradle idioms and conventions.</p
 </div>
 </div>
 <div class="sect1">
-<h2 id="supported-gradle-versions"><a class="anchor" href="#supported-gradle-versions"></a>2. Supported Gradle Versions</h2>
+<h2 id="getting-started"><a class="anchor" href="#getting-started"></a>2. Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To get started with the plugin it needs to be applied to your project.</p>
+</div>
+<div class="paragraph">
+<p>The plugin is <a href="https://plugins.gradle.org/plugin/io.mateo.cxf-codegen">published to Gradle&#8217;s plugin portal</a> and can be applied
+using the <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block">plugins DSL</a> block:</p>
+</div>
+<details open>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">plugins</span> <span class="o">{</span>
+    <span class="n">id</span> <span class="s2">"java"</span>
+    <span class="n">id</span> <span class="s2">"io.mateo.cxf-codegen"</span> <span class="n">version</span> <span class="s2">"1.1.0-SNAPSHOT"</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Kotlin</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">plugins</span> <span class="p">{</span>
+    <span class="n">java</span>
+    <span class="nf">id</span><span class="p">(</span><span class="s">"io.mateo.cxf-codegen"</span><span class="p">)</span> <span class="n">version</span> <span class="s">"1.1.0-SNAPSHOT"</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+</details>
+</div>
+</div>
+<div class="sect1">
+<h2 id="supported-gradle-versions"><a class="anchor" href="#supported-gradle-versions"></a>3. Supported Gradle Versions</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The CXF Codegen Gradle plugin supports the following Gradle versions:</p>
@@ -611,8 +647,219 @@ with your Gradle version.
 <div id="footer">
 <div id="footer-text">
 Version 1.1.0-SNAPSHOT<br>
-Last updated 2023-01-24 03:23:00 UTC
+Last updated 2023-02-02 02:56:08 UTC
 </div>
 </div>
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .sa, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
 </body>
 </html>

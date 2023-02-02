@@ -451,7 +451,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#overview">1. Overview</a>
 <ul class="sectlevel2">
 <li><a href="#what-is-cxf-codegen-gradle">1.1. What is CXF Codegen</a></li>
-<li><a href="#supported-gradle-versions">1.2. Supported Gradle Versions</a></li>
+<li><a href="#getting-started">1.2. Getting Started</a></li>
+<li><a href="#supported-gradle-versions">1.3. Supported Gradle Versions</a></li>
 </ul>
 </li>
 <li><a href="#plugin-configuration">2. Plugin Configuration</a>
@@ -515,7 +516,40 @@ The API is not a 1:1 port and leans heavily on Gradle idioms and conventions.</p
 </div>
 </div>
 <div class="sect2">
-<h3 id="supported-gradle-versions"><a class="anchor" href="#supported-gradle-versions"></a>1.2. Supported Gradle Versions</h3>
+<h3 id="getting-started"><a class="anchor" href="#getting-started"></a>1.2. Getting Started</h3>
+<div class="paragraph">
+<p>To get started with the plugin it needs to be applied to your project.</p>
+</div>
+<div class="paragraph">
+<p>The plugin is <a href="https://plugins.gradle.org/plugin/io.mateo.cxf-codegen">published to Gradle&#8217;s plugin portal</a> and can be applied
+using the <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block">plugins DSL</a> block:</p>
+</div>
+<details open>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">plugins</span> <span class="o">{</span>
+    <span class="n">id</span> <span class="s2">"java"</span>
+    <span class="n">id</span> <span class="s2">"io.mateo.cxf-codegen"</span> <span class="n">version</span> <span class="s2">"1.1.0-SNAPSHOT"</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Kotlin</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">plugins</span> <span class="p">{</span>
+    <span class="n">java</span>
+    <span class="nf">id</span><span class="p">(</span><span class="s">"io.mateo.cxf-codegen"</span><span class="p">)</span> <span class="n">version</span> <span class="s">"1.1.0-SNAPSHOT"</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+</details>
+</div>
+<div class="sect2">
+<h3 id="supported-gradle-versions"><a class="anchor" href="#supported-gradle-versions"></a>1.3. Supported Gradle Versions</h3>
 <div class="paragraph">
 <p>The CXF Codegen Gradle plugin supports the following Gradle versions:</p>
 </div>
@@ -1796,7 +1830,7 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 <div id="footer">
 <div id="footer-text">
 Version 1.1.0-SNAPSHOT<br>
-Last updated 2023-01-24 03:23:00 UTC
+Last updated 2023-02-02 02:56:08 UTC
 </div>
 </div>
 <style>
