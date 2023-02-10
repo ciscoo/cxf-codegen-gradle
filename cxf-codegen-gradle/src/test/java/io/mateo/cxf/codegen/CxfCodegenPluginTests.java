@@ -167,11 +167,11 @@ class CxfCodegenPluginTests {
 				.wsdl2java(wsdl2Java -> wsdl2Java.register(candidate, it -> it.getWsdl().set(temp))));
 
 		// @formatter:off
-		assertThatExceptionOfType(ProjectConfigurationException.class)
-				.isThrownBy(() -> project.getAllTasks(false)) // forces project evaluation
-				.withCause(new InvalidUserDataException("Name '" + candidate
-						+ "' is not valid for the cxfCodegen container. Must match match regex [A-Za-z0-9_\\-.]+"));
-		// @formatter:on
+        assertThatExceptionOfType(ProjectConfigurationException.class)
+                .isThrownBy(() -> project.getAllTasks(false)) // forces project evaluation
+                .withCause(new InvalidUserDataException("Name '" + candidate
+                        + "' is not valid for the cxfCodegen container. Must match match regex [A-Za-z0-9_\\-.]+"));
+        // @formatter:on
 	}
 
 	@Test
@@ -193,9 +193,12 @@ class CxfCodegenPluginTests {
 			assertThat(wsdl2Java.getArgumentProviders()).singleElement().extracting(it -> it.getClass().getSimpleName())
 					.isEqualTo("Wsdl2JavaArgumentProvider");
 			assertThat(wsdl2Java.getAddToMainSourceSet().get()).isTrue();
-			assertThat(wsdl2Java.getOnlyIf().getSpecs()).hasSize(2).element(1)
-					.asInstanceOf(InstanceOfAssertFactories.type(Describable.class))
-					.extracting(Describable::getDisplayName).isEqualTo("run only if 'wsdl' or 'wsdlUrl' is set");
+			assertThat(
+					this.<org.gradle.api.internal.tasks.execution.DescribingAndSpec<? super org.gradle.api.internal.TaskInternal>>uncheckedCast(
+							wsdl2Java.getOnlyIf()).getSpecs()).hasSize(2).element(1)
+									.asInstanceOf(InstanceOfAssertFactories.type(Describable.class))
+									.extracting(Describable::getDisplayName)
+									.isEqualTo("run only if 'wsdl' or 'wsdlUrl' is set");
 		});
 	}
 
@@ -301,6 +304,11 @@ class CxfCodegenPluginTests {
 		File expected = wsdl2Java.getOutputs().getFiles().getSingleFile();
 		File actual = ((DirectoryProperty) delete.getDelete().iterator().next()).get().getAsFile();
 		assertThat(actual).isEqualTo(expected);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T uncheckedCast(Object object) {
+		return (T) object;
 	}
 
 }
