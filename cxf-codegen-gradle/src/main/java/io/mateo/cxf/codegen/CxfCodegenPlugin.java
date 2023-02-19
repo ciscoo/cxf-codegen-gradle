@@ -50,11 +50,6 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	public static final String CXF_CODEGEN_CONFIGURATION_NAME = "cxfCodegen";
 
 	/**
-	 * Name of the extension contributed by this plugin.
-	 */
-	public static final String CXF_CODEGEN_EXTENSION_NAME = "cxfCodegen";
-
-	/**
 	 * Task name to execute all {@link Wsdl2Java} tasks.
 	 */
 	public static final String WSDL2JAVA_TASK_NAME = "wsdl2java";
