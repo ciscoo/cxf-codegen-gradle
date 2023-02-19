@@ -74,7 +74,6 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	 */
 	static final String DEFAULT_CXF_VERSION = "3.5.5";
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void apply(Project project) {
 		NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration = createConfiguration(project);
