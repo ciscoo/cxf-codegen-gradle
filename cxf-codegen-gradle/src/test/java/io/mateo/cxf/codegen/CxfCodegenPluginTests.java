@@ -17,7 +17,6 @@ package io.mateo.cxf.codegen;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -36,10 +35,8 @@ import org.gradle.api.Task;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
-import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.SourceDirectorySet;
 import org.gradle.api.specs.Spec;
-import org.gradle.api.tasks.Delete;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.TaskCollection;
