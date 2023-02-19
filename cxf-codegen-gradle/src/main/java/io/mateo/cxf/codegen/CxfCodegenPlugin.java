@@ -31,6 +31,7 @@ import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
+import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.TaskCollection;
@@ -83,39 +84,36 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		registerAggregateTask(project);
 	}
 
-	@SuppressWarnings("deprecation") // setMain()
 	private void configureWsdl2JsTaskConventions(Project project,
 			NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration) {
 		project.getTasks().withType(Wsdl2Js.class).configureEach(task -> {
-			try {
-				task.getMainClass().set(WSDL2JS_TOOL_MAIN_CLASS);
-			}
-			catch (NoSuchMethodError ignored) {
-				// < Gradle 6.4
-				task.setMain(WSDL2JS_TOOL_MAIN_CLASS);
-			}
+			configureMainClass(task, WSDL2JS_TOOL_MAIN_CLASS);
 			task.setClasspath(cxfCodegenConfiguration.get());
 			task.setGroup(WSDL2JS_GROUP);
 			task.setDescription("Generates JavaScript sources for '" + task.getName() + "'");
 		});
 	}
 
-	@SuppressWarnings("deprecation") // setMain()
 	private void configureWsdl2JavaTaskConventions(Project project,
 			NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration) {
 		project.getTasks().withType(Wsdl2Java.class).configureEach(task -> {
-			try {
-				task.getMainClass().set(WSDL2JAVA_TOOL_MAIN_CLASS);
-			}
-			catch (NoSuchMethodError ignored) {
-				// < Gradle 6.4
-				task.setMain(WSDL2JAVA_TOOL_MAIN_CLASS);
-			}
+			configureMainClass(task, WSDL2JAVA_TOOL_MAIN_CLASS);
 			configureOnlyIf(task);
 			task.setClasspath(cxfCodegenConfiguration.get());
 			task.setGroup(WSDL2JAVA_GROUP);
 			task.setDescription("Generates Java sources for '" + task.getName() + "'");
 		});
+	}
+
+	@SuppressWarnings("deprecation") // setMain()
+	private void configureMainClass(JavaExec javaExec, String mainClass) {
+		try {
+			javaExec.getMainClass().set(mainClass);
+		}
+		catch (NoSuchMethodError ignored) {
+			// < Gradle 6.4
+			javaExec.setMain(mainClass);
+		}
 	}
 
 	private void configureOnlyIf(Wsdl2Java wsdl2Java) {
