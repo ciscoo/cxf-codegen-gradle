@@ -49,36 +49,6 @@ class CxfCodegenPluginFunctionalTests {
 	}
 
 	@TestTemplate
-	void generatesJavaFromWsdl(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.build("wsdl2javaCalculator");
-
-		assertThat(result.getTasks()).hasSize(1);
-		assertThat(result.getTasks().get(0).getOutcome()).isEqualTo(TaskOutcome.SUCCESS);
-		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
-			Path generatedSources = projectDir.resolve(Path.of("build", "generated-sources", "cxf", "calculator"));
-			assertThat(generatedSources).exists();
-			assertThat(generatedSources).isNotEmptyDirectory();
-
-			Path packageDir = generatedSources.resolve(Path.of("org", "tempuri"));
-			assertThat(packageDir).exists();
-			assertThat(packageDir).isNotEmptyDirectory();
-
-			List<Path> sourcesDir = Files.list(packageDir).collect(Collectors.toUnmodifiableList());
-			assertThat(sourcesDir).isNotEmpty();
-			assertThat(sourcesDir).hasSize(12);
-
-			List<String> generatedFiles = sourcesDir.stream().map(Path::getFileName).map(Path::toString).sorted()
-					.collect(Collectors.toList());
-			List<String> expectedFiles = List.of("Add.java", "AddResponse.java", "Calculator.java",
-					"CalculatorSoap.java", "Divide.java", "DivideResponse.java", "Multiply.java",
-					"MultiplyResponse.java", "ObjectFactory.java", "Subtract.java", "SubtractResponse.java",
-					"package-info.java");
-
-			assertThat(generatedFiles).containsExactlyElementsOf(expectedFiles);
-		});
-	}
-
-	@TestTemplate
 	void javaSourceGenerationFromWsdl(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.build("calculator");
 
@@ -102,24 +72,6 @@ class CxfCodegenPluginFunctionalTests {
 					"package-info.java");
 
 			assertThat(generatedFiles).containsExactlyInAnyOrderElementsOf(expectedFiles);
-		});
-	}
-
-	@TestTemplate
-	void deleteGeneratedJava(GradleBuild gradleBuild) {
-		gradleBuild.build("wsdl2javaCalculator");
-		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
-			Path generatedSources = projectDir.resolve(Path.of("build", "generated-sources", "cxf", "calculator"));
-			assertThat(generatedSources).exists();
-			assertThat(generatedSources).isNotEmptyDirectory();
-		});
-
-		BuildResult result = gradleBuild.build("cleanWsdl2javaCalculator");
-		assertThat(result.getTasks()).hasSize(1);
-		assertThat(result.getTasks().get(0).getOutcome()).isEqualTo(TaskOutcome.SUCCESS);
-		assertThat(gradleBuild.getProjectDir()).satisfies((projectDir) -> {
-			Path generatedSources = projectDir.resolve(Path.of("build", "generated-sources", "cxf", "calculator"));
-			assertThat(generatedSources).doesNotExist();
 		});
 	}
 

@@ -32,17 +32,6 @@ class ConfigurationCacheFunctionalTests {
 			"6.7.1", "6.8.3", "6.9.3", "7.4.2", "7.5.1", "7.6", "current");
 
 	@TestTemplate
-	void configurationCache(GradleBuild gradleBuild) {
-		GradleRunner runner = gradleBuild.prepareRunner("--configuration-cache", "wsdl2javaCalculator");
-
-		BuildResult initialResult = runner.build();
-		BuildResult finalResult = runner.build();
-
-		assertThat(initialResult.getOutput()).contains("no configuration cache is available");
-		assertThat(finalResult.getOutput()).contains("Reusing configuration cache.");
-	}
-
-	@TestTemplate
 	void configurationCacheCompatibility(GradleBuild gradleBuild) {
 		GradleRunner runner = gradleBuild.prepareRunner("--configuration-cache", "calculator");
 

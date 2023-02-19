@@ -36,37 +36,8 @@ import org.junit.jupiter.api.TestTemplate;
 class IncrementalBuildFunctionalTests {
 
 	@TestTemplate
-	void separateXsd(GradleBuild gradleBuild) {
-		doTest(gradleBuild);
-	}
-
-	@TestTemplate
 	void generatesJavaSourcesWhenSeparateXsdIsUsed(GradleBuild gradleBuild) {
 		runTest(gradleBuild);
-	}
-
-	@TestTemplate
-	void generatesJavaFromWsdl(GradleBuild gradleBuild) {
-		doTest(gradleBuild);
-	}
-
-	@TestTemplate
-	void wsdlFileInput(GradleBuild gradleBuild) throws IOException {
-		GradleRunner runner = gradleBuild.prepareRunner("wsdl2javaCalculator", "-i");
-		BuildResult result = runner.build();
-
-		assertThat(result.getOutput()).contains("Task ':wsdl2javaCalculator' is not up-to-date");
-
-		// Simulate changes to the file by adding a new line.
-		Path wsdl = gradleBuild.getProjectDir().resolve(Path.of("wsdls", "calculator.wsdl"));
-		BufferedWriter writer = new BufferedWriter(new FileWriter(wsdl.toFile(), true));
-		writer.newLine();
-		writer.close();
-
-		result = runner.build();
-
-		assertThat(result.getOutput()).contains("Task ':wsdl2javaCalculator' is not up-to-date",
-				"Input property '$1' file /tmp/gradle-");
 	}
 
 	@TestTemplate
@@ -88,30 +59,6 @@ class IncrementalBuildFunctionalTests {
 		assertThat(result.getOutput()).contains("Task ':calculator' is not up-to-date because",
 				"Input property 'wsdl2JavaOptions.wsdl' file "
 						+ gradleBuild.getProjectDir().resolve(calculatorWsdlPath).toAbsolutePath() + " has changed");
-	}
-
-	@TestTemplate
-	void wsdlOptionMutations(GradleBuild gradleBuild) throws IOException {
-		GradleRunner runner = gradleBuild.prepareRunner("wsdl2javaCalculator", "-i");
-
-		BuildResult first = runner.build();
-		assertThat(first.getOutput()).contains("Task ':wsdl2javaCalculator' is not up-to-date");
-		BuildResult second = runner.build();
-		assertThat(second.getOutput()).contains("Skipping task ':wsdl2javaCalculator' as it is up-to-date.");
-
-		// test that changing WSDLOption.markGenerated triggers a rebuild
-		this.overwriteBuildSpec(gradleBuild, "generatesJavaFromWsdlChangedMarkGenerated");
-		BuildResult third = runner.build();
-		assertThat(third.getOutput()).contains("Task ':wsdl2javaCalculator' is not up-to-date");
-		BuildResult fourth = runner.build();
-		assertThat(fourth.getOutput()).contains("Skipping task ':wsdl2javaCalculator' as it is up-to-date.");
-
-		// test that changing WsdlOption.wsdl triggers a rebuild
-		this.overwriteBuildSpec(gradleBuild, "generatesJavaFromWsdlChangedWsdl");
-		BuildResult fifth = runner.build();
-		assertThat(fifth.getOutput()).contains("Task ':wsdl2javaCalculator' is not up-to-date");
-		BuildResult sixth = runner.build();
-		assertThat(sixth.getOutput()).contains("Skipping task ':wsdl2javaCalculator' as it is up-to-date.");
 	}
 
 	@TestTemplate

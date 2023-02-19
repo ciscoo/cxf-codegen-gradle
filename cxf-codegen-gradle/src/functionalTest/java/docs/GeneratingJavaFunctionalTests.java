@@ -39,36 +39,11 @@ class GeneratingJavaFunctionalTests {
 	static GradleCompatibilityExtension extension = new GradleCompatibilityExtension("current");
 
 	@TestTemplate
-	void defaultOptions(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.script(scriptFor("default-options")).build("verify");
-
-		assertThat(result.getOutput()).contains("first markGenerated true").contains("second markGenerated true")
-				.contains("third markGenerated true");
-	}
-
-	@TestTemplate
 	void defaultToolOptions(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.script(scriptFor("default-tool-options")).build("verify");
 
 		assertThat(result.getOutput()).contains("first markGenerated true").contains("second markGenerated true")
 				.contains("third markGenerated true");
-	}
-
-	@TestTemplate
-	void disableAllLogs(GradleBuild gradleBuild) throws IOException {
-		GradleRunner runner = gradleBuild.script(scriptFor("disable-all-logs")).prepareRunner("wsdl2java");
-		Files.copy(Path.of("src", "functionalTest", "resources", "emptyLogback.xml"),
-				gradleBuild.getProjectDir().resolve("logback.xml"), StandardCopyOption.COPY_ATTRIBUTES,
-				StandardCopyOption.REPLACE_EXISTING);
-		Files.copy(gradleBuild.getProjectDir().resolve(Path.of("wsdls", "calculator.wsdl")),
-				gradleBuild.getProjectDir().resolve(Path.of("example.wsdl")), StandardCopyOption.COPY_ATTRIBUTES);
-		Files.copy(gradleBuild.getProjectDir().resolve(Path.of("wsdls", "calculator.xsd")),
-				gradleBuild.getProjectDir().resolve(Path.of("example.xsd")), StandardCopyOption.COPY_ATTRIBUTES);
-
-		BuildResult result = runner.build();
-
-		assertThat(result.getOutput()).doesNotContain("DEBUG org.apache.cxf.common.logging.LogUtils",
-				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader", "DEBUG org.apache.velocity");
 	}
 
 	@TestTemplate
@@ -86,16 +61,6 @@ class GeneratingJavaFunctionalTests {
 
 		assertThat(result.getOutput()).doesNotContain("DEBUG org.apache.cxf.common.logging.LogUtils",
 				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader", "DEBUG org.apache.velocity");
-	}
-
-	@TestTemplate
-	void disableLogs(GradleBuild gradleBuild) throws IOException {
-		GradleRunner runner = gradleBuild.script(scriptFor("disable-logs")).prepareRunner("wsdl2java");
-
-		BuildResult result = runner.build();
-
-		assertThat(result.getOutput()).doesNotContain("DEBUG org.apache.cxf.common.logging.LogUtils",
-				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader").contains("DEBUG org.apache.velocity");
 	}
 
 	@TestTemplate
@@ -148,14 +113,6 @@ class GeneratingJavaFunctionalTests {
 	}
 
 	@TestTemplate
-	void logging(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.script(scriptFor("logging")).prepareRunner("wsdl2java").build();
-
-		assertThat(result.getOutput()).contains("DEBUG org.apache.cxf.common.logging.LogUtils",
-				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader", "DEBUG org.apache.velocity");
-	}
-
-	@TestTemplate
 	void loggingTask(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.script(scriptFor("logging-task")).prepareRunner("wsdl2java").build();
 
@@ -164,25 +121,10 @@ class GeneratingJavaFunctionalTests {
 	}
 
 	@TestTemplate
-	void minimalUsage(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.script(scriptFor("minimal-usage")).prepareRunner("verify").build();
-
-		assertThat(result.getOutput()).contains("/path/to/example.wsdl");
-	}
-
-	@TestTemplate
 	void minimalTaskUsage(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.script(scriptFor("minimal-task-usage")).prepareRunner("verify").build();
 
 		assertThat(result.getOutput()).contains("/path/to/example.wsdl");
-	}
-
-	@TestTemplate
-	void options(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.script(scriptFor("options")).prepareRunner("verify").build();
-
-		assertThat(result.getOutput()).contains("/path/to/example.wsdl", "/build/generated-java", "markGenerated=true",
-				"packageNames=[com.example, com.foo.bar]", "asyncMethods=[foo, bar]");
 	}
 
 	@TestTemplate

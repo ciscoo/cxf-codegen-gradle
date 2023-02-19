@@ -40,13 +40,6 @@ class PluginConfigurationFunctionalTests {
 		assertThat(result.getOutput()).contains("BUILD SUCCESSFUL");
 	}
 
-	@TestTemplate
-	void pluginExtension(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.script(scriptFor("plugin-extension")).build();
-
-		assertThat(result.getOutput()).contains("BUILD SUCCESSFUL");
-	}
-
 	String scriptFor(String name) {
 		final Path rootDir = Path.of("").toAbsolutePath().getParent();
 		Path scriptPath = rootDir
