@@ -1,3 +1,4 @@
 io.mateo.cxf.codegen
+io.mateo.cxf.codegen.internal
 io.mateo.cxf.codegen.wsdl2java
 io.mateo.cxf.codegen.wsdl2js
