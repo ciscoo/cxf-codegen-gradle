@@ -64,7 +64,8 @@ tasks {
                 "revnumber" to version,
                 "current-gradle-version" to GradleVersion.current().version,
                 "plugin-version" to version,
-                "outdir" to outputDir.absolutePath
+                "outdir" to outputDir.absolutePath,
+                "cxf-version" to libs.versions.cxf.get()
             )
         )
         forkOptions {

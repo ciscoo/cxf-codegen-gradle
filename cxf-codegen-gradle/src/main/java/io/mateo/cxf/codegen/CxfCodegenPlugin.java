@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.mateo.cxf.codegen.internal.GeneratedVersionAccessor;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaOptions;
@@ -69,11 +70,6 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	 * Group name that all {@link Wsdl2Js} tasks belong to.
 	 */
 	public static final String WSDL2JS_GROUP = "wsdl2js";
-
-	/**
-	 * Update documentation when updating version.
-	 */
-	static final String DEFAULT_CXF_VERSION = "3.5.5";
 
 	@Override
 	public void apply(Project project) {
@@ -179,17 +175,19 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		List<Dependency> dependencies = new ArrayList<>();
 
 		// Same dependencies defined in cxf-codegen-plugin's POM.
-		dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-core:" + DEFAULT_CXF_VERSION));
-		dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-common:" + DEFAULT_CXF_VERSION));
-		dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-core:" + DEFAULT_CXF_VERSION));
+		dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-core:" + GeneratedVersionAccessor.CXF_VERSION));
 		dependencies.add(
-				dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:" + DEFAULT_CXF_VERSION));
-		dependencies
-				.add(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:" + DEFAULT_CXF_VERSION));
+				dependencyHandler.create("org.apache.cxf:cxf-tools-common:" + GeneratedVersionAccessor.CXF_VERSION));
+		dependencies.add(dependencyHandler
+				.create("org.apache.cxf:cxf-tools-wsdlto-core:" + GeneratedVersionAccessor.CXF_VERSION));
+		dependencies.add(dependencyHandler
+				.create("org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:" + GeneratedVersionAccessor.CXF_VERSION));
+		dependencies.add(dependencyHandler
+				.create("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:" + GeneratedVersionAccessor.CXF_VERSION));
 
 		// The Maven plugin excludes cxf-rt-frontend-simple, so exclude it here as well.
 		ModuleDependency dependency = (ModuleDependency) dependencyHandler
-				.create("org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:" + DEFAULT_CXF_VERSION);
+				.create("org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:" + GeneratedVersionAccessor.CXF_VERSION);
 		Map<String, String> excludeProperties = new HashMap<>();
 		excludeProperties.put("group", "org.apache.cxf");
 		excludeProperties.put("module", "cxf-rt-frontend-simple");

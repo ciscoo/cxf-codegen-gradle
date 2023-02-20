@@ -21,6 +21,20 @@ gradlePlugin {
     }
 }
 
+val generateVersionAccessor = tasks.register("generateVersionAccessor", io.mateo.build.GenerateVersionAccessor::class) {
+    cxfVersion.set(libs.versions.cxf)
+}
+
+sourceSets.main {
+    java.srcDir(generateVersionAccessor)
+}
+
+spotless {
+    java {
+        targetExclude(generateVersionAccessor)
+    }
+}
+
 testing {
     suites {
         register("functionalTest", JvmTestSuite::class) {

@@ -1,3 +1,5 @@
+import io.spring.javaformat.gradle.tasks.CheckFormat
+
 plugins {
     id("com.diffplug.spotless")
     id("io.spring.javaformat")
@@ -16,5 +18,11 @@ spotless {
             trimTrailingWhitespace()
             endWithNewline()
         }
+    }
+}
+
+tasks.withType(CheckFormat::class).configureEach {
+    exclude {
+        it.file.toString().contains("generated-sources")
     }
 }
