@@ -31,7 +31,11 @@ sourceSets.main {
 
 spotless {
     java {
-        targetExclude(generateVersionAccessor)
+        targetExclude(
+            fileTree(generateVersionAccessor.flatMap { provider { it.outputDirectory.get() } }) {
+                include("**/*.java")
+            }
+        )
     }
 }
 
