@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import io.mateo.cxf.codegen.internal.GeneratedVersionAccessor;
 import io.mateo.cxf.codegen.junit.TaskNameGenerator;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 
@@ -83,7 +84,7 @@ class CxfCodegenPluginTests {
 		assertThat(configuration.getDependencies()).extracting(Dependency::getName)
 				.containsExactlyElementsOf(expectedDependencies);
 		assertThat(configuration.getDependencies()).extracting(Dependency::getVersion)
-				.allMatch((version) -> version.equals(CxfCodegenPlugin.DEFAULT_CXF_VERSION));
+				.allMatch((version) -> version.equals(GeneratedVersionAccessor.CXF_VERSION));
 		assertThat(configuration.getDependencies().matching(spec)).singleElement()
 				.asInstanceOf(InstanceOfAssertFactories.type(ModuleDependency.class)).satisfies((dependency) -> {
 					assertThat(dependency.getExcludeRules()).singleElement()
