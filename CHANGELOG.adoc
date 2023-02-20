@@ -8,6 +8,9 @@ All notable changes to this project will be documented in this file.
 - Raise recommended Gradle version to align with Spring Boot 2.7.x -- https://github.com/ciscoo/cxf-codegen-gradle/issues/52[#52]
 - Support for `wsdl2js` -- https://github.com/ciscoo/cxf-codegen-gradle/issues/39[#39]
 - Support WSDL input from online WSDL URL -- https://github.com/ciscoo/cxf-codegen-gradle/issues/63[#63]
+- Test against Gradle 8.0 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/35[#62]
+- Remove deprecated code from 1.0.0 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/66[#66]
+- Generate version accessor for CXF version -- https://github.com/ciscoo/cxf-codegen-gradle/issues/68[#68]
 
 == [1.0.3] - 2022-12-26
 
