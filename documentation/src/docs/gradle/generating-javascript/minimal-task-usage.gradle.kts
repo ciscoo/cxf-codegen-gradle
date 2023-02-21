@@ -12,7 +12,7 @@ plugins {
 
 tasks.register("example", Wsdl2Js::class) { // <1>
     toolOptions { // <2>
-        wsdl.set(file("path/to/example.wsdl")) // <3>
+        wsdl.set(file("path/to/example.wsdl").absolutePath) // <3>
     }
 }
 // end::code[]

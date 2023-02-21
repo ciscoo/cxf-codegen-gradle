@@ -61,7 +61,7 @@ class Wsdl2JsOptionsTests {
 
 	@Test
 	void quiet(TestInfo testInfo) {
-		var expected = List.of("-d", getOutputDirFor(testInfo), "-quiet", this.wsdl.toUri().toString());
+		var expected = List.of("-d", getOutputDirFor(testInfo), "-quiet", this.wsdl.toString());
 
 		var actual = createTask(testInfo.getDisplayName(), options -> options.getQuiet().set(true))
 				.getArgumentProviders().get(0).asArguments();
@@ -71,7 +71,7 @@ class Wsdl2JsOptionsTests {
 
 	@Test
 	void verbose(TestInfo testInfo) {
-		var expected = List.of("-d", getOutputDirFor(testInfo), "-verbose", this.wsdl.toUri().toString());
+		var expected = List.of("-d", getOutputDirFor(testInfo), "-verbose", this.wsdl.toString());
 
 		var actual = createTask(testInfo.getDisplayName(), options -> options.getVerbose().set(true))
 				.getArgumentProviders().get(0).asArguments();
@@ -92,7 +92,7 @@ class Wsdl2JsOptionsTests {
 
 	@Test
 	void validate(TestInfo testInfo) {
-		var expected = List.of("-d", getOutputDirFor(testInfo), "-validate=true", this.wsdl.toUri().toString());
+		var expected = List.of("-d", getOutputDirFor(testInfo), "-validate=true", this.wsdl.toString());
 
 		var actual = createTask(testInfo.getDisplayName(), options -> options.getValidate().set("true"))
 				.getArgumentProviders().get(0).asArguments();
@@ -104,7 +104,7 @@ class Wsdl2JsOptionsTests {
 	void catalog(TestInfo testInfo) {
 		var catalog = this.outputDir.resolve("example.xml");
 		var expected = List.of("-catalog", catalog.toAbsolutePath().toString(), "-d", getOutputDirFor(testInfo),
-				this.wsdl.toUri().toString());
+				this.wsdl.toString());
 
 		var actual = createTask(testInfo.getDisplayName(), options -> options.getCatalog().set(catalog.toFile()))
 				.getArgumentProviders().get(0).asArguments();
@@ -116,7 +116,7 @@ class Wsdl2JsOptionsTests {
 	void packagePrefixes(TestInfo testInfo) {
 		var expected = List.of("-p", "foo=http://www.example.com/Example/V1/ExampleService", "-p",
 				"bar=http://www.example.com/Example/V1/ExampleService", "-d", getOutputDirFor(testInfo),
-				this.wsdl.toUri().toString());
+				this.wsdl.toString());
 
 		var actual = createTask(testInfo.getDisplayName(),
 				options -> options.getPackagePrefixes().set(List.of(
@@ -129,7 +129,7 @@ class Wsdl2JsOptionsTests {
 
 	@Test
 	void wsdlVersion(TestInfo testInfo) {
-		var expected = List.of("-wv", "1.1", "-d", getOutputDirFor(testInfo), this.wsdl.toUri().toString());
+		var expected = List.of("-wv", "1.1", "-d", getOutputDirFor(testInfo), this.wsdl.toString());
 
 		var actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlVersion().set("1.1"))
 				.getArgumentProviders().get(0).asArguments();
@@ -139,7 +139,7 @@ class Wsdl2JsOptionsTests {
 
 	@Test
 	void wsdlOnly(TestInfo testInfo) {
-		var expected = List.of("-d", getOutputDirFor(testInfo), this.wsdl.toUri().toString());
+		var expected = List.of("-d", getOutputDirFor(testInfo), this.wsdl.toString());
 
 		var actual = createTask(testInfo.getDisplayName()).getArgumentProviders().get(0).asArguments();
 
@@ -153,14 +153,14 @@ class Wsdl2JsOptionsTests {
 
 	private Wsdl2Js createTask(String taskName, Action<? super Wsdl2JsOptions> configurer) {
 		return this.project.getTasks().create(taskName, Wsdl2Js.class, wsdl2java -> wsdl2java.toolOptions(options -> {
-			options.getWsdl().set(this.wsdl.toFile());
+			options.getWsdl().set(this.wsdl.toString());
 			configurer.execute(options);
 		}));
 	}
 
 	private Wsdl2Js createTask(String taskName) {
 		return this.project.getTasks().create(taskName, Wsdl2Js.class,
-				wsdl2java -> wsdl2java.toolOptions(options -> options.getWsdl().set(this.wsdl.toFile())));
+				wsdl2java -> wsdl2java.toolOptions(options -> options.getWsdl().set(this.wsdl.toString())));
 	}
 
 }

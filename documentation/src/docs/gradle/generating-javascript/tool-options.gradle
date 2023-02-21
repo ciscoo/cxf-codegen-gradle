@@ -8,7 +8,7 @@ plugins {
 // tag::code[]
 tasks.register("example", Wsdl2Js) {
     toolOptions {
-        wsdl.set(file("path/to/example.wsdl"))
+        wsdl.set(file("path/to/example.wsdl").absolutePath)
         outputDir.set(file("$buildDir/example-generated-js")) // <1>
         catalog.set(file("path/to/example-catalog.xml")) // <2>
         packagePrefixes.set([new UriPrefixPair("https://example.com", "example")]) // <3>

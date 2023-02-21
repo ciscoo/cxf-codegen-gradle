@@ -15,6 +15,6 @@ dependencies {
 
 tasks.register("calculator", Wsdl2Js) {
     toolOptions {
-        wsdl.set(file("wsdls/calculator.wsdl"))
+        wsdl.set(layout.projectDirectory.file("wsdls/calculator.wsdl").asFile.absolutePath)
     }
 }

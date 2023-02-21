@@ -91,7 +91,7 @@ public abstract class Wsdl2Js extends JavaExec {
 			if (options.getQuiet().isPresent() && options.getQuiet().get()) {
 				arguments.add("-quiet");
 			}
-			arguments.add(options.getWsdl().map(it -> it.getAsFile().toPath().toUri().toString()).get());
+			arguments.add(options.getWsdl().get());
 			return arguments;
 		}
 

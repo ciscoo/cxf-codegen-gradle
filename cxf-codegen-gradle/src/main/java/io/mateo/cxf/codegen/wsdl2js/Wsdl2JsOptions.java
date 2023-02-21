@@ -27,7 +27,6 @@ import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
-import org.gradle.api.tasks.SkipWhenEmpty;
 
 import javax.inject.Inject;
 import java.util.Objects;
@@ -42,7 +41,7 @@ import java.util.StringJoiner;
  */
 public abstract class Wsdl2JsOptions {
 
-	private final RegularFileProperty wsdl;
+	private final Property<String> wsdl;
 
 	private final Property<String> wsdlVersion;
 
@@ -60,7 +59,7 @@ public abstract class Wsdl2JsOptions {
 
 	@Inject
 	public Wsdl2JsOptions(String taskName, ObjectFactory objects, ProjectLayout layout) {
-		this.wsdl = objects.fileProperty();
+		this.wsdl = objects.property(String.class);
 		this.wsdlVersion = objects.property(String.class);
 		this.packagePrefixes = objects.listProperty(UriPrefixPair.class);
 		this.catalog = objects.fileProperty();
@@ -75,10 +74,8 @@ public abstract class Wsdl2JsOptions {
 	 * Specifies the WSDL document from which JavaScript is generated from
 	 * @return wsdl file
 	 */
-	@InputFile
-	@PathSensitive(PathSensitivity.RELATIVE)
-	@SkipWhenEmpty
-	public RegularFileProperty getWsdl() {
+	@Input
+	public Property<String> getWsdl() {
 		return this.wsdl;
 	}
 
