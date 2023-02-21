@@ -1277,7 +1277,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 
 <span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"example"</span><span class="o">,</span> <span class="n">Wsdl2Js</span><span class="o">)</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
     <span class="n">toolOptions</span> <span class="o">{</span> <i class="conum" data-value="2"></i><b>(2)</b>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">))</span> <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">absolutePath</span><span class="o">)</span> <i class="conum" data-value="3"></i><b>(3)</b>
     <span class="o">}</span>
 <span class="o">}</span></code></pre>
 </div>
@@ -1293,7 +1293,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 
 <span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"example"</span><span class="p">,</span> <span class="nc">Wsdl2Js</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
     <span class="nf">toolOptions</span> <span class="p">{</span> <i class="conum" data-value="2"></i><b>(2)</b>
-        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/example.wsdl"</span><span class="p">))</span> <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/example.wsdl"</span><span class="p">).</span><span class="n">absolutePath</span><span class="p">)</span> <i class="conum" data-value="3"></i><b>(3)</b>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
 </div>
@@ -1329,7 +1329,7 @@ offered by the <a href="https://cxf.apache.org/docs/wsdl-to-javascript.html"><co
 <div class="content">
 <pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"example"</span><span class="o">,</span> <span class="n">Wsdl2Js</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">))</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">absolutePath</span><span class="o">)</span>
         <span class="n">outputDir</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"$buildDir/example-generated-js"</span><span class="o">))</span> <i class="conum" data-value="1"></i><b>(1)</b>
         <span class="n">catalog</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example-catalog.xml"</span><span class="o">))</span> <i class="conum" data-value="2"></i><b>(2)</b>
         <span class="n">packagePrefixes</span><span class="o">.</span><span class="na">set</span><span class="o">([</span><span class="k">new</span> <span class="n">UriPrefixPair</span><span class="o">(</span><span class="s2">"https://example.com"</span><span class="o">,</span> <span class="s2">"example"</span><span class="o">)])</span> <i class="conum" data-value="3"></i><b>(3)</b>
@@ -1345,7 +1345,7 @@ offered by the <a href="https://cxf.apache.org/docs/wsdl-to-javascript.html"><co
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"example"</span><span class="p">,</span> <span class="nc">Wsdl2Js</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">toolOptions</span> <span class="p">{</span>
-        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/example.wsdl"</span><span class="p">))</span>
+        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/example.wsdl"</span><span class="p">).</span><span class="n">absolutePath</span><span class="p">)</span>
         <span class="n">outputDir</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"$buildDir/example-generated-js"</span><span class="p">))</span> <i class="conum" data-value="1"></i><b>(1)</b>
         <span class="n">catalog</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/example-catalog.xml"</span><span class="p">))</span> <i class="conum" data-value="2"></i><b>(2)</b>
         <span class="n">packagePrefixes</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">listOf</span><span class="p">(</span><span class="nc">UriPrefixPair</span><span class="p">(</span><span class="s">"https://example.com"</span><span class="p">,</span> <span class="s">"example"</span><span class="p">)))</span> <i class="conum" data-value="3"></i><b>(3)</b>
@@ -1830,7 +1830,7 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 <div id="footer">
 <div id="footer-text">
 Version 1.1.0-SNAPSHOT<br>
-Last updated 2023-02-20 17:00:31 UTC
+Last updated 2023-02-21 01:18:07 UTC
 </div>
 </div>
 <style>
