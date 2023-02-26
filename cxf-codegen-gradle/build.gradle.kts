@@ -1,22 +1,21 @@
 plugins {
-    `java-gradle-plugin`
     `java-library-conventions`
-    `maven-publish`
     signing
     id("com.gradle.plugin-publish")
 }
 
 description = "CXF Codegen"
 
-val pluginName = "cxfCodegen"
-
 gradlePlugin {
+    website.set("https://ciscoo.github.io/cxf-codegen-gradle/docs/current/user-guide/")
+    vcsUrl.set("https://github.com/ciscoo/cxf-codegen-gradle")
     plugins {
-        create(pluginName) {
+        create("cxfCodegen") {
             id = "io.mateo.cxf-codegen"
             displayName = "CXF Codegen"
-            description = "Plugin to generate code sources from WSDL."
+            description = "Gradle plugin to generate code sources from WSDL."
             implementationClass = "io.mateo.cxf.codegen.CxfCodegenPlugin"
+            tags.set(listOf("cxf", "wsdl2java"))
         }
     }
 }
@@ -56,19 +55,6 @@ testing {
                     systemProperty("gradle7", System.getProperty("gradle7", false.toString()))
                 }
             }
-        }
-    }
-}
-
-pluginBundle {
-    website = "https://github.com/ciscoo/cxf-codegen-gradle"
-    vcsUrl = "https://github.com/ciscoo/cxf-codegen-gradle"
-    description = "Gradle plugin port of the Maven CXF Codegen plugin."
-    (plugins) {
-        named(pluginName) {
-            displayName = "CXF Codegen plugin"
-            description = "Gradle port of the Apache CXF Code Generation Maven2 plugin (cxf-codegen-plugin)."
-            tags = listOf("cxf", "wsdl2java")
         }
     }
 }
