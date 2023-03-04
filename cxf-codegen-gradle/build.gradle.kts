@@ -1,6 +1,5 @@
 plugins {
     `java-library-conventions`
-    signing
     id("com.gradle.plugin-publish")
 }
 
@@ -124,13 +123,6 @@ publishing {
             }
         }
     }
-}
-
-val isCIEnvironment = System.getenv("CI")?.toBoolean() ?: false
-
-signing {
-    sign(publishing.publications)
-    isRequired = !(isSnapshot || isCIEnvironment)
 }
 
 afterEvaluate {
