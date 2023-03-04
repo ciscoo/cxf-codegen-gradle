@@ -114,7 +114,7 @@ public class Wsdl2Java extends JavaExec {
 					RegularFile bindingFile = Wsdl2Java.this.getProject().getLayout().getProjectDirectory()
 							.file(binding);
 					arguments.add("-b");
-					arguments.add(bindingFile.getAsFile().toURI().toString());
+					arguments.add(bindingFile.getAsFile().toPath().toAbsolutePath().toUri().toString());
 				});
 			}
 			if (options.getFrontend().isPresent()) {

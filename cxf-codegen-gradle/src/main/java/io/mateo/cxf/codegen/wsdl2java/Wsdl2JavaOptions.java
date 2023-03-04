@@ -108,7 +108,7 @@ public class Wsdl2JavaOptions {
 				.convention(layout.getBuildDirectory().dir(taskName + "-wsdl2java-generated-sources"));
 		this.wsdl = objects.fileProperty();
 		this.wsdlUrl = objects.property(String.class)
-				.convention(this.wsdl.map(it -> it.getAsFile().toURI().toString()));
+				.convention(this.wsdl.map(it -> it.getAsFile().toPath().toAbsolutePath().toUri().toString()));
 		this.packageNames = objects.listProperty(String.class);
 		this.extraArgs = objects.listProperty(String.class);
 		this.xjcArgs = objects.listProperty(String.class);
