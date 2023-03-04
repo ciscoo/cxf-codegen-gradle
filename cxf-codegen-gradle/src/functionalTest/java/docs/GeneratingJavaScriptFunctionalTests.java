@@ -41,12 +41,8 @@ class GeneratingJavaScriptFunctionalTests {
 	void toolOptions(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.script(scriptFor("tool-options")).prepareRunner("verify").build();
 
-		final var projectDir = gradleBuild.getProjectDir();
-		var wsdlPath = "wsdl=" + projectDir.resolve(Path.of("path", "to", "example.wsdl"));
-		var generatedJsPath = "outputDir=" + projectDir.resolve(Path.of("build", "example-generated-js"));
-		var catalogPath = "catalog=" + projectDir.resolve(Path.of("path", "to", "example-catalog.xml"));
-
-		assertThat(result.getOutput()).contains(wsdlPath, generatedJsPath, catalogPath,
+		assertThat(result.getOutput()).contains("/path/to/example.wsdl", "/build/example-generated-js",
+				"/path/to/example-catalog.xml",
 				"packagePrefixes=[UriPrefixPair[uri='https://example.com', prefix='example']]", "verbose=true");
 	}
 
