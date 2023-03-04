@@ -98,9 +98,10 @@ class CxfCodegenPluginTests {
 		project.getTasks().register(testInfo.getDisplayName(), Wsdl2Java.class);
 
 		project.getTasks().withType(Wsdl2Java.class).all(wsdl2Java -> {
-			Set<File> outputs = wsdl2Java.getOutputs().getFiles().getFiles();
+			Set<Path> outputs = wsdl2Java.getOutputs().getFiles().getFiles().stream().map(File::toPath)
+					.collect(Collectors.toUnmodifiableSet());
 			assertThat(outputs).hasSize(1);
-			assertThat(outputs.iterator().next().toPath())
+			assertThat(outputs.iterator().next())
 					.endsWithRaw(Path.of("build", wsdl2Java.getName() + "-wsdl2java-generated-sources"));
 			assertThat(wsdl2Java.getMainClass().get()).isEqualTo("org.apache.cxf.tools.wsdlto.WSDLToJava");
 			// Can not resolve configuration in unit tests, so assert on error message.
@@ -151,7 +152,8 @@ class CxfCodegenPluginTests {
 
 		assertThat(java.getSrcDirs()).hasSize(expectedSize);
 
-		List<String> paths = java.getSrcDirs().stream().map(File::getAbsolutePath).collect(Collectors.toList());
+		List<String> paths = java.getSrcDirs().stream().map(File::toPath).map(Path::toAbsolutePath).map(Path::toString)
+				.collect(Collectors.toList());
 		String outputDir = Path
 				.of(project.getBuildDir().getAbsolutePath(), testInfo.getDisplayName() + "-wsdl2java-generated-sources")
 				.toFile().getAbsolutePath();
