@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
 
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibility;
@@ -50,7 +51,7 @@ class IncrementalBuildFunctionalTests {
 		// Simulate changes to the file by adding a new line.
 		Path calculatorWsdlPath = Path.of("wsdls", "calculator.wsdl");
 		Path wsdl = gradleBuild.getProjectDir().resolve(calculatorWsdlPath);
-		BufferedWriter writer = new BufferedWriter(new FileWriter(wsdl.toFile(), true));
+		BufferedWriter writer = Files.newBufferedWriter(wsdl, StandardOpenOption.APPEND);
 		writer.newLine();
 		writer.close();
 
