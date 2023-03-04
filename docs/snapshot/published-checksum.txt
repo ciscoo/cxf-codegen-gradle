@@ -1,4 +1,4 @@
-1071dc740bc4386d025d039276450a4c  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaOptions.java
+069e3bc8290289ccbda3bfafa7b7a3bf  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/Wsdl2Java.java
 137c89f8c303e5755b2714fb32e62e94  documentation/src/docs/asciidoc/index.adoc
 1402a0cc5f76ffa7a03a3ee08af82606  documentation/src/docs/gradle/examples/jaxws-binding-file.gradle
 19ad8d67a9cdb5f24e6e20ea4d80331b  documentation/src/docs/gradle/generating-java/jakarta.gradle.kts
@@ -14,7 +14,6 @@
 34e7cfec5318a1a1896869549b99b31f  documentation/src/docs/gradle/generating-java/tool-options.gradle.kts
 35b313edc0c912ab5a7598c754ee32c8  documentation/src/docs/gradle/examples/jaxws-binding-file.gradle.kts
 3b6c19d32063a246111f1fddd486e9cc  documentation/src/docs/gradle/generating-java/tool-options.gradle
-3e568df66b7e93aabfd63c0aeb49b492  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/Wsdl2Java.java
 4079be3295d3c3131bea76c443b3ce86  documentation/src/docs/gradle/generating-java/logging-task.gradle.kts
 46cdd8eed4e017cc4a66eaf5ccc8e7d0  documentation/src/docs/asciidoc/attributes.adoc
 4713ad42197f7965ea2515587f8078eb  documentation/src/docs/gradle/generating-java/default-tool-options.gradle
@@ -35,6 +34,7 @@
 a50297541302cf389f3d956c9ae684fa  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/package-info.java
 ad311c2aa2223d063d318166a8397b35  documentation/src/docs/asciidoc/overview.adoc
 adae9f455f851e58694f889249382ecb  documentation/src/docs/gradle/examples/specify-data-binding.gradle.kts
+b5ca2ddba3c1eb885961fbbea88c0394  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaOptions.java
 ba55b253ebeb1b1e10722af3526f3567  documentation/src/docs/gradle/examples/service-name.gradle
 bf78d17ab3814d38fcc8d3647fcac8ec  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/package-info.java
 c0d2577c8e578299c3b37f33dad0a060  documentation/src/docs/asciidoc/authors.adoc
