@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
+import io.mateo.cxf.codegen.dsl.CxfCodegenExtension;
 import io.mateo.cxf.codegen.internal.GeneratedVersionAccessor;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 
@@ -32,10 +34,13 @@ import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
+import org.gradle.api.provider.ListProperty;
+import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.TaskCollection;
+import org.gradle.util.GradleVersion;
 
 /**
  * {@link Plugin} for code generation from WSDLs using Apache CXF.
@@ -73,11 +78,19 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {
-		NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration = createConfiguration(project);
+		CxfCodegenExtension extension = createExtension(project);
+		NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration = createConfiguration(project, extension);
 		configureWsdl2JavaTaskConventions(project, cxfCodegenConfiguration);
 		configureWsdl2JsTaskConventions(project, cxfCodegenConfiguration);
 		addToSourceSet(project);
 		registerAggregateTask(project);
+	}
+
+	private CxfCodegenExtension createExtension(Project project) {
+		CxfCodegenExtension extension = project.getExtensions().create(CxfCodegenExtension.EXTENSION_NAME,
+				CxfCodegenExtension.class);
+		extension.getCxfVersion().convention(GeneratedVersionAccessor.CXF_VERSION);
+		return extension;
 	}
 
 	private void configureWsdl2JsTaskConventions(Project project,
@@ -160,41 +173,66 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		}));
 	}
 
-	private NamedDomainObjectProvider<Configuration> createConfiguration(Project project) {
+	private NamedDomainObjectProvider<Configuration> createConfiguration(Project project,
+			CxfCodegenExtension extension) {
 		return project.getConfigurations().register(CXF_CODEGEN_CONFIGURATION_NAME, configuration -> {
 			configuration.setVisible(false);
 			configuration.setCanBeConsumed(false);
 			configuration.setCanBeResolved(true);
 			configuration.setDescription("Classpath for CXF Codegen.");
-			configuration.getDependencies().addAll(createDependencies(project));
+			setDependenciesCompatibility(project, configuration, extension);
 		});
 	}
 
-	private List<Dependency> createDependencies(Project project) {
-		DependencyHandler dependencyHandler = project.getDependencies();
-		List<Dependency> dependencies = new ArrayList<>();
+	private void setDependenciesCompatibility(Project project, Configuration configuration,
+			CxfCodegenExtension extension) {
+		// Avoid cast exception: DefaultProvider to CollectionProviderInternal
+		if (GradleVersion.current().compareTo(GradleVersion.version("6.0")) < 0) {
+			configuration.getDependencies().addAll(createDependenciesCompatibility(project, extension));
+		}
+		else {
+			configuration.getDependencies().addAllLater(createDependencies(project, extension));
+		}
+	}
 
+	private Provider<List<Dependency>> createDependencies(Project project, CxfCodegenExtension extension) {
+		// Avoid cast exception: FlatMapProvider to CollectionProviderInternal
+		if (GradleVersion.current().compareTo(GradleVersion.version("7.4")) < 0) {
+			String cxfVersion = extension.getCxfVersion().get();
+			return createDependenciesProvider(project, cxfVersion);
+		}
+		return extension.getCxfVersion().flatMap(cxfVersion -> createDependenciesProvider(project, cxfVersion));
+	}
+
+	private ListProperty<Dependency> createDependenciesProvider(Project project, String cxfVersion) {
+		ListProperty<Dependency> dependencies = project.getObjects().listProperty(Dependency.class);
+		addDependencies(dependencies::add, project.getDependencies(), cxfVersion);
+		return dependencies;
+	}
+
+	private List<Dependency> createDependenciesCompatibility(Project project, CxfCodegenExtension extension) {
+		String cxfVersion = extension.getCxfVersion().get();
+		List<Dependency> dependencies = new ArrayList<>();
+		addDependencies(dependencies::add, project.getDependencies(), cxfVersion);
+		return dependencies;
+	}
+
+	private void addDependencies(Consumer<Dependency> adderFn, DependencyHandler dependencyHandler, String cxfVersion) {
 		// Same dependencies defined in cxf-codegen-plugin's POM.
-		dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-core:" + GeneratedVersionAccessor.CXF_VERSION));
-		dependencies.add(
-				dependencyHandler.create("org.apache.cxf:cxf-tools-common:" + GeneratedVersionAccessor.CXF_VERSION));
-		dependencies.add(dependencyHandler
-				.create("org.apache.cxf:cxf-tools-wsdlto-core:" + GeneratedVersionAccessor.CXF_VERSION));
-		dependencies.add(dependencyHandler
-				.create("org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:" + GeneratedVersionAccessor.CXF_VERSION));
-		dependencies.add(dependencyHandler
-				.create("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:" + GeneratedVersionAccessor.CXF_VERSION));
+		adderFn.accept(dependencyHandler.create("org.apache.cxf:cxf-core:" + cxfVersion));
+		adderFn.accept(dependencyHandler.create("org.apache.cxf:cxf-tools-common:" + cxfVersion));
+		adderFn.accept(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-core:" + cxfVersion));
+		adderFn.accept(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:" + cxfVersion));
+		adderFn.accept(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:" + cxfVersion));
 
 		// The Maven plugin excludes cxf-rt-frontend-simple, so exclude it here as well.
 		ModuleDependency dependency = (ModuleDependency) dependencyHandler
-				.create("org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:" + GeneratedVersionAccessor.CXF_VERSION);
+				.create("org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:" + cxfVersion);
 		Map<String, String> excludeProperties = new HashMap<>();
 		excludeProperties.put("group", "org.apache.cxf");
 		excludeProperties.put("module", "cxf-rt-frontend-simple");
 		dependency.exclude(excludeProperties);
-		dependencies.add(dependency);
-
-		return dependencies;
+		adderFn.accept(dependency);
 	}
 
 }

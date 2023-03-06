@@ -2,6 +2,43 @@
 = Plugin Configuration
 include::attributes.adoc[]
 
+[[plugin-extension]]
+== Extension
+
+The plugin contributes a single extension to the project named `cxfCodegen`.
+
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+include::../gradle/plugin-configuration/extension.gradle[tags=code]
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+----
+include::../gradle/plugin-configuration/extension.gradle.kts[tags=code]
+----
+
+++++
+</details>
+++++
+
+<1> Primary entry point to the plugin configuration.
+
+For details on what is configuration options are available, view the Javadoc for `{cxf-codegen-extension}`.
+
 [[dependency-configuration]]
 == Dependency Configuration
 
@@ -23,12 +60,56 @@ These are the same dependencies defined in the Maven plugin's https://github.com
 [[dependency-version-constraints]]
 === Managing Dependency Versions
 
-Standard Gradle dependency management can be used to control the included dependency versions.
+There are two ways to manage the contributed dependencies:
 
-For example, a resolve rule can be used to downgrade the CXF dependencies:
+. Through the contributed <<plugin-extension, extension>>.
+. https://docs.gradle.org/current/userguide/core_dependency_management.html[Standard Gradle dependency management].
+
+The extension provides a short and concise way to specify the version while using standard Gradle dependency management
+offers allows more rich configuration options.
+
+The extension is preferred for simplicity, but if your project requires more complex dependency management, then use
+Gradle's dependency management instead.
 
 CAUTION: You will need to ensure the version of CXF dependencies you specify is compatible with the
 <<generating-java.adoc#options-usage, options>> used. Failure to do so will result in an error during code generation.
+
+==== Extension
+
+To change the version using the extension, specify the version using the `cxfVersion` property:
+
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+include::../gradle/plugin-configuration/managing-dependency-versions-extension.gradle[tags=code]
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+----
+include::../gradle/plugin-configuration/managing-dependency-versions-extension.gradle.kts[tags=code]
+----
+
+++++
+</details>
+++++
+
+==== Standard Gradle Dependency Management
+
+To change the version using Standard Gradle dependency management, a https://docs.gradle.org/current/userguide/resolution_rules.html#sec:dependency_resolve_rules[resolve rule]
+can be used:
 
 ++++
 <details open>

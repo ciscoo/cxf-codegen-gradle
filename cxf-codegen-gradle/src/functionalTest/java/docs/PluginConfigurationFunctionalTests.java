@@ -19,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.nio.file.Path;
 
+import io.mateo.cxf.codegen.internal.GeneratedVersionAccessor;
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibilityExtension;
 
@@ -38,6 +39,24 @@ class PluginConfigurationFunctionalTests {
 		// Do not test Gradle's functionality of dependency resolution.
 		// Just tests that we are able to do it.
 		assertThat(result.getOutput()).contains("BUILD SUCCESSFUL");
+	}
+
+	@TestTemplate
+	void extension(GradleBuild gradleBuild) {
+		var result = gradleBuild.script(scriptFor("extension")).build("verify");
+
+		assertThat(result.getOutput()).contains("Configured CXF version = " + GeneratedVersionAccessor.CXF_VERSION);
+	}
+
+	@TestTemplate
+	void managingDependencyVersionsWithExtension(GradleBuild gradleBuild) {
+		var result = gradleBuild.script(scriptFor("managing-dependency-versions-extension")).build("verify");
+
+		assertThat(result.getOutput())
+				.doesNotContain("Configured CXF version = " + GeneratedVersionAccessor.CXF_VERSION);
+		assertThat(result.getOutput()).contains("Configured CXF version = 3.2.0");
+		assertThat(result.getOutput()).contains(
+				"[org.apache.cxf:cxf-core:3.2.0, org.apache.cxf:cxf-tools-common:3.2.0, org.apache.cxf:cxf-tools-wsdlto-core:3.2.0, org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:3.2.0]");
 	}
 
 	String scriptFor(String name) {

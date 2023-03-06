@@ -242,7 +242,7 @@ include::../gradle/generating-java/jakarta.gradle.kts[tags=code]
 </details>
 ++++
 
-<1> Import/Use the 4.0.0 platform (BOM) for all CXF artifacts in the `cxfCodegen` classpath.
+<1> Specify 4.0.0 version for all CXF artifacts in the `cxfCodegen` classpath.
 <2> Use Jakarta specific artifacts that use the `jakarta` namespace.
 
 The above is just an example. Depending on your usage, there may be more dependencies or configuration required.

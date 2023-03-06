@@ -18,6 +18,7 @@
 :wsdl2java-task: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html[Wsdl2JavaTask]
 :wsdl2java-task-type: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2Java.html[Wsdl2Java]
 :wsdl2js-task-type: {javadoc-root}/io/mateo/cxf/codegen/wsdl2js/Wsdl2Js.html[Wsdl2Js]
+:cxf-codegen-extension: {javadoc-root}/io/mateo/cxf/codegen/dsl/CxfCodegenExtension.html[CxfCodegenExtension]
 :cxf-codegen-maven-plugin: https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html
 :wsdl2js-tool-docs: https://cxf.apache.org/docs/wsdl-to-javascript.html
 :wsdl2java-cli: https://cxf.apache.org/docs/wsdl-to-java.html

@@ -1,0 +1,21 @@
+plugins {
+    id("java")
+    id("io.mateo.cxf-codegen")
+}
+
+repositories {
+    mavenCentral()
+}
+
+// tag::code[]
+cxfCodegen {
+    cxfVersion = "3.2.0" // 3.3.0 breaks the build
+}
+// end::code[]
+
+tasks.register("verify") {
+    doLast {
+        println "Configured CXF version = ${cxfCodegen.cxfVersion.get()}"
+        println configurations.cxfCodegen.incoming.dependencies.collect { "${it.group}:${it.name}:${it.version}"}
+    }
+}

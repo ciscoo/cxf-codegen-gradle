@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import io.mateo.cxf.codegen.dsl.CxfCodegenExtension;
 import io.mateo.cxf.codegen.internal.GeneratedVersionAccessor;
 import io.mateo.cxf.codegen.junit.TaskNameGenerator;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
@@ -206,6 +207,14 @@ class CxfCodegenPluginTests {
 			var taskNames = dependencies.stream().map(Task::toString).collect(Collectors.toList());
 			assertThat(taskNames).containsExactlyElementsOf(List.of("task ':a'", "task ':b'"));
 		});
+	}
+
+	@Test
+	void extensionCreatedWithDefaults() {
+		var extension = this.project.getExtensions().findByType(CxfCodegenExtension.class);
+
+		assertThat(extension).isNotNull().satisfies(
+				ext -> assertThat(ext.getCxfVersion().get()).isEqualTo(GeneratedVersionAccessor.CXF_VERSION));
 	}
 
 	@SuppressWarnings("unchecked")
