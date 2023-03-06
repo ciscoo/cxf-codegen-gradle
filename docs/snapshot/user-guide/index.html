@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>CXF Codegen User Guide</h1>
 <div class="details">
 <span id="author" class="author">Francisco Mateo</span><br>
-<span id="revnumber">version 1.1.0-SNAPSHOT</span>
+<span id="revnumber">version 1.2.0-SNAPSHOT</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -457,9 +457,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#plugin-configuration">2. Plugin Configuration</a>
 <ul class="sectlevel2">
-<li><a href="#dependency-configuration">2.1. Dependency Configuration</a>
+<li><a href="#plugin-extension">2.1. Extension</a></li>
+<li><a href="#dependency-configuration">2.2. Dependency Configuration</a>
 <ul class="sectlevel3">
-<li><a href="#dependency-version-constraints">2.1.1. Managing Dependency Versions</a></li>
+<li><a href="#dependency-version-constraints">2.2.1. Managing Dependency Versions</a>
+<ul class="sectlevel4">
+<li><a href="#extension">Extension</a></li>
+<li><a href="#standard-gradle-dependency-management">Standard Gradle Dependency Management</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -530,7 +536,7 @@ using the <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:pl
 <div class="content">
 <pre class="rouge highlight"><code data-lang="groovy"><span class="n">plugins</span> <span class="o">{</span>
     <span class="n">id</span> <span class="s2">"java"</span>
-    <span class="n">id</span> <span class="s2">"io.mateo.cxf-codegen"</span> <span class="n">version</span> <span class="s2">"1.1.0-SNAPSHOT"</span>
+    <span class="n">id</span> <span class="s2">"io.mateo.cxf-codegen"</span> <span class="n">version</span> <span class="s2">"1.2.0-SNAPSHOT"</span>
 <span class="o">}</span></code></pre>
 </div>
 </div>
@@ -541,7 +547,7 @@ using the <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:pl
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">plugins</span> <span class="p">{</span>
     <span class="n">java</span>
-    <span class="nf">id</span><span class="p">(</span><span class="s">"io.mateo.cxf-codegen"</span><span class="p">)</span> <span class="n">version</span> <span class="s">"1.1.0-SNAPSHOT"</span>
+    <span class="nf">id</span><span class="p">(</span><span class="s">"io.mateo.cxf-codegen"</span><span class="p">)</span> <span class="n">version</span> <span class="s">"1.2.0-SNAPSHOT"</span>
 <span class="p">}</span></code></pre>
 </div>
 </div>
@@ -690,7 +696,44 @@ with your Gradle version.
 <h2 id="plugin-configuration"><a class="anchor" href="#plugin-configuration"></a>2. Plugin Configuration</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="dependency-configuration"><a class="anchor" href="#dependency-configuration"></a>2.1. Dependency Configuration</h3>
+<h3 id="plugin-extension"><a class="anchor" href="#plugin-extension"></a>2.1. Extension</h3>
+<div class="paragraph">
+<p>The plugin contributes a single extension to the project named <code>cxfCodegen</code>.</p>
+</div>
+<details open>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+
+<span class="o">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Kotlin</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">cxfCodegen</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Primary entry point to the plugin configuration.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For details on what is configuration options are available, view the Javadoc for <code><a href="../api/io/mateo/cxf/codegen/dsl/CxfCodegenExtension.html">CxfCodegenExtension</a></code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dependency-configuration"><a class="anchor" href="#dependency-configuration"></a>2.2. Dependency Configuration</h3>
 <div class="paragraph">
 <p>The plugin creates a configuration named <code>cxfCodegen</code> which can be used to add additional dependencies to the classpath
 for code generation.</p>
@@ -731,12 +774,27 @@ for code generation.</p>
 <p>These are the same dependencies defined in the Maven plugin&#8217;s <a href="https://github.com/apache/cxf/blob/cxf-3.5.5/maven-plugins/codegen-plugin/pom.xml#L71..L106">POM</a>.</p>
 </div>
 <div class="sect3">
-<h4 id="dependency-version-constraints"><a class="anchor" href="#dependency-version-constraints"></a>2.1.1. Managing Dependency Versions</h4>
+<h4 id="dependency-version-constraints"><a class="anchor" href="#dependency-version-constraints"></a>2.2.1. Managing Dependency Versions</h4>
 <div class="paragraph">
-<p>Standard Gradle dependency management can be used to control the included dependency versions.</p>
+<p>There are two ways to manage the contributed dependencies:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Through the contributed <a href="#plugin-extension">extension</a>.</p>
+</li>
+<li>
+<p><a href="https://docs.gradle.org/current/userguide/core_dependency_management.html">Standard Gradle dependency management</a>.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>For example, a resolve rule can be used to downgrade the CXF dependencies:</p>
+<p>The extension provides a short and concise way to specify the version while using standard Gradle dependency management
+offers allows more rich configuration options.</p>
+</div>
+<div class="paragraph">
+<p>The extension is preferred for simplicity, but if your project requires more complex dependency management, then use
+Gradle&#8217;s dependency management instead.</p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -750,6 +808,38 @@ You will need to ensure the version of CXF dependencies you specify is compatibl
 </td>
 </tr>
 </table>
+</div>
+<div class="sect4">
+<h5 id="extension"><a class="anchor" href="#extension"></a>Extension</h5>
+<div class="paragraph">
+<p>To change the version using the extension, specify the version using the <code>cxfVersion</code> property:</p>
+</div>
+<details open>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span>
+    <span class="n">cxfVersion</span> <span class="o">=</span> <span class="s2">"3.2.0"</span> <span class="c1">// 3.3.0 breaks the build</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Kotlin</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">cxfCodegen</span> <span class="p">{</span>
+    <span class="n">cxfVersion</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s">"3.2.0"</span><span class="p">)</span> <span class="c1">// 3.3.0 breaks the build</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+</div>
+<div class="sect4">
+<h5 id="standard-gradle-dependency-management"><a class="anchor" href="#standard-gradle-dependency-management"></a>Standard Gradle Dependency Management</h5>
+<div class="paragraph">
+<p>To change the version using Standard Gradle dependency management, a <a href="https://docs.gradle.org/current/userguide/resolution_rules.html#sec:dependency_resolve_rules">resolve rule</a>
+can be used:</p>
 </div>
 <details open>
 <summary>Groovy</summary>
@@ -781,6 +871,7 @@ You will need to ensure the version of CXF dependencies you specify is compatibl
 </div>
 </div>
 </details>
+</div>
 </div>
 </div>
 </div>
@@ -1099,8 +1190,11 @@ in Java 9 and eventually removed in Java 11. Refer to <a href="https://openjdk.j
     <span class="n">mavenCentral</span><span class="o">()</span>
 <span class="o">}</span>
 
+<span class="n">cxfCodegen</span> <span class="o">{</span>
+    <span class="n">cxfVersion</span> <span class="o">=</span> <span class="s2">"4.0.0"</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="o">}</span>
+
 <span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">cxfCodegen</span> <span class="nf">platform</span><span class="o">(</span><span class="s2">"org.apache.cxf:cxf-bom:4.0.0"</span><span class="o">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
     <span class="n">cxfCodegen</span> <span class="s2">"jakarta.xml.ws:jakarta.xml.ws-api:4.0.0"</span> <i class="conum" data-value="2"></i><b>(2)</b>
     <span class="n">cxfCodegen</span> <span class="s2">"jakarta.annotation:jakarta.annotation-api:2.1.1"</span>
 <span class="o">}</span></code></pre>
@@ -1115,8 +1209,11 @@ in Java 9 and eventually removed in Java 11. Refer to <a href="https://openjdk.j
     <span class="nf">mavenCentral</span><span class="p">()</span>
 <span class="p">}</span>
 
+<span class="nf">cxfCodegen</span> <span class="p">{</span>
+    <span class="n">cxfVersion</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s">"4.0.0"</span><span class="p">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="p">}</span>
+
 <span class="nf">dependencies</span> <span class="p">{</span>
-    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="nf">platform</span><span class="p">(</span><span class="s">"org.apache.cxf:cxf-bom:4.0.0"</span><span class="p">))</span> <i class="conum" data-value="1"></i><b>(1)</b>
     <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"jakarta.xml.ws:jakarta.xml.ws-api:4.0.0"</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
     <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"jakarta.annotation:jakarta.annotation-api:2.1.1"</span><span class="p">)</span>
 <span class="p">}</span></code></pre>
@@ -1127,7 +1224,7 @@ in Java 9 and eventually removed in Java 11. Refer to <a href="https://openjdk.j
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Import/Use the 4.0.0 platform (BOM) for all CXF artifacts in the <code>cxfCodegen</code> classpath.</td>
+<td>Specify 4.0.0 version for all CXF artifacts in the <code>cxfCodegen</code> classpath.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -1829,8 +1926,8 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.1.0-SNAPSHOT<br>
-Last updated 2023-03-04 17:06:56 UTC
+Version 1.2.0-SNAPSHOT<br>
+Last updated 2023-03-06 23:55:00 UTC
 </div>
 </div>
 <style>
