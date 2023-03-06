@@ -18,7 +18,6 @@ package io.mateo.cxf.codegen;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
@@ -99,8 +98,8 @@ class CxfCodegenPluginTests {
 		project.getTasks().register(testInfo.getDisplayName(), Wsdl2Java.class);
 
 		project.getTasks().withType(Wsdl2Java.class).all(wsdl2Java -> {
-			Set<Path> outputs = wsdl2Java.getOutputs().getFiles().getFiles().stream().map(File::toPath)
-					.collect(Collectors.toUnmodifiableSet());
+			Set<Path> outputs = wsdl2Java.getOutputs().getFiles().getFiles().stream()
+					.map(it -> it.toPath().toAbsolutePath()).collect(Collectors.toUnmodifiableSet());
 			assertThat(outputs).hasSize(1);
 			assertThat(outputs.iterator().next())
 					.endsWithRaw(Path.of("build", wsdl2Java.getName() + "-wsdl2java-generated-sources"));
@@ -134,7 +133,8 @@ class CxfCodegenPluginTests {
 
 		project.afterEvaluate(evaluated -> {
 			assertThat(java.getSrcDirs()).hasSize(expectedSize);
-			List<String> paths = java.getSrcDirs().stream().map(File::getAbsolutePath).collect(Collectors.toList());
+			List<String> paths = java.getSrcDirs().stream().map(it -> it.toPath().toAbsolutePath().toString())
+					.collect(Collectors.toList());
 			String outputDir = Path.of(evaluated.getBuildDir().getAbsolutePath(),
 					testInfo.getDisplayName() + "-wsdl2java-generated-sources").toFile().getAbsolutePath();
 			assertThat(paths).contains(outputDir);
@@ -153,7 +153,7 @@ class CxfCodegenPluginTests {
 
 		assertThat(java.getSrcDirs()).hasSize(expectedSize);
 
-		List<String> paths = java.getSrcDirs().stream().map(File::toPath).map(Path::toAbsolutePath).map(Path::toString)
+		List<String> paths = java.getSrcDirs().stream().map(it -> it.toPath().toAbsolutePath().toString())
 				.collect(Collectors.toList());
 		String outputDir = Path
 				.of(project.getBuildDir().getAbsolutePath(), testInfo.getDisplayName() + "-wsdl2java-generated-sources")
@@ -179,9 +179,10 @@ class CxfCodegenPluginTests {
 		project.getTasks().register(testInfo.getDisplayName(), Wsdl2Js.class);
 
 		project.getTasks().withType(Wsdl2Js.class).all(wsdl2Js -> {
-			Set<File> outputs = wsdl2Js.getOutputs().getFiles().getFiles();
+			Set<Path> outputs = wsdl2Js.getOutputs().getFiles().getFiles().stream()
+					.map(it -> it.toPath().toAbsolutePath()).collect(Collectors.toSet());
 			assertThat(outputs).hasSize(1);
-			assertThat(outputs.iterator().next().toPath())
+			assertThat(outputs.iterator().next())
 					.endsWithRaw(Path.of("build", wsdl2Js.getName() + "-wsdl2js-generated-sources"));
 			assertThat(wsdl2Js.getMainClass().get())
 					.isEqualTo("org.apache.cxf.tools.wsdlto.javascript.WSDLToJavaScript");
