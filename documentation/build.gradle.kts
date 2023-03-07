@@ -52,7 +52,9 @@ tasks {
     listOf(jar, javadocJar, sourcesJar).forEach { it { enabled = false } }
 
     val copyPluginApiDocs by registering(Copy::class) {
-        from(pluginApiDocsClasspath)
+        from(pluginApiDocsClasspath) {
+            exclude("**/*.jar")
+        }
         into(layout.buildDirectory.dir("plugin-api-docs"))
     }
 
