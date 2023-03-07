@@ -2,7 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-== [1.1.0] - ?
+== [1.2.0 - 2023-03-06
+
+- Introduce property to control CXF dependencies -- https://github.com/ciscoo/cxf-codegen-gradle/issues/72[#72]
+- Test against Gradle 8.0.2 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/75[#75]
+
+== [1.1.0] - 2023-02-26
 
 - Update Jakarta docs -- https://github.com/ciscoo/cxf-codegen-gradle/issues/58[#58]
 - Raise recommended Gradle version to align with Spring Boot 2.7.x -- https://github.com/ciscoo/cxf-codegen-gradle/issues/52[#52]
