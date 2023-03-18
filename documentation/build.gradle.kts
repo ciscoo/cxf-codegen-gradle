@@ -42,9 +42,9 @@ dependencies {
         project(
             mapOf(
                 "path" to ":cxf-codegen-gradle",
-                "configuration" to "apiDocs"
-            )
-        )
+                "configuration" to "apiDocs",
+            ),
+        ),
     )
 }
 
@@ -67,8 +67,8 @@ tasks {
                 "current-gradle-version" to GradleVersion.current().version,
                 "plugin-version" to version,
                 "outdir" to outputDir.absolutePath,
-                "cxf-version" to libs.versions.cxf.get()
-            )
+                "cxf-version" to libs.versions.cxf.get(),
+            ),
         )
         forkOptions {
             // To avoid warning, see https://github.com/asciidoctor/asciidoctor-gradle-plugin/issues/597
@@ -76,7 +76,7 @@ tasks {
                 "--add-opens",
                 "java.base/sun.nio.ch=ALL-UNNAMED",
                 "--add-opens",
-                "java.base/java.io=ALL-UNNAMED"
+                "java.base/java.io=ALL-UNNAMED",
             )
         }
     }

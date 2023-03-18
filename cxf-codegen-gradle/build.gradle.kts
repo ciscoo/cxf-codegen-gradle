@@ -32,7 +32,7 @@ spotless {
         targetExclude(
             fileTree(generateVersionAccessor.flatMap { provider { it.outputDirectory.get() } }) {
                 include("**/*.java")
-            }
+            },
         )
     }
 }
