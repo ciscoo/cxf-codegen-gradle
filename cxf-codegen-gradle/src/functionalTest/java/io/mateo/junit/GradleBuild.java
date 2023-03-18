@@ -130,8 +130,9 @@ public class GradleBuild {
 			throw new UncheckedIOException(ex);
 		}
 		// https://github.com/gradle/gradle/issues/23348
-		GradleRunner gradleRunner = GradleRunner.create().withProjectDir(this.projectDir.toFile())
-				.withPluginClasspath();
+		GradleRunner gradleRunner = GradleRunner.create()
+			.withProjectDir(this.projectDir.toFile())
+			.withPluginClasspath();
 		gradleRunner.withDebug(true);
 		if (this.gradleVersion != null) {
 			gradleRunner.withGradleVersion(this.gradleVersion);
@@ -209,8 +210,8 @@ public class GradleBuild {
 	private Path getSettingsContent() {
 		String scriptPathName = this.settings != null ? this.settings : "settings" + this.dsl.getExtension();
 		Path parentPath = Path.of("").toAbsolutePath();
-		return parentPath.resolve(
-				Path.of("src", "functionalTest", "resources", "io", "mateo", "cxf", "codegen", scriptPathName));
+		return parentPath
+			.resolve(Path.of("src", "functionalTest", "resources", "io", "mateo", "cxf", "codegen", scriptPathName));
 	}
 
 }

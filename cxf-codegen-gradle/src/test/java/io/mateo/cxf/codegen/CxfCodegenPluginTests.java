@@ -61,7 +61,7 @@ class CxfCodegenPluginTests {
 	@Test
 	void configurationCreated() {
 		Configuration configuration = this.project.getConfigurations()
-				.findByName(CxfCodegenPlugin.CXF_CODEGEN_CONFIGURATION_NAME);
+			.findByName(CxfCodegenPlugin.CXF_CODEGEN_CONFIGURATION_NAME);
 
 		assertThat(configuration).isNotNull();
 		assertThat(configuration.isVisible()).isFalse();
@@ -78,19 +78,20 @@ class CxfCodegenPluginTests {
 				"cxf-tools-wsdlto-frontend-javascript");
 
 		Configuration configuration = this.project.getConfigurations()
-				.getByName(CxfCodegenPlugin.CXF_CODEGEN_CONFIGURATION_NAME);
+			.getByName(CxfCodegenPlugin.CXF_CODEGEN_CONFIGURATION_NAME);
 
 		assertThat(configuration.getDependencies()).isNotEmpty();
 		assertThat(configuration.getDependencies()).extracting(Dependency::getName)
-				.containsExactlyElementsOf(expectedDependencies);
+			.containsExactlyElementsOf(expectedDependencies);
 		assertThat(configuration.getDependencies()).extracting(Dependency::getVersion)
-				.allMatch((version) -> version.equals(GeneratedVersionAccessor.CXF_VERSION));
+			.allMatch((version) -> version.equals(GeneratedVersionAccessor.CXF_VERSION));
 		assertThat(configuration.getDependencies().matching(spec)).singleElement()
-				.asInstanceOf(InstanceOfAssertFactories.type(ModuleDependency.class)).satisfies((dependency) -> {
-					assertThat(dependency.getExcludeRules()).singleElement()
-							.extracting((excludeRule) -> excludeRule.getGroup() + ":" + excludeRule.getModule())
-							.isEqualTo("org.apache.cxf:cxf-rt-frontend-simple");
-				});
+			.asInstanceOf(InstanceOfAssertFactories.type(ModuleDependency.class))
+			.satisfies((dependency) -> {
+				assertThat(dependency.getExcludeRules()).singleElement()
+					.extracting((excludeRule) -> excludeRule.getGroup() + ":" + excludeRule.getModule())
+					.isEqualTo("org.apache.cxf:cxf-rt-frontend-simple");
+			});
 	}
 
 	@Test
@@ -98,27 +99,35 @@ class CxfCodegenPluginTests {
 		project.getTasks().register(testInfo.getDisplayName(), Wsdl2Java.class);
 
 		project.getTasks().withType(Wsdl2Java.class).all(wsdl2Java -> {
-			Set<Path> outputs = wsdl2Java.getOutputs().getFiles().getFiles().stream()
-					.map(it -> it.toPath().toAbsolutePath()).collect(Collectors.toUnmodifiableSet());
+			Set<Path> outputs = wsdl2Java.getOutputs()
+				.getFiles()
+				.getFiles()
+				.stream()
+				.map(it -> it.toPath().toAbsolutePath())
+				.collect(Collectors.toUnmodifiableSet());
 			assertThat(outputs).hasSize(1);
 			assertThat(outputs.iterator().next())
-					.endsWithRaw(Path.of("build", wsdl2Java.getName() + "-wsdl2java-generated-sources"));
+				.endsWithRaw(Path.of("build", wsdl2Java.getName() + "-wsdl2java-generated-sources"));
 			assertThat(wsdl2Java.getMainClass().get()).isEqualTo("org.apache.cxf.tools.wsdlto.WSDLToJava");
 			// Can not resolve configuration in unit tests, so assert on error message.
 			assertThatCode(() -> wsdl2Java.getClasspath().getFiles())
-					.hasMessageContaining("configuration ':cxfCodegen'");
+				.hasMessageContaining("configuration ':cxfCodegen'");
 			assertThat(wsdl2Java.getGroup()).isEqualTo(CxfCodegenPlugin.WSDL2JAVA_GROUP);
 			assertThat(wsdl2Java.getDescription())
-					.isEqualTo(String.format("Generates Java sources for '%s'", testInfo.getDisplayName()));
-			assertThat(wsdl2Java.getArgumentProviders()).singleElement().extracting(it -> it.getClass().getSimpleName())
-					.isEqualTo("Wsdl2JavaArgumentProvider");
+				.isEqualTo(String.format("Generates Java sources for '%s'", testInfo.getDisplayName()));
+			assertThat(wsdl2Java.getArgumentProviders()).singleElement()
+				.extracting(it -> it.getClass().getSimpleName())
+				.isEqualTo("Wsdl2JavaArgumentProvider");
 			assertThat(wsdl2Java.getAddToMainSourceSet().get()).isTrue();
 			assertThat(
 					this.<org.gradle.api.internal.tasks.execution.DescribingAndSpec<? super org.gradle.api.internal.TaskInternal>>uncheckedCast(
-							wsdl2Java.getOnlyIf()).getSpecs()).hasSize(2).element(1)
-									.asInstanceOf(InstanceOfAssertFactories.type(Describable.class))
-									.extracting(Describable::getDisplayName)
-									.isEqualTo("run only if 'wsdl' or 'wsdlUrl' is set");
+							wsdl2Java.getOnlyIf())
+						.getSpecs())
+				.hasSize(2)
+				.element(1)
+				.asInstanceOf(InstanceOfAssertFactories.type(Describable.class))
+				.extracting(Describable::getDisplayName)
+				.isEqualTo("run only if 'wsdl' or 'wsdlUrl' is set");
 		});
 	}
 
@@ -133,10 +142,15 @@ class CxfCodegenPluginTests {
 
 		project.afterEvaluate(evaluated -> {
 			assertThat(java.getSrcDirs()).hasSize(expectedSize);
-			List<String> paths = java.getSrcDirs().stream().map(it -> it.toPath().toAbsolutePath().toString())
-					.collect(Collectors.toList());
-			String outputDir = Path.of(evaluated.getBuildDir().getAbsolutePath(),
-					testInfo.getDisplayName() + "-wsdl2java-generated-sources").toFile().getAbsolutePath();
+			List<String> paths = java.getSrcDirs()
+				.stream()
+				.map(it -> it.toPath().toAbsolutePath().toString())
+				.collect(Collectors.toList());
+			String outputDir = Path
+				.of(evaluated.getBuildDir().getAbsolutePath(),
+						testInfo.getDisplayName() + "-wsdl2java-generated-sources")
+				.toFile()
+				.getAbsolutePath();
 			assertThat(paths).contains(outputDir);
 		});
 	}
@@ -148,16 +162,20 @@ class CxfCodegenPluginTests {
 		SourceDirectorySet java = sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME).getJava();
 		int expectedSize = java.getSrcDirs().size();
 
-		project.getTasks().register(testInfo.getDisplayName(), Wsdl2Java.class,
-				wsdl2java -> wsdl2java.getAddToMainSourceSet().set(false));
+		project.getTasks()
+			.register(testInfo.getDisplayName(), Wsdl2Java.class,
+					wsdl2java -> wsdl2java.getAddToMainSourceSet().set(false));
 
 		assertThat(java.getSrcDirs()).hasSize(expectedSize);
 
-		List<String> paths = java.getSrcDirs().stream().map(it -> it.toPath().toAbsolutePath().toString())
-				.collect(Collectors.toList());
+		List<String> paths = java.getSrcDirs()
+			.stream()
+			.map(it -> it.toPath().toAbsolutePath().toString())
+			.collect(Collectors.toList());
 		String outputDir = Path
-				.of(project.getBuildDir().getAbsolutePath(), testInfo.getDisplayName() + "-wsdl2java-generated-sources")
-				.toFile().getAbsolutePath();
+			.of(project.getBuildDir().getAbsolutePath(), testInfo.getDisplayName() + "-wsdl2java-generated-sources")
+			.toFile()
+			.getAbsolutePath();
 		assertThat(paths).isNotEmpty().doesNotContain(outputDir);
 	}
 
@@ -169,9 +187,10 @@ class CxfCodegenPluginTests {
 
 		Task wsdl2java = project.getTasks().getByName(CxfCodegenPlugin.WSDL2JAVA_TASK_NAME);
 		assertThat(wsdl2java.getDependsOn()).satisfies(dependencies -> assertThat(dependencies).singleElement()
-				.asInstanceOf(InstanceOfAssertFactories.type(TaskCollection.class)).satisfies(tasks -> {
-					assertThat(tasks).containsExactlyInAnyOrder(a.get(), b.get());
-				}));
+			.asInstanceOf(InstanceOfAssertFactories.type(TaskCollection.class))
+			.satisfies(tasks -> {
+				assertThat(tasks).containsExactlyInAnyOrder(a.get(), b.get());
+			}));
 	}
 
 	@Test
@@ -179,20 +198,25 @@ class CxfCodegenPluginTests {
 		project.getTasks().register(testInfo.getDisplayName(), Wsdl2Js.class);
 
 		project.getTasks().withType(Wsdl2Js.class).all(wsdl2Js -> {
-			Set<Path> outputs = wsdl2Js.getOutputs().getFiles().getFiles().stream()
-					.map(it -> it.toPath().toAbsolutePath()).collect(Collectors.toSet());
+			Set<Path> outputs = wsdl2Js.getOutputs()
+				.getFiles()
+				.getFiles()
+				.stream()
+				.map(it -> it.toPath().toAbsolutePath())
+				.collect(Collectors.toSet());
 			assertThat(outputs).hasSize(1);
 			assertThat(outputs.iterator().next())
-					.endsWithRaw(Path.of("build", wsdl2Js.getName() + "-wsdl2js-generated-sources"));
+				.endsWithRaw(Path.of("build", wsdl2Js.getName() + "-wsdl2js-generated-sources"));
 			assertThat(wsdl2Js.getMainClass().get())
-					.isEqualTo("org.apache.cxf.tools.wsdlto.javascript.WSDLToJavaScript");
+				.isEqualTo("org.apache.cxf.tools.wsdlto.javascript.WSDLToJavaScript");
 			// Can not resolve configuration in unit tests, so assert on error message.
 			assertThatCode(() -> wsdl2Js.getClasspath().getFiles()).hasMessageContaining("configuration ':cxfCodegen'");
 			assertThat(wsdl2Js.getGroup()).isEqualTo(CxfCodegenPlugin.WSDL2JS_GROUP);
 			assertThat(wsdl2Js.getDescription())
-					.isEqualTo(String.format("Generates JavaScript sources for '%s'", testInfo.getDisplayName()));
-			assertThat(wsdl2Js.getArgumentProviders()).singleElement().extracting(it -> it.getClass().getSimpleName())
-					.isEqualTo("Wsdl2JsArgumentProvider");
+				.isEqualTo(String.format("Generates JavaScript sources for '%s'", testInfo.getDisplayName()));
+			assertThat(wsdl2Js.getArgumentProviders()).singleElement()
+				.extracting(it -> it.getClass().getSimpleName())
+				.isEqualTo("Wsdl2JsArgumentProvider");
 		});
 	}
 
@@ -214,8 +238,8 @@ class CxfCodegenPluginTests {
 	void extensionCreatedWithDefaults() {
 		var extension = this.project.getExtensions().findByType(CxfCodegenExtension.class);
 
-		assertThat(extension).isNotNull().satisfies(
-				ext -> assertThat(ext.getCxfVersion().get()).isEqualTo(GeneratedVersionAccessor.CXF_VERSION));
+		assertThat(extension).isNotNull()
+			.satisfies(ext -> assertThat(ext.getCxfVersion().get()).isEqualTo(GeneratedVersionAccessor.CXF_VERSION));
 	}
 
 	@SuppressWarnings("unchecked")

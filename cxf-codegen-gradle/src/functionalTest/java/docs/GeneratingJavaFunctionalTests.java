@@ -42,8 +42,9 @@ class GeneratingJavaFunctionalTests {
 	void defaultToolOptions(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.script(scriptFor("default-tool-options")).build("verify");
 
-		assertThat(result.getOutput()).contains("first markGenerated true").contains("second markGenerated true")
-				.contains("third markGenerated true");
+		assertThat(result.getOutput()).contains("first markGenerated true")
+			.contains("second markGenerated true")
+			.contains("third markGenerated true");
 	}
 
 	@TestTemplate
@@ -69,8 +70,10 @@ class GeneratingJavaFunctionalTests {
 
 		BuildResult result = runner.build();
 
-		assertThat(result.getOutput()).doesNotContain("DEBUG org.apache.cxf.common.logging.LogUtils",
-				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader").contains("DEBUG org.apache.velocity");
+		assertThat(result.getOutput())
+			.doesNotContain("DEBUG org.apache.cxf.common.logging.LogUtils",
+					"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader")
+			.contains("DEBUG org.apache.velocity");
 	}
 
 	@TestTemplate
@@ -85,7 +88,7 @@ class GeneratingJavaFunctionalTests {
 		BuildResult result = gradleBuild.script(scriptFor("jakarta")).prepareRunner("wsdl2java").build();
 
 		assertThat(result.getTasks()).extracting(BuildTask::getOutcome)
-				.allMatch(outcome -> outcome == TaskOutcome.SUCCESS);
+			.allMatch(outcome -> outcome == TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
 			Path generatedSources = projectDir.resolve(Path.of("build", "calculator-wsdl2java-generated-sources"));
 			assertThat(generatedSources).exists().isNotEmptyDirectory();
@@ -97,8 +100,8 @@ class GeneratingJavaFunctionalTests {
 			assertThat(sourcesDir).hasSize(12);
 
 			List<Path> filtered = sourcesDir.stream()
-					.filter(it -> it.getFileName().toString().equals("Calculator.java"))
-					.collect(Collectors.toUnmodifiableList());
+				.filter(it -> it.getFileName().toString().equals("Calculator.java"))
+				.collect(Collectors.toUnmodifiableList());
 			assertThat(filtered).hasSize(1);
 			Path calculatorSource = filtered.get(0);
 

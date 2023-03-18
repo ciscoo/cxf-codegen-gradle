@@ -64,7 +64,9 @@ class Wsdl2JsOptionsTests {
 		var expected = List.of("-d", getOutputDirFor(testInfo), "-quiet", this.wsdl.toString());
 
 		var actual = createTask(testInfo.getDisplayName(), options -> options.getQuiet().set(true))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -74,7 +76,9 @@ class Wsdl2JsOptionsTests {
 		var expected = List.of("-d", getOutputDirFor(testInfo), "-verbose", this.wsdl.toString());
 
 		var actual = createTask(testInfo.getDisplayName(), options -> options.getVerbose().set(true))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -87,7 +91,7 @@ class Wsdl2JsOptionsTests {
 		}).getArgumentProviders().get(0);
 
 		assertThatExceptionOfType(GradleException.class).isThrownBy(argumentProviders::asArguments)
-				.withMessage("Verbose and quite are mutually exclusive; only one can be enabled, not both.");
+			.withMessage("Verbose and quite are mutually exclusive; only one can be enabled, not both.");
 	}
 
 	@Test
@@ -95,7 +99,9 @@ class Wsdl2JsOptionsTests {
 		var expected = List.of("-d", getOutputDirFor(testInfo), "-validate=true", this.wsdl.toString());
 
 		var actual = createTask(testInfo.getDisplayName(), options -> options.getValidate().set("true"))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -107,7 +113,9 @@ class Wsdl2JsOptionsTests {
 				this.wsdl.toString());
 
 		var actual = createTask(testInfo.getDisplayName(), options -> options.getCatalog().set(catalog.toFile()))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -118,11 +126,12 @@ class Wsdl2JsOptionsTests {
 				"bar=http://www.example.com/Example/V1/ExampleService", "-d", getOutputDirFor(testInfo),
 				this.wsdl.toString());
 
-		var actual = createTask(testInfo.getDisplayName(),
-				options -> options.getPackagePrefixes().set(List.of(
-						new Wsdl2JsOptions.UriPrefixPair("http://www.example.com/Example/V1/ExampleService", "foo"),
-						new Wsdl2JsOptions.UriPrefixPair("http://www.example.com/Example/V1/ExampleService", "bar"))))
-								.getArgumentProviders().get(0).asArguments();
+		var actual = createTask(testInfo.getDisplayName(), options -> options.getPackagePrefixes()
+			.set(List.of(new Wsdl2JsOptions.UriPrefixPair("http://www.example.com/Example/V1/ExampleService", "foo"),
+					new Wsdl2JsOptions.UriPrefixPair("http://www.example.com/Example/V1/ExampleService", "bar"))))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -132,7 +141,9 @@ class Wsdl2JsOptionsTests {
 		var expected = List.of("-wv", "1.1", "-d", getOutputDirFor(testInfo), this.wsdl.toString());
 
 		var actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlVersion().set("1.1"))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -159,8 +170,9 @@ class Wsdl2JsOptionsTests {
 	}
 
 	private Wsdl2Js createTask(String taskName) {
-		return this.project.getTasks().create(taskName, Wsdl2Js.class,
-				wsdl2java -> wsdl2java.toolOptions(options -> options.getWsdl().set(this.wsdl.toString())));
+		return this.project.getTasks()
+			.create(taskName, Wsdl2Js.class,
+					wsdl2java -> wsdl2java.toolOptions(options -> options.getWsdl().set(this.wsdl.toString())));
 	}
 
 }

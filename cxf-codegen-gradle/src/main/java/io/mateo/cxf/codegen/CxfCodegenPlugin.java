@@ -87,8 +87,8 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	}
 
 	private CxfCodegenExtension createExtension(Project project) {
-		CxfCodegenExtension extension = project.getExtensions().create(CxfCodegenExtension.EXTENSION_NAME,
-				CxfCodegenExtension.class);
+		CxfCodegenExtension extension = project.getExtensions()
+			.create(CxfCodegenExtension.EXTENSION_NAME, CxfCodegenExtension.class);
 		extension.getCxfVersion().convention(GeneratedVersionAccessor.CXF_VERSION);
 		return extension;
 	}
@@ -166,9 +166,9 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	private void addToSourceSet(Project project) {
 		project.afterEvaluate(evaluated -> evaluated.getTasks().withType(Wsdl2Java.class).all(wsdl2Java -> {
 			if (wsdl2Java.getAddToMainSourceSet().get()) {
-				evaluated.getExtensions().configure(SourceSetContainer.class,
-						sourceSets -> sourceSets.named(SourceSet.MAIN_SOURCE_SET_NAME,
-								main -> main.getJava().srcDir(wsdl2Java.getWsdl2JavaOptions().getOutputDir())));
+				evaluated.getExtensions()
+					.configure(SourceSetContainer.class, sourceSets -> sourceSets.named(SourceSet.MAIN_SOURCE_SET_NAME,
+							main -> main.getJava().srcDir(wsdl2Java.getWsdl2JavaOptions().getOutputDir())));
 			}
 		}));
 	}
@@ -227,7 +227,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 
 		// The Maven plugin excludes cxf-rt-frontend-simple, so exclude it here as well.
 		ModuleDependency dependency = (ModuleDependency) dependencyHandler
-				.create("org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:" + cxfVersion);
+			.create("org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:" + cxfVersion);
 		Map<String, String> excludeProperties = new HashMap<>();
 		excludeProperties.put("group", "org.apache.cxf");
 		excludeProperties.put("module", "cxf-rt-frontend-simple");

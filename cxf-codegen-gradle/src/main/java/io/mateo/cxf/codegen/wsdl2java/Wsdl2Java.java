@@ -36,8 +36,9 @@ public class Wsdl2Java extends JavaExec {
 
 	private final Wsdl2JavaOptions wsdl2JavaOptions;
 
-	private final Property<Boolean> addToMainSourceSet = getProject().getObjects().property(Boolean.class)
-			.convention(true);
+	private final Property<Boolean> addToMainSourceSet = getProject().getObjects()
+		.property(Boolean.class)
+		.convention(true);
 
 	public Wsdl2Java() {
 		Wsdl2JavaOptions options;
@@ -111,8 +112,10 @@ public class Wsdl2Java extends JavaExec {
 			arguments.add(outputDir);
 			if (options.getBindingFiles().isPresent()) {
 				options.getBindingFiles().get().forEach(binding -> {
-					RegularFile bindingFile = Wsdl2Java.this.getProject().getLayout().getProjectDirectory()
-							.file(binding);
+					RegularFile bindingFile = Wsdl2Java.this.getProject()
+						.getLayout()
+						.getProjectDirectory()
+						.file(binding);
 					arguments.add("-b");
 					arguments.add(bindingFile.getAsFile().toPath().toAbsolutePath().toUri().toString());
 				});

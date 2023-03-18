@@ -53,7 +53,7 @@ class PluginConfigurationFunctionalTests {
 		var result = gradleBuild.script(scriptFor("managing-dependency-versions-extension")).build("verify");
 
 		assertThat(result.getOutput())
-				.doesNotContain("Configured CXF version = " + GeneratedVersionAccessor.CXF_VERSION);
+			.doesNotContain("Configured CXF version = " + GeneratedVersionAccessor.CXF_VERSION);
 		assertThat(result.getOutput()).contains("Configured CXF version = 3.2.0");
 		assertThat(result.getOutput()).contains(
 				"[org.apache.cxf:cxf-core:3.2.0, org.apache.cxf:cxf-tools-common:3.2.0, org.apache.cxf:cxf-tools-wsdlto-core:3.2.0, org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:3.2.0]");
@@ -62,7 +62,7 @@ class PluginConfigurationFunctionalTests {
 	String scriptFor(String name) {
 		final Path rootDir = Path.of("").toAbsolutePath().getParent();
 		Path scriptPath = rootDir
-				.resolve(Path.of("documentation", "src", "docs", "gradle", "plugin-configuration", name));
+			.resolve(Path.of("documentation", "src", "docs", "gradle", "plugin-configuration", name));
 		return scriptPath.toString();
 	}
 

@@ -74,7 +74,7 @@ public abstract class Wsdl2Js extends JavaExec {
 			if (options.getCatalog().isPresent()) {
 				arguments.add("-catalog");
 				arguments
-						.add(options.getCatalog().map(it -> it.getAsFile().toPath().toAbsolutePath().toString()).get());
+					.add(options.getCatalog().map(it -> it.getAsFile().toPath().toAbsolutePath().toString()).get());
 			}
 			arguments.add("-d");
 			arguments.add(options.getOutputDir().get().getAsFile().getAbsolutePath());

@@ -54,8 +54,9 @@ class AdditionalPluginsFunctionalTests {
 
 		BuildResult result = runner.build();
 
-		assertThat(result.task(":calculator")).isNotNull().extracting(BuildTask::getOutcome)
-				.isEqualTo(TaskOutcome.SUCCESS);
+		assertThat(result.task(":calculator")).isNotNull()
+			.extracting(BuildTask::getOutcome)
+			.isEqualTo(TaskOutcome.SUCCESS);
 	}
 
 }

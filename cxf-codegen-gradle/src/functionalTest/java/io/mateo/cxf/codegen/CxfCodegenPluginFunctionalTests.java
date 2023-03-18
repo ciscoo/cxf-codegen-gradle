@@ -44,16 +44,18 @@ class CxfCodegenPluginFunctionalTests {
 	void skipWhenWsdlIsMissing(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.build("calculator");
 
-		assertThat(result.task(":calculator")).isNotNull().extracting(BuildTask::getOutcome)
-				.isEqualTo(TaskOutcome.SKIPPED);
+		assertThat(result.task(":calculator")).isNotNull()
+			.extracting(BuildTask::getOutcome)
+			.isEqualTo(TaskOutcome.SKIPPED);
 	}
 
 	@TestTemplate
 	void javaSourceGenerationFromWsdl(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.build("calculator");
 
-		assertThat(result.task(":calculator")).isNotNull().extracting(BuildTask::getOutcome)
-				.isEqualTo(TaskOutcome.SUCCESS);
+		assertThat(result.task(":calculator")).isNotNull()
+			.extracting(BuildTask::getOutcome)
+			.isEqualTo(TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
 			Path generatedSources = projectDir.resolve(Path.of("build", "calculator-wsdl2java-generated-sources"));
 			assertThat(generatedSources).exists().isNotEmptyDirectory();
@@ -64,8 +66,11 @@ class CxfCodegenPluginFunctionalTests {
 			List<Path> sourcesDir = Files.list(packageDir).collect(Collectors.toUnmodifiableList());
 			assertThat(sourcesDir).isNotEmpty().hasSize(12);
 
-			List<String> generatedFiles = sourcesDir.stream().map(Path::getFileName).map(Path::toString).sorted()
-					.collect(Collectors.toList());
+			List<String> generatedFiles = sourcesDir.stream()
+				.map(Path::getFileName)
+				.map(Path::toString)
+				.sorted()
+				.collect(Collectors.toList());
 			List<String> expectedFiles = List.of("Add.java", "AddResponse.java", "Calculator.java",
 					"CalculatorSoap.java", "Divide.java", "DivideResponse.java", "Multiply.java",
 					"MultiplyResponse.java", "ObjectFactory.java", "Subtract.java", "SubtractResponse.java",
@@ -86,8 +91,9 @@ class CxfCodegenPluginFunctionalTests {
 	void jsSourceGenerationFromWsdl(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.build("calculator");
 
-		assertThat(result.task(":calculator")).isNotNull().extracting(BuildTask::getOutcome)
-				.isEqualTo(TaskOutcome.SUCCESS);
+		assertThat(result.task(":calculator")).isNotNull()
+			.extracting(BuildTask::getOutcome)
+			.isEqualTo(TaskOutcome.SUCCESS);
 		assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
 			var generatedSources = projectDir.resolve(Path.of("build", "calculator-wsdl2js-generated-sources"));
 			assertThat(generatedSources).exists().isNotEmptyDirectory();

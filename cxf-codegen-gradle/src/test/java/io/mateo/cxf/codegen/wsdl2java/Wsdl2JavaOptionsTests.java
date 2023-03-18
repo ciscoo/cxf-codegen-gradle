@@ -64,7 +64,9 @@ class Wsdl2JavaOptionsTests {
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
 				options -> options.getPackageNames().set(List.of("com.example.foo", "com.example.bar")))
-						.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -75,8 +77,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getNamespaceExcludes().set(List.of("foo", "bar"))).getArgumentProviders().get(0)
-						.asArguments();
+				options -> options.getNamespaceExcludes().set(List.of("foo", "bar")))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -84,15 +88,30 @@ class Wsdl2JavaOptionsTests {
 	@Test
 	void bindingFiles(TestInfo testInfo) {
 		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-b",
-				this.project.getLayout().getProjectDirectory().file("foo").getAsFile().toPath().toAbsolutePath().toUri()
-						.toString(),
-				"-b", this.project.getLayout().getProjectDirectory().file("bar").getAsFile().toPath().toAbsolutePath()
-						.toUri().toString(),
+				this.project.getLayout()
+					.getProjectDirectory()
+					.file("foo")
+					.getAsFile()
+					.toPath()
+					.toAbsolutePath()
+					.toUri()
+					.toString(),
+				"-b",
+				this.project.getLayout()
+					.getProjectDirectory()
+					.file("bar")
+					.getAsFile()
+					.toPath()
+					.toAbsolutePath()
+					.toUri()
+					.toString(),
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getBindingFiles().set(List.of("foo", "bar"))).getArgumentProviders().get(0)
-						.asArguments();
+				options -> options.getBindingFiles().set(List.of("foo", "bar")))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -103,7 +122,9 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getFrontend().set("foo"))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -114,7 +135,9 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getDatabinding().set("foo"))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -125,7 +148,9 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlVersion().set("foo"))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -136,7 +161,9 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getCatalog().set("foo"))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -147,7 +174,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getExtendedSoapHeaders().set(true)).getArgumentProviders().get(0).asArguments();
+				options -> options.getExtendedSoapHeaders().set(true))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -158,7 +188,9 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getNoTypes().set(true))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -169,7 +201,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getAllowElementRefs().set(true)).getArgumentProviders().get(0).asArguments();
+				options -> options.getAllowElementRefs().set(true))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -180,7 +215,9 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getValidateWsdl().set("foo"))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -191,7 +228,9 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getMarkGenerated().set(true))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -202,7 +241,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getSuppressGeneratedDate().set(true)).getArgumentProviders().get(0).asArguments();
+				options -> options.getSuppressGeneratedDate().set(true))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -213,7 +255,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getDefaultExcludesNamespace().set(true)).getArgumentProviders().get(0).asArguments();
+				options -> options.getDefaultExcludesNamespace().set(true))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -224,8 +269,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getDefaultNamespacePackageMapping().set(true)).getArgumentProviders().get(0)
-						.asArguments();
+				options -> options.getDefaultNamespacePackageMapping().set(true))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -236,7 +283,9 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getServiceName().set("foo"))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -247,7 +296,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getFaultSerialVersionUid().set("1234")).getArgumentProviders().get(0).asArguments();
+				options -> options.getFaultSerialVersionUid().set("1234"))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -259,7 +311,9 @@ class Wsdl2JavaOptionsTests {
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
 				options -> options.getExceptionSuper().set(UncheckedIOException.class.toString()))
-						.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -270,8 +324,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getSeiSuper().set(List.of("foo", "bar"))).getArgumentProviders().get(0)
-						.asArguments();
+				options -> options.getSeiSuper().set(List.of("foo", "bar")))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -282,7 +338,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getAutoNameResolution().set(true)).getArgumentProviders().get(0).asArguments();
+				options -> options.getAutoNameResolution().set(true))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -293,7 +352,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getNoAddressBinding().set(true)).getArgumentProviders().get(0).asArguments();
+				options -> options.getNoAddressBinding().set(true))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -304,8 +366,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getXjcArgs().set(List.of("-Xts", "-Xwsdlextension"))).getArgumentProviders().get(0)
-						.asArguments();
+				options -> options.getXjcArgs().set(List.of("-Xts", "-Xwsdlextension")))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -316,8 +380,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getExtraArgs().set(List.of("-client", "-all"))).getArgumentProviders().get(0)
-						.asArguments();
+				options -> options.getExtraArgs().set(List.of("-client", "-all")))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -328,7 +394,9 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlLocation().set("foo"))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -339,7 +407,9 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlList().set(true))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -350,7 +420,9 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getEncoding().set("UTF-8"))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -361,7 +433,9 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getVerbose().set(true))
-				.getArgumentProviders().get(0).asArguments();
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -372,8 +446,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getAsyncMethods().set(List.of("foo", "bar"))).getArgumentProviders().get(0)
-						.asArguments();
+				options -> options.getAsyncMethods().set(List.of("foo", "bar")))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -384,8 +460,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getBareMethods().set(List.of("foo", "bar"))).getArgumentProviders().get(0)
-						.asArguments();
+				options -> options.getBareMethods().set(List.of("foo", "bar")))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -396,8 +474,10 @@ class Wsdl2JavaOptionsTests {
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
-				options -> options.getMimeMethods().set(List.of("foo", "bar"))).getArgumentProviders().get(0)
-						.asArguments();
+				options -> options.getMimeMethods().set(List.of("foo", "bar")))
+			.getArgumentProviders()
+			.get(0)
+			.asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
@@ -427,8 +507,9 @@ class Wsdl2JavaOptionsTests {
 		assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> {
 			createTaskWithConfiguration(testInfo.getDisplayName(), options -> {
 			}).getArgumentProviders().get(0).asArguments();
-		}).withMessage(
-				"Cannot generate arguments for task 'bothWsdlFileAndWsdlUrlMissingResultsInFailure' because 'wsdl' and 'wsdlUrl' have no value; at least one of the options must be configured");
+		})
+			.withMessage(
+					"Cannot generate arguments for task 'bothWsdlFileAndWsdlUrlMissingResultsInFailure' because 'wsdl' and 'wsdlUrl' have no value; at least one of the options must be configured");
 	}
 
 	private String getOutputDirFor(TestInfo testInfo) {
@@ -444,13 +525,14 @@ class Wsdl2JavaOptionsTests {
 	}
 
 	private Wsdl2Java createTask(String taskName) {
-		return this.project.getTasks().create(taskName, Wsdl2Java.class,
-				wsdl2java -> wsdl2java.toolOptions(options -> options.getWsdl().set(this.wsdl.toFile())));
+		return this.project.getTasks()
+			.create(taskName, Wsdl2Java.class,
+					wsdl2java -> wsdl2java.toolOptions(options -> options.getWsdl().set(this.wsdl.toFile())));
 	}
 
 	private Wsdl2Java createTaskWithConfiguration(String taskName, Action<? super Wsdl2JavaOptions> configurer) {
-		return this.project.getTasks().create(taskName, Wsdl2Java.class,
-				wsdl2java -> wsdl2java.toolOptions(configurer));
+		return this.project.getTasks()
+			.create(taskName, Wsdl2Java.class, wsdl2java -> wsdl2java.toolOptions(configurer));
 	}
 
 }

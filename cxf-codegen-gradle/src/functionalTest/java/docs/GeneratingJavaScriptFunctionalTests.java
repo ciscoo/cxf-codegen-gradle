@@ -49,7 +49,7 @@ class GeneratingJavaScriptFunctionalTests {
 	String scriptFor(String name) {
 		final var rootDir = Path.of("").toAbsolutePath().getParent();
 		var scriptPath = rootDir
-				.resolve(Path.of("documentation", "src", "docs", "gradle", "generating-javascript", name));
+			.resolve(Path.of("documentation", "src", "docs", "gradle", "generating-javascript", name));
 		return scriptPath.toString();
 	}
 

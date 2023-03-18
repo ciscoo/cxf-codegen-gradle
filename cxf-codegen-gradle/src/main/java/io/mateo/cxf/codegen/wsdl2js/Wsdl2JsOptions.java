@@ -67,7 +67,7 @@ public abstract class Wsdl2JsOptions {
 		this.verbose = objects.property(Boolean.class);
 		this.quiet = objects.property(Boolean.class);
 		this.outputDir = objects.directoryProperty()
-				.convention(layout.getBuildDirectory().dir(taskName + "-wsdl2js-generated-sources"));
+			.convention(layout.getBuildDirectory().dir(taskName + "-wsdl2js-generated-sources"));
 	}
 
 	/**
@@ -206,7 +206,8 @@ public abstract class Wsdl2JsOptions {
 		@Override
 		public String toString() {
 			return new StringJoiner(", ", UriPrefixPair.class.getSimpleName() + "[", "]").add("uri='" + uri + "'")
-					.add("prefix='" + prefix + "'").toString();
+				.add("prefix='" + prefix + "'")
+				.toString();
 		}
 
 	}
