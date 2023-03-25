@@ -4,3 +4,6 @@ cxf = "3.5.5"
 [libraries]
 junitBom = { module = "org.junit:junit-bom", version = "5.9.1" }
 assertj = { module = "org.assertj:assertj-core", version = "3.24.2" }
+javapoet = { module = "com.squareup:javapoet", version = "1.13.0" }
+gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version = "6.17.0" }
+gradle-springJavaFormat = { module = "io.spring.javaformat:spring-javaformat-gradle-plugin", version = "0.0.38" }
