@@ -9,8 +9,14 @@ on:
       - "*"
 
 jobs:
-  Linux:
-    runs-on: ubuntu-latest
+  main-build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - macos-latest
+          - ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Main Build
@@ -34,7 +40,7 @@ jobs:
 
   publish_snapshot_artifacts:
     name: Publish Snapshot Artifacts
-    needs: linux
+    needs: main-build
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
     steps:
@@ -49,7 +55,7 @@ jobs:
 
   update_snapshot_documentation:
     name: Update Snapshot Documentation
-    needs: linux
+    needs: main-build
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
     steps:
