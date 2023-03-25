@@ -301,6 +301,18 @@ public class Wsdl2JavaOptions {
 	/**
 	 * Specifies the value of the {@code @WebServiceClient} annotation's
 	 * {@code wsdlLocation} property.
+	 * <p>
+	 * By default, the {@code wsdl2java} tool will use the value of {@link #wsdlUrl}. This
+	 * may lead to runtime issues such as {@code FileNotFoundException} being thrown.
+	 * Consider setting this value to a location that your application understands. For
+	 * example (Kotlin DSL), a classpath location: <pre>
+	 * tasks.register("example", Wsdl2Java::class) {
+	 * 	toolOptions {
+	 * 		wsdlUrl.set(layout.projectDirectory.file("src/main/resources/wsdl/example.wsdl").asFile.absolutePath)
+	 * 		wsdlLocation.set("classpath:wsdl/example.wsdl")
+	 *        }
+	 * }
+	 * </pre>
 	 * @return wsdl location
 	 */
 	@Input
