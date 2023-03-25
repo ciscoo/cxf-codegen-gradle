@@ -1,4 +1,4 @@
-name: Build
+name: CI
 
 on:
   push:
@@ -9,16 +9,64 @@ on:
       - "*"
 
 jobs:
-  main-build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-          - windows-latest
-          - macos-latest
-          - ubuntu-latest
+  Linux:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: Main Build
+        uses: ./.github/actions/run-gradle
+      - name: Functional Tests (Gradle 8)
+        uses: ./.github/actions/run-gradle
+        with:
+          arguments: functionalTest --parallel
+      - name: Functional Tests (Gradle 7)
+        uses: ./.github/actions/run-gradle
+        with:
+          arguments: functionalTest --parallel -Dgradle7=true
+      - name: Functional Tests (Gradle 6)
+        uses: ./.github/actions/run-gradle
+        with:
+          arguments: functionalTest --parallel -Dgradle6=true
+      - name: Functional Tests (Gradle 5)
+        uses: ./.github/actions/run-gradle
+        with:
+          arguments: functionalTest --parallel -Dgradle5=true
+  Windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: Main Build
+        uses: ./.github/actions/run-gradle
+      - name: Functional Tests (Gradle 8)
+        uses: ./.github/actions/run-gradle
+        with:
+          arguments: functionalTest --parallel
+      - name: Functional Tests (Gradle 7)
+        uses: ./.github/actions/run-gradle
+        with:
+          arguments: functionalTest --parallel -Dgradle7=true
+      - name: Functional Tests (Gradle 6)
+        uses: ./.github/actions/run-gradle
+        with:
+          arguments: functionalTest --parallel -Dgradle6=true
+      - name: Functional Tests (Gradle 5)
+        uses: ./.github/actions/run-gradle
+        with:
+          arguments: functionalTest --parallel -Dgradle5=true
+
+  macOS:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
       - name: Main Build
         uses: ./.github/actions/run-gradle
       - name: Functional Tests (Gradle 8)
@@ -40,7 +88,7 @@ jobs:
 
   publish_snapshot_artifacts:
     name: Publish Snapshot Artifacts
-    needs: main-build
+    needs: linux
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
     steps:
@@ -55,7 +103,7 @@ jobs:
 
   update_snapshot_documentation:
     name: Update Snapshot Documentation
-    needs: main-build
+    needs: linux
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
     steps:
