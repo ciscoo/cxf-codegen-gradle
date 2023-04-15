@@ -513,8 +513,7 @@ class Wsdl2JavaOptionsTests {
 	}
 
 	private String getOutputDirFor(TestInfo testInfo) {
-		return String.format("%s/%s-wsdl2java-generated-sources", this.outputDir.toAbsolutePath(),
-				testInfo.getDisplayName());
+		return this.outputDir.resolve(testInfo.getDisplayName() + "-wsdl2java-generated-sources").toString();
 	}
 
 	private Wsdl2Java createTask(String taskName, Action<? super Wsdl2JavaOptions> configurer) {

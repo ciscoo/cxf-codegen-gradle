@@ -34,15 +34,16 @@ class GeneratingJavaScriptFunctionalTests {
 	void minimalTaskUsage(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.script(scriptFor("minimal-task-usage")).prepareRunner("verify").build();
 
-		assertThat(result.getOutput()).contains("/path/to/example.wsdl");
+		assertThat(result.getOutput()).contains(Path.of("path", "to", "example.wsdl").toString());
 	}
 
 	@TestTemplate
 	void toolOptions(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.script(scriptFor("tool-options")).prepareRunner("verify").build();
 
-		assertThat(result.getOutput()).contains("/path/to/example.wsdl", "/build/example-generated-js",
-				"/path/to/example-catalog.xml",
+		assertThat(result.getOutput()).contains(Path.of("path", "to", "example.wsdl").toString(),
+				Path.of("build", "example-generated-js").toString(),
+				Path.of("path", "to", "example-catalog.xml").toString(),
 				"packagePrefixes=[UriPrefixPair[uri='https://example.com', prefix='example']]", "verbose=true");
 	}
 

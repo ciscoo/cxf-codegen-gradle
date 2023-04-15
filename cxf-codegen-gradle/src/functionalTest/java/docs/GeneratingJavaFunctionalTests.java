@@ -127,14 +127,15 @@ class GeneratingJavaFunctionalTests {
 	void minimalTaskUsage(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.script(scriptFor("minimal-task-usage")).prepareRunner("verify").build();
 
-		assertThat(result.getOutput()).contains("/path/to/example.wsdl");
+		assertThat(result.getOutput()).contains(Path.of("path", "to", "example.wsdl").toString());
 	}
 
 	@TestTemplate
 	void toolOptions(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.script(scriptFor("tool-options")).prepareRunner("verify").build();
 
-		assertThat(result.getOutput()).contains("/path/to/example.wsdl", "/build/generated-java", "markGenerated=true",
+		assertThat(result.getOutput()).contains(Path.of("path", "to", "example.wsdl").toString(),
+				Path.of("build", "generated-java").toString(), "markGenerated=true",
 				"packageNames=[com.example, com.foo.bar]", "asyncMethods=[foo, bar]");
 	}
 
