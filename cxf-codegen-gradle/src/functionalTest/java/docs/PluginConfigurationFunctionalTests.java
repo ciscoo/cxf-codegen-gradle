@@ -59,11 +59,9 @@ class PluginConfigurationFunctionalTests {
 				"[org.apache.cxf:cxf-core:3.2.0, org.apache.cxf:cxf-tools-common:3.2.0, org.apache.cxf:cxf-tools-wsdlto-core:3.2.0, org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:3.2.0]");
 	}
 
-	String scriptFor(String name) {
+	Path scriptFor(String name) {
 		final Path rootDir = Path.of("").toAbsolutePath().getParent();
-		Path scriptPath = rootDir
-			.resolve(Path.of("documentation", "src", "docs", "gradle", "plugin-configuration", name));
-		return scriptPath.toString();
+		return rootDir.resolve(Path.of("documentation", "src", "docs", "gradle", "plugin-configuration", name));
 	}
 
 }

@@ -47,11 +47,9 @@ class GeneratingJavaScriptFunctionalTests {
 				"packagePrefixes=[UriPrefixPair[uri='https://example.com', prefix='example']]", "verbose=true");
 	}
 
-	String scriptFor(String name) {
+	Path scriptFor(String name) {
 		final var rootDir = Path.of("").toAbsolutePath().getParent();
-		var scriptPath = rootDir
-			.resolve(Path.of("documentation", "src", "docs", "gradle", "generating-javascript", name));
-		return scriptPath.toString();
+		return rootDir.resolve(Path.of("documentation", "src", "docs", "gradle", "generating-javascript", name));
 	}
 
 }

@@ -16,6 +16,7 @@
 package io.mateo.junit;
 
 import java.net.URL;
+import java.nio.file.Path;
 
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
@@ -42,7 +43,7 @@ public class GradleBuildExtension implements BeforeEachCallback, AfterEachCallba
 	public void beforeEach(ExtensionContext context) throws Exception {
 		URL buildScript = getBuildScript(context);
 		if (buildScript != null) {
-			this.gradleBuild.script(buildScript.getFile());
+			this.gradleBuild.script(Path.of(buildScript.toURI()));
 		}
 		this.gradleBuild.before();
 	}

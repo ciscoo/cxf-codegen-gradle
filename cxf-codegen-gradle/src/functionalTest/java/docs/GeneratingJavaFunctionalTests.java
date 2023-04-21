@@ -139,10 +139,9 @@ class GeneratingJavaFunctionalTests {
 				"packageNames=[com.example, com.foo.bar]", "asyncMethods=[foo, bar]");
 	}
 
-	String scriptFor(String name) {
+	Path scriptFor(String name) {
 		final Path rootDir = Path.of("").toAbsolutePath().getParent();
-		Path scriptPath = rootDir.resolve(Path.of("documentation", "src", "docs", "gradle", "generating-java", name));
-		return scriptPath.toString();
+		return rootDir.resolve(Path.of("documentation", "src", "docs", "gradle", "generating-java", name));
 	}
 
 }

@@ -59,7 +59,7 @@ class ExamplesFunctionalTests {
 		final var rootDir = Path.of("").toAbsolutePath().getParent();
 		final var scriptPath = rootDir.resolve(Path.of("documentation", "src", "docs", "gradle", "examples", name));
 
-		var runner = gradleBuild.script(scriptPath.toString()).prepareRunner("wsdl2java");
+		var runner = gradleBuild.script(scriptPath).prepareRunner("wsdl2java");
 
 		var result = runner.build();
 

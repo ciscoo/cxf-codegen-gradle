@@ -39,9 +39,9 @@ public class GradleBuild {
 
 	private Path projectDir;
 
-	private String script;
+	private Path script;
 
-	private String settings;
+	private Path settings;
 
 	private String gradleVersion;
 
@@ -66,18 +66,18 @@ public class GradleBuild {
 		}
 	}
 
-	public GradleBuild script(String script) {
+	public GradleBuild script(Path script) {
 		this.script = script;
-		if (!script.endsWith(this.dsl.getExtension())) {
-			this.script = script + this.dsl.getExtension();
+		if (!script.toString().endsWith(this.dsl.getExtension())) {
+			this.script = script.resolveSibling(script.getFileName() + this.dsl.getExtension());
 		}
 		return this;
 	}
 
-	public GradleBuild settings(String settings) {
+	public GradleBuild settings(Path settings) {
 		this.settings = settings;
 		if (!settings.endsWith(this.dsl.getExtension())) {
-			this.settings = settings + this.dsl.getExtension();
+			this.settings = settings.resolveSibling(settings.getFileName() + this.dsl.getExtension());
 		}
 		return this;
 	}
@@ -103,7 +103,7 @@ public class GradleBuild {
 	public GradleRunner prepareRunner(String... arguments) {
 		String scriptContent;
 		try {
-			scriptContent = Files.readString(Path.of(this.script), StandardCharsets.UTF_8);
+			scriptContent = Files.readString(this.script, StandardCharsets.UTF_8);
 		}
 		catch (IOException ex) {
 			throw new UncheckedIOException(ex);
@@ -208,10 +208,10 @@ public class GradleBuild {
 	}
 
 	private Path getSettingsContent() {
-		String scriptPathName = this.settings != null ? this.settings : "settings" + this.dsl.getExtension();
+		Path scriptPathName = this.settings != null ? this.settings : Path.of("settings" + this.dsl.getExtension());
 		Path parentPath = Path.of("").toAbsolutePath();
-		return parentPath
-			.resolve(Path.of("src", "functionalTest", "resources", "io", "mateo", "cxf", "codegen", scriptPathName));
+		return parentPath.resolve(Path.of("src", "functionalTest", "resources", "io", "mateo", "cxf", "codegen"))
+			.resolve(scriptPathName);
 	}
 
 }
