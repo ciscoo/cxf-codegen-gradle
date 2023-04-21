@@ -45,8 +45,8 @@ class IncrementalBuildFunctionalTests {
 		GradleRunner runner = gradleBuild.prepareRunner("calculator", "-i");
 		BuildResult result = runner.build();
 
-		assertThat(result.getOutput())
-			.contains("Task ':calculator' is not up-to-date because:\n" + "  No history is available.");
+		assertThat(result.getOutput()).contains("Task ':calculator' is not up-to-date because:" + System.lineSeparator()
+				+ "  No history is available.");
 
 		// Simulate changes to the file by adding a new line.
 		Path calculatorWsdlPath = Path.of("wsdls", "calculator.wsdl");
