@@ -26,14 +26,7 @@ jobs:
         uses: ./.github/actions/run-gradle
         with:
           arguments: functionalTest --parallel -Dgradle7=true
-      - name: Functional Tests (Gradle 6)
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: functionalTest --parallel -Dgradle6=true
-      - name: Functional Tests (Gradle 5)
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: functionalTest --parallel -Dgradle5=true
+
   Windows:
     runs-on: windows-latest
     steps:
@@ -51,14 +44,6 @@ jobs:
         uses: ./.github/actions/run-gradle
         with:
           arguments: functionalTest --parallel -Dgradle7=true
-      - name: Functional Tests (Gradle 6)
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: functionalTest --parallel -Dgradle6=true
-      - name: Functional Tests (Gradle 5)
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: functionalTest --parallel -Dgradle5=true
 
   macOS:
     runs-on: macos-latest
@@ -77,14 +62,6 @@ jobs:
         uses: ./.github/actions/run-gradle
         with:
           arguments: functionalTest --parallel -Dgradle7=true
-      - name: Functional Tests (Gradle 6)
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: functionalTest --parallel -Dgradle6=true
-      - name: Functional Tests (Gradle 5)
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: functionalTest --parallel -Dgradle5=true
 
   publish_snapshot_artifacts:
     name: Publish Snapshot Artifacts
