@@ -29,6 +29,8 @@ import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
 
+import javax.inject.Inject;
+
 /**
  * Options for the {@code wsdl2java} tool.
  *
@@ -103,6 +105,7 @@ public class Wsdl2JavaOptions {
 
 	private final DirectoryProperty outputDir;
 
+	@Inject
 	public Wsdl2JavaOptions(String taskName, ObjectFactory objects, ProjectLayout layout) {
 		this.outputDir = objects.directoryProperty()
 			.convention(layout.getBuildDirectory().dir(taskName + "-wsdl2java-generated-sources"));

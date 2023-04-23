@@ -15,7 +15,6 @@
  */
 package io.mateo.cxf.codegen;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +35,6 @@ import org.gradle.api.artifacts.ModuleDependency;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
 import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Provider;
-import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.TaskCollection;
@@ -96,7 +94,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	private void configureWsdl2JsTaskConventions(Project project,
 			NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration) {
 		project.getTasks().withType(Wsdl2Js.class).configureEach(task -> {
-			configureMainClass(task, WSDL2JS_TOOL_MAIN_CLASS);
+			task.getMainClass().set(WSDL2JS_TOOL_MAIN_CLASS);
 			task.setClasspath(cxfCodegenConfiguration.get());
 			task.setGroup(WSDL2JS_GROUP);
 			task.setDescription("Generates JavaScript sources for '" + task.getName() + "'");
@@ -106,23 +104,12 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	private void configureWsdl2JavaTaskConventions(Project project,
 			NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration) {
 		project.getTasks().withType(Wsdl2Java.class).configureEach(task -> {
-			configureMainClass(task, WSDL2JAVA_TOOL_MAIN_CLASS);
+			task.getMainClass().set(WSDL2JAVA_TOOL_MAIN_CLASS);
 			configureOnlyIf(task);
 			task.setClasspath(cxfCodegenConfiguration.get());
 			task.setGroup(WSDL2JAVA_GROUP);
 			task.setDescription("Generates Java sources for '" + task.getName() + "'");
 		});
-	}
-
-	@SuppressWarnings("deprecation") // setMain()
-	private void configureMainClass(JavaExec javaExec, String mainClass) {
-		try {
-			javaExec.getMainClass().set(mainClass);
-		}
-		catch (NoSuchMethodError ignored) {
-			// < Gradle 6.4
-			javaExec.setMain(mainClass);
-		}
 	}
 
 	private void configureOnlyIf(Wsdl2Java wsdl2Java) {
@@ -180,19 +167,8 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 			configuration.setCanBeConsumed(false);
 			configuration.setCanBeResolved(true);
 			configuration.setDescription("Classpath for CXF Codegen.");
-			setDependenciesCompatibility(project, configuration, extension);
-		});
-	}
-
-	private void setDependenciesCompatibility(Project project, Configuration configuration,
-			CxfCodegenExtension extension) {
-		// Avoid cast exception: DefaultProvider to CollectionProviderInternal
-		if (GradleVersion.current().compareTo(GradleVersion.version("6.0")) < 0) {
-			configuration.getDependencies().addAll(createDependenciesCompatibility(project, extension));
-		}
-		else {
 			configuration.getDependencies().addAllLater(createDependencies(project, extension));
-		}
+		});
 	}
 
 	private Provider<List<Dependency>> createDependencies(Project project, CxfCodegenExtension extension) {
@@ -206,13 +182,6 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 
 	private ListProperty<Dependency> createDependenciesProvider(Project project, String cxfVersion) {
 		ListProperty<Dependency> dependencies = project.getObjects().listProperty(Dependency.class);
-		addDependencies(dependencies::add, project.getDependencies(), cxfVersion);
-		return dependencies;
-	}
-
-	private List<Dependency> createDependenciesCompatibility(Project project, CxfCodegenExtension extension) {
-		String cxfVersion = extension.getCxfVersion().get();
-		List<Dependency> dependencies = new ArrayList<>();
 		addDependencies(dependencies::add, project.getDependencies(), cxfVersion);
 		return dependencies;
 	}

@@ -36,20 +36,10 @@ public class Wsdl2Java extends JavaExec {
 
 	private final Wsdl2JavaOptions wsdl2JavaOptions;
 
-	private final Property<Boolean> addToMainSourceSet = getProject().getObjects()
-		.property(Boolean.class)
-		.convention(true);
+	private final Property<Boolean> addToMainSourceSet = getObjectFactory().property(Boolean.class).convention(true);
 
 	public Wsdl2Java() {
-		Wsdl2JavaOptions options;
-		try {
-			options = new Wsdl2JavaOptions(getName(), getObjectFactory(), getProject().getLayout());
-		}
-		catch (NoSuchMethodError ignored) {
-			// < Gradle 6.1
-			options = new Wsdl2JavaOptions(getName(), getProject().getObjects(), getProject().getLayout());
-		}
-		this.wsdl2JavaOptions = options;
+		this.wsdl2JavaOptions = getObjectFactory().newInstance(Wsdl2JavaOptions.class, getName());
 		getArgumentProviders().add(new Wsdl2JavaArgumentProvider());
 	}
 
