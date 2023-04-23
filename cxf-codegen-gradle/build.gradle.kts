@@ -12,7 +12,10 @@ gradlePlugin {
         create("cxfCodegen") {
             id = "io.mateo.cxf-codegen"
             displayName = "CXF Codegen"
-            description = "Gradle plugin to generate code sources from WSDL."
+            description = """
+                Gradle plugin to generate code sources from WSDL.
+                The next major version and subsequent versions will only be published to the Maven Central Repository.
+            """.trimIndent()
             implementationClass = "io.mateo.cxf.codegen.CxfCodegenPlugin"
             tags.set(listOf("cxf", "wsdl2java"))
         }
