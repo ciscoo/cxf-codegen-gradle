@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-== [1.2.1] - ?
+== [1.2.1] - 2023-04-22
 
 - Execute build on Windows and macOS -- https://github.com/ciscoo/cxf-codegen-gradle/issues/80[#80]
 - Test against Gradle 8.1.1 -- https://github.com/ciscoo/cxf-codegen-gradle/issues/79[#79]
