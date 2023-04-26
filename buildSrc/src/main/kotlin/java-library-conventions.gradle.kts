@@ -28,7 +28,7 @@ java {
     withJavadocJar()
     withSourcesJar()
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(11))
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
 
@@ -45,9 +45,6 @@ testing {
                             TestLogEvent.SKIPPED
                         )
                     }
-                    javaLauncher.set(javaToolchains.launcherFor {
-                        languageVersion.set(JavaLanguageVersion.of(11))
-                    })
                 }
             }
         }
@@ -80,7 +77,6 @@ tasks {
     }
 
     compileTestJava {
-        options.release.set(JavaVersion.VERSION_11.majorVersion.toInt())
         options.compilerArgs.addAll(listOf("-Xlint", "-Xlint:-overrides", "-Werror", "-parameters"))
     }
 
@@ -103,8 +99,5 @@ tasks {
             logging.captureStandardError(LogLevel.INFO)
             logging.captureStandardOutput(LogLevel.INFO)
         }
-        javadocTool.set(javaToolchains.javadocToolFor {
-            languageVersion.set(JavaLanguageVersion.of(11))
-        })
     }
 }
