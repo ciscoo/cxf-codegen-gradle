@@ -33,7 +33,7 @@ class ConfigurationCacheFunctionalTests {
 
 	@TestTemplate
 	void configurationCacheCompatibility(GradleBuild gradleBuild) {
-		GradleRunner runner = gradleBuild.prepareRunner("--configuration-cache", "calculator");
+		GradleRunner runner = gradleBuild.useConfigurationCache().prepareRunner("--configuration-cache", "calculator");
 
 		BuildResult initialResult = runner.build();
 		BuildResult finalResult = runner.build();

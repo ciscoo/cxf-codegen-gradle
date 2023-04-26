@@ -47,6 +47,8 @@ public class GradleBuild {
 
 	private GradleDsl dsl;
 
+	private boolean configurationCache = false;
+
 	void before() {
 		try {
 			this.projectDir = Files.createTempDirectory("gradle-");
@@ -133,7 +135,11 @@ public class GradleBuild {
 		GradleRunner gradleRunner = GradleRunner.create()
 			.withProjectDir(this.projectDir.toFile())
 			.withPluginClasspath();
-		gradleRunner.withDebug(true);
+		// Use some approach Spring Boot uses to avoid opening packages to workaround
+		// https://github.com/gradle/gradle/issues/22765
+		if (this.dsl != GradleDsl.KOTLIN && !this.configurationCache) {
+			gradleRunner.withDebug(true);
+		}
 		if (this.gradleVersion != null) {
 			gradleRunner.withGradleVersion(this.gradleVersion);
 		}
@@ -156,6 +162,11 @@ public class GradleBuild {
 
 	public GradleDsl getDsl() {
 		return this.dsl;
+	}
+
+	public GradleBuild useConfigurationCache() {
+		this.configurationCache = true;
+		return this;
 	}
 
 	private void copyDirectory(Path source, Path target) throws IOException {
