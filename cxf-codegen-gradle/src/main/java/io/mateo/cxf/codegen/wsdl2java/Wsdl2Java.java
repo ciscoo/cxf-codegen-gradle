@@ -32,14 +32,13 @@ import org.gradle.process.CommandLineArgumentProvider;
  * Generates Java sources from WSDLs.
  */
 @CacheableTask
-public class Wsdl2Java extends JavaExec {
+public abstract class Wsdl2Java extends JavaExec {
 
 	private final Wsdl2JavaOptions wsdl2JavaOptions;
 
-	private final Property<Boolean> addToMainSourceSet = getObjectFactory().property(Boolean.class).convention(true);
-
 	public Wsdl2Java() {
 		this.wsdl2JavaOptions = getObjectFactory().newInstance(Wsdl2JavaOptions.class, getName());
+		getAddToMainSourceSet().convention(true);
 		getArgumentProviders().add(new Wsdl2JavaArgumentProvider());
 	}
 
@@ -58,9 +57,7 @@ public class Wsdl2Java extends JavaExec {
 	 * @return whether to add to source set
 	 */
 	@Internal
-	public Property<Boolean> getAddToMainSourceSet() {
-		return this.addToMainSourceSet;
-	}
+	public abstract Property<Boolean> getAddToMainSourceSet();
 
 	/**
 	 * Configures the {@code wsdl2java} tool options.
