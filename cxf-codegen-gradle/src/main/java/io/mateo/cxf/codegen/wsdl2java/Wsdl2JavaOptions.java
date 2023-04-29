@@ -18,7 +18,6 @@ package io.mateo.cxf.codegen.wsdl2java;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.file.RegularFileProperty;
-import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.SetProperty;
@@ -37,111 +36,12 @@ import javax.inject.Inject;
  * @see <a href="https://cxf.apache.org/docs/wsdl-to-java.html#WSDLtoJava-Options">WSDL to
  * Java options</a>
  */
-public class Wsdl2JavaOptions {
-
-	private final RegularFileProperty wsdl;
-
-	private final Property<String> wsdlUrl;
-
-	private final ListProperty<String> packageNames;
-
-	private final ListProperty<String> extraArgs;
-
-	private final ListProperty<String> xjcArgs;
-
-	private final ListProperty<String> asyncMethods;
-
-	private final ListProperty<String> bareMethods;
-
-	private final ListProperty<String> mimeMethods;
-
-	private final ListProperty<String> namespaceExcludes;
-
-	private final Property<Boolean> defaultExcludesNamespace;
-
-	private final Property<Boolean> defaultNamespacePackageMapping;
-
-	private final SetProperty<String> bindingFiles;
-
-	private final Property<String> wsdlLocation;
-
-	private final Property<Boolean> wsdlList;
-
-	private final Property<String> frontend;
-
-	private final Property<String> databinding;
-
-	private final Property<String> wsdlVersion;
-
-	private final Property<String> catalog;
-
-	private final Property<Boolean> extendedSoapHeaders;
-
-	private final Property<String> validateWsdl;
-
-	private final Property<Boolean> noTypes;
-
-	private final Property<String> faultSerialVersionUid;
-
-	private final Property<String> exceptionSuper;
-
-	private final ListProperty<String> seiSuper;
-
-	private final Property<Boolean> markGenerated;
-
-	private final Property<Boolean> suppressGeneratedDate;
-
-	private final Property<String> serviceName;
-
-	private final Property<Boolean> autoNameResolution;
-
-	private final Property<Boolean> noAddressBinding;
-
-	private final Property<Boolean> allowElementRefs;
-
-	private final Property<String> encoding;
-
-	private final Property<Boolean> verbose;
-
-	private final DirectoryProperty outputDir;
+public abstract class Wsdl2JavaOptions {
 
 	@Inject
-	public Wsdl2JavaOptions(String taskName, ObjectFactory objects, ProjectLayout layout) {
-		this.outputDir = objects.directoryProperty()
-			.convention(layout.getBuildDirectory().dir(taskName + "-wsdl2java-generated-sources"));
-		this.wsdl = objects.fileProperty();
-		this.wsdlUrl = objects.property(String.class)
-			.convention(this.wsdl.map(it -> it.getAsFile().toPath().toAbsolutePath().toUri().toString()));
-		this.packageNames = objects.listProperty(String.class);
-		this.extraArgs = objects.listProperty(String.class);
-		this.xjcArgs = objects.listProperty(String.class);
-		this.asyncMethods = objects.listProperty(String.class);
-		this.bareMethods = objects.listProperty(String.class);
-		this.mimeMethods = objects.listProperty(String.class);
-		this.namespaceExcludes = objects.listProperty(String.class);
-		this.defaultExcludesNamespace = objects.property(Boolean.class);
-		this.defaultNamespacePackageMapping = objects.property(Boolean.class);
-		this.bindingFiles = objects.setProperty(String.class);
-		this.wsdlLocation = objects.property(String.class);
-		this.wsdlList = objects.property(Boolean.class);
-		this.frontend = objects.property(String.class);
-		this.databinding = objects.property(String.class);
-		this.wsdlVersion = objects.property(String.class);
-		this.catalog = objects.property(String.class);
-		this.extendedSoapHeaders = objects.property(Boolean.class);
-		this.validateWsdl = objects.property(String.class);
-		this.noTypes = objects.property(Boolean.class);
-		this.faultSerialVersionUid = objects.property(String.class);
-		this.exceptionSuper = objects.property(String.class);
-		this.seiSuper = objects.listProperty(String.class);
-		this.markGenerated = objects.property(Boolean.class);
-		this.suppressGeneratedDate = objects.property(Boolean.class);
-		this.serviceName = objects.property(String.class);
-		this.autoNameResolution = objects.property(Boolean.class);
-		this.noAddressBinding = objects.property(Boolean.class);
-		this.allowElementRefs = objects.property(Boolean.class);
-		this.encoding = objects.property(String.class);
-		this.verbose = objects.property(Boolean.class);
+	public Wsdl2JavaOptions(String taskName, ProjectLayout layout) {
+		getOutputDir().convention(layout.getBuildDirectory().dir(taskName + "-wsdl2java-generated-sources"));
+		getWsdlUrl().convention(getWsdl().map(it -> it.getAsFile().toPath().toAbsolutePath().toUri().toString()));
 	}
 
 	/**
@@ -151,9 +51,7 @@ public class Wsdl2JavaOptions {
 	@InputFile
 	@PathSensitive(PathSensitivity.RELATIVE)
 	@Optional
-	public RegularFileProperty getWsdl() {
-		return this.wsdl;
-	}
+	public abstract RegularFileProperty getWsdl();
 
 	/**
 	 * WSDL to process. The value can either be a direct path to a file on a local system
@@ -165,9 +63,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<String> getWsdlUrl() {
-		return this.wsdlUrl;
-	}
+	public abstract Property<String> getWsdlUrl();
 
 	/**
 	 * Specifies the directory the generated code files are written.
@@ -178,9 +74,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@OutputDirectory
 	@Optional
-	public DirectoryProperty getOutputDir() {
-		return this.outputDir;
-	}
+	public abstract DirectoryProperty getOutputDir();
 
 	/**
 	 * Specifies zero, or more, package names to use for the generated code.
@@ -190,9 +84,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public ListProperty<String> getPackageNames() {
-		return this.packageNames;
-	}
+	public abstract ListProperty<String> getPackageNames();
 
 	/**
 	 * Specifies extra arguments to pass to the command-line code generator.
@@ -200,9 +92,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public ListProperty<String> getExtraArgs() {
-		return this.extraArgs;
-	}
+	public abstract ListProperty<String> getExtraArgs();
 
 	/**
 	 * Specifies
@@ -212,9 +102,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public ListProperty<String> getXjcArgs() {
-		return this.xjcArgs;
-	}
+	public abstract ListProperty<String> getXjcArgs();
 
 	/**
 	 * Specifies subsequently generated Java class methods to allow for client-side
@@ -223,9 +111,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public ListProperty<String> getAsyncMethods() {
-		return this.asyncMethods;
-	}
+	public abstract ListProperty<String> getAsyncMethods();
 
 	/**
 	 * Specifies subsequently generated Java class methods to have wrapper style, similar
@@ -234,9 +120,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public ListProperty<String> getBareMethods() {
-		return this.bareMethods;
-	}
+	public abstract ListProperty<String> getBareMethods();
 
 	/**
 	 * Specifies subsequently generated Java class methods to enable mime:content mapping,
@@ -245,9 +129,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public ListProperty<String> getMimeMethods() {
-		return this.mimeMethods;
-	}
+	public abstract ListProperty<String> getMimeMethods();
 
 	/**
 	 * Ignore the specified WSDL schema namespace when generating code.
@@ -258,9 +140,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public ListProperty<String> getNamespaceExcludes() {
-		return this.namespaceExcludes;
-	}
+	public abstract ListProperty<String> getNamespaceExcludes();
 
 	/**
 	 * Enables or disables the loading of the default excludes namespace mapping.
@@ -270,9 +150,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<Boolean> getDefaultExcludesNamespace() {
-		return this.defaultExcludesNamespace;
-	}
+	public abstract Property<Boolean> getDefaultExcludesNamespace();
 
 	/**
 	 * Enables or disables the loading of the default namespace package name mapping.
@@ -284,9 +162,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<Boolean> getDefaultNamespacePackageMapping() {
-		return this.defaultNamespacePackageMapping;
-	}
+	public abstract Property<Boolean> getDefaultNamespacePackageMapping();
 
 	/**
 	 * Specifies JAX-WS or JAXB binding files or XMLBeans context files.
@@ -297,16 +173,14 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public SetProperty<String> getBindingFiles() {
-		return this.bindingFiles;
-	}
+	public abstract SetProperty<String> getBindingFiles();
 
 	/**
 	 * Specifies the value of the {@code @WebServiceClient} annotation's
 	 * {@code wsdlLocation} property.
 	 * <p>
-	 * By default, the {@code wsdl2java} tool will use the value of {@link #wsdlUrl}. This
-	 * may lead to runtime issues such as {@code FileNotFoundException} being thrown.
+	 * By default, the {@code wsdl2java} tool will use the value of {@link #getWsdlUrl()}.
+	 * This may lead to runtime issues such as {@code FileNotFoundException} being thrown.
 	 * Consider setting this value to a location that your application understands. For
 	 * example (Kotlin DSL), a classpath location: <pre>
 	 * tasks.register("example", Wsdl2Java::class) {
@@ -320,9 +194,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<String> getWsdlLocation() {
-		return this.wsdlLocation;
-	}
+	public abstract Property<String> getWsdlLocation();
 
 	/**
 	 * Specifies that the {@code wsdlurl} contains a plain text, new line delimited, list
@@ -331,9 +203,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<Boolean> getWsdlList() {
-		return this.wsdlList;
-	}
+	public abstract Property<Boolean> getWsdlList();
 
 	/**
 	 * Specifies the frontend. Currently only supports JAX-WS CXF frontends and a
@@ -344,9 +214,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<String> getFrontend() {
-		return this.frontend;
-	}
+	public abstract Property<String> getFrontend();
 
 	/**
 	 * Specifies the databinding. Currently supports JAXB, XMLBeans, SDO (sdo-static * and
@@ -357,9 +225,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<String> getDatabinding() {
-		return this.databinding;
-	}
+	public abstract Property<String> getDatabinding();
 
 	/**
 	 * Specifies the WSDL version.
@@ -370,9 +236,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<String> getWsdlVersion() {
-		return this.wsdlVersion;
-	}
+	public abstract Property<String> getWsdlVersion();
 
 	/**
 	 * Specify catalog file to map the imported WSDL/schema.
@@ -380,9 +244,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<String> getCatalog() {
-		return this.catalog;
-	}
+	public abstract Property<String> getCatalog();
 
 	/**
 	 * Enables or disables processing of implicit SOAP headers (i.e. SOAP headers defined
@@ -397,9 +259,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<Boolean> getExtendedSoapHeaders() {
-		return this.extendedSoapHeaders;
-	}
+	public abstract Property<Boolean> getExtendedSoapHeaders();
 
 	/**
 	 * Enables validating the WSDL before generating the code.
@@ -407,9 +267,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<String> getValidateWsdl() {
-		return this.validateWsdl;
-	}
+	public abstract Property<String> getValidateWsdl();
 
 	/**
 	 * Enables or disables generation of the type classes.
@@ -419,9 +277,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<Boolean> getNoTypes() {
-		return this.noTypes;
-	}
+	public abstract Property<Boolean> getNoTypes();
 
 	/**
 	 * Specifies how to generate serial version UID of fault exceptions.
@@ -439,9 +295,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<String> getFaultSerialVersionUid() {
-		return this.faultSerialVersionUid;
-	}
+	public abstract Property<String> getFaultSerialVersionUid();
 
 	/**
 	 * Specifies the superclass for fault beans generated from {@code wsdl:fault} elements
@@ -451,9 +305,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<String> getExceptionSuper() {
-		return this.exceptionSuper;
-	}
+	public abstract Property<String> getExceptionSuper();
 
 	/**
 	 * Specifies the superinterfaces to use for generated SEIs.
@@ -461,9 +313,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public ListProperty<String> getSeiSuper() {
-		return this.seiSuper;
-	}
+	public abstract ListProperty<String> getSeiSuper();
 
 	/**
 	 * Enables or disables adding the {@code @Generated} annotation to classes generated.
@@ -471,9 +321,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<Boolean> getMarkGenerated() {
-		return this.markGenerated;
-	}
+	public abstract Property<Boolean> getMarkGenerated();
 
 	/**
 	 * Enables or disables writing the current timestamp in the generated file (since CXF
@@ -482,9 +330,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<Boolean> getSuppressGeneratedDate() {
-		return this.suppressGeneratedDate;
-	}
+	public abstract Property<Boolean> getSuppressGeneratedDate();
 
 	/**
 	 * Specifies the WSDL service name to use for the generated code.
@@ -492,9 +338,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<String> getServiceName() {
-		return this.serviceName;
-	}
+	public abstract Property<String> getServiceName();
 
 	/**
 	 * Enables or disables automatically resolving naming conflicts without requiring the
@@ -503,9 +347,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<Boolean> getAutoNameResolution() {
-		return this.autoNameResolution;
-	}
+	public abstract Property<Boolean> getAutoNameResolution();
 
 	/**
 	 * For compatibility with CXF 2.0, this flag directs the code generator to generate
@@ -515,9 +357,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<Boolean> getNoAddressBinding() {
-		return this.noAddressBinding;
-	}
+	public abstract Property<Boolean> getNoAddressBinding();
 
 	/**
 	 * Enables or disables disregarding the rule given in section 2.3.1.2(v) of the JAX-WS
@@ -526,9 +366,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<Boolean> getAllowElementRefs() {
-		return this.allowElementRefs;
-	}
+	public abstract Property<Boolean> getAllowElementRefs();
 
 	/**
 	 * Encoding to use for generated sources (since CXF version 2.5.4).
@@ -536,9 +374,7 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<String> getEncoding() {
-		return this.encoding;
-	}
+	public abstract Property<String> getEncoding();
 
 	/**
 	 * Enables or disables verbosity.
@@ -546,8 +382,6 @@ public class Wsdl2JavaOptions {
 	 */
 	@Input
 	@Optional
-	public Property<Boolean> getVerbose() {
-		return this.verbose;
-	}
+	public abstract Property<Boolean> getVerbose();
 
 }
