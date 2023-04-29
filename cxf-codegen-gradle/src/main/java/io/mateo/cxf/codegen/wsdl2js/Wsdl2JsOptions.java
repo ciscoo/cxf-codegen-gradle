@@ -18,7 +18,6 @@ package io.mateo.cxf.codegen.wsdl2js;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.file.RegularFileProperty;
-import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
@@ -41,33 +40,9 @@ import java.util.StringJoiner;
  */
 public abstract class Wsdl2JsOptions {
 
-	private final Property<String> wsdl;
-
-	private final Property<String> wsdlVersion;
-
-	private final ListProperty<UriPrefixPair> packagePrefixes;
-
-	private final RegularFileProperty catalog;
-
-	private final Property<String> validate;
-
-	private final Property<Boolean> verbose;
-
-	private final Property<Boolean> quiet;
-
-	private final DirectoryProperty outputDir;
-
 	@Inject
-	public Wsdl2JsOptions(String taskName, ObjectFactory objects, ProjectLayout layout) {
-		this.wsdl = objects.property(String.class);
-		this.wsdlVersion = objects.property(String.class);
-		this.packagePrefixes = objects.listProperty(UriPrefixPair.class);
-		this.catalog = objects.fileProperty();
-		this.validate = objects.property(String.class);
-		this.verbose = objects.property(Boolean.class);
-		this.quiet = objects.property(Boolean.class);
-		this.outputDir = objects.directoryProperty()
-			.convention(layout.getBuildDirectory().dir(taskName + "-wsdl2js-generated-sources"));
+	public Wsdl2JsOptions(String taskName, ProjectLayout layout) {
+		getOutputDir().convention(layout.getBuildDirectory().dir(taskName + "-wsdl2js-generated-sources"));
 	}
 
 	/**
@@ -75,9 +50,7 @@ public abstract class Wsdl2JsOptions {
 	 * @return wsdl file
 	 */
 	@Input
-	public Property<String> getWsdl() {
-		return this.wsdl;
-	}
+	public abstract Property<String> getWsdl();
 
 	/**
 	 * Specifies the WSDL version the tool expects.
@@ -87,9 +60,7 @@ public abstract class Wsdl2JsOptions {
 	 */
 	@Input
 	@Optional
-	public Property<String> getWsdlVersion() {
-		return this.wsdlVersion;
-	}
+	public abstract Property<String> getWsdlVersion();
 
 	/**
 	 * Specifies a mapping between the namespaces used in the WSDL document and the
@@ -101,9 +72,7 @@ public abstract class Wsdl2JsOptions {
 	 */
 	@Input
 	@Optional
-	public ListProperty<UriPrefixPair> getPackagePrefixes() {
-		return this.packagePrefixes;
-	}
+	public abstract ListProperty<UriPrefixPair> getPackagePrefixes();
 
 	/**
 	 * Specifies the XML catalog to use for resolving imported schemas and WSDL documents.
@@ -112,9 +81,7 @@ public abstract class Wsdl2JsOptions {
 	@InputFile
 	@PathSensitive(PathSensitivity.RELATIVE)
 	@Optional
-	public RegularFileProperty getCatalog() {
-		return this.catalog;
-	}
+	public abstract RegularFileProperty getCatalog();
 
 	/**
 	 * Enables validating the WSDL before generating the code.
@@ -122,9 +89,7 @@ public abstract class Wsdl2JsOptions {
 	 */
 	@Input
 	@Optional
-	public Property<String> getValidate() {
-		return this.validate;
-	}
+	public abstract Property<String> getValidate();
 
 	/**
 	 * Enables or disables verbosity. When enabled, displays comments during the code
@@ -133,9 +98,7 @@ public abstract class Wsdl2JsOptions {
 	 */
 	@Input
 	@Optional
-	public Property<Boolean> getVerbose() {
-		return this.verbose;
-	}
+	public abstract Property<Boolean> getVerbose();
 
 	/**
 	 * Enables or disables quiet mode. When enabled, suppresses comments during the code
@@ -144,9 +107,7 @@ public abstract class Wsdl2JsOptions {
 	 */
 	@Input
 	@Optional
-	public Property<Boolean> getQuiet() {
-		return this.quiet;
-	}
+	public abstract Property<Boolean> getQuiet();
 
 	/**
 	 * Specifies the directory the generated code files are written.
@@ -157,9 +118,7 @@ public abstract class Wsdl2JsOptions {
 	 */
 	@OutputDirectory
 	@Optional
-	public DirectoryProperty getOutputDir() {
-		return this.outputDir;
-	}
+	public abstract DirectoryProperty getOutputDir();
 
 	/**
 	 * Container class for URI. An arbitrary URI can't be a XML element name.
