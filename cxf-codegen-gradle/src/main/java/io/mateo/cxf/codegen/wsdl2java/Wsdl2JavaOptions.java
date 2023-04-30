@@ -16,7 +16,6 @@
 package io.mateo.cxf.codegen.wsdl2java;
 
 import org.gradle.api.file.DirectoryProperty;
-import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Property;
@@ -28,8 +27,6 @@ import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
 
-import javax.inject.Inject;
-
 /**
  * Options for the {@code wsdl2java} tool.
  *
@@ -37,12 +34,6 @@ import javax.inject.Inject;
  * Java options</a>
  */
 public abstract class Wsdl2JavaOptions {
-
-	@Inject
-	public Wsdl2JavaOptions(String taskName, ProjectLayout layout) {
-		getOutputDir().convention(layout.getBuildDirectory().dir(taskName + "-wsdl2java-generated-sources"));
-		getWsdlUrl().convention(getWsdl().map(it -> it.getAsFile().toPath().toAbsolutePath().toUri().toString()));
-	}
 
 	/**
 	 * WSDL file to process.

@@ -16,7 +16,6 @@
 package io.mateo.cxf.codegen.wsdl2js;
 
 import org.gradle.api.file.DirectoryProperty;
-import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Property;
@@ -27,7 +26,6 @@ import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
 
-import javax.inject.Inject;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -39,11 +37,6 @@ import java.util.StringJoiner;
  * JavaScript options</a>
  */
 public abstract class Wsdl2JsOptions {
-
-	@Inject
-	public Wsdl2JsOptions(String taskName, ProjectLayout layout) {
-		getOutputDir().convention(layout.getBuildDirectory().dir(taskName + "-wsdl2js-generated-sources"));
-	}
 
 	/**
 	 * Specifies the WSDL document from which JavaScript is generated from

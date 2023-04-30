@@ -31,10 +31,7 @@ import java.util.List;
 @CacheableTask
 public abstract class Wsdl2Js extends JavaExec {
 
-	private final Wsdl2JsOptions wsdl2JsOptions;
-
 	public Wsdl2Js() {
-		this.wsdl2JsOptions = getObjectFactory().newInstance(Wsdl2JsOptions.class, getName());
 		getArgumentProviders().add(new Wsdl2Js.Wsdl2JsArgumentProvider());
 	}
 
@@ -43,16 +40,14 @@ public abstract class Wsdl2Js extends JavaExec {
 	 * @return tool options
 	 */
 	@Nested
-	public Wsdl2JsOptions getWsdl2JsOptions() {
-		return this.wsdl2JsOptions;
-	}
+	public abstract Wsdl2JsOptions getWsdl2JsOptions();
 
 	/**
 	 * Configures the {@code wsdl2js} tool options.
 	 * @param configurer action or closure to configure tool options
 	 */
 	public void toolOptions(Action<? super Wsdl2JsOptions> configurer) {
-		configurer.execute(this.wsdl2JsOptions);
+		configurer.execute(this.getWsdl2JsOptions());
 	}
 
 	private class Wsdl2JsArgumentProvider implements CommandLineArgumentProvider {

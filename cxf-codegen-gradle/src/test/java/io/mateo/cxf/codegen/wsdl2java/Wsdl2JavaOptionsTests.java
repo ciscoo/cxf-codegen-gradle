@@ -60,7 +60,7 @@ class Wsdl2JavaOptionsTests {
 	@Test
 	void packageNames(TestInfo testInfo) {
 		List<String> expected = List.of("-p", "com.example.foo", "-p", "com.example.bar", "-d",
-				getOutputDirFor(testInfo), this.wsdl.toAbsolutePath().toUri().toString());
+				this.outputDir.toString(), this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
 				options -> options.getPackageNames().set(List.of("com.example.foo", "com.example.bar")))
@@ -73,7 +73,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void namespaceExcludes(TestInfo testInfo) {
-		List<String> expected = List.of("-nexclude", "foo", "-nexclude", "bar", "-d", getOutputDirFor(testInfo),
+		List<String> expected = List.of("-nexclude", "foo", "-nexclude", "bar", "-d", this.outputDir.toString(),
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -87,7 +87,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void bindingFiles(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-b",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-b",
 				this.project.getLayout()
 					.getProjectDirectory()
 					.file("foo")
@@ -118,7 +118,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void frontend(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-fe", "foo",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-fe", "foo",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getFrontend().set("foo"))
@@ -131,7 +131,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void databinding(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-db", "foo",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-db", "foo",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getDatabinding().set("foo"))
@@ -144,7 +144,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void wsdlVersion(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-wv", "foo",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-wv", "foo",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlVersion().set("foo"))
@@ -157,7 +157,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void catalog(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-catalog", "foo",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-catalog", "foo",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getCatalog().set("foo"))
@@ -170,7 +170,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void extendedSoapHeaders(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-exsh", "true",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-exsh", "true",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -184,7 +184,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void noTypes(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-noTypes",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-noTypes",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getNoTypes().set(true))
@@ -197,7 +197,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void allowElementRefs(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-allowElementReferences",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-allowElementReferences",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -211,7 +211,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void validateWsdl(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-validate=foo",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-validate=foo",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getValidateWsdl().set("foo"))
@@ -224,7 +224,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void markGenerated(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-mark-generated",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-mark-generated",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getMarkGenerated().set(true))
@@ -237,7 +237,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void suppressGeneratedDate(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-suppress-generated-date",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-suppress-generated-date",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -251,7 +251,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void defaultExcludesNamespace(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-dex", "true",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-dex", "true",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -265,7 +265,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void defaultNamespacePackingMapping(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-dns", "true",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-dns", "true",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -279,7 +279,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void serviceName(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-sn", "foo",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-sn", "foo",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getServiceName().set("foo"))
@@ -292,7 +292,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void faultSerial(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-faultSerialVersionUID", "1234",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-faultSerialVersionUID", "1234",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -306,7 +306,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void exceptionSuper(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-exceptionSuper",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-exceptionSuper",
 				UncheckedIOException.class.toString(), this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -320,7 +320,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void seiSuper(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-seiSuper", "foo", "-seiSuper", "bar",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-seiSuper", "foo", "-seiSuper", "bar",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -334,7 +334,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void autoNameResolution(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-autoNameResolution",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-autoNameResolution",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -348,7 +348,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void noAddressBinding(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-noAddressBinding",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-noAddressBinding",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -362,7 +362,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void xjcArgs(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-xjc-Xts", "-xjc-Xwsdlextension",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-xjc-Xts", "-xjc-Xwsdlextension",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -376,7 +376,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void extraArgs(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-client", "-all",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-client", "-all",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -390,7 +390,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void wsdlLocation(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-wsdlLocation", "foo",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-wsdlLocation", "foo",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlLocation().set("foo"))
@@ -403,7 +403,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void wsdlList(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-wsdlList",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-wsdlList",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlList().set(true))
@@ -416,7 +416,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void encoding(TestInfo testInfo) {
-		List<String> expected = List.of("-encoding", "UTF-8", "-d", getOutputDirFor(testInfo),
+		List<String> expected = List.of("-encoding", "UTF-8", "-d", this.outputDir.toString(),
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getEncoding().set("UTF-8"))
@@ -429,7 +429,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void verbose(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-verbose",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-verbose",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getVerbose().set(true))
@@ -442,7 +442,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void asyncMethods(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-asyncMethods=foo,bar",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-asyncMethods=foo,bar",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -456,7 +456,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void bareMethods(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-bareMethods=foo,bar",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-bareMethods=foo,bar",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -470,7 +470,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void mimeMethods(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "-mimeMethods=foo,bar",
+		List<String> expected = List.of("-d", this.outputDir.toString(), "-mimeMethods=foo,bar",
 				this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(),
@@ -484,7 +484,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void wsdlOnly(TestInfo testInfo) { // also tests convention of wsdlUrl
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), this.wsdl.toAbsolutePath().toUri().toString());
+		List<String> expected = List.of("-d", this.outputDir.toString(), this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName()).getArgumentProviders().get(0).asArguments();
 
@@ -493,7 +493,7 @@ class Wsdl2JavaOptionsTests {
 
 	@Test
 	void wsdlUrlOnly(TestInfo testInfo) {
-		List<String> expected = List.of("-d", getOutputDirFor(testInfo), "https://example.com/example?wsdl");
+		List<String> expected = List.of("-d", this.outputDir.toString(), "https://example.com/example?wsdl");
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> {
 			options.getWsdlUrl().set("https://example.com/example?wsdl");
@@ -512,26 +512,35 @@ class Wsdl2JavaOptionsTests {
 					"Cannot generate arguments for task 'bothWsdlFileAndWsdlUrlMissingResultsInFailure' because 'wsdl' and 'wsdlUrl' have no value; at least one of the options must be configured");
 	}
 
-	private String getOutputDirFor(TestInfo testInfo) {
-		return this.outputDir.resolve(testInfo.getDisplayName() + "-wsdl2java-generated-sources").toString();
-	}
-
 	private Wsdl2Java createTask(String taskName, Action<? super Wsdl2JavaOptions> configurer) {
 		return this.project.getTasks().create(taskName, Wsdl2Java.class, wsdl2java -> wsdl2java.toolOptions(options -> {
+			options.getOutputDir().set(this.outputDir.toFile());
 			options.getWsdl().set(this.wsdl.toFile());
+			options.getWsdlUrl()
+				.convention(options.getWsdl().map(it -> it.getAsFile().toPath().toAbsolutePath().toUri().toString()));
 			configurer.execute(options);
 		}));
 	}
 
 	private Wsdl2Java createTask(String taskName) {
-		return this.project.getTasks()
-			.create(taskName, Wsdl2Java.class,
-					wsdl2java -> wsdl2java.toolOptions(options -> options.getWsdl().set(this.wsdl.toFile())));
+		return this.project.getTasks().create(taskName, Wsdl2Java.class, wsdl2java -> wsdl2java.toolOptions(options -> {
+			options.getWsdlUrl()
+				.convention(options.getWsdl().map(it -> it.getAsFile().toPath().toAbsolutePath().toUri().toString()));
+			options.getOutputDir().set(this.outputDir.toFile());
+			options.getWsdl().set(this.wsdl.toFile());
+		}));
 	}
 
 	private Wsdl2Java createTaskWithConfiguration(String taskName, Action<? super Wsdl2JavaOptions> configurer) {
-		return this.project.getTasks()
-			.create(taskName, Wsdl2Java.class, wsdl2java -> wsdl2java.toolOptions(configurer));
+		return this.project.getTasks().create(taskName, Wsdl2Java.class, wsdl2java -> {
+			wsdl2java.getWsdl2JavaOptions().getOutputDir().set(this.outputDir.toFile());
+			wsdl2java.getWsdl2JavaOptions()
+				.getWsdlUrl()
+				.convention(wsdl2java.getWsdl2JavaOptions()
+					.getWsdl()
+					.map(it -> it.getAsFile().toPath().toAbsolutePath().toUri().toString()));
+			wsdl2java.toolOptions(configurer);
+		});
 	}
 
 }

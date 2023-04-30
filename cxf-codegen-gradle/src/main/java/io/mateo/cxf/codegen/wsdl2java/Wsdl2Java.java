@@ -34,11 +34,7 @@ import org.gradle.process.CommandLineArgumentProvider;
 @CacheableTask
 public abstract class Wsdl2Java extends JavaExec {
 
-	private final Wsdl2JavaOptions wsdl2JavaOptions;
-
 	public Wsdl2Java() {
-		this.wsdl2JavaOptions = getObjectFactory().newInstance(Wsdl2JavaOptions.class, getName());
-		getAddToMainSourceSet().convention(true);
 		getArgumentProviders().add(new Wsdl2JavaArgumentProvider());
 	}
 
@@ -47,9 +43,7 @@ public abstract class Wsdl2Java extends JavaExec {
 	 * @return tool options
 	 */
 	@Nested
-	public Wsdl2JavaOptions getWsdl2JavaOptions() {
-		return this.wsdl2JavaOptions;
-	}
+	public abstract Wsdl2JavaOptions getWsdl2JavaOptions();
 
 	/**
 	 * Whether to add the generated Java sources to the
@@ -64,7 +58,7 @@ public abstract class Wsdl2Java extends JavaExec {
 	 * @param configurer action or closure to configure tool options
 	 */
 	public void toolOptions(Action<? super Wsdl2JavaOptions> configurer) {
-		configurer.execute(this.wsdl2JavaOptions);
+		configurer.execute(this.getWsdl2JavaOptions());
 	}
 
 	private class Wsdl2JavaArgumentProvider implements CommandLineArgumentProvider {

@@ -98,6 +98,9 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 			task.setClasspath(cxfCodegenConfiguration.get());
 			task.setGroup(WSDL2JS_GROUP);
 			task.setDescription("Generates JavaScript sources for '" + task.getName() + "'");
+			task.getWsdl2JsOptions()
+				.getOutputDir()
+				.convention(project.getLayout().getBuildDirectory().dir(task.getName() + "-wsdl2js-generated-sources"));
 		});
 	}
 
@@ -109,6 +112,16 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 			task.setClasspath(cxfCodegenConfiguration.get());
 			task.setGroup(WSDL2JAVA_GROUP);
 			task.setDescription("Generates Java sources for '" + task.getName() + "'");
+			task.getWsdl2JavaOptions()
+				.getOutputDir()
+				.convention(
+						project.getLayout().getBuildDirectory().dir(task.getName() + "-wsdl2java-generated-sources"));
+			task.getWsdl2JavaOptions()
+				.getWsdlUrl()
+				.convention(task.getWsdl2JavaOptions()
+					.getWsdl()
+					.map(it -> it.getAsFile().toPath().toAbsolutePath().toUri().toString()));
+			task.getAddToMainSourceSet().convention(true);
 		});
 	}
 
