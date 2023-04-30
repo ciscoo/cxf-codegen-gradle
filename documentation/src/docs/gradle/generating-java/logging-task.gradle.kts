@@ -15,11 +15,6 @@ dependencies {
 }
 // end::code[]
 
-dependencies {
-    cxfCodegen("jakarta.xml.ws:jakarta.xml.ws-api:2.3.3")
-    cxfCodegen("jakarta.annotation:jakarta.annotation-api:1.3.5")
-}
-
 tasks.register("example", Wsdl2Java::class) {
     toolOptions {
         wsdl.set(file("wsdls/calculator.wsdl"))

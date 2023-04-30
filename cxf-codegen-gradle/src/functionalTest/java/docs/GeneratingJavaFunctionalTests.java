@@ -70,10 +70,8 @@ class GeneratingJavaFunctionalTests {
 
 		BuildResult result = runner.build();
 
-		assertThat(result.getOutput())
-			.doesNotContain("DEBUG org.apache.cxf.common.logging.LogUtils",
-					"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader")
-			.contains("DEBUG org.apache.velocity");
+		assertThat(result.getOutput()).doesNotContain("DEBUG org.apache.cxf.common.logging.LogUtils",
+				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader", "DEBUG org.apache.velocity");
 	}
 
 	@TestTemplate

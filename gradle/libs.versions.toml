@@ -1,5 +1,5 @@
 [versions]
-cxf = "3.5.5"
+cxf = "4.0.0"
 
 [libraries]
 junitBom = { module = "org.junit:junit-bom", version = "5.9.2" }
