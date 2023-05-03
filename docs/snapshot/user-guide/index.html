@@ -601,19 +601,6 @@ using the <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:pl
 </tr>
 </tbody>
 </table>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">Gradle Version Support</div>
-<div class="paragraph">
-<p>To keep the plugin as simple as possible, there will not be any <em>extensive</em> version specific workarounds for older versions
-of Gradle or any Gradle version for that matter. Trivial or simple workarounds are fine.</p>
-</div>
-<div class="paragraph">
-<p>However, the recommended minimum Gradle version is Gradle 6.8, 6.9, or 7.x. This recommended minimum aligns with Spring
-Boot Gradle Plugin 2.7.7, but without the strict requirement.</p>
-</div>
-</div>
-</div>
 <div class="paragraph">
 <p>The plugin is fully tested against the above versions to ensure compatibility. View
 the source of the <a href="https://github.com/ciscoo/cxf-codegen-gradle/tree/master/cxf-codegen-gradle/src/functionalTest">functional tests</a> for more details.</p>
@@ -685,7 +672,7 @@ with your Gradle version.
 for code generation.</p>
 </div>
 <div class="paragraph">
-<p>Out-of-the-box, the following dependencies are added (v3.5.5):</p>
+<p>Out-of-the-box, the following dependencies are added (v4.0.0):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -717,7 +704,7 @@ for code generation.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>These are the same dependencies defined in the Maven plugin&#8217;s <a href="https://github.com/apache/cxf/blob/cxf-3.5.5/maven-plugins/codegen-plugin/pom.xml#L71..L106">POM</a>.</p>
+<p>These are the same dependencies defined in the Maven plugin&#8217;s <a href="https://github.com/apache/cxf/blob/cxf-4.0.0/maven-plugins/codegen-plugin/pom.xml#L71..L106">POM</a>.</p>
 </div>
 <div class="sect3">
 <h4 id="dependency-version-constraints"><a class="anchor" href="#dependency-version-constraints"></a>2.2.1. Managing Dependency Versions</h4>
@@ -1698,7 +1685,7 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 <span class="o">}</span>
 
 <span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">myConfiguration</span> <span class="s2">"org.apache.cxf:cxf-testutils:3.5.3"</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="n">myConfiguration</span> <span class="s2">"org.apache.cxf:cxf-testutils:4.0.0"</span> <i class="conum" data-value="2"></i><b>(2)</b>
 <span class="o">}</span>
 
 <span class="kt">def</span> <span class="n">copyArtifact</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"copyArtifact"</span><span class="o">,</span> <span class="n">Copy</span><span class="o">)</span> <span class="o">{</span> <i class="conum" data-value="3"></i><b>(3)</b>
@@ -1815,8 +1802,8 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 <span class="c1">// ...</span>
 
 <span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">implementation</span> <span class="s2">"org.apache.cxf.xjc-utils:cxf-xjc-runtime:3.3.2"</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="n">cxfCodegen</span> <span class="s2">"org.apache.cxf.xjcplugins:cxf-xjc-ts:3.3.2"</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="n">implementation</span> <span class="s2">"org.apache.cxf.xjc-utils:cxf-xjc-runtime:4.0.0"</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="n">cxfCodegen</span> <span class="s2">"org.apache.cxf.xjcplugins:cxf-xjc-ts:4.0.0"</span> <i class="conum" data-value="2"></i><b>(2)</b>
 <span class="o">}</span>
 
 <span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
@@ -1837,8 +1824,8 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 <span class="c1">// ...</span>
 
 <span class="nf">dependencies</span> <span class="p">{</span>
-    <span class="nf">implementation</span><span class="p">(</span><span class="s">"org.apache.cxf.xjc-utils:cxf-xjc-runtime:3.3.2"</span><span class="p">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"org.apache.cxf.xjcplugins:cxf-xjc-ts:3.3.2"</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="nf">implementation</span><span class="p">(</span><span class="s">"org.apache.cxf.xjc-utils:cxf-xjc-runtime:4.0.0"</span><span class="p">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"org.apache.cxf.xjcplugins:cxf-xjc-ts:4.0.0"</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
 <span class="p">}</span>
 
 <span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"calculator"</span><span class="p">,</span> <span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span>
@@ -1873,7 +1860,7 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 <div id="footer">
 <div id="footer-text">
 Version 2.0.0-SNAPSHOT<br>
-Last updated 2023-04-30 15:16:28 UTC
+Last updated 2023-05-03 02:19:03 UTC
 </div>
 </div>
 <style>
