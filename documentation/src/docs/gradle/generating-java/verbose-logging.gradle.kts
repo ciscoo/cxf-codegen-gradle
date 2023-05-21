@@ -1,7 +1,7 @@
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java
 
 plugins {
-    id("java")
+    java
     id("io.mateo.cxf-codegen")
 }
 
@@ -9,15 +9,18 @@ repositories {
     mavenCentral()
 }
 
-// tag::code[]
 dependencies {
     cxfCodegen("ch.qos.logback:logback-classic:1.4.7")
 }
-// end::code[]
 
-tasks.register("example", Wsdl2Java::class) {
-    jvmArgs = listOf("-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Slf4jLogger")
+tasks.register("calculator", Wsdl2Java::class) {
     toolOptions {
         wsdl.set(file("wsdls/calculator.wsdl"))
     }
 }
+
+// tag::code[]
+tasks.withType(Wsdl2Java::class).configureEach {
+    jvmArgs = listOf("-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Slf4jLogger")
+}
+// end::code[]

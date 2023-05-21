@@ -259,7 +259,8 @@ SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 ----
 
-To enable logging for Apache CXF, include a SLF4J binding and logging framework. A Logback example is shown below.
+Apache CXF uses SLF4J for logging. To enable logging for Apache CXF, include a SLF4J binding and logging framework. A
+Logback example is shown below.
 
 ++++
 <details open>
@@ -289,27 +290,72 @@ include::../gradle/generating-java/logging-task.gradle.kts[tags=code]
 </details>
 ++++
 
-With the above, you should now start to see a plethora of logs as shown below.
+With the above, you will see some logs from Apache Velocity:
 
 [source,log]
 ----
-22:14:05.833 [main] DEBUG org.apache.cxf.common.logging.LogUtils - Using org.apache.cxf.common.logging.Slf4jLogger for logging.
-22:14:05.967 [main] DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader - Loading plugin jar:file:~/.gradle/caches/modules-2/files-2.1/org.apache.cxf/cxf-tools-wsdlto-databinding-jaxb/3.4.0/.../cxf-tools-wsdlto-databinding-jaxb-3.4.0.jar!/META-INF/tools-plugin.xml
-22:14:06.043 [main] DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader - Found 1 databindings in <jaxb> plugin.
-22:14:06.043 [main] DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader - Loading <jaxb> databinding from <jaxb> plugin.
-22:14:06.043 [main] DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader - Loading plugin jar:file:~/.gradle/caches/modules-2/files-2.1/org.apache.cxf/cxf-tools-wsdlto-frontend-jaxws/3.4.0/.../cxf-tools-wsdlto-frontend-jaxws-3.4.0.jar!/META-INF/tools-plugin.xml
+11:48:25.024 [main] DEBUG org.apache.velocity -- Initializing Velocity, Calling init()...
+11:48:25.025 [main] DEBUG org.apache.velocity -- Starting Apache Velocity v2.3
+11:48:25.026 [main] DEBUG org.apache.velocity -- Default Properties resource: org/apache/velocity/runtime/defaults/velocity.properties
+----
 
----- snip
+[[verbose-logs]]
+=== Verbose Logs
 
-22:14:06.043 [main] DEBUG org.apache.velocity - Initializing Velocity, Calling init()...
-22:14:06.043 [main] DEBUG org.apache.velocity - Starting Apache Velocity v2.2
-22:14:06.043 [main] DEBUG org.apache.velocity - Default Properties resource: org/apache/velocity/runtime/defaults/velocity.properties
+To see logs from Apache CXF, configure the logger for the specific task you want logs for.
+
+NOTE: The example below configures logging for **all** `{wsdl2java-task}` tasks.
+
+++++
+<details open>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+include::../gradle/generating-java/verbose-logging.gradle[tags=code]
+----
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+----
+include::../gradle/generating-java/verbose-logging.gradle.kts[tags=code]
+----
+
+++++
+</details>
+++++
+
+With the above configuration, you will see logs from Apache CXF:
+
+[source,logs]
+----
+11:00:38.266 [main] DEBUG org.apache.cxf.common.logging.LogUtils -- Using org.apache.cxf.common.logging.Slf4jLogger for logging.
+11:00:38.319 [main] DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader -- Loading plugin jar:file:~/.gradle/caches/modules-2/files-2.1/org.apache.cxf/cxf-tools-wsdlto-databinding-jaxb/4.0.0/5876acee034617f4f6ed756105fe9a0dc50a750c/cxf-tools-wsdlto-databinding-jaxb-4.0.0.jar!/META-INF/tools-plugin.xml
+11:00:38.349 [main] DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader -- Found 1 databindings in <jaxb> plugin.
+11:00:38.349 [main] DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader -- Loading <jaxb> databinding from <jaxb> plugin.
+11:00:38.349 [main] DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader -- Loading plugin jar:file:~/.gradle/caches/modules-2/files-2.1/org.apache.cxf/cxf-tools-wsdlto-frontend-jaxws/4.0.0/762d4f960e3e8778af050a271218785567bc29e1/cxf-tools-wsdlto-frontend-jaxws-4.0.0.jar!/META-INF/tools-plugin.xml
+
+...and so on
 ----
 
 [[disable-logs]]
 === Disable Logs
 
-Logs from Apache CXF can be disabled by specifying a `null` logger for each `{wsdl2java-task}` task type as JVM argument.
+Logs from Apache CXF can be disabled by in two ways:
+
+. By not specifying a logger at all -- same as never enabling.
+. By explicitly specifying a `null` logger as shown below.
+
+NOTE: The example below specifies a `null` logger _**all**_ `{wsdl2java-task}` task type as JVM argument.
 
 ++++
 <details open>
@@ -339,7 +385,7 @@ include::../gradle/generating-java/disable-task-logs.gradle.kts[tags=code]
 </details>
 ++++
 
-Logs from Apache Velocity unfortunately cannot be disabled. However, you can specify a log configuration
+The Apache Velocity initialization logs unfortunately cannot be disabled. However, you can specify a log configuration
 that essentially overrides all logging levels. For example, an empty Logback configuration will silence all logs:
 
 .logback.xml

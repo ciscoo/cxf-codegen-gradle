@@ -11,11 +11,12 @@ repositories {
 
 // tag::code[]
 dependencies {
-    cxfCodegen "ch.qos.logback:logback-classic:1.2.10"
+    cxfCodegen "ch.qos.logback:logback-classic:1.4.7"
 }
 // end::code[]
 
 tasks.register("example", Wsdl2Java) {
+    jvmArgs = ["-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Slf4jLogger"]
     toolOptions {
         wsdl.set(file("wsdls/calculator.wsdl"))
     }

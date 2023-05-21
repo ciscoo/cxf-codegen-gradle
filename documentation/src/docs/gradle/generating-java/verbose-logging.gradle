@@ -13,14 +13,14 @@ dependencies {
     cxfCodegen "ch.qos.logback:logback-classic:1.4.7"
 }
 
-tasks.register("example", Wsdl2Java) {
+tasks.register("calculator", Wsdl2Java) {
     toolOptions {
-        wsdl.set(file("example.wsdl"))
+        wsdl.set(file("wsdls/calculator.wsdl"))
     }
 }
 
-//tag::code[]
+// tag::code[]
 tasks.withType(Wsdl2Java).configureEach {
-    jvmArgs = ["-Dlogback.configurationFile=logback.xml"]
+    jvmArgs = ["-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Slf4jLogger"]
 }
-//end::code[]
+// end::code[]

@@ -122,6 +122,15 @@ class GeneratingJavaFunctionalTests {
 	}
 
 	@TestTemplate
+	void verboseLogging(GradleBuild gradleBuild) {
+		// same as loggingTask, just different samples
+		var result = gradleBuild.script(scriptFor("verbose-logging")).prepareRunner("wsdl2java").build();
+
+		assertThat(result.getOutput()).contains("DEBUG org.apache.cxf.common.logging.LogUtils",
+				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader", "DEBUG org.apache.velocity");
+	}
+
+	@TestTemplate
 	void minimalTaskUsage(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.script(scriptFor("minimal-task-usage")).prepareRunner("verify").build();
 

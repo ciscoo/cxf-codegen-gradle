@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    cxfCodegen("ch.qos.logback:logback-classic:1.2.3")
+    cxfCodegen("ch.qos.logback:logback-classic:1.4.7")
 }
 
 tasks.register("example", Wsdl2Java::class) {
