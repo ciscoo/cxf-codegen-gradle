@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../../../../../script-dir/jquery-ui.min.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../../jquery-ui.overrides.css" title="Style">
 <script type="text/javascript" src="../../../../../script.js"></script>
-<script type="text/javascript" src="../../../../../script-dir/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../../../../../script-dir/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
@@ -259,10 +259,10 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Enables or disables verbosity.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/file/RegularFileProperty.html" title="class or interface in org.gradle.api.file" class="external-link">RegularFileProperty</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html" title="class or interface in org.gradle.api.provider" class="external-link">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getWsdl()" class="member-name-link">getWsdl</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">WSDL file to process.</div>
+<div class="block">WSDL to process.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html" title="class or interface in org.gradle.api.provider" class="external-link">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getWsdlList()" class="member-name-link">getWsdlList</a>()</code></div>
@@ -277,18 +277,13 @@ loadScripts(document, 'script');</script>
  <code>wsdlLocation</code> property.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html" title="class or interface in org.gradle.api.provider" class="external-link">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getWsdlUrl()" class="member-name-link">getWsdlUrl</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getWsdlVersion()" class="member-name-link">getWsdlVersion</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">WSDL to process.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html" title="class or interface in org.gradle.api.provider" class="external-link">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getWsdlVersion()" class="member-name-link">getWsdlVersion</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Specifies the WSDL version.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html" title="class or interface in org.gradle.api.provider" class="external-link">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getXjcArgs()" class="member-name-link">getXjcArgs</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/ListProperty.html" title="class or interface in org.gradle.api.provider" class="external-link">ListProperty</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getXjcArgs()" class="member-name-link">getXjcArgs</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Specifies
  <a href="https://javaee.github.io/jaxb-v2/doc/user-guide/ch04.html">arguments</a>
  that are passed directly to the XJC processor when using the JAXB data binding.</div>
@@ -327,31 +322,13 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getWsdl()">
 <h3>getWsdl</h3>
-<div class="member-signature"><span class="annotations"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/InputFile.html" title="class or interface in org.gradle.api.tasks" class="external-link">@InputFile</a>
-<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/PathSensitive.html" title="class or interface in org.gradle.api.tasks" class="external-link">@PathSensitive</a>(<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/PathSensitivity.html#RELATIVE" title="class or interface in org.gradle.api.tasks" class="external-link">RELATIVE</a>)
-<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/Optional.html" title="class or interface in org.gradle.api.tasks" class="external-link">@Optional</a>
-</span><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/file/RegularFileProperty.html" title="class or interface in org.gradle.api.file" class="external-link">RegularFileProperty</a></span>&nbsp;<span class="element-name">getWsdl</span>()</div>
-<div class="block">WSDL file to process.</div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/Input.html" title="class or interface in org.gradle.api.tasks" class="external-link">@Input</a>
+</span><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html" title="class or interface in org.gradle.api.provider" class="external-link">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getWsdl</span>()</div>
+<div class="block">WSDL to process. The value can either be a direct path to a file on a local system
+ or URL to a remote file.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>wsdl file</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getWsdlUrl()">
-<h3>getWsdlUrl</h3>
-<div class="member-signature"><span class="annotations"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/Input.html" title="class or interface in org.gradle.api.tasks" class="external-link">@Input</a>
-<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/Optional.html" title="class or interface in org.gradle.api.tasks" class="external-link">@Optional</a>
-</span><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/provider/Property.html" title="class or interface in org.gradle.api.provider" class="external-link">Property</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getWsdlUrl</span>()</div>
-<div class="block">WSDL to process. The value can either be a direct path to a file on a local system
- or URL to a remote file.
- <p>
- If no value is specified, the <em>convention</em> is the value of
- <a href="#getWsdl()"><code>getWsdl()</code></a>.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>wsdl url</dd>
 </dl>
 </section>
 </li>
@@ -528,7 +505,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Specifies the value of the <code>@WebServiceClient</code> annotation's
  <code>wsdlLocation</code> property.
  <p>
- By default, the <code>wsdl2java</code> tool will use the value of <a href="#getWsdlUrl()"><code>getWsdlUrl()</code></a>.
+ By default, the <code>wsdl2java</code> tool will use the value of <code>#getWsdlUrl()</code>.
  This may lead to runtime issues such as <code>FileNotFoundException</code> being thrown.
  Consider setting this value to a location that your application understands. For
  example (Kotlin DSL), a classpath location: <pre>
