@@ -15,7 +15,7 @@ dependencies {
 
 tasks.register("example", Wsdl2Java) {
     toolOptions {
-        wsdl.set(file("example.wsdl"))
+        wsdl.set(file("example.wsdl").toPath().toAbsolutePath().toUri().toString())
     }
 }
 

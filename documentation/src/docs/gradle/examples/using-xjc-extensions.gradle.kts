@@ -22,7 +22,7 @@ dependencies {
 
 tasks.register("calculator", Wsdl2Java::class) {
     toolOptions {
-        wsdl.set(layout.projectDirectory.file("calculator.wsdl"))
+        wsdl.set(layout.projectDirectory.file("calculator.wsdl").asFile.toPath().toAbsolutePath().toUri().toString())
         xjcArgs.add("-Xts") // <3>
     }
 }

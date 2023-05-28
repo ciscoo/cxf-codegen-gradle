@@ -24,7 +24,6 @@ import io.mateo.cxf.codegen.dsl.CxfCodegenExtension;
 import io.mateo.cxf.codegen.internal.GeneratedVersionAccessor;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 
-import io.mateo.cxf.codegen.wsdl2java.Wsdl2JavaOptions;
 import io.mateo.cxf.codegen.wsdl2js.Wsdl2Js;
 import org.gradle.api.NamedDomainObjectProvider;
 import org.gradle.api.Plugin;
@@ -108,7 +107,6 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 			NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration) {
 		project.getTasks().withType(Wsdl2Java.class).configureEach(task -> {
 			task.getMainClass().set(WSDL2JAVA_TOOL_MAIN_CLASS);
-			configureOnlyIf(task);
 			task.setClasspath(cxfCodegenConfiguration.get());
 			task.setGroup(WSDL2JAVA_GROUP);
 			task.setDescription("Generates Java sources for '" + task.getName() + "'");
@@ -116,35 +114,8 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 				.getOutputDir()
 				.convention(
 						project.getLayout().getBuildDirectory().dir(task.getName() + "-wsdl2java-generated-sources"));
-			task.getWsdl2JavaOptions()
-				.getWsdlUrl()
-				.convention(task.getWsdl2JavaOptions()
-					.getWsdl()
-					.map(it -> it.getAsFile().toPath().toAbsolutePath().toUri().toString()));
 			task.getAddToMainSourceSet().convention(true);
 		});
-	}
-
-	private void configureOnlyIf(Wsdl2Java wsdl2Java) {
-		try {
-			wsdl2Java.onlyIf("run only if 'wsdl' or 'wsdlUrl' is set", self -> {
-				Wsdl2JavaOptions options = ((Wsdl2Java) self).getWsdl2JavaOptions();
-				return options.getWsdl().isPresent() || options.getWsdlUrl().isPresent();
-			});
-		}
-		catch (NoSuchMethodError ignored) {
-			// < Gradle 7.6
-			wsdl2Java.onlyIf(task -> {
-				Wsdl2JavaOptions options = ((Wsdl2Java) task).getWsdl2JavaOptions();
-				boolean shouldExecute = options.getWsdl().isPresent() || options.getWsdlUrl().isPresent();
-				if (!shouldExecute) {
-					if (task.getLogger().isInfoEnabled()) {
-						task.getLogger().info("run only if 'wsdl' or 'wsdlUrl' is set");
-					}
-				}
-				return shouldExecute;
-			});
-		}
 	}
 
 	@SuppressWarnings("deprecation")

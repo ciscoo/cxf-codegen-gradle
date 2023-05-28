@@ -16,16 +16,12 @@
 package io.mateo.cxf.codegen.wsdl2java;
 
 import org.gradle.api.file.DirectoryProperty;
-import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.SetProperty;
 import org.gradle.api.tasks.Input;
-import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputDirectory;
-import org.gradle.api.tasks.PathSensitive;
-import org.gradle.api.tasks.PathSensitivity;
 
 /**
  * Options for the {@code wsdl2java} tool.
@@ -36,25 +32,12 @@ import org.gradle.api.tasks.PathSensitivity;
 public abstract class Wsdl2JavaOptions {
 
 	/**
-	 * WSDL file to process.
-	 * @return wsdl file
-	 */
-	@InputFile
-	@PathSensitive(PathSensitivity.RELATIVE)
-	@Optional
-	public abstract RegularFileProperty getWsdl();
-
-	/**
 	 * WSDL to process. The value can either be a direct path to a file on a local system
 	 * or URL to a remote file.
-	 * <p>
-	 * If no value is specified, the <em>convention</em> is the value of
-	 * {@link #getWsdl()}.
-	 * @return wsdl url
+	 * @return wsdl file
 	 */
 	@Input
-	@Optional
-	public abstract Property<String> getWsdlUrl();
+	public abstract Property<String> getWsdl();
 
 	/**
 	 * Specifies the directory the generated code files are written.

@@ -22,6 +22,6 @@ dependencies {
 
 tasks.register("calculator", Wsdl2Java) {
     toolOptions {
-        wsdl.set(file("calculator.wsdl"))
+        wsdl.set(file("calculator.wsdl").toPath().toAbsolutePath().toUri().toString())
     }
 }

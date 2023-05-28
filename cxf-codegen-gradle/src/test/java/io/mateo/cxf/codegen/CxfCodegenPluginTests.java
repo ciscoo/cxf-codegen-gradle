@@ -123,11 +123,10 @@ class CxfCodegenPluginTests {
 					this.<org.gradle.api.internal.tasks.execution.DescribingAndSpec<? super org.gradle.api.internal.TaskInternal>>uncheckedCast(
 							wsdl2Java.getOnlyIf())
 						.getSpecs())
-				.hasSize(2)
-				.element(1)
+				.singleElement()
 				.asInstanceOf(InstanceOfAssertFactories.type(Describable.class))
 				.extracting(Describable::getDisplayName)
-				.isEqualTo("run only if 'wsdl' or 'wsdlUrl' is set");
+				.isEqualTo("Task is enabled");
 		});
 	}
 

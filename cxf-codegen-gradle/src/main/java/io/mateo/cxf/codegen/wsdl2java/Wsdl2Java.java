@@ -67,9 +67,9 @@ public abstract class Wsdl2Java extends JavaExec {
 		public Iterable<String> asArguments() {
 			Wsdl2JavaOptions options = Wsdl2Java.this.getWsdl2JavaOptions();
 			// Don't rely on just onlyIf spec.
-			if (!options.getWsdl().isPresent() && !options.getWsdlUrl().isPresent()) {
+			if (!options.getWsdl().isPresent()) {
 				throw new IllegalStateException("Cannot generate arguments for task '" + Wsdl2Java.this.getName()
-						+ "' because 'wsdl' and 'wsdlUrl' have no value; at least one of the options must be configured");
+						+ "' because 'wsdl' has no value.");
 			}
 			List<String> arguments = new ArrayList<>();
 			if (options.getEncoding().isPresent()) {
@@ -237,8 +237,7 @@ public abstract class Wsdl2Java extends JavaExec {
 					arguments.add(sb.toString());
 				}
 			}
-			// The convention of 'wsdlUrl' is the 'wsdl' file.
-			arguments.add(options.getWsdlUrl().get());
+			arguments.add(options.getWsdl().get());
 			return Collections.unmodifiableList(arguments);
 		}
 

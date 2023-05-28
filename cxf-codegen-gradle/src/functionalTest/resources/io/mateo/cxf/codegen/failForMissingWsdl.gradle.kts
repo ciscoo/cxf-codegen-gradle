@@ -1,3 +1,5 @@
+import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java
+
 plugins {
     java
     id("io.mateo.cxf-codegen")
@@ -7,8 +9,4 @@ repositories {
     mavenCentral()
 }
 
-cxfCodegen {
-    wsdl2java {
-        register("calculator")
-    }
-}
+tasks.register("calculator", Wsdl2Java::class)

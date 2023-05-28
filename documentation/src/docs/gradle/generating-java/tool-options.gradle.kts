@@ -8,7 +8,7 @@ plugins {
 // tag::code[]
 tasks.register("example", Wsdl2Java::class) {
     toolOptions {
-        wsdl.set(file("path/to/example.wsdl"))
+        wsdl.set(file("path/to/example.wsdl").toPath().toAbsolutePath().toUri().toString())
         outputDir.set(file("$buildDir/generated-java")) // <1>
         markGenerated.set(true) // <2>
         packageNames.set(listOf("com.example", "com.foo.bar")) // <3>

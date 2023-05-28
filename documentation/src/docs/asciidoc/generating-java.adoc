@@ -56,7 +56,7 @@ include::../gradle/generating-java/minimal-task-usage.gradle.kts[tags=code]
 
 <1> Creates a task named `example` of type `{wsdl2java-task-type}`.
 <2> Use the `toolOptions` to configure all available options for code generation.
-<3> Configure the WSDL to use for code generation.
+<3> Configure the WSDL to use for code generation. The value can be a path to some location on a filesystem or a URL to a remote location.
 <4> Configure a custom locale. +
 Remember that `{wsdl2java-task-type}` is a subclass of `{javaexec-task}`. All configurations you can do to `{javaexec-task}` can be done here as well.
 

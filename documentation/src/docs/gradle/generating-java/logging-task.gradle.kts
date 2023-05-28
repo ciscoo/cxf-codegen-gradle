@@ -18,6 +18,6 @@ dependencies {
 tasks.register("example", Wsdl2Java::class) {
     jvmArgs = listOf("-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Slf4jLogger")
     toolOptions {
-        wsdl.set(file("wsdls/calculator.wsdl"))
+        wsdl.set(file("wsdls/calculator.wsdl").toPath().toAbsolutePath().toUri().toString())
     }
 }

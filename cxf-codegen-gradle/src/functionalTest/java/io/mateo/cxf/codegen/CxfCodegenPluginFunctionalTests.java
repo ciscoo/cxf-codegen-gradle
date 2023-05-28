@@ -35,18 +35,11 @@ class CxfCodegenPluginFunctionalTests {
 
 	@TestTemplate
 	void failForMissingWsdl(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.buildAndFail("wsdl2javaCalculator");
-
-		assertThat(result.getTasks()).isEmpty();
-	}
-
-	@TestTemplate
-	void skipWhenWsdlIsMissing(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.build("calculator");
+		BuildResult result = gradleBuild.buildAndFail("calculator");
 
 		assertThat(result.task(":calculator")).isNotNull()
 			.extracting(BuildTask::getOutcome)
-			.isEqualTo(TaskOutcome.SKIPPED);
+			.isEqualTo(TaskOutcome.FAILED);
 	}
 
 	@TestTemplate

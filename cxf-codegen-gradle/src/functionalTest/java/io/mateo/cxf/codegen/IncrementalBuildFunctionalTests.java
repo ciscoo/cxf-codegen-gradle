@@ -17,12 +17,10 @@ package io.mateo.cxf.codegen;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.nio.file.StandardOpenOption;
 
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibility;
@@ -38,27 +36,6 @@ class IncrementalBuildFunctionalTests {
 	@TestTemplate
 	void generatesJavaSourcesWhenSeparateXsdIsUsed(GradleBuild gradleBuild) {
 		runTest(gradleBuild);
-	}
-
-	@TestTemplate
-	void wsdlFileChangesCausesTaskToBeOutdated(GradleBuild gradleBuild) throws IOException {
-		GradleRunner runner = gradleBuild.prepareRunner("calculator", "-i");
-		BuildResult result = runner.build();
-
-		assertThat(result.getOutput()).contains("Task ':calculator' is not up-to-date because:" + System.lineSeparator()
-				+ "  No history is available.");
-
-		// Simulate changes to the file by adding a new line.
-		Path calculatorWsdlPath = Path.of("wsdls", "calculator.wsdl");
-		Path wsdl = gradleBuild.getProjectDir().resolve(calculatorWsdlPath);
-		BufferedWriter writer = Files.newBufferedWriter(wsdl, StandardOpenOption.APPEND);
-		writer.newLine();
-		writer.close();
-
-		result = runner.build();
-
-		assertThat(result.getOutput()).contains("Task ':calculator' is not up-to-date because",
-				"Input property 'wsdl2JavaOptions.wsdl'");
 	}
 
 	@TestTemplate

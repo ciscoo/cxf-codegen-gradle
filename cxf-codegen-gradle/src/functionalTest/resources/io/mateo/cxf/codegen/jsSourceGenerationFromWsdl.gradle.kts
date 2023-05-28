@@ -10,6 +10,6 @@ repositories {
 
 tasks.register("calculator", Wsdl2Js::class) {
     toolOptions {
-        wsdl.set(layout.projectDirectory.file("wsdls/calculator.wsdl").asFile.absolutePath)
+        wsdl.set(layout.projectDirectory.file("wsdls/calculator.wsdl").asFile.toPath().toAbsolutePath().toUri().toString())
     }
 }

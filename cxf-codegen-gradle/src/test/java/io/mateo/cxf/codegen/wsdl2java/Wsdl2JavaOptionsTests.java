@@ -483,7 +483,7 @@ class Wsdl2JavaOptionsTests {
 	}
 
 	@Test
-	void wsdlOnly(TestInfo testInfo) { // also tests convention of wsdlUrl
+	void wsdlOnly(TestInfo testInfo) {
 		List<String> expected = List.of("-d", this.outputDir.toString(), this.wsdl.toAbsolutePath().toUri().toString());
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName()).getArgumentProviders().get(0).asArguments();
@@ -496,49 +496,38 @@ class Wsdl2JavaOptionsTests {
 		List<String> expected = List.of("-d", this.outputDir.toString(), "https://example.com/example?wsdl");
 
 		Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> {
-			options.getWsdlUrl().set("https://example.com/example?wsdl");
+			options.getWsdl().set("https://example.com/example?wsdl");
 		}).getArgumentProviders().get(0).asArguments();
 
 		assertThat(actual).containsExactlyElementsOf(expected);
 	}
 
 	@Test
-	void bothWsdlFileAndWsdlUrlMissingResultsInFailure(TestInfo testInfo) {
+	void wsdlMissingResultsInFailure(TestInfo testInfo) {
 		assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> {
 			createTaskWithConfiguration(testInfo.getDisplayName(), options -> {
 			}).getArgumentProviders().get(0).asArguments();
-		})
-			.withMessage(
-					"Cannot generate arguments for task 'bothWsdlFileAndWsdlUrlMissingResultsInFailure' because 'wsdl' and 'wsdlUrl' have no value; at least one of the options must be configured");
+		}).withMessage("Cannot generate arguments for task 'wsdlMissingResultsInFailure' because 'wsdl' has no value.");
 	}
 
 	private Wsdl2Java createTask(String taskName, Action<? super Wsdl2JavaOptions> configurer) {
 		return this.project.getTasks().create(taskName, Wsdl2Java.class, wsdl2java -> wsdl2java.toolOptions(options -> {
 			options.getOutputDir().set(this.outputDir.toFile());
-			options.getWsdl().set(this.wsdl.toFile());
-			options.getWsdlUrl()
-				.convention(options.getWsdl().map(it -> it.getAsFile().toPath().toAbsolutePath().toUri().toString()));
+			options.getWsdl().set(this.wsdl.toAbsolutePath().toUri().toString());
 			configurer.execute(options);
 		}));
 	}
 
 	private Wsdl2Java createTask(String taskName) {
 		return this.project.getTasks().create(taskName, Wsdl2Java.class, wsdl2java -> wsdl2java.toolOptions(options -> {
-			options.getWsdlUrl()
-				.convention(options.getWsdl().map(it -> it.getAsFile().toPath().toAbsolutePath().toUri().toString()));
 			options.getOutputDir().set(this.outputDir.toFile());
-			options.getWsdl().set(this.wsdl.toFile());
+			options.getWsdl().set(this.wsdl.toAbsolutePath().toUri().toString());
 		}));
 	}
 
 	private Wsdl2Java createTaskWithConfiguration(String taskName, Action<? super Wsdl2JavaOptions> configurer) {
 		return this.project.getTasks().create(taskName, Wsdl2Java.class, wsdl2java -> {
 			wsdl2java.getWsdl2JavaOptions().getOutputDir().set(this.outputDir.toFile());
-			wsdl2java.getWsdl2JavaOptions()
-				.getWsdlUrl()
-				.convention(wsdl2java.getWsdl2JavaOptions()
-					.getWsdl()
-					.map(it -> it.getAsFile().toPath().toAbsolutePath().toUri().toString()));
 			wsdl2java.toolOptions(configurer);
 		});
 	}

@@ -45,7 +45,7 @@ val extractWsdl = tasks.register("extractWsdl") { // <4>
 tasks.register("calculator", Wsdl2Java::class) { // <5>
     inputs.files(extractWsdl)
     toolOptions {
-        wsdl.fileProvider(extractWsdl.map { it.outputs.files.singleFile })
+        wsdl.set(extractWsdl.map { it.outputs.files.singleFile.toPath().toAbsolutePath().toUri().toString() })
     }
 }
 // end::code[]
