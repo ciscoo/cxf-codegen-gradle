@@ -15,7 +15,7 @@ tasks {
     register("calculator", Wsdl2Java::class) {
         addToMainSourceSet.set(false)
         toolOptions {
-            wsdl.set(file("wsdls/calculator.wsdl").toPath().toAbsolutePath().toUri().toString())
+            wsdl.set(file("wsdls/calculator.wsdl").toPath().toAbsolutePath().toString())
         }
     }
     register("verify") {

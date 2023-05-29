@@ -19,7 +19,7 @@ application {
 cxfCodegen {
     wsdl2java {
         calculator {
-            wsdl = file("wsdls/calculator.wsdl").toPath().toAbsolutePath().toUri().toString()
+            wsdl = file("wsdls/calculator.wsdl").toPath().toAbsolutePath().toString()
             markGenerated = false
         }
     }

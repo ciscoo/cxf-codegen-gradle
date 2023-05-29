@@ -98,7 +98,7 @@ public abstract class Wsdl2Java extends JavaExec {
 						.getProjectDirectory()
 						.file(binding);
 					arguments.add("-b");
-					arguments.add(bindingFile.getAsFile().toPath().toAbsolutePath().toUri().toString());
+					arguments.add(bindingFile.getAsFile().toPath().toAbsolutePath().toString());
 				});
 			}
 			if (options.getFrontend().isPresent()) {

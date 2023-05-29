@@ -10,7 +10,7 @@ repositories {
 cxfCodegen {
     wsdl2java {
         register("calculator") {
-            wsdl.set(file("wsdls/calculator.wsdl").toPath().toAbsolutePath().toUri().toString())
+            wsdl.set(file("wsdls/calculator.wsdl").toPath().toAbsolutePath().toString())
             markGenerated.set(true)
         }
     }

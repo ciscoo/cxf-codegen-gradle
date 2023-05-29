@@ -16,6 +16,6 @@ application {
 
 tasks.register("calculator", Wsdl2Java::class) {
     toolOptions {
-        wsdl.set(file("wsdls/calculator.wsdl").toPath().toAbsolutePath().toUri().toString())
+        wsdl.set(file("wsdls/calculator.wsdl").toPath().toAbsolutePath().toString())
     }
 }
