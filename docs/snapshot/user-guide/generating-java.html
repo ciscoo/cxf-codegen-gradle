@@ -515,7 +515,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
 <span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"example"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
     <span class="n">toolOptions</span> <span class="o">{</span> <i class="conum" data-value="2"></i><b>(2)</b>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toUri</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span> <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span> <i class="conum" data-value="3"></i><b>(3)</b>
     <span class="o">}</span>
     <span class="n">allJvmArgs</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"-Duser.language=fr"</span><span class="o">,</span> <span class="s2">"-Duser.country=CA"</span><span class="o">]</span> <i class="conum" data-value="4"></i><b>(4)</b>
 <span class="o">}</span></code></pre>
@@ -532,7 +532,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
 <span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"example"</span><span class="p">,</span> <span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
     <span class="nf">toolOptions</span> <span class="p">{</span> <i class="conum" data-value="2"></i><b>(2)</b>
-        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/example.wsdl"</span><span class="p">).</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toUri</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span> <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/example.wsdl"</span><span class="p">).</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span> <i class="conum" data-value="3"></i><b>(3)</b>
     <span class="p">}</span>
     <span class="n">allJvmArgs</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="s">"-Duser.language=fr"</span><span class="p">,</span> <span class="s">"-Duser.country=CA"</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
 <span class="p">}</span></code></pre>
@@ -589,7 +589,7 @@ offered by the <a href="https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsd
 <div class="content">
 <pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"example"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toUri</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
         <span class="n">outputDir</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"$buildDir/generated-java"</span><span class="o">))</span> <i class="conum" data-value="1"></i><b>(1)</b>
         <span class="n">markGenerated</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
         <span class="n">packageNames</span><span class="o">.</span><span class="na">set</span><span class="o">([</span><span class="s2">"com.example"</span><span class="o">,</span> <span class="s2">"com.foo.bar"</span><span class="o">])</span> <i class="conum" data-value="3"></i><b>(3)</b>
@@ -605,7 +605,7 @@ offered by the <a href="https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsd
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"example"</span><span class="p">,</span> <span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">toolOptions</span> <span class="p">{</span>
-        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/example.wsdl"</span><span class="p">).</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toUri</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span>
+        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/example.wsdl"</span><span class="p">).</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span>
         <span class="n">outputDir</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"$buildDir/generated-java"</span><span class="p">))</span> <i class="conum" data-value="1"></i><b>(1)</b>
         <span class="n">markGenerated</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
         <span class="n">packageNames</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">listOf</span><span class="p">(</span><span class="s">"com.example"</span><span class="p">,</span> <span class="s">"com.foo.bar"</span><span class="p">))</span> <i class="conum" data-value="3"></i><b>(3)</b>
@@ -656,17 +656,17 @@ for <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaOptions.html#m
 <div class="content">
 <pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"first"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/first.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toUri</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/first.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"second"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/second.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toUri</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/second.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"third"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/third.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toUri</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/third.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre>
 </div>
@@ -679,17 +679,17 @@ for <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaOptions.html#m
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">tasks</span> <span class="p">{</span>
     <span class="nf">register</span><span class="p">(</span><span class="s">"first"</span><span class="p">,</span> <span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span>
         <span class="nf">toolOptions</span> <span class="p">{</span>
-            <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/first.wsdl"</span><span class="p">).</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toUri</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span>
+            <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/first.wsdl"</span><span class="p">).</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span>
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="nf">register</span><span class="p">(</span><span class="s">"second"</span><span class="p">,</span> <span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span>
         <span class="nf">toolOptions</span> <span class="p">{</span>
-            <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/second.wsdl"</span><span class="p">).</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toUri</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span>
+            <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/second.wsdl"</span><span class="p">).</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span>
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="nf">register</span><span class="p">(</span><span class="s">"third"</span><span class="p">,</span> <span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span>
         <span class="nf">toolOptions</span> <span class="p">{</span>
-            <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/third.wsdl"</span><span class="p">).</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toUri</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span>
+            <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">file</span><span class="p">(</span><span class="s">"path/to/third.wsdl"</span><span class="p">).</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
@@ -1017,7 +1017,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 <div id="footer">
 <div id="footer-text">
 Version 2.0.0-SNAPSHOT<br>
-Last updated 2023-05-28 16:18:31 UTC
+Last updated 2023-05-31 23:27:28 UTC
 </div>
 </div>
 <style>
