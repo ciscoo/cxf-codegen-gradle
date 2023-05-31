@@ -94,7 +94,6 @@ class Wsdl2JavaOptionsTests {
 					.getAsFile()
 					.toPath()
 					.toAbsolutePath()
-					.toUri()
 					.toString(),
 				"-b",
 				this.project.getLayout()
@@ -103,7 +102,6 @@ class Wsdl2JavaOptionsTests {
 					.getAsFile()
 					.toPath()
 					.toAbsolutePath()
-					.toUri()
 					.toString(),
 				this.wsdl.toAbsolutePath().toUri().toString());
 
