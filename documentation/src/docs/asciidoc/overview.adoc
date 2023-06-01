@@ -69,6 +69,7 @@ a|
 
 a|
 - 8.0.2
+- 8.1.1
 - {current-gradle-version}
 |===
 
