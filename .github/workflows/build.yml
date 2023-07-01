@@ -18,6 +18,8 @@ jobs:
           fetch-depth: 1
       - name: Main Build
         uses: ./.github/actions/run-gradle
+      - name: Upload to Codecov.io
+        uses: codecov/codecov-action@v3
       - name: Functional Tests (Gradle 8)
         uses: ./.github/actions/run-gradle
         with:

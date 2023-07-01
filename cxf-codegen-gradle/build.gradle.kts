@@ -1,5 +1,6 @@
 plugins {
     `java-library-conventions`
+    jacoco
     id("com.gradle.plugin-publish")
 }
 
@@ -76,6 +77,15 @@ tasks {
             windowTitle = "CXF Codegen Gradle Plugin $version API"
             this as StandardJavadocDocletOptions
             docTitle = "CXF Codegen Gradle Plugin $version API"
+        }
+    }
+    test {
+        finalizedBy(jacocoTestReport)
+    }
+    jacocoTestReport {
+        dependsOn(test)
+        reports {
+            xml.required.set(true)
         }
     }
 }
