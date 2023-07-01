@@ -3,7 +3,3 @@ plugins {
 }
 
 defaultTasks("build")
-
-allprojects {
-    group = "io.mateo"
-}
