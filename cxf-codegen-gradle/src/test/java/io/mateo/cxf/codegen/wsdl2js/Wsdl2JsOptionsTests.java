@@ -23,6 +23,7 @@ import org.gradle.testfixtures.ProjectBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestInstance;
@@ -33,6 +34,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 @DisplayNameGeneration(TaskNameGenerator.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -56,7 +58,10 @@ class Wsdl2JsOptionsTests {
 
 	@AfterEach
 	void tearDown(TestInfo testInfo) {
-		this.project.getTasks().named(testInfo.getDisplayName(), task -> task.setEnabled(false));
+		var task = this.project.getTasks().findByName(testInfo.getDisplayName());
+		if (task != null) {
+			task.setEnabled(false);
+		}
 	}
 
 	@Test
@@ -170,6 +175,18 @@ class Wsdl2JsOptionsTests {
 			options.getOutputDir().set(this.outputDir.toFile());
 			options.getWsdl().set(this.wsdl.toString());
 		}));
+	}
+
+	@Nested
+	class UriPrefixPairTests {
+
+		@Test
+		void nullChecks() {
+			var uriPrefixPair = new Wsdl2JsOptions.UriPrefixPair();
+			assertThatNullPointerException().isThrownBy(() -> uriPrefixPair.setPrefix(null));
+			assertThatNullPointerException().isThrownBy(() -> uriPrefixPair.setUri(null));
+		}
+
 	}
 
 }
