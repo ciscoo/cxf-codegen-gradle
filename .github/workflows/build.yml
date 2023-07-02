@@ -75,8 +75,8 @@ jobs:
       - name: Publish
         uses: ./.github/actions/run-gradle
         env:
-          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
-          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
+          ORG_GRADLE_PROJECT_sonatypeSnapshotsUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_sonatypeSnapshotsPassword: ${{ secrets.SONATYPE_PASSWORD }}
         with:
           arguments: publish -x check
 
