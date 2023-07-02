@@ -140,7 +140,6 @@ publishing {
 val isCIEnvironment = System.getenv("CI")?.toBoolean() ?: false
 
 signing {
-    sign(publishing.publications)
     isRequired = !(isSnapshot || isCIEnvironment)
 }
 
