@@ -1,5 +1,6 @@
 plugins {
     `java-library-conventions`
+    signing
     jacoco
     id("com.gradle.plugin-publish")
 }

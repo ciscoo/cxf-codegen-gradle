@@ -7,3 +7,4 @@ assertj = { module = "org.assertj:assertj-core", version = "3.24.2" }
 javapoet = { module = "com.squareup:javapoet", version = "1.13.0" }
 gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version = "6.19.0" }
 gradle-springJavaFormat = { module = "io.spring.javaformat:spring-javaformat-gradle-plugin", version = "0.0.39" }
+gradle-nexusPublish = { module = "io.github.gradle-nexus:publish-plugin", version = "2.0.0-rc-1" }
