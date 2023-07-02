@@ -103,12 +103,8 @@ artifacts {
 publishing {
     repositories {
         maven {
-            name = "sonatype"
-            url = if (isSnapshot) {
-                uri("https://oss.sonatype.org/content/repositories/snapshots")
-            } else {
-                uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-            }
+            name = "sonatypeSnapshots"
+            url = uri("https://oss.sonatype.org/content/repositories/snapshots")
             credentials(PasswordCredentials::class)
         }
     }
