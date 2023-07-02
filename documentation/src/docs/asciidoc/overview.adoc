@@ -76,7 +76,7 @@ a|
 The plugin is fully tested against the above versions to ensure compatibility. View
 the source of the {functional-test}[functional tests] for more details.
 
-Gradle's {configuration-cache}[configuration cache] is supported when using Gradle 6.6 or later.
+Gradle's {configuration-cache}[configuration cache] is supported.
 
 WARNING: All examples are written for _and_ are tested for Gradle {current-gradle-version}.
 Depending on your Gradle version, you may need to adapt the example to a syntax that is compatible

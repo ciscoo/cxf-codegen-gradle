@@ -14,13 +14,13 @@ However, depending on how your WSDLs are structured, you may encounter scenarios
 Additionally, when defining a task:
 
 . For each task, the generated Java source (the task output) is added to the {main-source-sets}[`main` source sets].
-.. This can be disabled when creating the task via `addToMainSourceSet.set(false)`
+.. This can be disabled when creating the task by using `addToMainSourceSet.set(false)`
 . All `{wsdl2java-task-type}` task types are aggregated to a single task named `wsdl2java`.
 
 [[minimal-usage]]
 == Minimal Usage
 
-The minimum requirement for generating Java is a single WSDL file.
+The minimum requirement for generating Java is a single WSDL which can either be a path to a file or URL. A file example is shown below.
 
 ++++
 <details open>
@@ -60,7 +60,7 @@ include::../gradle/generating-java/minimal-task-usage.gradle.kts[tags=code]
 <4> Configure a custom locale. +
 Remember that `{wsdl2java-task-type}` is a subclass of `{javaexec-task}`. All configurations you can do to `{javaexec-task}` can be done here as well.
 
-TIP: The WSDL property is annotated with https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/InputFile.html[`@InputFile`] therefore any changes to the WSDL will cause the task to be out-of-date. If your WSDL imports a schema (XSD) or something else, consider adding that file to the
+TIP: For local files, if your WSDL imports a schema (XSD) or something else, consider adding that file to the
 task inputs as well so that it can be considered during Gradle's https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:up_to_date_checks[up-to-date checks].
 
 [[options-usage]]
@@ -169,83 +169,6 @@ include::../gradle/generating-java/default-tool-options.gradle.kts[tags=secondar
 ++++
 </details>
 ++++
-
-[[java-9]]
-== Java 9+
-
-If you are using Java 9+, you can use the `cxfCodegen` configuration to add back the Java EE modules that were deprecated
-in Java 9 and eventually removed in Java 11. Refer to https://openjdk.java.net/jeps/320[JEP 320] for more details.
-
-++++
-<details open>
-<summary>Groovy</summary>
-++++
-
-[source,groovy]
-----
-include::../gradle/generating-java/java-nine.gradle[tags=code]
-----
-
-++++
-</details>
-++++
-
-++++
-<details>
-<summary>Kotlin</summary>
-++++
-
-[source,kotlin]
-----
-include::../gradle/generating-java/java-nine.gradle.kts[tags=code]
-----
-
-++++
-</details>
-++++
-
-<1> Replacement for `javax.xml.ws.Service`
-<2> Replacement for `javax.annotation.Resource`
-
-The above is just an example. Depending on your usage, there may be more dependencies required.
-
-[[jakarta]]
-== Jakarta
-
-It is possible to generate Java using the `jakarta` namespace instead of `javax`. In order to do so, you must use Apache CXF 4 along with Jakarta specific artifacts.
-
-++++
-<details open>
-<summary>Groovy</summary>
-++++
-
-[source,groovy]
-----
-include::../gradle/generating-java/jakarta.gradle[tags=code]
-----
-
-++++
-</details>
-++++
-
-++++
-<details>
-<summary>Kotlin</summary>
-++++
-
-[source,kotlin]
-----
-include::../gradle/generating-java/jakarta.gradle.kts[tags=code]
-----
-
-++++
-</details>
-++++
-
-<1> Specify 4.0.0 version for all CXF artifacts in the `cxfCodegen` classpath.
-<2> Use Jakarta specific artifacts that use the `jakarta` namespace.
-
-The above is just an example. Depending on your usage, there may be more dependencies or configuration required.
 
 [[logging]]
 == Logging
