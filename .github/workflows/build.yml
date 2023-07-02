@@ -78,7 +78,7 @@ jobs:
           ORG_GRADLE_PROJECT_sonatypeSnapshotsUsername: ${{ secrets.SONATYPE_USERNAME }}
           ORG_GRADLE_PROJECT_sonatypeSnapshotsPassword: ${{ secrets.SONATYPE_PASSWORD }}
         with:
-          arguments: publish -x check
+          arguments: publishAllPublicationsToSonatypeSnapshotsRepository -x check
 
   update_snapshot_documentation:
     name: Update Snapshot Documentation
