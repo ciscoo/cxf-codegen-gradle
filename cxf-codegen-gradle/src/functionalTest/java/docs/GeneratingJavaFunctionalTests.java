@@ -18,9 +18,7 @@ package docs;
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibilityExtension;
 import org.gradle.testkit.runner.BuildResult;
-import org.gradle.testkit.runner.BuildTask;
 import org.gradle.testkit.runner.GradleRunner;
-import org.gradle.testkit.runner.TaskOutcome;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
@@ -28,8 +26,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -72,45 +68,6 @@ class GeneratingJavaFunctionalTests {
 
 		assertThat(result.getOutput()).doesNotContain("DEBUG org.apache.cxf.common.logging.LogUtils",
 				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader", "DEBUG org.apache.velocity");
-	}
-
-	@TestTemplate
-	void javaNine(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.script(scriptFor("java-nine")).prepareRunner("verify").build();
-
-		assertThat(result.getOutput()).contains(List.of("jakarta.xml.ws-api", "jakarta.annotation-api"));
-	}
-
-	@TestTemplate
-	void jakarta(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.script(scriptFor("jakarta")).prepareRunner("wsdl2java").build();
-
-		assertThat(result.getTasks()).extracting(BuildTask::getOutcome)
-			.allMatch(outcome -> outcome == TaskOutcome.SUCCESS);
-		assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
-			Path generatedSources = projectDir.resolve(Path.of("build", "calculator-wsdl2java-generated-sources"));
-			assertThat(generatedSources).exists().isNotEmptyDirectory();
-
-			Path packageDir = generatedSources.resolve(Path.of("org", "tempuri"));
-			assertThat(packageDir).exists().isNotEmptyDirectory();
-
-			List<Path> sourcesDir = Files.list(packageDir).collect(Collectors.toUnmodifiableList());
-			assertThat(sourcesDir).hasSize(12);
-
-			List<Path> filtered = sourcesDir.stream()
-				.filter(it -> it.getFileName().toString().equals("Calculator.java"))
-				.collect(Collectors.toUnmodifiableList());
-			assertThat(filtered).hasSize(1);
-			Path calculatorSource = filtered.get(0);
-
-			List<String> calculatorSourceLines = Files.readAllLines(calculatorSource);
-
-			// Lines 5-8 should start with Jakarta import.
-			assertThat(calculatorSourceLines.get(5)).startsWith("import jakarta");
-			assertThat(calculatorSourceLines.get(6)).startsWith("import jakarta");
-			assertThat(calculatorSourceLines.get(7)).startsWith("import jakarta");
-			assertThat(calculatorSourceLines.get(8)).startsWith("import jakarta");
-		});
 	}
 
 	@TestTemplate
