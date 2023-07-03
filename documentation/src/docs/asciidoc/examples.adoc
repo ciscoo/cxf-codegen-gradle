@@ -6,8 +6,7 @@ This section provides Gradle examples translated from the https://cxf.apache.org
 
 [CAUTION]
 ====
-You will need to ensure you have the appropriate dependencies when generating code  for Java 9+; see the
-<<generating-java#java-9, Java 9+>> section for more details. In addition, there may be more dependencies the CXF Codegen
+You will need to ensure you have the appropriate dependencies when generating code. Additionally, there may be more dependencies the CXF Codegen
 tool requires. Review <<plugin-configuration#dependency-configuration, dependency configuration>> documentation on how to
 add additional dependencies to the CXF Codegen tool classpath.
 
