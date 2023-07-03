@@ -468,22 +468,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The plugin contributes a single extension to the project named <code>cxfCodegen</code>.</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
-
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">cxfCodegen</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
 
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -593,22 +593,22 @@ dependencies for the <code>cxfCodegen</code> classpath and/or your application&#
 <p>To change the version using the extension, specify the version using the <code>cxfVersion</code> property:</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span>
-    <span class="n">cxfVersion</span> <span class="o">=</span> <span class="s2">"3.2.0"</span> <span class="c1">// 3.3.0 breaks the build</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">cxfCodegen</span> <span class="p">{</span>
     <span class="n">cxfVersion</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s">"3.2.0"</span><span class="p">)</span> <span class="c1">// 3.3.0 breaks the build</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span>
+    <span class="n">cxfVersion</span> <span class="o">=</span> <span class="s2">"3.2.0"</span> <span class="c1">// 3.3.0 breaks the build</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -620,21 +620,6 @@ dependencies for the <code>cxfCodegen</code> classpath and/or your application&#
 can be used:</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">configurations</span><span class="o">.</span><span class="na">cxfCodegen</span> <span class="o">{</span>
-    <span class="n">resolutionStrategy</span><span class="o">.</span><span class="na">eachDependency</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">requested</span><span class="o">.</span><span class="na">group</span> <span class="o">==</span> <span class="s2">"org.apache.cxf"</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">useVersion</span> <span class="s2">"3.2.0"</span>
-            <span class="n">because</span> <span class="s2">"3.3.0 breaks the build"</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -649,6 +634,21 @@ can be used:</p>
 </div>
 </div>
 </details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">configurations</span><span class="o">.</span><span class="na">cxfCodegen</span> <span class="o">{</span>
+    <span class="n">resolutionStrategy</span><span class="o">.</span><span class="na">eachDependency</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">requested</span><span class="o">.</span><span class="na">group</span> <span class="o">==</span> <span class="s2">"org.apache.cxf"</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">useVersion</span> <span class="s2">"3.2.0"</span>
+            <span class="n">because</span> <span class="s2">"3.3.0 breaks the build"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+</details>
 </div>
 </div>
 </div>
@@ -657,7 +657,7 @@ can be used:</p>
 <div id="footer">
 <div id="footer-text">
 Version 2.0.0-SNAPSHOT<br>
-Last updated 2023-07-03 00:53:15 UTC
+Last updated 2023-07-03 12:36:44 UTC
 </div>
 </div>
 <style>

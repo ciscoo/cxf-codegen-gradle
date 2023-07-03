@@ -488,9 +488,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#generating-javascript-sources.minimal-usage">4.1. Minimal Usage</a></li>
 <li><a href="#generating-javascript-sources.options-usage">4.2. Options</a></li>
 <li><a href="#generating-javascript-sources.default-options">4.3. Default Options</a></li>
-<li><a href="#generating-javascript-sources.java-9">4.4. Java 9+</a></li>
-<li><a href="#generating-javascript-sources.jakarta">4.5. Jakarta</a></li>
-<li><a href="#generating-javascript-sources.logging">4.6. Logging</a></li>
+<li><a href="#generating-javascript-sources.logging">4.4. Logging</a></li>
 </ul>
 </li>
 <li><a href="#java-examples">5. Java Examples</a>
@@ -530,17 +528,6 @@ The API is not a 1:1 port and leans heavily on Gradle idioms and conventions.</p
 using the <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block">plugins DSL</a> block:</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">plugins</span> <span class="o">{</span>
-    <span class="n">id</span> <span class="s2">"java"</span>
-    <span class="n">id</span> <span class="s2">"io.mateo.cxf-codegen"</span> <span class="n">version</span> <span class="s2">"2.0.0-SNAPSHOT"</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -551,6 +538,16 @@ using the <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:pl
 </div>
 </div>
 </details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">plugins</span> <span class="o">{</span>
+    <span class="n">id</span> <span class="s2">"java"</span>
+    <span class="n">id</span> <span class="s2">"io.mateo.cxf-codegen"</span> <span class="n">version</span> <span class="s2">"2.0.0-SNAPSHOT"</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
 </details>
 </div>
 <div class="sect2">
@@ -636,22 +633,22 @@ with your Gradle version.
 <p>The plugin contributes a single extension to the project named <code>cxfCodegen</code>.</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
-
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">cxfCodegen</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
 
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -759,22 +756,22 @@ dependencies for the <code>cxfCodegen</code> classpath and/or your application&#
 <p>To change the version using the extension, specify the version using the <code>cxfVersion</code> property:</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span>
-    <span class="n">cxfVersion</span> <span class="o">=</span> <span class="s2">"3.2.0"</span> <span class="c1">// 3.3.0 breaks the build</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">cxfCodegen</span> <span class="p">{</span>
     <span class="n">cxfVersion</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s">"3.2.0"</span><span class="p">)</span> <span class="c1">// 3.3.0 breaks the build</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span>
+    <span class="n">cxfVersion</span> <span class="o">=</span> <span class="s2">"3.2.0"</span> <span class="c1">// 3.3.0 breaks the build</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -786,21 +783,6 @@ dependencies for the <code>cxfCodegen</code> classpath and/or your application&#
 can be used:</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">configurations</span><span class="o">.</span><span class="na">cxfCodegen</span> <span class="o">{</span>
-    <span class="n">resolutionStrategy</span><span class="o">.</span><span class="na">eachDependency</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">requested</span><span class="o">.</span><span class="na">group</span> <span class="o">==</span> <span class="s2">"org.apache.cxf"</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">useVersion</span> <span class="s2">"3.2.0"</span>
-            <span class="n">because</span> <span class="s2">"3.3.0 breaks the build"</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -812,6 +794,21 @@ can be used:</p>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">configurations</span><span class="o">.</span><span class="na">cxfCodegen</span> <span class="o">{</span>
+    <span class="n">resolutionStrategy</span><span class="o">.</span><span class="na">eachDependency</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">requested</span><span class="o">.</span><span class="na">group</span> <span class="o">==</span> <span class="s2">"org.apache.cxf"</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">useVersion</span> <span class="s2">"3.2.0"</span>
+            <span class="n">because</span> <span class="s2">"3.3.0 breaks the build"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -863,23 +860,6 @@ can be used:</p>
 <p>The minimum requirement for generating Java is a single WSDL which can either be a path to a file or URL. A file example is shown below.</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="kn">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2Java</span>
-
-<span class="c1">// ...</span>
-
-<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"example"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="n">toolOptions</span> <span class="o">{</span> <i class="conum" data-value="2"></i><b>(2)</b>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="o">}</span>
-    <span class="n">allJvmArgs</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"-Duser.language=fr"</span><span class="o">,</span> <span class="s2">"-Duser.country=CA"</span><span class="o">]</span> <i class="conum" data-value="4"></i><b>(4)</b>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -896,6 +876,23 @@ can be used:</p>
 </div>
 </div>
 </details>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="kn">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2Java</span>
+
+<span class="c1">// ...</span>
+
+<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"example"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="n">toolOptions</span> <span class="o">{</span> <i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="o">}</span>
+    <span class="n">allJvmArgs</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"-Duser.language=fr"</span><span class="o">,</span> <span class="s2">"-Duser.country=CA"</span><span class="o">]</span> <i class="conum" data-value="4"></i><b>(4)</b>
+<span class="o">}</span></code></pre>
+</div>
+</div>
 </details>
 <div class="colist arabic">
 <table>
@@ -939,22 +936,6 @@ task inputs as well so that it can be considered during Gradle&#8217;s <a href="
 offered by the <a href="https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html">Maven plugin</a>.</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"example"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
-        <span class="n">outputDir</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"$buildDir/generated-java"</span><span class="o">))</span> <i class="conum" data-value="1"></i><b>(1)</b>
-        <span class="n">markGenerated</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
-        <span class="n">packageNames</span><span class="o">.</span><span class="na">set</span><span class="o">([</span><span class="s2">"com.example"</span><span class="o">,</span> <span class="s2">"com.foo.bar"</span><span class="o">])</span> <i class="conum" data-value="3"></i><b>(3)</b>
-        <span class="n">asyncMethods</span><span class="o">.</span><span class="na">set</span><span class="o">([</span><span class="s2">"foo"</span><span class="o">,</span> <span class="s2">"bar"</span><span class="o">])</span> <i class="conum" data-value="4"></i><b>(4)</b>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -967,6 +948,22 @@ offered by the <a href="https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsd
         <span class="n">asyncMethods</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nf">listOf</span><span class="p">(</span><span class="s">"foo"</span><span class="p">,</span> <span class="s">"bar"</span><span class="p">))</span> <i class="conum" data-value="4"></i><b>(4)</b>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"example"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">toolOptions</span> <span class="o">{</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+        <span class="n">outputDir</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"$buildDir/generated-java"</span><span class="o">))</span> <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="n">markGenerated</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="n">packageNames</span><span class="o">.</span><span class="na">set</span><span class="o">([</span><span class="s2">"com.example"</span><span class="o">,</span> <span class="s2">"com.foo.bar"</span><span class="o">])</span> <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="n">asyncMethods</span><span class="o">.</span><span class="na">set</span><span class="o">([</span><span class="s2">"foo"</span><span class="o">,</span> <span class="s2">"bar"</span><span class="o">])</span> <i class="conum" data-value="4"></i><b>(4)</b>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -1004,28 +1001,6 @@ for <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaOptions.html#m
 <p>First define some tasks:</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"first"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/first.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"second"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/second.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"third"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/third.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -1049,22 +1024,32 @@ for <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaOptions.html#m
 </div>
 </div>
 </details>
-<div class="paragraph">
-<p>Then configure each one using the <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/DomainObjectCollection.html#configureEach-org.gradle.api.Action-"><code>configureEach</code></a> method on the container:</p>
-</div>
-<details open>
+<details>
 <summary>Groovy</summary>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">(</span><span class="n">Wsdl2Java</span><span class="o">).</span><span class="na">configureEach</span> <span class="o">{</span>
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"first"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">markGenerated</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/first.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"second"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">toolOptions</span> <span class="o">{</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/second.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"third"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">toolOptions</span> <span class="o">{</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/third.wsdl"</span><span class="o">).</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
-<details>
+<div class="paragraph">
+<p>Then configure each one using the <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/DomainObjectCollection.html#configureEach-org.gradle.api.Action-"><code>configureEach</code></a> method on the container:</p>
+</div>
+<details open>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -1073,6 +1058,18 @@ for <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaOptions.html#m
         <span class="n">markGenerated</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">(</span><span class="n">Wsdl2Java</span><span class="o">).</span><span class="na">configureEach</span> <span class="o">{</span>
+    <span class="n">toolOptions</span> <span class="o">{</span>
+        <span class="n">markGenerated</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -1094,22 +1091,22 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 Logback example is shown below.</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">cxfCodegen</span> <span class="s2">"ch.qos.logback:logback-classic:1.4.7"</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">dependencies</span> <span class="p">{</span>
     <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"ch.qos.logback:logback-classic:1.4.7"</span><span class="p">)</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">cxfCodegen</span> <span class="s2">"ch.qos.logback:logback-classic:1.4.7"</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -1141,22 +1138,22 @@ The example below configures logging for <strong>all</strong> <code><a href="../
 </table>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">(</span><span class="n">Wsdl2Java</span><span class="o">).</span><span class="na">configureEach</span> <span class="o">{</span>
-    <span class="n">jvmArgs</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Slf4jLogger"</span><span class="o">]</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="n">tasks</span><span class="p">.</span><span class="nf">withType</span><span class="p">(</span><span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="nf">configureEach</span> <span class="p">{</span>
     <span class="n">jvmArgs</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="s">"-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Slf4jLogger"</span><span class="p">)</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">(</span><span class="n">Wsdl2Java</span><span class="o">).</span><span class="na">configureEach</span> <span class="o">{</span>
+    <span class="n">jvmArgs</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Slf4jLogger"</span><span class="o">]</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -1203,22 +1200,22 @@ The example below specifies a <code>null</code> logger <em><strong>all</strong><
 </table>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">(</span><span class="n">Wsdl2Java</span><span class="o">).</span><span class="na">configureEach</span> <span class="o">{</span>
-    <span class="n">jvmArgs</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"-Dorg.apache.cxf.Logger=null"</span><span class="o">]</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="n">tasks</span><span class="p">.</span><span class="nf">withType</span><span class="p">(</span><span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="nf">configureEach</span> <span class="p">{</span>
     <span class="n">jvmArgs</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="s">"-Dorg.apache.cxf.Logger=null"</span><span class="p">)</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">(</span><span class="n">Wsdl2Java</span><span class="o">).</span><span class="na">configureEach</span> <span class="o">{</span>
+    <span class="n">jvmArgs</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"-Dorg.apache.cxf.Logger=null"</span><span class="o">]</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -1235,22 +1232,22 @@ that essentially overrides all logging levels. For example, an empty Logback con
 </div>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">(</span><span class="n">Wsdl2Java</span><span class="o">).</span><span class="na">configureEach</span> <span class="o">{</span>
-    <span class="n">jvmArgs</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"-Dlogback.configurationFile=logback.xml"</span><span class="o">]</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="n">tasks</span><span class="p">.</span><span class="nf">withType</span><span class="p">(</span><span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="nf">configureEach</span> <span class="p">{</span>
     <span class="n">jvmArgs</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="s">"-Dlogback.configurationFile=logback.xml"</span><span class="p">)</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">(</span><span class="n">Wsdl2Java</span><span class="o">).</span><span class="na">configureEach</span> <span class="o">{</span>
+    <span class="n">jvmArgs</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"-Dlogback.configurationFile=logback.xml"</span><span class="o">]</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -1273,22 +1270,6 @@ that essentially overrides all logging levels. For example, an empty Logback con
 <p>The minimum requirement for generating JavaScript is a single WSDL file.</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="kn">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2js.Wsdl2Js</span>
-
-<span class="c1">// ...</span>
-
-<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"example"</span><span class="o">,</span> <span class="n">Wsdl2Js</span><span class="o">)</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="n">toolOptions</span> <span class="o">{</span> <i class="conum" data-value="2"></i><b>(2)</b>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">absolutePath</span><span class="o">)</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -1304,6 +1285,21 @@ that essentially overrides all logging levels. For example, an empty Logback con
 </div>
 </div>
 </details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="kn">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2js.Wsdl2Js</span>
+
+<span class="c1">// ...</span>
+
+<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"example"</span><span class="o">,</span> <span class="n">Wsdl2Js</span><span class="o">)</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="n">toolOptions</span> <span class="o">{</span> <i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">absolutePath</span><span class="o">)</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
 </details>
 <div class="colist arabic">
 <table>
@@ -1329,22 +1325,6 @@ that essentially overrides all logging levels. For example, an empty Logback con
 offered by the <a href="https://cxf.apache.org/docs/wsdl-to-javascript.html"><code>wsdl2js</code></a> tool.</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"example"</span><span class="o">,</span> <span class="n">Wsdl2Js</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">absolutePath</span><span class="o">)</span>
-        <span class="n">outputDir</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"$buildDir/example-generated-js"</span><span class="o">))</span> <i class="conum" data-value="1"></i><b>(1)</b>
-        <span class="n">catalog</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example-catalog.xml"</span><span class="o">))</span> <i class="conum" data-value="2"></i><b>(2)</b>
-        <span class="n">packagePrefixes</span><span class="o">.</span><span class="na">set</span><span class="o">([</span><span class="k">new</span> <span class="n">UriPrefixPair</span><span class="o">(</span><span class="s2">"https://example.com"</span><span class="o">,</span> <span class="s2">"example"</span><span class="o">)])</span> <i class="conum" data-value="3"></i><b>(3)</b>
-        <span class="n">verbose</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -1357,6 +1337,22 @@ offered by the <a href="https://cxf.apache.org/docs/wsdl-to-javascript.html"><co
         <span class="n">verbose</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"example"</span><span class="o">,</span> <span class="n">Wsdl2Js</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">toolOptions</span> <span class="o">{</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example.wsdl"</span><span class="o">).</span><span class="na">absolutePath</span><span class="o">)</span>
+        <span class="n">outputDir</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"$buildDir/example-generated-js"</span><span class="o">))</span> <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="n">catalog</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">file</span><span class="o">(</span><span class="s2">"path/to/example-catalog.xml"</span><span class="o">))</span> <i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="n">packagePrefixes</span><span class="o">.</span><span class="na">set</span><span class="o">([</span><span class="k">new</span> <span class="n">UriPrefixPair</span><span class="o">(</span><span class="s2">"https://example.com"</span><span class="o">,</span> <span class="s2">"example"</span><span class="o">)])</span> <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="n">verbose</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -1392,31 +1388,7 @@ for <code><a href="../api/io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#metho
 </div>
 </div>
 <div class="sect2">
-<h3 id="generating-javascript-sources.java-9"><a class="anchor" href="#generating-javascript-sources.java-9"></a>4.4. Java 9+</h3>
-<div class="paragraph">
-<p>If you are using Java 9+, the <code>cxfCodegen</code> configuration to add back the Java EE modules that were removed in Java 11. Refer to <a href="#java-9">Java 9</a> documentation for more details.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The Java EE (or Jakarta) dependencies are required regardless if a JVM plugin (<code>java</code>, <code>groovy</code>, <code>scala</code>, <code>kotlin("jvm")</code>, etc) is applied. This is because the underlying code generation tool is based on Java.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="generating-javascript-sources.jakarta"><a class="anchor" href="#generating-javascript-sources.jakarta"></a>4.5. Jakarta</h3>
-<div class="paragraph">
-<p>When using Apache CXF 4 or greater, you must include Jakarta specific artifacts instead of Java EE. Refer to the <a href="#jakarta">Java Jakarta</a> documentation for more details.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="generating-javascript-sources.logging"><a class="anchor" href="#generating-javascript-sources.logging"></a>4.6. Logging</h3>
+<h3 id="generating-javascript-sources.logging"><a class="anchor" href="#generating-javascript-sources.logging"></a>4.4. Logging</h3>
 <div class="paragraph">
 <p>Refer to the <a href="#logging">documentation</a> for generating Java sources. The process for enabling or disabling logs is the same. Replace <code>Wsdl2Java</code> with <code>Wsdl2Js</code>.</p>
 </div>
@@ -1437,8 +1409,7 @@ The Java EE (or Jakarta) dependencies are required regardless if a JVM plugin (<
 </td>
 <td class="content">
 <div class="paragraph">
-<p>You will need to ensure you have the appropriate dependencies when generating code  for Java 9+; see the
-<a href="#java-9">Java 9+</a> section for more details. In addition, there may be more dependencies the CXF Codegen
+<p>You will need to ensure you have the appropriate dependencies when generating code. Additionally, there may be more dependencies the CXF Codegen
 tool requires. Review <a href="#dependency-configuration">dependency configuration</a> documentation on how to
 add additional dependencies to the CXF Codegen tool classpath.</p>
 </div>
@@ -1499,23 +1470,6 @@ the same thing. Refer to the <a href="#default-options">default options</a> sect
 <div class="sect2">
 <h3 id="examples.jaxws-binding-file"><a class="anchor" href="#examples.jaxws-binding-file"></a>5.1. JAX-WS Binding File</h3>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="kn">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2Java</span>
-
-<span class="c1">// ...</span>
-
-<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
-        <span class="n">bindingFiles</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"async-binding.xml"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">absolutePath</span><span class="o">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -1532,6 +1486,23 @@ the same thing. Refer to the <a href="#default-options">default options</a> sect
 </div>
 </div>
 </details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="kn">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2Java</span>
+
+<span class="c1">// ...</span>
+
+<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">toolOptions</span> <span class="o">{</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+        <span class="n">bindingFiles</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"async-binding.xml"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">absolutePath</span><span class="o">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+</details>
 <div class="colist arabic">
 <table>
 <tr>
@@ -1544,27 +1515,6 @@ the same thing. Refer to the <a href="#default-options">default options</a> sect
 <div class="sect2">
 <h3 id="examples.specify-data-binding"><a class="anchor" href="#examples.specify-data-binding"></a>5.2. Specify Data Binding</h3>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="kn">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2Java</span>
-
-<span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">cxfCodegen</span> <span class="s2">"org.apache.cxf:cxf-rt-databinding-jibx:3.1.18"</span> <i class="conum" data-value="1"></i><b>(1)</b>
-<span class="o">}</span>
-
-<span class="c1">// ...</span>
-
-<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
-        <span class="n">extraArgs</span><span class="o">.</span><span class="na">addAll</span><span class="o">([</span><span class="s2">"-databinding"</span><span class="o">,</span> <span class="s2">"jibx"</span><span class="o">])</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -1585,6 +1535,27 @@ the same thing. Refer to the <a href="#default-options">default options</a> sect
 </div>
 </div>
 </details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="kn">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2Java</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">cxfCodegen</span> <span class="s2">"org.apache.cxf:cxf-rt-databinding-jibx:3.1.18"</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="o">}</span>
+
+<span class="c1">// ...</span>
+
+<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">toolOptions</span> <span class="o">{</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+        <span class="n">extraArgs</span><span class="o">.</span><span class="na">addAll</span><span class="o">([</span><span class="s2">"-databinding"</span><span class="o">,</span> <span class="s2">"jibx"</span><span class="o">])</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+</details>
 <div class="colist arabic">
 <table>
 <tr>
@@ -1601,23 +1572,6 @@ the same thing. Refer to the <a href="#default-options">default options</a> sect
 <div class="sect2">
 <h3 id="examples.specify-service-to-generate-artifacts-for"><a class="anchor" href="#examples.specify-service-to-generate-artifacts-for"></a>5.3. Specify Service to Generate Artifacts For</h3>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="kn">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2Java</span>
-
-<span class="c1">// ...</span>
-
-<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
-        <span class="n">serviceName</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s2">"Calculator"</span><span class="o">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -1631,6 +1585,23 @@ the same thing. Refer to the <a href="#default-options">default options</a> sect
         <span class="n">serviceName</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s">"Calculator"</span><span class="p">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="kn">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2Java</span>
+
+<span class="c1">// ...</span>
+
+<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">toolOptions</span> <span class="o">{</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+        <span class="n">serviceName</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s2">"Calculator"</span><span class="o">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -1650,6 +1621,50 @@ the same thing. Refer to the <a href="#default-options">default options</a> sect
 For example, to use the WSDL published in the <code>cxf-testutils</code> JAR artifact:</p>
 </div>
 <details open>
+<summary>Kotlin</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="k">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2Java</span>
+
+<span class="kd">val</span> <span class="py">myConfiguration</span><span class="p">:</span> <span class="nc">Configuration</span> <span class="k">by</span> <span class="n">configurations</span><span class="p">.</span><span class="n">creating</span> <i class="conum" data-value="1"></i><b>(1)</b>
+
+<span class="nf">dependencies</span> <span class="p">{</span>
+    <span class="nf">myConfiguration</span><span class="p">(</span><span class="s">"org.apache.cxf:cxf-testutils:3.5.3"</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="p">}</span>
+
+<span class="kd">val</span> <span class="py">copyArtifact</span> <span class="p">=</span> <span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"copyArtifact"</span><span class="p">,</span> <span class="nc">Copy</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="nf">from</span><span class="p">(</span><span class="n">myConfiguration</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">include</span> <span class="p">{</span>
+            <span class="n">it</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="nf">startsWith</span><span class="p">(</span><span class="s">"cxf-testutils"</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nf">into</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="n">buildDirectory</span><span class="p">.</span><span class="nf">dir</span><span class="p">(</span><span class="s">"copied-artifact"</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">val</span> <span class="py">extractWsdl</span> <span class="p">=</span> <span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"extractWsdl"</span><span class="p">)</span> <span class="p">{</span> <i class="conum" data-value="4"></i><b>(4)</b>
+    <span class="kd">val</span> <span class="py">wsdlFile</span> <span class="p">=</span> <span class="n">layout</span><span class="p">.</span><span class="n">buildDirectory</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s">"extracted.wsdl"</span><span class="p">)</span>
+    <span class="n">inputs</span><span class="p">.</span><span class="nf">files</span><span class="p">(</span><span class="n">copyArtifact</span><span class="p">)</span>
+    <span class="n">outputs</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="n">wsdlFile</span><span class="p">)</span>
+    <span class="nf">doLast</span> <span class="p">{</span>
+        <span class="c1">// Assumes single JAR artifact from previous task</span>
+        <span class="kd">val</span> <span class="py">archive</span> <span class="p">=</span> <span class="n">inputs</span><span class="p">.</span><span class="n">files</span><span class="p">.</span><span class="n">singleFile</span><span class="p">.</span><span class="nf">walk</span><span class="p">().</span><span class="nf">filter</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">isFile</span> <span class="p">}.</span><span class="nf">single</span><span class="p">()</span>
+        <span class="kd">val</span> <span class="py">textResource</span> <span class="p">=</span> <span class="n">resources</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="nf">fromArchiveEntry</span><span class="p">(</span><span class="n">archive</span><span class="p">,</span> <span class="s">"wsdl/calculator.wsdl"</span><span class="p">)</span>
+        <span class="kd">val</span> <span class="py">f</span> <span class="p">=</span> <span class="n">wsdlFile</span><span class="p">.</span><span class="k">get</span><span class="p">().</span><span class="n">asFile</span>
+        <span class="n">f</span><span class="p">.</span><span class="nf">createNewFile</span><span class="p">()</span>
+        <span class="n">f</span><span class="p">.</span><span class="nf">writeText</span><span class="p">(</span><span class="n">textResource</span><span class="p">.</span><span class="nf">asString</span><span class="p">())</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"calculator"</span><span class="p">,</span> <span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span> <i class="conum" data-value="5"></i><b>(5)</b>
+    <span class="n">inputs</span><span class="p">.</span><span class="nf">files</span><span class="p">(</span><span class="n">extractWsdl</span><span class="p">)</span>
+    <span class="nf">toolOptions</span> <span class="p">{</span>
+        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">extractWsdl</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">outputs</span><span class="p">.</span><span class="n">files</span><span class="p">.</span><span class="n">singleFile</span><span class="p">.</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">()</span> <span class="p">})</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
 <summary>Groovy</summary>
 <div class="listingblock">
 <div class="content">
@@ -1697,50 +1712,6 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 </div>
 </div>
 </details>
-<details>
-<summary>Kotlin</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="k">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2Java</span>
-
-<span class="kd">val</span> <span class="py">myConfiguration</span><span class="p">:</span> <span class="nc">Configuration</span> <span class="k">by</span> <span class="n">configurations</span><span class="p">.</span><span class="n">creating</span> <i class="conum" data-value="1"></i><b>(1)</b>
-
-<span class="nf">dependencies</span> <span class="p">{</span>
-    <span class="nf">myConfiguration</span><span class="p">(</span><span class="s">"org.apache.cxf:cxf-testutils:3.5.3"</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
-<span class="p">}</span>
-
-<span class="kd">val</span> <span class="py">copyArtifact</span> <span class="p">=</span> <span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"copyArtifact"</span><span class="p">,</span> <span class="nc">Copy</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="nf">from</span><span class="p">(</span><span class="n">myConfiguration</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nf">include</span> <span class="p">{</span>
-            <span class="n">it</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="nf">startsWith</span><span class="p">(</span><span class="s">"cxf-testutils"</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="nf">into</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="n">buildDirectory</span><span class="p">.</span><span class="nf">dir</span><span class="p">(</span><span class="s">"copied-artifact"</span><span class="p">))</span>
-<span class="p">}</span>
-
-<span class="kd">val</span> <span class="py">extractWsdl</span> <span class="p">=</span> <span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"extractWsdl"</span><span class="p">)</span> <span class="p">{</span> <i class="conum" data-value="4"></i><b>(4)</b>
-    <span class="kd">val</span> <span class="py">wsdlFile</span> <span class="p">=</span> <span class="n">layout</span><span class="p">.</span><span class="n">buildDirectory</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s">"extracted.wsdl"</span><span class="p">)</span>
-    <span class="n">inputs</span><span class="p">.</span><span class="nf">files</span><span class="p">(</span><span class="n">copyArtifact</span><span class="p">)</span>
-    <span class="n">outputs</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="n">wsdlFile</span><span class="p">)</span>
-    <span class="nf">doLast</span> <span class="p">{</span>
-        <span class="c1">// Assumes single JAR artifact from previous task</span>
-        <span class="kd">val</span> <span class="py">archive</span> <span class="p">=</span> <span class="n">inputs</span><span class="p">.</span><span class="n">files</span><span class="p">.</span><span class="n">singleFile</span><span class="p">.</span><span class="nf">walk</span><span class="p">().</span><span class="nf">filter</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">isFile</span> <span class="p">}.</span><span class="nf">single</span><span class="p">()</span>
-        <span class="kd">val</span> <span class="py">textResource</span> <span class="p">=</span> <span class="n">resources</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="nf">fromArchiveEntry</span><span class="p">(</span><span class="n">archive</span><span class="p">,</span> <span class="s">"wsdl/calculator.wsdl"</span><span class="p">)</span>
-        <span class="kd">val</span> <span class="py">f</span> <span class="p">=</span> <span class="n">wsdlFile</span><span class="p">.</span><span class="k">get</span><span class="p">().</span><span class="n">asFile</span>
-        <span class="n">f</span><span class="p">.</span><span class="nf">createNewFile</span><span class="p">()</span>
-        <span class="n">f</span><span class="p">.</span><span class="nf">writeText</span><span class="p">(</span><span class="n">textResource</span><span class="p">.</span><span class="nf">asString</span><span class="p">())</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"calculator"</span><span class="p">,</span> <span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span> <i class="conum" data-value="5"></i><b>(5)</b>
-    <span class="n">inputs</span><span class="p">.</span><span class="nf">files</span><span class="p">(</span><span class="n">extractWsdl</span><span class="p">)</span>
-    <span class="nf">toolOptions</span> <span class="p">{</span>
-        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">extractWsdl</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">outputs</span><span class="p">.</span><span class="n">files</span><span class="p">.</span><span class="n">singleFile</span><span class="p">.</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">()</span> <span class="p">})</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre>
-</div>
-</div>
-</details>
 <div class="colist arabic">
 <table>
 <tr>
@@ -1769,28 +1740,6 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 <div class="sect2">
 <h3 id="examples.using-xjc-extensions"><a class="anchor" href="#examples.using-xjc-extensions"></a>5.5. Using XJC Extensions</h3>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="kn">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2Java</span>
-
-<span class="c1">// ...</span>
-
-<span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">implementation</span> <span class="s2">"org.apache.cxf.xjc-utils:cxf-xjc-runtime:4.0.0"</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="n">cxfCodegen</span> <span class="s2">"org.apache.cxf.xjcplugins:cxf-xjc-ts:4.0.0"</span> <i class="conum" data-value="2"></i><b>(2)</b>
-<span class="o">}</span>
-
-<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
-        <span class="n">xjcArgs</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s2">"-Xts"</span><span class="o">)</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -1809,6 +1758,28 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
         <span class="n">xjcArgs</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="s">"-Xts"</span><span class="p">)</span> <i class="conum" data-value="3"></i><b>(3)</b>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="kn">import</span> <span class="nn">io.mateo.cxf.codegen.wsdl2java.Wsdl2Java</span>
+
+<span class="c1">// ...</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">implementation</span> <span class="s2">"org.apache.cxf.xjc-utils:cxf-xjc-runtime:4.0.0"</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="n">cxfCodegen</span> <span class="s2">"org.apache.cxf.xjcplugins:cxf-xjc-ts:4.0.0"</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="o">}</span>
+
+<span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">toolOptions</span> <span class="o">{</span>
+        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+        <span class="n">xjcArgs</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s2">"-Xts"</span><span class="o">)</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -1835,7 +1806,7 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 <div id="footer">
 <div id="footer-text">
 Version 2.0.0-SNAPSHOT<br>
-Last updated 2023-07-03 00:53:15 UTC
+Last updated 2023-07-03 12:36:44 UTC
 </div>
 </div>
 <style>
