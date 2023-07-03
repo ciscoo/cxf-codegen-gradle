@@ -10,13 +10,14 @@ using the https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_blo
 
 ++++
 <details open>
-<summary>Groovy</summary>
+<summary>Kotlin</summary>
 ++++
 
-[source,groovy]
+[source,kotlin]
 ----
 plugins {
-    id "io.mateo.cxf-codegen" version "1.2.1"
+    java
+    id("io.mateo.cxf-codegen") version "1.2.1"
 }
 ----
 
@@ -26,13 +27,14 @@ plugins {
 
 ++++
 <details>
-<summary>Kotlin</summary>
+<summary>Groovy</summary>
 ++++
 
-[source,kotlin]
+[source,groovy]
 ----
 plugins {
-    id("io.mateo.cxf-codegen") version "1.2.1"
+    id "java"
+    id "io.mateo.cxf-codegen" version "1.2.1"
 }
 ----
 
@@ -59,17 +61,19 @@ Snapshots are published for every commit to the `master` branch.
 
 ++++
 <details open>
-<summary>Groovy</summary>
+<summary>Kotlin</summary>
 ++++
 
-[source,groovy]
+[source,kotlin]
 ----
-// build.gradle
+// build.gradle.kts
+
 plugins {
-    id "io.mateo.cxf-codegen" version "2.0.0-SNAPSHOT"
+    java
+    id("io.mateo.cxf-codegen") version "2.0.0-SNAPSHOT"
 }
 
-// settings.gradle
+// settings.gradle.kts
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -89,18 +93,18 @@ pluginManagement {
 
 ++++
 <details>
-<summary>Kotlin</summary>
+<summary>Groovy</summary>
 ++++
 
-[source,kotlin]
+[source,groovy]
 ----
-// build.gradle.kts
-
+// build.gradle
 plugins {
-    id("io.mateo.cxf-codegen") version "2.0.0-SNAPSHOT"
+    id "java"
+    id "io.mateo.cxf-codegen" version "2.0.0-SNAPSHOT"
 }
 
-// settings.gradle.kts
+// settings.gradle
 pluginManagement {
     repositories {
         gradlePluginPortal()

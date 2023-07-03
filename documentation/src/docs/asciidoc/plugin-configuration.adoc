@@ -9,12 +9,12 @@ The plugin contributes a single extension to the project named `cxfCodegen`.
 
 ++++
 <details open>
-<summary>Groovy</summary>
+<summary>Kotlin</summary>
 ++++
 
-[source,groovy]
+[source,kotlin]
 ----
-include::../gradle/plugin-configuration/extension.gradle[tags=code]
+include::../gradle/plugin-configuration/extension.gradle.kts[tags=code]
 ----
 
 ++++
@@ -23,12 +23,12 @@ include::../gradle/plugin-configuration/extension.gradle[tags=code]
 
 ++++
 <details>
-<summary>Kotlin</summary>
+<summary>Groovy</summary>
 ++++
 
-[source,kotlin]
+[source,groovy]
 ----
-include::../gradle/plugin-configuration/extension.gradle.kts[tags=code]
+include::../gradle/plugin-configuration/extension.gradle[tags=code]
 ----
 
 ++++
@@ -88,12 +88,12 @@ To change the version using the extension, specify the version using the `cxfVer
 
 ++++
 <details open>
-<summary>Groovy</summary>
+<summary>Kotlin</summary>
 ++++
 
-[source,groovy]
+[source,kotlin]
 ----
-include::../gradle/plugin-configuration/managing-dependency-versions-extension.gradle[tags=code]
+include::../gradle/plugin-configuration/managing-dependency-versions-extension.gradle.kts[tags=code]
 ----
 
 ++++
@@ -102,12 +102,12 @@ include::../gradle/plugin-configuration/managing-dependency-versions-extension.g
 
 ++++
 <details>
-<summary>Kotlin</summary>
+<summary>Groovy</summary>
 ++++
 
-[source,kotlin]
+[source,groovy]
 ----
-include::../gradle/plugin-configuration/managing-dependency-versions-extension.gradle.kts[tags=code]
+include::../gradle/plugin-configuration/managing-dependency-versions-extension.gradle[tags=code]
 ----
 
 ++++
@@ -121,12 +121,12 @@ can be used:
 
 ++++
 <details open>
-<summary>Groovy</summary>
+<summary>Kotlin</summary>
 ++++
 
-[source,groovy]
+[source,kotlin]
 ----
-include::../gradle/plugin-configuration/managing-dependency-versions.gradle[tags=code]
+include::../gradle/plugin-configuration/managing-dependency-versions.gradle.kts[tags=code]
 ----
 
 ++++
@@ -135,12 +135,12 @@ include::../gradle/plugin-configuration/managing-dependency-versions.gradle[tags
 
 ++++
 <details>
-<summary>Kotlin</summary>
+<summary>Groovy</summary>
 ++++
 
-[source,kotlin]
+[source,groovy]
 ----
-include::../gradle/plugin-configuration/managing-dependency-versions.gradle.kts[tags=code]
+include::../gradle/plugin-configuration/managing-dependency-versions.gradle[tags=code]
 ----
 
 ++++

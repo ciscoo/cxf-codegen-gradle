@@ -13,20 +13,6 @@ The minimum requirement for generating JavaScript is a single WSDL file.
 
 ++++
 <details open>
-<summary>Groovy</summary>
-++++
-
-[source,groovy]
-----
-include::../gradle/generating-javascript/minimal-task-usage.gradle[tags=code]
-----
-
-++++
-</details>
-++++
-
-++++
-<details>
 <summary>Kotlin</summary>
 ++++
 
@@ -38,6 +24,16 @@ include::../gradle/generating-javascript/minimal-task-usage.gradle.kts[tags=code
 ++++
 </details>
 ++++
+
+++++
+<details>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+include::../gradle/generating-javascript/minimal-task-usage.gradle[tags=code]
+----
 
 ++++
 </details>
@@ -55,12 +51,12 @@ offered by the {wsdl2js-tool-docs}[`wsdl2js`] tool.
 
 ++++
 <details open>
-<summary>Groovy</summary>
+<summary>Kotlin</summary>
 ++++
 
-[source,groovy]
+[source,kotlin]
 ----
-include::../gradle/generating-javascript/tool-options.gradle[tags=code]
+include::../gradle/generating-javascript/tool-options.gradle.kts[tags=code]
 ----
 
 ++++
@@ -69,12 +65,12 @@ include::../gradle/generating-javascript/tool-options.gradle[tags=code]
 
 ++++
 <details>
-<summary>Kotlin</summary>
+<summary>Groovy</summary>
 ++++
 
-[source,kotlin]
+[source,groovy]
 ----
-include::../gradle/generating-javascript/tool-options.gradle.kts[tags=code]
+include::../gradle/generating-javascript/tool-options.gradle[tags=code]
 ----
 
 ++++

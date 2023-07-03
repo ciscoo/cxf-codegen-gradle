@@ -21,20 +21,6 @@ using the https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_blo
 
 ++++
 <details open>
-<summary>Groovy</summary>
-++++
-
-[source,groovy,subs="verbatim,attributes"]
-----
-include::../gradle/overview/plugin-application.gradle[]
-----
-
-++++
-</details>
-++++
-
-++++
-<details>
 <summary>Kotlin</summary>
 ++++
 
@@ -46,6 +32,16 @@ include::../gradle/overview/plugin-application.gradle.kts[]
 ++++
 </details>
 ++++
+
+++++
+<details>
+<summary>Groovy</summary>
+++++
+
+[source,groovy,subs="verbatim,attributes"]
+----
+include::../gradle/overview/plugin-application.gradle[]
+----
 
 ++++
 </details>

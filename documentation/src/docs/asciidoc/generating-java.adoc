@@ -24,20 +24,6 @@ The minimum requirement for generating Java is a single WSDL which can either be
 
 ++++
 <details open>
-<summary>Groovy</summary>
-++++
-
-[source,groovy]
-----
-include::../gradle/generating-java/minimal-task-usage.gradle[tags=code]
-----
-
-++++
-</details>
-++++
-
-++++
-<details>
 <summary>Kotlin</summary>
 ++++
 
@@ -49,6 +35,20 @@ include::../gradle/generating-java/minimal-task-usage.gradle.kts[tags=code]
 ++++
 </details>
 ++++
+
+++++
+</details>
+++++
+
+++++
+<details>
+<summary>Groovy</summary>
+++++
+
+[source,groovy]
+----
+include::../gradle/generating-java/minimal-task-usage.gradle[tags=code]
+----
 
 ++++
 </details>
@@ -71,12 +71,12 @@ offered by the {cxf-codegen-maven-plugin}[Maven plugin].
 
 ++++
 <details open>
-<summary>Groovy</summary>
+<summary>Kotlin</summary>
 ++++
 
-[source,groovy]
+[source,kotlin]
 ----
-include::../gradle/generating-java/tool-options.gradle[tags=code]
+include::../gradle/generating-java/tool-options.gradle.kts[tags=code]
 ----
 
 ++++
@@ -85,12 +85,12 @@ include::../gradle/generating-java/tool-options.gradle[tags=code]
 
 ++++
 <details>
-<summary>Kotlin</summary>
+<summary>Groovy</summary>
 ++++
 
-[source,kotlin]
+[source,groovy]
 ----
-include::../gradle/generating-java/tool-options.gradle.kts[tags=code]
+include::../gradle/generating-java/tool-options.gradle[tags=code]
 ----
 
 ++++
@@ -114,20 +114,6 @@ First define some tasks:
 
 ++++
 <details open>
-<summary>Groovy</summary>
-++++
-
-[source,groovy]
-----
-include::../gradle/generating-java/default-tool-options.gradle[tags=primary]
-----
-
-++++
-</details>
-++++
-
-++++
-<details>
 <summary>Kotlin</summary>
 ++++
 
@@ -140,16 +126,30 @@ include::../gradle/generating-java/default-tool-options.gradle.kts[tags=primary]
 </details>
 ++++
 
-Then configure each one using the {configure-each}[`configureEach`] method on the container:
-
 ++++
-<details open>
+<details>
 <summary>Groovy</summary>
 ++++
 
 [source,groovy]
 ----
-include::../gradle/generating-java/default-tool-options.gradle[tags=secondary]
+include::../gradle/generating-java/default-tool-options.gradle[tags=primary]
+----
+
+++++
+</details>
+++++
+
+Then configure each one using the {configure-each}[`configureEach`] method on the container:
+
+++++
+<details open>
+<summary>Kotlin</summary>
+++++
+
+[source,kotlin]
+----
+include::../gradle/generating-java/default-tool-options.gradle.kts[tags=secondary]
 ----
 
 ++++
@@ -158,12 +158,12 @@ include::../gradle/generating-java/default-tool-options.gradle[tags=secondary]
 
 ++++
 <details>
-<summary>Kotlin</summary>
+<summary>Groovy</summary>
 ++++
 
-[source,kotlin]
+[source,groovy]
 ----
-include::../gradle/generating-java/default-tool-options.gradle.kts[tags=secondary]
+include::../gradle/generating-java/default-tool-options.gradle[tags=secondary]
 ----
 
 ++++
@@ -187,12 +187,12 @@ Logback example is shown below.
 
 ++++
 <details open>
-<summary>Groovy</summary>
+<summary>Kotlin</summary>
 ++++
 
-[source,groovy]
+[source,kotlin]
 ----
-include::../gradle/generating-java/logging-task.gradle[tags=code]
+include::../gradle/generating-java/logging-task.gradle.kts[tags=code]
 ----
 
 ++++
@@ -201,12 +201,12 @@ include::../gradle/generating-java/logging-task.gradle[tags=code]
 
 ++++
 <details>
-<summary>Kotlin</summary>
+<summary>Groovy</summary>
 ++++
 
-[source,kotlin]
+[source,groovy]
 ----
-include::../gradle/generating-java/logging-task.gradle.kts[tags=code]
+include::../gradle/generating-java/logging-task.gradle[tags=code]
 ----
 
 ++++
@@ -231,12 +231,12 @@ NOTE: The example below configures logging for **all** `{wsdl2java-task}` tasks.
 
 ++++
 <details open>
-<summary>Groovy</summary>
+<summary>Kotlin</summary>
 ++++
 
-[source,groovy]
+[source,kotlin]
 ----
-include::../gradle/generating-java/verbose-logging.gradle[tags=code]
+include::../gradle/generating-java/verbose-logging.gradle.kts[tags=code]
 ----
 
 ++++
@@ -245,12 +245,12 @@ include::../gradle/generating-java/verbose-logging.gradle[tags=code]
 
 ++++
 <details>
-<summary>Kotlin</summary>
+<summary>Groovy</summary>
 ++++
 
-[source,kotlin]
+[source,groovy]
 ----
-include::../gradle/generating-java/verbose-logging.gradle.kts[tags=code]
+include::../gradle/generating-java/verbose-logging.gradle[tags=code]
 ----
 
 ++++
@@ -282,12 +282,12 @@ NOTE: The example below specifies a `null` logger _**all**_ `{wsdl2java-task}` t
 
 ++++
 <details open>
-<summary>Groovy</summary>
+<summary>Kotlin</summary>
 ++++
 
-[source,groovy]
+[source,kotlin]
 ----
-include::../gradle/generating-java/disable-task-logs.gradle[tags=code]
+include::../gradle/generating-java/disable-task-logs.gradle.kts[tags=code]
 ----
 
 ++++
@@ -296,12 +296,12 @@ include::../gradle/generating-java/disable-task-logs.gradle[tags=code]
 
 ++++
 <details>
-<summary>Kotlin</summary>
+<summary>Groovy</summary>
 ++++
 
-[source,kotlin]
+[source,groovy]
 ----
-include::../gradle/generating-java/disable-task-logs.gradle.kts[tags=code]
+include::../gradle/generating-java/disable-task-logs.gradle[tags=code]
 ----
 
 ++++
@@ -321,12 +321,12 @@ that essentially overrides all logging levels. For example, an empty Logback con
 
 ++++
 <details open>
-<summary>Groovy</summary>
+<summary>Kotlin</summary>
 ++++
 
-[source,groovy]
+[source,kotlin]
 ----
-include::../gradle/generating-java/disable-all-task-logs.gradle[tags=code]
+include::../gradle/generating-java/disable-all-task-logs.gradle.kts[tags=code]
 ----
 
 ++++
@@ -335,12 +335,12 @@ include::../gradle/generating-java/disable-all-task-logs.gradle[tags=code]
 
 ++++
 <details>
-<summary>Kotlin</summary>
+<summary>Groovy</summary>
 ++++
 
-[source,kotlin]
+[source,groovy]
 ----
-include::../gradle/generating-java/disable-all-task-logs.gradle.kts[tags=code]
+include::../gradle/generating-java/disable-all-task-logs.gradle[tags=code]
 ----
 
 ++++
