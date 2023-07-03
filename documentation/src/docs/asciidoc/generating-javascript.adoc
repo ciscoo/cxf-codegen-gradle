@@ -90,18 +90,6 @@ for `{wsdl2js-options}` for more details.
 
 You may want to configure options that apply to all tasks. This is can be accomplished using native Gradle functionality. Refer to the <<generating-java#default-options, default options>> section in the documentation for generating Java sources for examples. Replace `Wsdl2Java` with `Wsdl2Js` in the examples.
 
-[[generating-javascript-sources.java-9]]
-== Java 9+
-
-If you are using Java 9+, the `cxfCodegen` configuration to add back the Java EE modules that were removed in Java 11. Refer to <<generating-java#java-9, Java 9>> documentation for more details.
-
-TIP: The Java EE (or Jakarta) dependencies are required regardless if a JVM plugin (`java`, `groovy`, `scala`, `kotlin("jvm")`, etc) is applied. This is because the underlying code generation tool is based on Java.
-
-[[generating-javascript-sources.jakarta]]
-== Jakarta
-
-When using Apache CXF 4 or greater, you must include Jakarta specific artifacts instead of Java EE. Refer to the <<generating-java#jakarta, Java Jakarta>> documentation for more details.
-
 [[generating-javascript-sources.logging]]
 == Logging
 
