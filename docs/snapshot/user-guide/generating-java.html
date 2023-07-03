@@ -449,12 +449,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#minimal-usage">1. Minimal Usage</a></li>
 <li><a href="#options-usage">2. Options</a></li>
 <li><a href="#default-options">3. Default Options</a></li>
-<li><a href="#java-9">4. Java 9+</a></li>
-<li><a href="#jakarta">5. Jakarta</a></li>
-<li><a href="#logging">6. Logging</a>
+<li><a href="#logging">4. Logging</a>
 <ul class="sectlevel2">
-<li><a href="#verbose-logs">6.1. Verbose Logs</a></li>
-<li><a href="#disable-logs">6.2. Disable Logs</a></li>
+<li><a href="#verbose-logs">4.1. Verbose Logs</a></li>
+<li><a href="#disable-logs">4.2. Disable Logs</a></li>
 </ul>
 </li>
 </ul>
@@ -487,7 +485,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>This can be disabled when creating the task via <code>addToMainSourceSet.set(false)</code></p>
+<p>This can be disabled when creating the task by using <code>addToMainSourceSet.set(false)</code></p>
 </li>
 </ol>
 </div>
@@ -503,7 +501,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="minimal-usage"><a class="anchor" href="#minimal-usage"></a>1. Minimal Usage</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The minimum requirement for generating Java is a single WSDL file.</p>
+<p>The minimum requirement for generating Java is a single WSDL which can either be a path to a file or URL. A file example is shown below.</p>
 </div>
 <details open>
 <summary>Groovy</summary>
@@ -568,7 +566,7 @@ Remember that <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2Java.htm
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The WSDL property is annotated with <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/InputFile.html"><code>@InputFile</code></a> therefore any changes to the WSDL will cause the task to be out-of-date. If your WSDL imports a schema (XSD) or something else, consider adding that file to the
+For local files, if your WSDL imports a schema (XSD) or something else, consider adding that file to the
 task inputs as well so that it can be considered during Gradle&#8217;s <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:up_to_date_checks">up-to-date checks</a>.
 </td>
 </tr>
@@ -726,114 +724,7 @@ for <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaOptions.html#m
 </div>
 </div>
 <div class="sect1">
-<h2 id="java-9"><a class="anchor" href="#java-9"></a>4. Java 9+</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>If you are using Java 9+, you can use the <code>cxfCodegen</code> configuration to add back the Java EE modules that were deprecated
-in Java 9 and eventually removed in Java 11. Refer to <a href="https://openjdk.java.net/jeps/320">JEP 320</a> for more details.</p>
-</div>
-<details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">cxfCodegen</span> <span class="s2">"jakarta.xml.ws:jakarta.xml.ws-api:2.3.3"</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="n">cxfCodegen</span> <span class="s2">"jakarta.annotation:jakarta.annotation-api:1.3.5"</span> <i class="conum" data-value="2"></i><b>(2)</b>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
-<summary>Kotlin</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">dependencies</span> <span class="p">{</span>
-    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"jakarta.xml.ws:jakarta.xml.ws-api:2.3.3"</span><span class="p">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"jakarta.annotation:jakarta.annotation-api:1.3.5"</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
-<span class="p">}</span></code></pre>
-</div>
-</div>
-</details>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Replacement for <code>javax.xml.ws.Service</code></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Replacement for <code>javax.annotation.Resource</code></td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The above is just an example. Depending on your usage, there may be more dependencies required.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="jakarta"><a class="anchor" href="#jakarta"></a>5. Jakarta</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>It is possible to generate Java using the <code>jakarta</code> namespace instead of <code>javax</code>. In order to do so, you must use Apache CXF 4 along with Jakarta specific artifacts.</p>
-</div>
-<details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">repositories</span> <span class="o">{</span>
-    <span class="n">mavenCentral</span><span class="o">()</span>
-<span class="o">}</span>
-
-<span class="n">cxfCodegen</span> <span class="o">{</span>
-    <span class="n">cxfVersion</span> <span class="o">=</span> <span class="s2">"4.0.0"</span> <i class="conum" data-value="1"></i><b>(1)</b>
-<span class="o">}</span>
-
-<span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">cxfCodegen</span> <span class="s2">"jakarta.xml.ws:jakarta.xml.ws-api:4.0.0"</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="n">cxfCodegen</span> <span class="s2">"jakarta.annotation:jakarta.annotation-api:2.1.1"</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
-<summary>Kotlin</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">repositories</span> <span class="p">{</span>
-    <span class="nf">mavenCentral</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="nf">cxfCodegen</span> <span class="p">{</span>
-    <span class="n">cxfVersion</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s">"4.0.0"</span><span class="p">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
-<span class="p">}</span>
-
-<span class="nf">dependencies</span> <span class="p">{</span>
-    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"jakarta.xml.ws:jakarta.xml.ws-api:4.0.0"</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"jakarta.annotation:jakarta.annotation-api:2.1.1"</span><span class="p">)</span>
-<span class="p">}</span></code></pre>
-</div>
-</div>
-</details>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Specify 4.0.0 version for all CXF artifacts in the <code>cxfCodegen</code> classpath.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Use Jakarta specific artifacts that use the <code>jakarta</code> namespace.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The above is just an example. Depending on your usage, there may be more dependencies or configuration required.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="logging"><a class="anchor" href="#logging"></a>6. Logging</h2>
+<h2 id="logging"><a class="anchor" href="#logging"></a>4. Logging</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Without any additional configuration, when executing any of the created tasks, the following lines will be printed to the console:</p>
@@ -880,7 +771,7 @@ Logback example is shown below.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="verbose-logs"><a class="anchor" href="#verbose-logs"></a>6.1. Verbose Logs</h3>
+<h3 id="verbose-logs"><a class="anchor" href="#verbose-logs"></a>4.1. Verbose Logs</h3>
 <div class="paragraph">
 <p>To see logs from Apache CXF, configure the logger for the specific task you want logs for.</p>
 </div>
@@ -932,7 +823,7 @@ The example below configures logging for <strong>all</strong> <code><a href="../
 </div>
 </div>
 <div class="sect2">
-<h3 id="disable-logs"><a class="anchor" href="#disable-logs"></a>6.2. Disable Logs</h3>
+<h3 id="disable-logs"><a class="anchor" href="#disable-logs"></a>4.2. Disable Logs</h3>
 <div class="paragraph">
 <p>Logs from Apache CXF can be disabled by in two ways:</p>
 </div>
@@ -1017,7 +908,7 @@ that essentially overrides all logging levels. For example, an empty Logback con
 <div id="footer">
 <div id="footer-text">
 Version 2.0.0-SNAPSHOT<br>
-Last updated 2023-06-09 23:21:27 UTC
+Last updated 2023-07-03 00:53:15 UTC
 </div>
 </div>
 <style>
