@@ -146,7 +146,7 @@ class CxfCodegenPluginTests {
 				.map(it -> it.toPath().toAbsolutePath().toString())
 				.collect(Collectors.toList());
 			String outputDir = Path
-				.of(evaluated.getBuildDir().getAbsolutePath(),
+				.of(evaluated.getLayout().getBuildDirectory().getAsFile().get().getAbsolutePath(),
 						testInfo.getDisplayName() + "-wsdl2java-generated-sources")
 				.toFile()
 				.getAbsolutePath();
@@ -172,7 +172,8 @@ class CxfCodegenPluginTests {
 			.map(it -> it.toPath().toAbsolutePath().toString())
 			.collect(Collectors.toList());
 		String outputDir = Path
-			.of(project.getBuildDir().getAbsolutePath(), testInfo.getDisplayName() + "-wsdl2java-generated-sources")
+			.of(project.getLayout().getBuildDirectory().getAsFile().get().getAbsolutePath(),
+					testInfo.getDisplayName() + "-wsdl2java-generated-sources")
 			.toFile()
 			.getAbsolutePath();
 		assertThat(paths).isNotEmpty().doesNotContain(outputDir);
