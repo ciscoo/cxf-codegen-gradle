@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+jshell .github/workflows/should-publish-snapshot-docs.jsh
+if [ $? -eq 0 ]; then
+  echo "Skip publishing snapshot documentation since version is not a snapshot"
+  exit 0
+fi
+
 readonly checksum_dir='documentation/build/checksum'
 readonly current_checksum="${checksum_dir}/current-checksum.txt"
 readonly published_checksum="${checksum_dir}/published-checksum.txt"
