@@ -158,4 +158,16 @@ afterEvaluate {
             }
         }
     }
+    tasks {
+        named("publishCxfCodegenPluginMarkerMavenPublicationToSonatypeSnapshotsRepository") {
+            onlyIf("snapshot") {
+                isSnapshot
+            }
+        }
+        named("publishPluginMavenPublicationToSonatypeSnapshotsRepository") {
+            onlyIf("snapshot") {
+                isSnapshot
+            }
+        }
+    }
 }
