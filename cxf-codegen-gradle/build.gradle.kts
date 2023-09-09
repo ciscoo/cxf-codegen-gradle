@@ -53,9 +53,6 @@ testing {
                     testLogging {
                         exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
                     }
-                    // TODO: Drop support for older versions of Gradle.
-                    systemProperty("gradle5", System.getProperty("gradle5", false.toString()))
-                    systemProperty("gradle6", System.getProperty("gradle6", false.toString()))
                     systemProperty("gradle7", System.getProperty("gradle7", false.toString()))
                 }
             }
