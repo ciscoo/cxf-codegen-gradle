@@ -441,7 +441,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>Plugin Configuration</h1>
 <div class="details">
-<span id="revnumber">version 1.2.1</span>
+<span id="revnumber">version 2.0.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -468,22 +468,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The plugin contributes a single extension to the project named <code>cxfCodegen</code>.</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
-
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">cxfCodegen</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
 
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -508,7 +508,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 for code generation.</p>
 </div>
 <div class="paragraph">
-<p>Out-of-the-box, the following dependencies are added (v3.5.5):</p>
+<p>Out-of-the-box, the following dependencies are added (v4.0.3):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -540,7 +540,7 @@ for code generation.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>These are the same dependencies defined in the Maven plugin&#8217;s <a href="https://github.com/apache/cxf/blob/cxf-3.5.5/maven-plugins/codegen-plugin/pom.xml#L71..L106">POM</a>.</p>
+<p>These are the same dependencies defined in the Maven plugin&#8217;s <a href="https://github.com/apache/cxf/blob/cxf-4.0.3/maven-plugins/codegen-plugin/pom.xml#L71..L106">POM</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="dependency-version-constraints"><a class="anchor" href="#dependency-version-constraints"></a>2.1. Managing Dependency Versions</h3>
@@ -559,7 +559,7 @@ for code generation.</p>
 </div>
 <div class="paragraph">
 <p>The extension provides a short and concise way to specify the version while using standard Gradle dependency management
-offers allows more rich configuration options.</p>
+offers more rich configuration options.</p>
 </div>
 <div class="paragraph">
 <p>The extension is preferred for simplicity, but if your project requires more complex dependency management, then use
@@ -572,8 +572,17 @@ Gradle&#8217;s dependency management instead.</p>
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-You will need to ensure the version of CXF dependencies you specify is compatible with the
-<a href="generating-java.html#options-usage">options</a> used. Failure to do so will result in an error during code generation.
+<div class="paragraph">
+<p>You will need to ensure the version of CXF you specify is compatible with the
+<a href="generating-java.html#options-usage">options</a> used <strong>and</strong> your application&#8217;s version of <a href="https://jakarta.ee/specifications/">Jakarta EE</a> (Java EE).</p>
+</div>
+<div class="paragraph">
+<p>Additionally, depending on the version of you CXF you specify, you will also need to ensure you have the appropriate
+dependencies for the <code>cxfCodegen</code> classpath and/or your application&#8217;s classpath.</p>
+</div>
+<div class="paragraph">
+<p>Failure to do so can result in an error during code generation and/or compilation errors.</p>
+</div>
 </td>
 </tr>
 </table>
@@ -584,22 +593,22 @@ You will need to ensure the version of CXF dependencies you specify is compatibl
 <p>To change the version using the extension, specify the version using the <code>cxfVersion</code> property:</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span>
-    <span class="n">cxfVersion</span> <span class="o">=</span> <span class="s2">"3.2.0"</span> <span class="c1">// 3.3.0 breaks the build</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">cxfCodegen</span> <span class="p">{</span>
     <span class="n">cxfVersion</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s">"3.2.0"</span><span class="p">)</span> <span class="c1">// 3.3.0 breaks the build</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">cxfCodegen</span> <span class="o">{</span>
+    <span class="n">cxfVersion</span> <span class="o">=</span> <span class="s2">"3.2.0"</span> <span class="c1">// 3.3.0 breaks the build</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 </details>
@@ -611,21 +620,6 @@ You will need to ensure the version of CXF dependencies you specify is compatibl
 can be used:</p>
 </div>
 <details open>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">configurations</span><span class="o">.</span><span class="na">cxfCodegen</span> <span class="o">{</span>
-    <span class="n">resolutionStrategy</span><span class="o">.</span><span class="na">eachDependency</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">requested</span><span class="o">.</span><span class="na">group</span> <span class="o">==</span> <span class="s2">"org.apache.cxf"</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">useVersion</span> <span class="s2">"3.2.0"</span>
-            <span class="n">because</span> <span class="s2">"3.3.0 breaks the build"</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
@@ -640,6 +634,21 @@ can be used:</p>
 </div>
 </div>
 </details>
+<details>
+<summary>Groovy</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">configurations</span><span class="o">.</span><span class="na">cxfCodegen</span> <span class="o">{</span>
+    <span class="n">resolutionStrategy</span><span class="o">.</span><span class="na">eachDependency</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">requested</span><span class="o">.</span><span class="na">group</span> <span class="o">==</span> <span class="s2">"org.apache.cxf"</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">useVersion</span> <span class="s2">"3.2.0"</span>
+            <span class="n">because</span> <span class="s2">"3.3.0 breaks the build"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+</details>
 </div>
 </div>
 </div>
@@ -647,8 +656,8 @@ can be used:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.2.1<br>
-Last updated 2023-03-06 09:11:48 -0600
+Version 2.0.0<br>
+Last updated 2023-07-03 07:18:03 -0500
 </div>
 </div>
 <style>
