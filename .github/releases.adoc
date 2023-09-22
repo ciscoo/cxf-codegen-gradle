@@ -18,9 +18,12 @@ https://github.com/ciscoo/cxf-codegen-gradle/blob/master/.github/workflows/build
 * [ ] Change release date in changelog
 * [ ] Change version in readme
 * [ ] Commit with message _Release vx.x.x_
-* [ ] Execute `./gradlew clean build publishPlugins`
-* [ ] Update sample project to use version and test
 * [ ] Tag current commit `git tag vx.x.x`
+* [ ] Execute `./gradlew clean build`
+* [ ] Execute `./gradlew publishToSonatype closeSonatypeStagingRepository`
+* [ ] Find closed repository at https://oss.sonatype.org/#stagingRepositories
+* [ ] Verify published plugin using a sample test project
+* [ ] Release repository
 * [ ] Upload docs `./gradlew gitPublishPush` (docs are generated/prepared by the `build` task earlier)
 * [ ] Change `version` in `gradle.properties` in `master` to new development versions and commit with message _Back to snapshots_
 * [ ] Push `master` and all tags `git push origin vx.x.x`
@@ -32,9 +35,12 @@ https://github.com/ciscoo/cxf-codegen-gradle/blob/master/.github/workflows/build
 * [ ] Change release date in changelog
 * [ ] Change version in readme
 * [ ] Commit with message _Release vx.x.x_
-* [ ] Execute `./gradlew clean build publishPlugins`
-* [ ] Update sample project to use version and test
 * [ ] Tag current commit `git tag vx.x.x`
+* [ ] Execute `./gradlew clean build`
+* [ ] Execute `./gradlew publishToSonatype closeSonatypeStagingRepository`
+* [ ] Find closed repository at https://oss.sonatype.org/#stagingRepositories
+* [ ] Verify published plugin using a sample test project
+* [ ] Release repository
 * [ ] Upload docs `./gradlew -PreplaceCurrentDocs gitPublishPush` (docs are generated/prepared by the `build` task earlier)
 * [ ] Change `version` in `gradle.properties` in `master` to new development versions and commit with message _Back to snapshots_
 * [ ] Push `master` and all tags `git push origin vx.x.x`
