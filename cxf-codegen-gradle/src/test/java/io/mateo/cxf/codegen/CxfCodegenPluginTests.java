@@ -73,9 +73,10 @@ class CxfCodegenPluginTests {
 	@Test
 	void defaultDependencies() {
 		Spec<Dependency> spec = (dependency) -> dependency.getName().equals("cxf-tools-wsdlto-frontend-javascript");
-		List<String> expectedDependencies = List.of("cxf-core", "cxf-tools-common", "cxf-tools-wsdlto-core",
-				"cxf-tools-wsdlto-databinding-jaxb", "cxf-tools-wsdlto-frontend-jaxws",
+		List<String> expectedDependencies = List.of("slf4j-nop", "cxf-core", "cxf-tools-common",
+				"cxf-tools-wsdlto-core", "cxf-tools-wsdlto-databinding-jaxb", "cxf-tools-wsdlto-frontend-jaxws",
 				"cxf-tools-wsdlto-frontend-javascript");
+		var expectedVersions = List.of("2.0.9", "4.0.3", "4.0.3", "4.0.3", "4.0.3", "4.0.3", "4.0.3");
 
 		Configuration configuration = this.project.getConfigurations()
 			.getByName(CxfCodegenPlugin.CXF_CODEGEN_CONFIGURATION_NAME);
@@ -83,8 +84,7 @@ class CxfCodegenPluginTests {
 		assertThat(configuration.getDependencies()).isNotEmpty();
 		assertThat(configuration.getDependencies()).extracting(Dependency::getName)
 			.containsExactlyElementsOf(expectedDependencies);
-		assertThat(configuration.getDependencies()).extracting(Dependency::getVersion)
-			.allMatch((version) -> version.equals(GeneratedVersionAccessor.CXF_VERSION));
+		assertThat(configuration.getDependencies()).extracting(Dependency::getVersion).isEqualTo(expectedVersions);
 		assertThat(configuration.getDependencies().matching(spec)).singleElement()
 			.asInstanceOf(InstanceOfAssertFactories.type(ModuleDependency.class))
 			.satisfies((dependency) -> {

@@ -173,7 +173,10 @@ include::../gradle/generating-java/default-tool-options.gradle[tags=secondary]
 [[logging]]
 == Logging
 
-Without any additional configuration, when executing any of the created tasks, the following lines will be printed to the console:
+Apache CXF uses SLF4J for logging and by default, all logs are suppressed.
+This is accomplished by CXF Codegen Gradle plugin including the `org.slf4j:slf4j-nop` dependency in the `cxfCodegen` configuration.
+
+If logs were not suppressed by default, when executing any of the created tasks, the following lines will be printed to the console:
 
 [source,log]
 ----
@@ -182,8 +185,19 @@ SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 ----
 
-Apache CXF uses SLF4J for logging. To enable logging for Apache CXF, include a SLF4J binding and logging framework. A
-Logback example is shown below.
+The above logging provides no useful information in the build output and instead pollutes the build output. This is the reason why logging is suppressed by default.
+
+[[enable-logging]]
+=== Enable Logging
+
+To enable logging for Apache CXF:
+
+. Exclude the `org.slf4j:slf4j-nop` dependency
+. Include a SLF4J provider (or binding)
+. Include a logging library
+.. The library should implement the SLF4J API
+
+In the following example, https://logback.qos.ch/[Logback] is used which provides an implementation of the SLF4J API.
 
 ++++
 <details open>
@@ -269,80 +283,3 @@ With the above configuration, you will see logs from Apache CXF:
 
 ...and so on
 ----
-
-[[disable-logs]]
-=== Disable Logs
-
-Logs from Apache CXF can be disabled by in two ways:
-
-. By not specifying a logger at all -- same as never enabling.
-. By explicitly specifying a `null` logger as shown below.
-
-NOTE: The example below specifies a `null` logger _**all**_ `{wsdl2java-task}` task type as JVM argument.
-
-++++
-<details open>
-<summary>Kotlin</summary>
-++++
-
-[source,kotlin]
-----
-include::../gradle/generating-java/disable-task-logs.gradle.kts[tags=code]
-----
-
-++++
-</details>
-++++
-
-++++
-<details>
-<summary>Groovy</summary>
-++++
-
-[source,groovy]
-----
-include::../gradle/generating-java/disable-task-logs.gradle[tags=code]
-----
-
-++++
-</details>
-++++
-
-The Apache Velocity initialization logs unfortunately cannot be disabled. However, you can specify a log configuration
-that essentially overrides all logging levels. For example, an empty Logback configuration will silence all logs:
-
-.logback.xml
-[source,xml]
-----
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-</configuration>
-----
-
-++++
-<details open>
-<summary>Kotlin</summary>
-++++
-
-[source,kotlin]
-----
-include::../gradle/generating-java/disable-all-task-logs.gradle.kts[tags=code]
-----
-
-++++
-</details>
-++++
-
-++++
-<details>
-<summary>Groovy</summary>
-++++
-
-[source,groovy]
-----
-include::../gradle/generating-java/disable-all-task-logs.gradle[tags=code]
-----
-
-++++
-</details>
-++++

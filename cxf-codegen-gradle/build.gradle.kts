@@ -26,6 +26,7 @@ gradlePlugin {
 
 val generateVersionAccessor = tasks.register("generateVersionAccessor", io.mateo.build.GenerateVersionAccessor::class) {
     cxfVersion.set(libs.versions.cxf)
+    slf4jVersion.set(libs.versions.slf4j)
 }
 
 sourceSets.main {

@@ -9,6 +9,10 @@ repositories {
     mavenCentral()
 }
 
+configurations.cxfCodegen {
+    exclude(group = "org.slf4j", module = "slf4j-nop")
+}
+
 dependencies {
     cxfCodegen("ch.qos.logback:logback-classic:1.4.7")
 }

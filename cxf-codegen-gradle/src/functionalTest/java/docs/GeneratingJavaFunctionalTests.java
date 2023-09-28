@@ -44,33 +44,6 @@ class GeneratingJavaFunctionalTests {
 	}
 
 	@TestTemplate
-	void disableAllTaskLogs(GradleBuild gradleBuild) throws IOException {
-		GradleRunner runner = gradleBuild.script(scriptFor("disable-all-task-logs")).prepareRunner("wsdl2java");
-		Files.copy(Path.of("src", "functionalTest", "resources", "emptyLogback.xml"),
-				gradleBuild.getProjectDir().resolve("logback.xml"), StandardCopyOption.COPY_ATTRIBUTES,
-				StandardCopyOption.REPLACE_EXISTING);
-		Files.copy(gradleBuild.getProjectDir().resolve(Path.of("wsdls", "calculator.wsdl")),
-				gradleBuild.getProjectDir().resolve(Path.of("example.wsdl")), StandardCopyOption.COPY_ATTRIBUTES);
-		Files.copy(gradleBuild.getProjectDir().resolve(Path.of("wsdls", "calculator.xsd")),
-				gradleBuild.getProjectDir().resolve(Path.of("example.xsd")), StandardCopyOption.COPY_ATTRIBUTES);
-
-		BuildResult result = runner.build();
-
-		assertThat(result.getOutput()).doesNotContain("DEBUG org.apache.cxf.common.logging.LogUtils",
-				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader", "DEBUG org.apache.velocity");
-	}
-
-	@TestTemplate
-	void disableTaskLogs(GradleBuild gradleBuild) {
-		GradleRunner runner = gradleBuild.script(scriptFor("disable-task-logs")).prepareRunner("wsdl2java");
-
-		BuildResult result = runner.build();
-
-		assertThat(result.getOutput()).doesNotContain("DEBUG org.apache.cxf.common.logging.LogUtils",
-				"DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader", "DEBUG org.apache.velocity");
-	}
-
-	@TestTemplate
 	void loggingTask(GradleBuild gradleBuild) {
 		BuildResult result = gradleBuild.script(scriptFor("logging-task")).prepareRunner("wsdl2java").build();
 

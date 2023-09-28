@@ -183,6 +183,9 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	}
 
 	private void addDependencies(Consumer<Dependency> adderFn, DependencyHandler dependencyHandler, String cxfVersion) {
+		// Suppress/silence logs by default for a cleaner build output.
+		adderFn.accept(dependencyHandler.create("org.slf4j:slf4j-nop:" + GeneratedVersionAccessor.SLF4J_VERSION));
+
 		// Same dependencies defined in cxf-codegen-plugin's POM.
 		adderFn.accept(dependencyHandler.create("org.apache.cxf:cxf-core:" + cxfVersion));
 		adderFn.accept(dependencyHandler.create("org.apache.cxf:cxf-tools-common:" + cxfVersion));
