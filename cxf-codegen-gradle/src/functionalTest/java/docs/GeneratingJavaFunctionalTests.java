@@ -18,14 +18,10 @@ package docs;
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibilityExtension;
 import org.gradle.testkit.runner.BuildResult;
-import org.gradle.testkit.runner.GradleRunner;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
