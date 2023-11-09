@@ -3,10 +3,10 @@ cxf = "4.0.3"
 slf4j = "2.0.9"
 
 [libraries]
-junitBom = { module = "org.junit:junit-bom", version = "5.10.0" }
+junitBom = { module = "org.junit:junit-bom", version = "5.10.1" }
 assertj = { module = "org.assertj:assertj-core", version = "3.24.2" }
 javapoet = { module = "com.squareup:javapoet", version = "1.13.0" }
-gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version = "6.21.0" }
+gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version = "6.22.0" }
 gradle-springJavaFormat = { module = "io.spring.javaformat:spring-javaformat-gradle-plugin", version = "0.0.39" }
 gradle-nexusPublish = { module = "io.github.gradle-nexus:publish-plugin", version = "2.0.0-rc-1" }
 slf4jNop = { module = "org.slf4j:slf4j-nop", version.ref = "slf4j" } # Unused; exists to allow automatic updates.
