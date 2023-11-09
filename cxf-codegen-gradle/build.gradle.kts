@@ -14,20 +14,22 @@ gradlePlugin {
         create("cxfCodegen") {
             id = "io.mateo.cxf-codegen"
             displayName = "CXF Codegen"
-            description = """
+            description =
+                """
                 Gradle plugin to generate code sources from WSDL.
                 The next major version and subsequent versions will only be published to the Maven Central Repository.
-            """.trimIndent()
+                """.trimIndent()
             implementationClass = "io.mateo.cxf.codegen.CxfCodegenPlugin"
             tags.set(listOf("cxf", "wsdl2java"))
         }
     }
 }
 
-val generateVersionAccessor = tasks.register("generateVersionAccessor", io.mateo.build.GenerateVersionAccessor::class) {
-    cxfVersion.set(libs.versions.cxf)
-    slf4jVersion.set(libs.versions.slf4j)
-}
+val generateVersionAccessor =
+    tasks.register("generateVersionAccessor", io.mateo.build.GenerateVersionAccessor::class) {
+        cxfVersion.set(libs.versions.cxf)
+        slf4jVersion.set(libs.versions.slf4j)
+    }
 
 sourceSets.main {
     java.srcDir(generateVersionAccessor)
