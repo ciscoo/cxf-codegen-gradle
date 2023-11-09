@@ -441,7 +441,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>Generating Java Sources</h1>
 <div class="details">
-<span id="revnumber">version 2.0.0-SNAPSHOT</span>
+<span id="revnumber">version 2.1.0-SNAPSHOT</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -451,8 +451,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#default-options">3. Default Options</a></li>
 <li><a href="#logging">4. Logging</a>
 <ul class="sectlevel2">
-<li><a href="#verbose-logs">4.1. Verbose Logs</a></li>
-<li><a href="#disable-logs">4.2. Disable Logs</a></li>
+<li><a href="#enable-logging">4.1. Enable Logging</a></li>
+<li><a href="#verbose-logs">4.2. Verbose Logs</a></li>
 </ul>
 </li>
 </ul>
@@ -727,7 +727,11 @@ for <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaOptions.html#m
 <h2 id="logging"><a class="anchor" href="#logging"></a>4. Logging</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Without any additional configuration, when executing any of the created tasks, the following lines will be printed to the console:</p>
+<p>Apache CXF uses SLF4J for logging and by default, all logs are suppressed.
+This is accomplished by CXF Codegen Gradle plugin including the <code>org.slf4j:slf4j-nop</code> dependency in the <code>cxfCodegen</code> configuration.</p>
+</div>
+<div class="paragraph">
+<p>If logs were not suppressed by default, when executing any of the created tasks, the following lines will be printed to the console:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -737,14 +741,45 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 </div>
 </div>
 <div class="paragraph">
-<p>Apache CXF uses SLF4J for logging. To enable logging for Apache CXF, include a SLF4J binding and logging framework. A
-Logback example is shown below.</p>
+<p>The above logging provides no useful information in the build output and instead pollutes the build output. This is the reason why logging is suppressed by default.</p>
+</div>
+<div class="sect2">
+<h3 id="enable-logging"><a class="anchor" href="#enable-logging"></a>4.1. Enable Logging</h3>
+<div class="paragraph">
+<p>To enable logging for Apache CXF:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Exclude the <code>org.slf4j:slf4j-nop</code> dependency</p>
+</li>
+<li>
+<p>Include a SLF4J provider (or binding)</p>
+</li>
+<li>
+<p>Include a logging library</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>The library should implement the SLF4J API</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In the following example, <a href="https://logback.qos.ch/">Logback</a> is used which provides an implementation of the SLF4J API.</p>
 </div>
 <details open>
 <summary>Kotlin</summary>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">dependencies</span> <span class="p">{</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="n">configurations</span><span class="p">.</span><span class="nf">cxfCodegen</span> <span class="p">{</span>
+    <span class="nf">exclude</span><span class="p">(</span><span class="n">group</span> <span class="p">=</span> <span class="s">"org.slf4j"</span><span class="p">,</span> <span class="n">module</span> <span class="p">=</span> <span class="s">"slf4j-nop"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nf">dependencies</span> <span class="p">{</span>
     <span class="nf">cxfCodegen</span><span class="p">(</span><span class="s">"ch.qos.logback:logback-classic:1.4.7"</span><span class="p">)</span>
 <span class="p">}</span></code></pre>
 </div>
@@ -754,7 +789,13 @@ Logback example is shown below.</p>
 <summary>Groovy</summary>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">dependencies</span> <span class="o">{</span>
+<pre class="rouge highlight"><code data-lang="groovy"><span class="n">configurations</span> <span class="o">{</span>
+    <span class="n">cxfCodegen</span> <span class="o">{</span>
+        <span class="n">exclude</span> <span class="nl">group:</span> <span class="s2">"org.slf4j"</span><span class="o">,</span> <span class="nl">module:</span> <span class="s2">"slf4j-nop"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
     <span class="n">cxfCodegen</span> <span class="s2">"ch.qos.logback:logback-classic:1.4.7"</span>
 <span class="o">}</span></code></pre>
 </div>
@@ -770,8 +811,9 @@ Logback example is shown below.</p>
 11:48:25.026 [main] DEBUG org.apache.velocity -- Default Properties resource: org/apache/velocity/runtime/defaults/velocity.properties</code></pre>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="verbose-logs"><a class="anchor" href="#verbose-logs"></a>4.1. Verbose Logs</h3>
+<h3 id="verbose-logs"><a class="anchor" href="#verbose-logs"></a>4.2. Verbose Logs</h3>
 <div class="paragraph">
 <p>To see logs from Apache CXF, configure the logger for the specific task you want logs for.</p>
 </div>
@@ -822,93 +864,13 @@ The example below configures logging for <strong>all</strong> <code><a href="../
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="disable-logs"><a class="anchor" href="#disable-logs"></a>4.2. Disable Logs</h3>
-<div class="paragraph">
-<p>Logs from Apache CXF can be disabled by in two ways:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>By not specifying a logger at all&#8201;&#8212;&#8201;same as never enabling.</p>
-</li>
-<li>
-<p>By explicitly specifying a <code>null</code> logger as shown below.</p>
-</li>
-</ol>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The example below specifies a <code>null</code> logger <em><strong>all</strong></em> <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html">Wsdl2JavaTask</a></code> task type as JVM argument.
-</td>
-</tr>
-</table>
-</div>
-<details open>
-<summary>Kotlin</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="n">tasks</span><span class="p">.</span><span class="nf">withType</span><span class="p">(</span><span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="nf">configureEach</span> <span class="p">{</span>
-    <span class="n">jvmArgs</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="s">"-Dorg.apache.cxf.Logger=null"</span><span class="p">)</span>
-<span class="p">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">(</span><span class="n">Wsdl2Java</span><span class="o">).</span><span class="na">configureEach</span> <span class="o">{</span>
-    <span class="n">jvmArgs</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"-Dorg.apache.cxf.Logger=null"</span><span class="o">]</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-<div class="paragraph">
-<p>The Apache Velocity initialization logs unfortunately cannot be disabled. However, you can specify a log configuration
-that essentially overrides all logging levels. For example, an empty Logback configuration will silence all logs:</p>
-</div>
-<div class="listingblock">
-<div class="title">logback.xml</div>
-<div class="content">
-<pre class="rouge highlight"><code data-lang="xml"><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="nt">&lt;configuration&gt;</span>
-<span class="nt">&lt;/configuration&gt;</span></code></pre>
-</div>
-</div>
-<details open>
-<summary>Kotlin</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="n">tasks</span><span class="p">.</span><span class="nf">withType</span><span class="p">(</span><span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="nf">configureEach</span> <span class="p">{</span>
-    <span class="n">jvmArgs</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="s">"-Dlogback.configurationFile=logback.xml"</span><span class="p">)</span>
-<span class="p">}</span></code></pre>
-</div>
-</div>
-</details>
-<details>
-<summary>Groovy</summary>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="groovy"><span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">(</span><span class="n">Wsdl2Java</span><span class="o">).</span><span class="na">configureEach</span> <span class="o">{</span>
-    <span class="n">jvmArgs</span> <span class="o">=</span> <span class="o">[</span><span class="s2">"-Dlogback.configurationFile=logback.xml"</span><span class="o">]</span>
-<span class="o">}</span></code></pre>
-</div>
-</div>
-</details>
-</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 2.0.0-SNAPSHOT<br>
-Last updated 2023-07-03 12:36:44 UTC
+Version 2.1.0-SNAPSHOT<br>
+Last updated 2023-09-28 08:54:19 -0500
 </div>
 </div>
 <style>

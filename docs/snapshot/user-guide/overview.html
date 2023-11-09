@@ -441,14 +441,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>Overview</h1>
 <div class="details">
-<span id="revnumber">version 2.0.0-SNAPSHOT</span>
+<span id="revnumber">version 2.1.0-SNAPSHOT</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#what-is-cxf-codegen-gradle">1. What is CXF Codegen</a></li>
 <li><a href="#getting-started">2. Getting Started</a></li>
-<li><a href="#supported-gradle-versions">3. Supported Gradle Versions</a></li>
+<li><a href="#supported-gradle-versions">3. Supported Gradle Versions</a>
+<ul class="sectlevel2">
+<li><a href="#support-policy">3.1. Support Policy</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -486,7 +490,7 @@ using the <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:pl
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nf">plugins</span> <span class="p">{</span>
     <span class="n">java</span>
-    <span class="nf">id</span><span class="p">(</span><span class="s">"io.mateo.cxf-codegen"</span><span class="p">)</span> <span class="n">version</span> <span class="s">"2.0.0-SNAPSHOT"</span>
+    <span class="nf">id</span><span class="p">(</span><span class="s">"io.mateo.cxf-codegen"</span><span class="p">)</span> <span class="n">version</span> <span class="s">"2.1.0-SNAPSHOT"</span>
 <span class="p">}</span></code></pre>
 </div>
 </div>
@@ -497,7 +501,7 @@ using the <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:pl
 <div class="content">
 <pre class="rouge highlight"><code data-lang="groovy"><span class="n">plugins</span> <span class="o">{</span>
     <span class="n">id</span> <span class="s2">"java"</span>
-    <span class="n">id</span> <span class="s2">"io.mateo.cxf-codegen"</span> <span class="n">version</span> <span class="s2">"2.0.0-SNAPSHOT"</span>
+    <span class="n">id</span> <span class="s2">"io.mateo.cxf-codegen"</span> <span class="n">version</span> <span class="s2">"2.1.0-SNAPSHOT"</span>
 <span class="o">}</span></code></pre>
 </div>
 </div>
@@ -548,7 +552,13 @@ using the <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:pl
 <p>8.1.1</p>
 </li>
 <li>
-<p>8.2</p>
+<p>8.2.1</p>
+</li>
+<li>
+<p>8.3</p>
+</li>
+<li>
+<p>8.4</p>
 </li>
 </ul>
 </div></div></td>
@@ -569,20 +579,31 @@ the source of the <a href="https://github.com/ciscoo/cxf-codegen-gradle/tree/mas
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-All examples are written for <em>and</em> are tested for Gradle 8.2.
+All examples are written for <em>and</em> are tested for Gradle 8.4.
 Depending on your Gradle version, you may need to adapt the example to a syntax that is compatible
 with your Gradle version.
 </td>
 </tr>
 </table>
 </div>
+<div class="sect2">
+<h3 id="support-policy"><a class="anchor" href="#support-policy"></a>3.1. Support Policy</h3>
+<div class="paragraph">
+<p>Only the current version and the previous minor versions at their latest patch versions are supported. For example, given
+Gradle 8.3 is the current/latest release (as of 2023-08-17), the previous latest minor versions are 8.2.1 and 8.1.1.
+Therefore Gradle 8.3, 8.2.1, and 8.1.1 are the only supported versions.</p>
+</div>
+<div class="paragraph">
+<p>The Gradle team releases frequently and to keep this plugin up-to-date, a limited amount of versions will be supported.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 2.0.0-SNAPSHOT<br>
-Last updated 2023-07-03 12:36:44 UTC
+Version 2.1.0-SNAPSHOT<br>
+Last updated 2023-10-12 19:38:49 -0500
 </div>
 </div>
 <style>
