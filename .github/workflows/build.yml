@@ -20,14 +20,10 @@ jobs:
         uses: ./.github/actions/run-gradle
       - name: Upload to Codecov.io
         uses: codecov/codecov-action@v3
-      - name: Functional Tests (Gradle 8)
+      - name: Functional Tests
         uses: ./.github/actions/run-gradle
         with:
           arguments: functionalTest --parallel
-      - name: Functional Tests (Gradle 7)
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: functionalTest --parallel -Dgradle7=true
 
   Windows:
     runs-on: windows-latest
@@ -38,14 +34,10 @@ jobs:
           fetch-depth: 1
       - name: Main Build
         uses: ./.github/actions/run-gradle
-      - name: Functional Tests (Gradle 8)
+      - name: Functional Tests
         uses: ./.github/actions/run-gradle
         with:
           arguments: functionalTest --parallel
-      - name: Functional Tests (Gradle 7)
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: functionalTest --parallel -Dgradle7=true
 
   macOS:
     runs-on: macos-latest
@@ -56,14 +48,10 @@ jobs:
           fetch-depth: 1
       - name: Main Build
         uses: ./.github/actions/run-gradle
-      - name: Functional Tests (Gradle 8)
+      - name: Functional Tests
         uses: ./.github/actions/run-gradle
         with:
           arguments: functionalTest --parallel
-      - name: Functional Tests (Gradle 7)
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: functionalTest --parallel -Dgradle7=true
 
   publish_snapshot_artifacts:
     name: Publish Snapshot Artifacts

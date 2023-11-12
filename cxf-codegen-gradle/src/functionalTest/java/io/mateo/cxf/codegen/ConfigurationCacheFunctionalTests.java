@@ -28,8 +28,8 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 class ConfigurationCacheFunctionalTests {
 
 	@RegisterExtension
-	static GradleCompatibilityExtension gradleCompatibilityExtension = new GradleCompatibilityExtension("7.3.3",
-			"7.4.2", "7.5.1", "7.6", "8.2.1", "8.3", "current");
+	static GradleCompatibilityExtension gradleCompatibilityExtension = new GradleCompatibilityExtension("8.2.1", "8.3",
+			"current");
 
 	@TestTemplate
 	void configurationCacheCompatibility(GradleBuild gradleBuild) {

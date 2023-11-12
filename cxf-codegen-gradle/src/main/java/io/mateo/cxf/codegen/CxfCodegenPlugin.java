@@ -168,11 +168,6 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 	}
 
 	private Provider<List<Dependency>> createDependencies(Project project, CxfCodegenExtension extension) {
-		// Avoid cast exception: FlatMapProvider to CollectionProviderInternal
-		if (GradleVersion.current().compareTo(GradleVersion.version("7.4")) < 0) {
-			String cxfVersion = extension.getCxfVersion().get();
-			return createDependenciesProvider(project, cxfVersion);
-		}
 		return extension.getCxfVersion().flatMap(cxfVersion -> createDependenciesProvider(project, cxfVersion));
 	}
 

@@ -56,7 +56,6 @@ testing {
                     testLogging {
                         exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
                     }
-                    systemProperty("gradle7", System.getProperty("gradle7", false.toString()))
                 }
             }
         }
