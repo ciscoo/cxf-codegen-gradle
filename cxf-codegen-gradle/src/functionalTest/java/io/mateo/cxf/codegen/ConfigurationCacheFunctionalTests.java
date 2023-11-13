@@ -18,18 +18,14 @@ package io.mateo.cxf.codegen;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.mateo.junit.GradleBuild;
-import io.mateo.junit.GradleCompatibilityExtension;
+import io.mateo.junit.GradleCompatibility;
 
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
 import org.junit.jupiter.api.TestTemplate;
-import org.junit.jupiter.api.extension.RegisterExtension;
 
+@GradleCompatibility
 class ConfigurationCacheFunctionalTests {
-
-	@RegisterExtension
-	static GradleCompatibilityExtension gradleCompatibilityExtension = new GradleCompatibilityExtension("8.2.1", "8.3",
-			"current");
 
 	@TestTemplate
 	void configurationCacheCompatibility(GradleBuild gradleBuild) {
