@@ -34,7 +34,9 @@ class ConfigurationCacheFunctionalTests {
 		BuildResult initialResult = runner.build();
 		BuildResult finalResult = runner.build();
 
-		assertThat(initialResult.getOutput()).contains("no configuration cache is available");
+		assertThat(initialResult.getOutput()).satisfiesAnyOf(
+				output -> assertThat(output).contains("no configuration cache is available"),
+				output -> assertThat(output).contains("no cached configuration is available"));
 		assertThat(finalResult.getOutput()).contains("Reusing configuration cache.");
 	}
 
