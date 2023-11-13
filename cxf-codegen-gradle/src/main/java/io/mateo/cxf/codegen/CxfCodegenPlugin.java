@@ -32,21 +32,16 @@ import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
-import org.gradle.api.logging.Logger;
-import org.gradle.api.logging.Logging;
 import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.TaskCollection;
-import org.gradle.util.GradleVersion;
 
 /**
  * {@link Plugin} for code generation from WSDLs using Apache CXF.
  */
 public class CxfCodegenPlugin implements Plugin<Project> {
-
-	private static final Logger logger = Logging.getLogger(CxfCodegenPlugin.class);
 
 	private static final String WSDL2JAVA_TOOL_MAIN_CLASS = "org.apache.cxf.tools.wsdlto.WSDLToJava";
 
@@ -79,20 +74,12 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {
-		warnIfUsingDeprecatedGradleVersion();
 		CxfCodegenExtension extension = createExtension(project);
 		NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration = createConfiguration(project, extension);
 		configureWsdl2JavaTaskConventions(project, cxfCodegenConfiguration);
 		configureWsdl2JsTaskConventions(project, cxfCodegenConfiguration);
 		addToSourceSet(project);
 		registerAggregateTask(project);
-	}
-
-	private void warnIfUsingDeprecatedGradleVersion() {
-		if (GradleVersion.current().compareTo(GradleVersion.version("8.2.1")) < 0) {
-			logger.warn("Support for Gradle versions < 8.2.1 is deprecated. The current Gradle version is {}.",
-					GradleVersion.current());
-		}
 	}
 
 	private CxfCodegenExtension createExtension(Project project) {
