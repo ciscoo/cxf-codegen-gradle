@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 jshell .github/workflows/should-publish-snapshot-docs.jsh
-if [ $? -eq 0 ]; then
+if [ $? -eq 1 ]; then
   echo "Skip publishing snapshot documentation since version is not a snapshot"
   exit 0
 fi
