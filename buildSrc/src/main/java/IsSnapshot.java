@@ -15,6 +15,7 @@ class IsSnapshot {
             return 1;
         }
         var version = gradleProperties.get("version").toString().toLowerCase(Locale.ENGLISH);
+        System.err.println("Version from Gradle properties file: " + version);
         if (!version.contains("snapshot")) {
             System.err.println("Expected version to be a snapshot");
             return 1;
