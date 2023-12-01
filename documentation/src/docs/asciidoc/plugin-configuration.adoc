@@ -37,7 +37,7 @@ include::../gradle/plugin-configuration/extension.gradle[tags=code]
 
 <1> Primary entry point to the plugin configuration.
 
-For details on what is configuration options are available, view the Javadoc for `{cxf-codegen-extension}`.
+For details on what configuration options are available, view the Javadoc for `{cxf-codegen-extension}`.
 
 [[dependency-configuration]]
 == Dependency Configuration
