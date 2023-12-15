@@ -33,7 +33,7 @@
 9ea5d31c006f4f1a7475c1ea2decc019  documentation/src/docs/gradle/plugin-configuration/managing-dependency-versions.gradle.kts
 a50297541302cf389f3d956c9ae684fa  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/package-info.java
 ad8a226f8340a1a3b832ab726388d461  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.java
-b05242fcf7e26a40dd140c562f82521f  documentation/src/docs/asciidoc/plugin-configuration.adoc
+b4fb4df5246dc2de82b34ad187b6b01c  documentation/src/docs/asciidoc/plugin-configuration.adoc
 be1a863ea826a6e2b0e1db0b3fed7ffe  documentation/src/docs/asciidoc/generating-javascript.adoc
 bf78d17ab3814d38fcc8d3647fcac8ec  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/package-info.java
 c0d2577c8e578299c3b37f33dad0a060  documentation/src/docs/asciidoc/authors.adoc
