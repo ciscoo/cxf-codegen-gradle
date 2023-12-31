@@ -32,10 +32,10 @@ import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
+import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.SourceSet;
-import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.TaskCollection;
 
 /**
@@ -137,8 +137,10 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		project.afterEvaluate(evaluated -> evaluated.getTasks().withType(Wsdl2Java.class).all(wsdl2Java -> {
 			if (wsdl2Java.getAddToMainSourceSet().get()) {
 				evaluated.getExtensions()
-					.configure(SourceSetContainer.class, sourceSets -> sourceSets.named(SourceSet.MAIN_SOURCE_SET_NAME,
-							main -> main.getJava().srcDir(wsdl2Java)));
+					.getByType(JavaPluginExtension.class)
+					.getSourceSets()
+					.named(SourceSet.MAIN_SOURCE_SET_NAME)
+					.configure(main -> main.getJava().srcDir(wsdl2Java));
 			}
 		}));
 	}
