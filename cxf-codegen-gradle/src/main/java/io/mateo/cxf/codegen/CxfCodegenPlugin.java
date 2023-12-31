@@ -138,7 +138,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 			if (wsdl2Java.getAddToMainSourceSet().get()) {
 				evaluated.getExtensions()
 					.configure(SourceSetContainer.class, sourceSets -> sourceSets.named(SourceSet.MAIN_SOURCE_SET_NAME,
-							main -> main.getJava().srcDir(wsdl2Java.getWsdl2JavaOptions().getOutputDir())));
+							main -> main.getJava().srcDir(wsdl2Java)));
 			}
 		}));
 	}
