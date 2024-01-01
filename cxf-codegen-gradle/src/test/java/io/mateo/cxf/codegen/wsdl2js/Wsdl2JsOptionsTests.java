@@ -42,15 +42,12 @@ class Wsdl2JsOptionsTests {
 
 	private Project project;
 
-	private Path projectDir;
-
 	private Path outputDir;
 
 	private Path wsdl;
 
 	@BeforeAll
 	void beforeAll(@TempDir Path projectDir, @TempDir Path wsdl) {
-		this.projectDir = projectDir;
 		this.project = ProjectBuilder.builder().withProjectDir(projectDir.toFile()).build();
 		this.outputDir = this.project.getLayout().getBuildDirectory().map(it -> it.getAsFile().toPath()).get();
 		this.wsdl = wsdl;

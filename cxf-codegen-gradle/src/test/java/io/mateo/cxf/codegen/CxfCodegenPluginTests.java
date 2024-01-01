@@ -72,7 +72,7 @@ class CxfCodegenPluginTests {
 
 	@Test
 	void defaultDependencies() {
-		Spec<Dependency> spec = (dependency) -> dependency.getName().equals("cxf-tools-wsdlto-frontend-javascript");
+		Spec<Dependency> spec = dependency -> dependency.getName().equals("cxf-tools-wsdlto-frontend-javascript");
 		List<String> expectedDependencies = List.of("slf4j-nop", "cxf-core", "cxf-tools-common",
 				"cxf-tools-wsdlto-core", "cxf-tools-wsdlto-databinding-jaxb", "cxf-tools-wsdlto-frontend-jaxws",
 				"cxf-tools-wsdlto-frontend-javascript");

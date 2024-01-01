@@ -17,6 +17,7 @@ package docs;
 
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibilityExtension;
+import org.gradle.testkit.runner.BuildTask;
 import org.gradle.testkit.runner.TaskOutcome;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -63,7 +64,9 @@ class ExamplesFunctionalTests {
 
 		var result = runner.build();
 
-		assertThat(result.task(":wsdl2java").getOutcome()).isEqualTo(TaskOutcome.SUCCESS);
+		assertThat(result.task(":wsdl2java")).isNotNull()
+			.extracting(BuildTask::getOutcome)
+			.isEqualTo(TaskOutcome.SUCCESS);
 	}
 
 }

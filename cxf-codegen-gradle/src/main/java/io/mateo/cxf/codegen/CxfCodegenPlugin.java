@@ -117,7 +117,6 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 		});
 	}
 
-	@SuppressWarnings("deprecation")
 	private void registerAggregateTask(Project project) {
 		TaskCollection<Wsdl2Java> wsdl2Javas = project.getTasks().withType(Wsdl2Java.class);
 		project.getTasks().register(WSDL2JAVA_TASK_NAME, task -> {

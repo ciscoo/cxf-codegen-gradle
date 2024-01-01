@@ -56,7 +56,10 @@ class CxfCodegenPluginFunctionalTests {
 			Path packageDir = generatedSources.resolve(Path.of("org", "tempuri"));
 			assertThat(packageDir).exists().isNotEmptyDirectory();
 
-			List<Path> sourcesDir = Files.list(packageDir).collect(Collectors.toUnmodifiableList());
+			List<Path> sourcesDir;
+			try (var files = Files.list(packageDir)) {
+				sourcesDir = files.toList();
+			}
 			assertThat(sourcesDir).isNotEmpty().hasSize(12);
 
 			List<String> generatedFiles = sourcesDir.stream()

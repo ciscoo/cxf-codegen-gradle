@@ -65,18 +65,6 @@ class IncrementalBuildFunctionalTests {
 		assertThat(secondResult.getOutput()).contains("Skipping task ':calculator' as it is up-to-date.");
 	}
 
-	void doTest(GradleBuild gradleBuild) {
-		GradleRunner runner = gradleBuild.prepareRunner("wsdl2javaCalculator", "-i");
-
-		BuildResult initialResult = runner.build();
-		BuildResult secondResult = runner.build();
-		BuildResult finalResult = runner.build();
-
-		assertThat(initialResult.getOutput()).contains("Task ':wsdl2javaCalculator' is not up-to-date");
-		assertThat(secondResult.getOutput()).contains("Skipping task ':wsdl2javaCalculator' as it is up-to-date.");
-		assertThat(finalResult.getOutput()).contains("Skipping task ':wsdl2javaCalculator' as it is up-to-date.");
-	}
-
 	void overwriteBuildSpec(GradleBuild build, String newBuildFileBase) throws IOException {
 		final Path buildScriptPath = Path.of("src", "functionalTest", "resources", "io", "mateo", "cxf", "codegen");
 		if (build.getDsl() == GradleDsl.GROOVY) {
