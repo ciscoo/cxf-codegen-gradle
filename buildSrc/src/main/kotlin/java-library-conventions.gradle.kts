@@ -7,21 +7,18 @@ plugins {
     id("code-style-conventions")
 }
 
-configurations {
-    val internal by registering {
-        isVisible = false
-        isCanBeConsumed = false
-        isCanBeResolved = false
-    }
-    matching { it.name.endsWith("Classpath") }.configureEach {
-        extendsFrom(internal.get())
-    }
-}
+val libsCatalog = versionCatalogs.named("libs")
 
 dependencies {
-    "internal"(platform(project(":dependencies")))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.assertj:assertj-core")
+    libsCatalog.findLibrary("junitBom").ifPresent {
+        testImplementation(platform(it))
+    }
+    libsCatalog.findLibrary("junitJupiter").ifPresent {
+        testImplementation(it)
+    }
+    libsCatalog.findLibrary("assertj").ifPresent {
+        testImplementation(it)
+    }
 }
 
 java {
