@@ -32,7 +32,9 @@ java {
 testing {
     suites {
         withType(JvmTestSuite::class) {
-            useJUnitJupiter()
+            libsCatalog.findVersion("junit").ifPresent {
+                useJUnitJupiter(it.requiredVersion)
+            }
             targets.configureEach {
                 testTask.configure {
                     testLogging {
