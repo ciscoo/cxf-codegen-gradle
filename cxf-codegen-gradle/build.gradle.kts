@@ -50,6 +50,7 @@ testing {
         register("functionalTest", JvmTestSuite::class) {
             dependencies {
                 implementation(project())
+                implementation(libs.assertj)
             }
             targets.configureEach {
                 testTask.configure {
