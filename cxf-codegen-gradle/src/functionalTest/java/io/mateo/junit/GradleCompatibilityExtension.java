@@ -36,7 +36,7 @@ import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
  */
 public final class GradleCompatibilityExtension implements TestTemplateInvocationContextProvider {
 
-	private static final List<String> GRADLE_8_VERSIONS = List.of("8.3", "8.4", "current", "8.6-rc-2");
+	private static final List<String> GRADLE_8_VERSIONS = List.of("8.3", "8.4", "current", "8.6-rc-3");
 
 	private static final List<String> DEFAULT_GRADLE_VERSIONS;
 
