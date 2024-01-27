@@ -17,15 +17,13 @@ package io.mateo.cxf.codegen;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import io.mateo.junit.GradleBuild;
+import io.mateo.junit.GradleCompatibility;
+import io.mateo.junit.GradleDsl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-
-import io.mateo.junit.GradleBuild;
-import io.mateo.junit.GradleCompatibility;
-import io.mateo.junit.GradleDsl;
-
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
 import org.junit.jupiter.api.TestTemplate;
@@ -33,51 +31,52 @@ import org.junit.jupiter.api.TestTemplate;
 @GradleCompatibility
 class IncrementalBuildFunctionalTests {
 
-	@TestTemplate
-	void generatesJavaSourcesWhenSeparateXsdIsUsed(GradleBuild gradleBuild) {
-		runTest(gradleBuild);
-	}
+    @TestTemplate
+    void generatesJavaSourcesWhenSeparateXsdIsUsed(GradleBuild gradleBuild) {
+        runTest(gradleBuild);
+    }
 
-	@TestTemplate
-	void wsdlOptionChangesCausesTaskToBeOutdated(GradleBuild gradleBuild) throws IOException {
-		GradleRunner runner = gradleBuild.prepareRunner("calculator", "-i");
+    @TestTemplate
+    void wsdlOptionChangesCausesTaskToBeOutdated(GradleBuild gradleBuild) throws IOException {
+        GradleRunner runner = gradleBuild.prepareRunner("calculator", "-i");
 
-		BuildResult first = runner.build();
-		assertThat(first.getOutput()).contains("Task ':calculator' is not up-to-date");
-		BuildResult second = runner.build();
-		assertThat(second.getOutput()).contains("Skipping task ':calculator' as it is up-to-date.");
+        BuildResult first = runner.build();
+        assertThat(first.getOutput()).contains("Task ':calculator' is not up-to-date");
+        BuildResult second = runner.build();
+        assertThat(second.getOutput()).contains("Skipping task ':calculator' as it is up-to-date.");
 
-		// Changing wsdlOptions.markGenerated to true triggers a rebuild
-		this.overwriteBuildSpec(gradleBuild, "wsdlOptionChangesCausesTaskToBeOutdatedMarkGenerated");
-		BuildResult third = runner.build();
-		assertThat(third.getOutput()).contains("Task ':calculator' is not up-to-date");
-		BuildResult fourth = runner.build();
-		assertThat(fourth.getOutput()).contains("Skipping task ':calculator' as it is up-to-date.");
-	}
+        // Changing wsdlOptions.markGenerated to true triggers a rebuild
+        this.overwriteBuildSpec(gradleBuild, "wsdlOptionChangesCausesTaskToBeOutdatedMarkGenerated");
+        BuildResult third = runner.build();
+        assertThat(third.getOutput()).contains("Task ':calculator' is not up-to-date");
+        BuildResult fourth = runner.build();
+        assertThat(fourth.getOutput()).contains("Skipping task ':calculator' as it is up-to-date.");
+    }
 
-	void runTest(GradleBuild gradleBuild) {
-		GradleRunner runner = gradleBuild.prepareRunner("calculator", "-i");
+    void runTest(GradleBuild gradleBuild) {
+        GradleRunner runner = gradleBuild.prepareRunner("calculator", "-i");
 
-		BuildResult initialResult = runner.build();
-		BuildResult secondResult = runner.build();
+        BuildResult initialResult = runner.build();
+        BuildResult secondResult = runner.build();
 
-		assertThat(initialResult.getOutput()).contains("Task ':calculator' is not up-to-date");
-		assertThat(secondResult.getOutput()).contains("Skipping task ':calculator' as it is up-to-date.");
-	}
+        assertThat(initialResult.getOutput()).contains("Task ':calculator' is not up-to-date");
+        assertThat(secondResult.getOutput()).contains("Skipping task ':calculator' as it is up-to-date.");
+    }
 
-	void overwriteBuildSpec(GradleBuild build, String newBuildFileBase) throws IOException {
-		final Path buildScriptPath = Path.of("src", "functionalTest", "resources", "io", "mateo", "cxf", "codegen");
-		if (build.getDsl() == GradleDsl.GROOVY) {
-			Files.copy(buildScriptPath.resolve(Path.of(newBuildFileBase + ".gradle")),
-					build.getProjectDir().resolve("build.gradle"), StandardCopyOption.COPY_ATTRIBUTES,
-					StandardCopyOption.REPLACE_EXISTING);
-		}
-		else {
-			Files.copy(buildScriptPath.resolve(Path.of(newBuildFileBase + ".gradle.kts")),
-					build.getProjectDir().resolve("build.gradle.kts"), StandardCopyOption.COPY_ATTRIBUTES,
-					StandardCopyOption.REPLACE_EXISTING);
-		}
-
-	}
-
+    void overwriteBuildSpec(GradleBuild build, String newBuildFileBase) throws IOException {
+        final Path buildScriptPath = Path.of("src", "functionalTest", "resources", "io", "mateo", "cxf", "codegen");
+        if (build.getDsl() == GradleDsl.GROOVY) {
+            Files.copy(
+                    buildScriptPath.resolve(Path.of(newBuildFileBase + ".gradle")),
+                    build.getProjectDir().resolve("build.gradle"),
+                    StandardCopyOption.COPY_ATTRIBUTES,
+                    StandardCopyOption.REPLACE_EXISTING);
+        } else {
+            Files.copy(
+                    buildScriptPath.resolve(Path.of(newBuildFileBase + ".gradle.kts")),
+                    build.getProjectDir().resolve("build.gradle.kts"),
+                    StandardCopyOption.COPY_ATTRIBUTES,
+                    StandardCopyOption.REPLACE_EXISTING);
+        }
+    }
 }

@@ -17,14 +17,12 @@ package io.mateo.cxf.codegen;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import io.mateo.junit.GradleBuild;
+import io.mateo.junit.GradleCompatibility;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import io.mateo.junit.GradleBuild;
-import io.mateo.junit.GradleCompatibility;
-
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.BuildTask;
 import org.gradle.testkit.runner.TaskOutcome;
@@ -33,75 +31,86 @@ import org.junit.jupiter.api.TestTemplate;
 @GradleCompatibility
 class CxfCodegenPluginFunctionalTests {
 
-	@TestTemplate
-	void failForMissingWsdl(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.buildAndFail("calculator");
+    @TestTemplate
+    void failForMissingWsdl(GradleBuild gradleBuild) {
+        BuildResult result = gradleBuild.buildAndFail("calculator");
 
-		assertThat(result.task(":calculator")).isNotNull()
-			.extracting(BuildTask::getOutcome)
-			.isEqualTo(TaskOutcome.FAILED);
-	}
+        assertThat(result.task(":calculator"))
+                .isNotNull()
+                .extracting(BuildTask::getOutcome)
+                .isEqualTo(TaskOutcome.FAILED);
+    }
 
-	@TestTemplate
-	void javaSourceGenerationFromWsdl(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.build("calculator");
+    @TestTemplate
+    void javaSourceGenerationFromWsdl(GradleBuild gradleBuild) {
+        BuildResult result = gradleBuild.build("calculator");
 
-		assertThat(result.task(":calculator")).isNotNull()
-			.extracting(BuildTask::getOutcome)
-			.isEqualTo(TaskOutcome.SUCCESS);
-		assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
-			Path generatedSources = projectDir.resolve(Path.of("build", "calculator-wsdl2java-generated-sources"));
-			assertThat(generatedSources).exists().isNotEmptyDirectory();
+        assertThat(result.task(":calculator"))
+                .isNotNull()
+                .extracting(BuildTask::getOutcome)
+                .isEqualTo(TaskOutcome.SUCCESS);
+        assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
+            Path generatedSources = projectDir.resolve(Path.of("build", "calculator-wsdl2java-generated-sources"));
+            assertThat(generatedSources).exists().isNotEmptyDirectory();
 
-			Path packageDir = generatedSources.resolve(Path.of("org", "tempuri"));
-			assertThat(packageDir).exists().isNotEmptyDirectory();
+            Path packageDir = generatedSources.resolve(Path.of("org", "tempuri"));
+            assertThat(packageDir).exists().isNotEmptyDirectory();
 
-			List<Path> sourcesDir;
-			try (var files = Files.list(packageDir)) {
-				sourcesDir = files.toList();
-			}
-			assertThat(sourcesDir).isNotEmpty().hasSize(12);
+            List<Path> sourcesDir;
+            try (var files = Files.list(packageDir)) {
+                sourcesDir = files.toList();
+            }
+            assertThat(sourcesDir).isNotEmpty().hasSize(12);
 
-			List<String> generatedFiles = sourcesDir.stream()
-				.map(Path::getFileName)
-				.map(Path::toString)
-				.sorted()
-				.collect(Collectors.toList());
-			List<String> expectedFiles = List.of("Add.java", "AddResponse.java", "Calculator.java",
-					"CalculatorSoap.java", "Divide.java", "DivideResponse.java", "Multiply.java",
-					"MultiplyResponse.java", "ObjectFactory.java", "Subtract.java", "SubtractResponse.java",
-					"package-info.java");
+            List<String> generatedFiles = sourcesDir.stream()
+                    .map(Path::getFileName)
+                    .map(Path::toString)
+                    .sorted()
+                    .collect(Collectors.toList());
+            List<String> expectedFiles = List.of(
+                    "Add.java",
+                    "AddResponse.java",
+                    "Calculator.java",
+                    "CalculatorSoap.java",
+                    "Divide.java",
+                    "DivideResponse.java",
+                    "Multiply.java",
+                    "MultiplyResponse.java",
+                    "ObjectFactory.java",
+                    "Subtract.java",
+                    "SubtractResponse.java",
+                    "package-info.java");
 
-			assertThat(generatedFiles).containsExactlyInAnyOrderElementsOf(expectedFiles);
-		});
-	}
+            assertThat(generatedFiles).containsExactlyInAnyOrderElementsOf(expectedFiles);
+        });
+    }
 
-	@TestTemplate
-	void generatedJavaIsNotAddedToMainWhenConfiguredFalse(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.build("verify");
+    @TestTemplate
+    void generatedJavaIsNotAddedToMainWhenConfiguredFalse(GradleBuild gradleBuild) {
+        BuildResult result = gradleBuild.build("verify");
 
-		assertThat(result.getOutput()).contains("Source directories size match: true");
-	}
+        assertThat(result.getOutput()).contains("Source directories size match: true");
+    }
 
-	@TestTemplate
-	void jsSourceGenerationFromWsdl(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.build("calculator");
+    @TestTemplate
+    void jsSourceGenerationFromWsdl(GradleBuild gradleBuild) {
+        BuildResult result = gradleBuild.build("calculator");
 
-		assertThat(result.task(":calculator")).isNotNull()
-			.extracting(BuildTask::getOutcome)
-			.isEqualTo(TaskOutcome.SUCCESS);
-		assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
-			var generatedSources = projectDir.resolve(Path.of("build", "calculator-wsdl2js-generated-sources"));
-			assertThat(generatedSources).exists().isNotEmptyDirectory();
+        assertThat(result.task(":calculator"))
+                .isNotNull()
+                .extracting(BuildTask::getOutcome)
+                .isEqualTo(TaskOutcome.SUCCESS);
+        assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
+            var generatedSources = projectDir.resolve(Path.of("build", "calculator-wsdl2js-generated-sources"));
+            assertThat(generatedSources).exists().isNotEmptyDirectory();
 
-			try (var files = Files.list(generatedSources)) {
-				var generatedFiles = files.map(Path::getFileName).map(Path::toString).collect(Collectors.toList());
-				var expectedFiles = List.of("Calculator.js");
+            try (var files = Files.list(generatedSources)) {
+                var generatedFiles =
+                        files.map(Path::getFileName).map(Path::toString).collect(Collectors.toList());
+                var expectedFiles = List.of("Calculator.js");
 
-				assertThat(generatedFiles).containsExactlyInAnyOrderElementsOf(expectedFiles);
-			}
-
-		});
-	}
-
+                assertThat(generatedFiles).containsExactlyInAnyOrderElementsOf(expectedFiles);
+            }
+        });
+    }
 }

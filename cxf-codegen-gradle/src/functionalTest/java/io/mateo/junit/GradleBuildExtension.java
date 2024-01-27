@@ -17,7 +17,6 @@ package io.mateo.junit;
 
 import java.net.URL;
 import java.nio.file.Path;
-
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.Extension;
@@ -33,42 +32,43 @@ import org.junit.jupiter.api.extension.ParameterResolver;
  */
 public class GradleBuildExtension implements BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
-	private final GradleBuild gradleBuild;
+    private final GradleBuild gradleBuild;
 
-	public GradleBuildExtension(GradleBuild gradleBuild) {
-		this.gradleBuild = gradleBuild;
-	}
+    public GradleBuildExtension(GradleBuild gradleBuild) {
+        this.gradleBuild = gradleBuild;
+    }
 
-	@Override
-	public void beforeEach(ExtensionContext context) throws Exception {
-		URL buildScript = getBuildScript(context);
-		if (buildScript != null) {
-			this.gradleBuild.script(Path.of(buildScript.toURI()));
-		}
-		this.gradleBuild.before();
-	}
+    @Override
+    public void beforeEach(ExtensionContext context) throws Exception {
+        URL buildScript = getBuildScript(context);
+        if (buildScript != null) {
+            this.gradleBuild.script(Path.of(buildScript.toURI()));
+        }
+        this.gradleBuild.before();
+    }
 
-	@Override
-	public void afterEach(ExtensionContext context) throws Exception {
-		this.gradleBuild.after();
-	}
+    @Override
+    public void afterEach(ExtensionContext context) throws Exception {
+        this.gradleBuild.after();
+    }
 
-	@Override
-	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
-			throws ParameterResolutionException {
-		return parameterContext.getParameter().getType() == GradleBuild.class;
-	}
+    @Override
+    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
+            throws ParameterResolutionException {
+        return parameterContext.getParameter().getType() == GradleBuild.class;
+    }
 
-	@Override
-	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
-			throws ParameterResolutionException {
-		return this.gradleBuild;
-	}
+    @Override
+    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
+            throws ParameterResolutionException {
+        return this.gradleBuild;
+    }
 
-	private URL getBuildScript(ExtensionContext context) {
-		String name = String.format("%s%s", context.getRequiredTestMethod().getName(),
-				this.gradleBuild.getDsl().getExtension());
-		return context.getRequiredTestClass().getResource(name);
-	}
-
+    private URL getBuildScript(ExtensionContext context) {
+        String name = String.format(
+                "%s%s",
+                context.getRequiredTestMethod().getName(),
+                this.gradleBuild.getDsl().getExtension());
+        return context.getRequiredTestClass().getResource(name);
+    }
 }

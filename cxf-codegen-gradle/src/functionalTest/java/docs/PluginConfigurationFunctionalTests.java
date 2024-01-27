@@ -17,51 +17,52 @@ package docs;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.nio.file.Path;
-
 import io.mateo.cxf.codegen.internal.GeneratedVersionAccessor;
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibilityExtension;
-
+import java.nio.file.Path;
 import org.gradle.testkit.runner.BuildResult;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 class PluginConfigurationFunctionalTests {
 
-	@RegisterExtension
-	static GradleCompatibilityExtension extension = new GradleCompatibilityExtension("current");
+    @RegisterExtension
+    static GradleCompatibilityExtension extension = new GradleCompatibilityExtension("current");
 
-	@TestTemplate
-	void managingDependencyVersions(GradleBuild gradleBuild) {
-		BuildResult result = gradleBuild.script(scriptFor("managing-dependency-versions")).build();
+    @TestTemplate
+    void managingDependencyVersions(GradleBuild gradleBuild) {
+        BuildResult result =
+                gradleBuild.script(scriptFor("managing-dependency-versions")).build();
 
-		// Do not test Gradle's functionality of dependency resolution.
-		// Just tests that we are able to do it.
-		assertThat(result.getOutput()).contains("BUILD SUCCESSFUL");
-	}
+        // Do not test Gradle's functionality of dependency resolution.
+        // Just tests that we are able to do it.
+        assertThat(result.getOutput()).contains("BUILD SUCCESSFUL");
+    }
 
-	@TestTemplate
-	void extension(GradleBuild gradleBuild) {
-		var result = gradleBuild.script(scriptFor("extension")).build("verify");
+    @TestTemplate
+    void extension(GradleBuild gradleBuild) {
+        var result = gradleBuild.script(scriptFor("extension")).build("verify");
 
-		assertThat(result.getOutput()).contains("Configured CXF version = " + GeneratedVersionAccessor.CXF_VERSION);
-	}
+        assertThat(result.getOutput()).contains("Configured CXF version = " + GeneratedVersionAccessor.CXF_VERSION);
+    }
 
-	@TestTemplate
-	void managingDependencyVersionsWithExtension(GradleBuild gradleBuild) {
-		var result = gradleBuild.script(scriptFor("managing-dependency-versions-extension")).build("verify");
+    @TestTemplate
+    void managingDependencyVersionsWithExtension(GradleBuild gradleBuild) {
+        var result = gradleBuild
+                .script(scriptFor("managing-dependency-versions-extension"))
+                .build("verify");
 
-		assertThat(result.getOutput())
-			.doesNotContain("Configured CXF version = " + GeneratedVersionAccessor.CXF_VERSION);
-		assertThat(result.getOutput()).contains("Configured CXF version = 3.2.0");
-		assertThat(result.getOutput()).contains(
-				"[org.slf4j:slf4j-nop:2.0.9, org.apache.cxf:cxf-core:3.2.0, org.apache.cxf:cxf-tools-common:3.2.0, org.apache.cxf:cxf-tools-wsdlto-core:3.2.0, org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:3.2.0]");
-	}
+        assertThat(result.getOutput())
+                .doesNotContain("Configured CXF version = " + GeneratedVersionAccessor.CXF_VERSION);
+        assertThat(result.getOutput()).contains("Configured CXF version = 3.2.0");
+        assertThat(result.getOutput())
+                .contains(
+                        "[org.slf4j:slf4j-nop:2.0.9, org.apache.cxf:cxf-core:3.2.0, org.apache.cxf:cxf-tools-common:3.2.0, org.apache.cxf:cxf-tools-wsdlto-core:3.2.0, org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:3.2.0]");
+    }
 
-	Path scriptFor(String name) {
-		final Path rootDir = Path.of("").toAbsolutePath().getParent();
-		return rootDir.resolve(Path.of("documentation", "src", "docs", "gradle", "plugin-configuration", name));
-	}
-
+    Path scriptFor(String name) {
+        final Path rootDir = Path.of("").toAbsolutePath().getParent();
+        return rootDir.resolve(Path.of("documentation", "src", "docs", "gradle", "plugin-configuration", name));
+    }
 }

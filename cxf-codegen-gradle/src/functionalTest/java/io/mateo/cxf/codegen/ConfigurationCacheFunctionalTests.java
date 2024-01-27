@@ -19,7 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibility;
-
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
 import org.junit.jupiter.api.TestTemplate;
@@ -27,17 +26,17 @@ import org.junit.jupiter.api.TestTemplate;
 @GradleCompatibility
 class ConfigurationCacheFunctionalTests {
 
-	@TestTemplate
-	void configurationCacheCompatibility(GradleBuild gradleBuild) {
-		GradleRunner runner = gradleBuild.useConfigurationCache().prepareRunner("--configuration-cache", "calculator");
+    @TestTemplate
+    void configurationCacheCompatibility(GradleBuild gradleBuild) {
+        GradleRunner runner = gradleBuild.useConfigurationCache().prepareRunner("--configuration-cache", "calculator");
 
-		BuildResult initialResult = runner.build();
-		BuildResult finalResult = runner.build();
+        BuildResult initialResult = runner.build();
+        BuildResult finalResult = runner.build();
 
-		assertThat(initialResult.getOutput()).satisfiesAnyOf(
-				output -> assertThat(output).contains("no configuration cache is available"),
-				output -> assertThat(output).contains("no cached configuration is available"));
-		assertThat(finalResult.getOutput()).contains("Reusing configuration cache.");
-	}
-
+        assertThat(initialResult.getOutput())
+                .satisfiesAnyOf(
+                        output -> assertThat(output).contains("no configuration cache is available"),
+                        output -> assertThat(output).contains("no cached configuration is available"));
+        assertThat(finalResult.getOutput()).contains("Reusing configuration cache.");
+    }
 }

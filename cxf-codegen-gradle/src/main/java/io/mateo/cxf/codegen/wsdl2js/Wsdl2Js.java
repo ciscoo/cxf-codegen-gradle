@@ -15,6 +15,8 @@
  */
 package io.mateo.cxf.codegen.wsdl2js;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.gradle.api.Action;
 import org.gradle.api.GradleException;
 import org.gradle.api.tasks.CacheableTask;
@@ -22,74 +24,71 @@ import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.Nested;
 import org.gradle.process.CommandLineArgumentProvider;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Generates JavaScript sources from WSDLs.
  */
 @CacheableTask
 public abstract class Wsdl2Js extends JavaExec {
 
-	public Wsdl2Js() {
-		getArgumentProviders().add(new Wsdl2Js.Wsdl2JsArgumentProvider());
-	}
+    public Wsdl2Js() {
+        getArgumentProviders().add(new Wsdl2Js.Wsdl2JsArgumentProvider());
+    }
 
-	/**
-	 * Options to configure the {@code wsdl2js} tool.
-	 * @return tool options
-	 */
-	@Nested
-	public abstract Wsdl2JsOptions getWsdl2JsOptions();
+    /**
+     * Options to configure the {@code wsdl2js} tool.
+     * @return tool options
+     */
+    @Nested
+    public abstract Wsdl2JsOptions getWsdl2JsOptions();
 
-	/**
-	 * Configures the {@code wsdl2js} tool options.
-	 * @param configurer action or closure to configure tool options
-	 */
-	public void toolOptions(Action<? super Wsdl2JsOptions> configurer) {
-		configurer.execute(this.getWsdl2JsOptions());
-	}
+    /**
+     * Configures the {@code wsdl2js} tool options.
+     * @param configurer action or closure to configure tool options
+     */
+    public void toolOptions(Action<? super Wsdl2JsOptions> configurer) {
+        configurer.execute(this.getWsdl2JsOptions());
+    }
 
-	private class Wsdl2JsArgumentProvider implements CommandLineArgumentProvider {
+    private class Wsdl2JsArgumentProvider implements CommandLineArgumentProvider {
 
-		@Override
-		public Iterable<String> asArguments() {
-			List<String> arguments = new ArrayList<>();
-			Wsdl2JsOptions options = Wsdl2Js.this.getWsdl2JsOptions();
-			if (options.getWsdlVersion().isPresent()) {
-				arguments.add("-wv");
-				arguments.add(options.getWsdlVersion().get());
-			}
-			if (options.getPackagePrefixes().isPresent()) {
-				for (Wsdl2JsOptions.UriPrefixPair uriPrefixPair : options.getPackagePrefixes().get()) {
-					arguments.add("-p");
-					arguments.add(String.format("%s=%s", uriPrefixPair.getPrefix(), uriPrefixPair.getUri()));
-				}
-			}
-			if (options.getCatalog().isPresent()) {
-				arguments.add("-catalog");
-				arguments
-					.add(options.getCatalog().map(it -> it.getAsFile().toPath().toAbsolutePath().toString()).get());
-			}
-			arguments.add("-d");
-			arguments.add(options.getOutputDir().get().getAsFile().getAbsolutePath());
-			if (options.getValidate().isPresent()) {
-				arguments.add("-validate=" + options.getValidate().get());
-			}
-			if (options.getVerbose().isPresent() && options.getQuiet().isPresent()) {
-				throw new GradleException(
-						"Verbose and quite are mutually exclusive; only one can be enabled, not both.");
-			}
-			if (options.getVerbose().isPresent() && options.getVerbose().get()) {
-				arguments.add("-verbose");
-			}
-			if (options.getQuiet().isPresent() && options.getQuiet().get()) {
-				arguments.add("-quiet");
-			}
-			arguments.add(options.getWsdl().get());
-			return arguments;
-		}
-
-	}
-
+        @Override
+        public Iterable<String> asArguments() {
+            List<String> arguments = new ArrayList<>();
+            Wsdl2JsOptions options = Wsdl2Js.this.getWsdl2JsOptions();
+            if (options.getWsdlVersion().isPresent()) {
+                arguments.add("-wv");
+                arguments.add(options.getWsdlVersion().get());
+            }
+            if (options.getPackagePrefixes().isPresent()) {
+                for (Wsdl2JsOptions.UriPrefixPair uriPrefixPair :
+                        options.getPackagePrefixes().get()) {
+                    arguments.add("-p");
+                    arguments.add(String.format("%s=%s", uriPrefixPair.getPrefix(), uriPrefixPair.getUri()));
+                }
+            }
+            if (options.getCatalog().isPresent()) {
+                arguments.add("-catalog");
+                arguments.add(options.getCatalog()
+                        .map(it -> it.getAsFile().toPath().toAbsolutePath().toString())
+                        .get());
+            }
+            arguments.add("-d");
+            arguments.add(options.getOutputDir().get().getAsFile().getAbsolutePath());
+            if (options.getValidate().isPresent()) {
+                arguments.add("-validate=" + options.getValidate().get());
+            }
+            if (options.getVerbose().isPresent() && options.getQuiet().isPresent()) {
+                throw new GradleException(
+                        "Verbose and quite are mutually exclusive; only one can be enabled, not both.");
+            }
+            if (options.getVerbose().isPresent() && options.getVerbose().get()) {
+                arguments.add("-verbose");
+            }
+            if (options.getQuiet().isPresent() && options.getQuiet().get()) {
+                arguments.add("-quiet");
+            }
+            arguments.add(options.getWsdl().get());
+            return arguments;
+        }
+    }
 }

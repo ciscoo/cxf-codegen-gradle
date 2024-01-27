@@ -15,58 +15,57 @@
  */
 package docs;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibilityExtension;
+import java.nio.file.Path;
 import org.gradle.testkit.runner.BuildTask;
 import org.gradle.testkit.runner.TaskOutcome;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import java.nio.file.Path;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 class ExamplesFunctionalTests {
 
-	@RegisterExtension
-	static GradleCompatibilityExtension extension = new GradleCompatibilityExtension("current");
+    @RegisterExtension
+    static GradleCompatibilityExtension extension = new GradleCompatibilityExtension("current");
 
-	@TestTemplate
-	void jaxwsBindingFile(GradleBuild gradleBuild) {
-		doTestForScript("jaxws-binding-file", gradleBuild);
-	}
+    @TestTemplate
+    void jaxwsBindingFile(GradleBuild gradleBuild) {
+        doTestForScript("jaxws-binding-file", gradleBuild);
+    }
 
-	@TestTemplate
-	void specifyDataBinding(GradleBuild gradleBuild) {
-		doTestForScript("specify-data-binding", gradleBuild);
-	}
+    @TestTemplate
+    void specifyDataBinding(GradleBuild gradleBuild) {
+        doTestForScript("specify-data-binding", gradleBuild);
+    }
 
-	@TestTemplate
-	void serviceName(GradleBuild gradleBuild) {
-		doTestForScript("service-name", gradleBuild);
-	}
+    @TestTemplate
+    void serviceName(GradleBuild gradleBuild) {
+        doTestForScript("service-name", gradleBuild);
+    }
 
-	@TestTemplate
-	void loadFromArtifact(GradleBuild gradleBuild) {
-		doTestForScript("loading-wsdl", gradleBuild);
-	}
+    @TestTemplate
+    void loadFromArtifact(GradleBuild gradleBuild) {
+        doTestForScript("loading-wsdl", gradleBuild);
+    }
 
-	@TestTemplate
-	void usingXjcExtensions(GradleBuild gradleBuild) {
-		doTestForScript("using-xjc-extensions", gradleBuild);
-	}
+    @TestTemplate
+    void usingXjcExtensions(GradleBuild gradleBuild) {
+        doTestForScript("using-xjc-extensions", gradleBuild);
+    }
 
-	private void doTestForScript(String name, GradleBuild gradleBuild) {
-		final var rootDir = Path.of("").toAbsolutePath().getParent();
-		final var scriptPath = rootDir.resolve(Path.of("documentation", "src", "docs", "gradle", "examples", name));
+    private void doTestForScript(String name, GradleBuild gradleBuild) {
+        final var rootDir = Path.of("").toAbsolutePath().getParent();
+        final var scriptPath = rootDir.resolve(Path.of("documentation", "src", "docs", "gradle", "examples", name));
 
-		var runner = gradleBuild.script(scriptPath).prepareRunner("wsdl2java");
+        var runner = gradleBuild.script(scriptPath).prepareRunner("wsdl2java");
 
-		var result = runner.build();
+        var result = runner.build();
 
-		assertThat(result.task(":wsdl2java")).isNotNull()
-			.extracting(BuildTask::getOutcome)
-			.isEqualTo(TaskOutcome.SUCCESS);
-	}
-
+        assertThat(result.task(":wsdl2java"))
+                .isNotNull()
+                .extracting(BuildTask::getOutcome)
+                .isEqualTo(TaskOutcome.SUCCESS);
+    }
 }

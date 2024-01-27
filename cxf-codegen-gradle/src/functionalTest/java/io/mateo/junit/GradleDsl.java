@@ -21,26 +21,24 @@ package io.mateo.junit;
  * Based on the Spring Boot implementation by Andy Wilkinson.
  */
 public enum GradleDsl {
+    GROOVY("Groovy DSL", ".gradle"),
 
-	GROOVY("Groovy DSL", ".gradle"),
+    KOTLIN("Kotlin DSL", ".gradle.kts");
 
-	KOTLIN("Kotlin DSL", ".gradle.kts");
+    private final String name;
 
-	private final String name;
+    private final String extension;
 
-	private final String extension;
+    GradleDsl(String name, String extension) {
+        this.name = name;
+        this.extension = extension;
+    }
 
-	GradleDsl(String name, String extension) {
-		this.name = name;
-		this.extension = extension;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public String getName() {
-		return this.name;
-	}
-
-	String getExtension() {
-		return this.extension;
-	}
-
+    String getExtension() {
+        return this.extension;
+    }
 }

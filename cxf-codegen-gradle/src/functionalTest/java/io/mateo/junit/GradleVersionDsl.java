@@ -20,21 +20,20 @@ package io.mateo.junit;
  */
 public class GradleVersionDsl {
 
-	private final String version;
+    private final String version;
 
-	private final GradleDsl dsl;
+    private final GradleDsl dsl;
 
-	public GradleVersionDsl(String gradleVersion, GradleDsl gradleDsl) {
-		this.version = gradleVersion;
-		this.dsl = gradleDsl;
-	}
+    public GradleVersionDsl(String gradleVersion, GradleDsl gradleDsl) {
+        this.version = gradleVersion;
+        this.dsl = gradleDsl;
+    }
 
-	public String getVersion() {
-		return this.version;
-	}
+    public String getVersion() {
+        return this.version;
+    }
 
-	public GradleDsl getDsl() {
-		return this.dsl;
-	}
-
+    public GradleDsl getDsl() {
+        return this.dsl;
+    }
 }

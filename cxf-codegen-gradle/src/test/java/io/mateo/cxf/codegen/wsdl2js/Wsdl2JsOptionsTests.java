@@ -15,7 +15,13 @@
  */
 package io.mateo.cxf.codegen.wsdl2js;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
+
 import io.mateo.cxf.codegen.junit.TaskNameGenerator;
+import java.nio.file.Path;
+import java.util.List;
 import org.gradle.api.Action;
 import org.gradle.api.GradleException;
 import org.gradle.api.Project;
@@ -29,161 +35,186 @@ import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.io.TempDir;
 
-import java.nio.file.Path;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.assertThatNullPointerException;
-
 @DisplayNameGeneration(TaskNameGenerator.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class Wsdl2JsOptionsTests {
 
-	private Project project;
+    private Project project;
 
-	private Path outputDir;
+    private Path outputDir;
 
-	private Path wsdl;
+    private Path wsdl;
 
-	@BeforeAll
-	void beforeAll(@TempDir Path projectDir, @TempDir Path wsdl) {
-		this.project = ProjectBuilder.builder().withProjectDir(projectDir.toFile()).build();
-		this.outputDir = this.project.getLayout().getBuildDirectory().map(it -> it.getAsFile().toPath()).get();
-		this.wsdl = wsdl;
-	}
+    @BeforeAll
+    void beforeAll(@TempDir Path projectDir, @TempDir Path wsdl) {
+        this.project =
+                ProjectBuilder.builder().withProjectDir(projectDir.toFile()).build();
+        this.outputDir = this.project
+                .getLayout()
+                .getBuildDirectory()
+                .map(it -> it.getAsFile().toPath())
+                .get();
+        this.wsdl = wsdl;
+    }
 
-	@AfterEach
-	void tearDown(TestInfo testInfo) {
-		var task = this.project.getTasks().findByName(testInfo.getDisplayName());
-		if (task != null) {
-			task.setEnabled(false);
-		}
-	}
+    @AfterEach
+    void tearDown(TestInfo testInfo) {
+        var task = this.project.getTasks().findByName(testInfo.getDisplayName());
+        if (task != null) {
+            task.setEnabled(false);
+        }
+    }
 
-	@Test
-	void quiet(TestInfo testInfo) {
-		var expected = List.of("-d", this.outputDir.toString(), "-quiet", this.wsdl.toString());
+    @Test
+    void quiet(TestInfo testInfo) {
+        var expected = List.of("-d", this.outputDir.toString(), "-quiet", this.wsdl.toString());
 
-		var actual = createTask(testInfo.getDisplayName(), options -> options.getQuiet().set(true))
-			.getArgumentProviders()
-			.get(0)
-			.asArguments();
+        var actual = createTask(
+                        testInfo.getDisplayName(), options -> options.getQuiet().set(true))
+                .getArgumentProviders()
+                .get(0)
+                .asArguments();
 
-		assertThat(actual).containsExactlyElementsOf(expected);
-	}
+        assertThat(actual).containsExactlyElementsOf(expected);
+    }
 
-	@Test
-	void verbose(TestInfo testInfo) {
-		var expected = List.of("-d", this.outputDir.toString(), "-verbose", this.wsdl.toString());
+    @Test
+    void verbose(TestInfo testInfo) {
+        var expected = List.of("-d", this.outputDir.toString(), "-verbose", this.wsdl.toString());
 
-		var actual = createTask(testInfo.getDisplayName(), options -> options.getVerbose().set(true))
-			.getArgumentProviders()
-			.get(0)
-			.asArguments();
+        var actual = createTask(testInfo.getDisplayName(), options -> options.getVerbose()
+                        .set(true))
+                .getArgumentProviders()
+                .get(0)
+                .asArguments();
 
-		assertThat(actual).containsExactlyElementsOf(expected);
-	}
+        assertThat(actual).containsExactlyElementsOf(expected);
+    }
 
-	@Test
-	void verboseAndQuietEnabledResultsInException(TestInfo testInfo) {
-		var argumentProviders = createTask(testInfo.getDisplayName(), options -> {
-			options.getQuiet().set(true);
-			options.getVerbose().set(true);
-		}).getArgumentProviders().get(0);
+    @Test
+    void verboseAndQuietEnabledResultsInException(TestInfo testInfo) {
+        var argumentProviders = createTask(testInfo.getDisplayName(), options -> {
+                    options.getQuiet().set(true);
+                    options.getVerbose().set(true);
+                })
+                .getArgumentProviders()
+                .get(0);
 
-		assertThatExceptionOfType(GradleException.class).isThrownBy(argumentProviders::asArguments)
-			.withMessage("Verbose and quite are mutually exclusive; only one can be enabled, not both.");
-	}
+        assertThatExceptionOfType(GradleException.class)
+                .isThrownBy(argumentProviders::asArguments)
+                .withMessage("Verbose and quite are mutually exclusive; only one can be enabled, not both.");
+    }
 
-	@Test
-	void validate(TestInfo testInfo) {
-		var expected = List.of("-d", this.outputDir.toString(), "-validate=true", this.wsdl.toString());
+    @Test
+    void validate(TestInfo testInfo) {
+        var expected = List.of("-d", this.outputDir.toString(), "-validate=true", this.wsdl.toString());
 
-		var actual = createTask(testInfo.getDisplayName(), options -> options.getValidate().set("true"))
-			.getArgumentProviders()
-			.get(0)
-			.asArguments();
+        var actual = createTask(testInfo.getDisplayName(), options -> options.getValidate()
+                        .set("true"))
+                .getArgumentProviders()
+                .get(0)
+                .asArguments();
 
-		assertThat(actual).containsExactlyElementsOf(expected);
-	}
+        assertThat(actual).containsExactlyElementsOf(expected);
+    }
 
-	@Test
-	void catalog(TestInfo testInfo) {
-		var catalog = this.outputDir.resolve("example.xml");
-		var expected = List.of("-catalog", catalog.toAbsolutePath().toString(), "-d", this.outputDir.toString(),
-				this.wsdl.toString());
+    @Test
+    void catalog(TestInfo testInfo) {
+        var catalog = this.outputDir.resolve("example.xml");
+        var expected = List.of(
+                "-catalog", catalog.toAbsolutePath().toString(), "-d", this.outputDir.toString(), this.wsdl.toString());
 
-		var actual = createTask(testInfo.getDisplayName(), options -> options.getCatalog().set(catalog.toFile()))
-			.getArgumentProviders()
-			.get(0)
-			.asArguments();
+        var actual = createTask(testInfo.getDisplayName(), options -> options.getCatalog()
+                        .set(catalog.toFile()))
+                .getArgumentProviders()
+                .get(0)
+                .asArguments();
 
-		assertThat(actual).containsExactlyElementsOf(expected);
-	}
+        assertThat(actual).containsExactlyElementsOf(expected);
+    }
 
-	@Test
-	void packagePrefixes(TestInfo testInfo) {
-		var expected = List.of("-p", "foo=http://www.example.com/Example/V1/ExampleService", "-p",
-				"bar=http://www.example.com/Example/V1/ExampleService", "-d", this.outputDir.toString(),
-				this.wsdl.toString());
+    @Test
+    void packagePrefixes(TestInfo testInfo) {
+        var expected = List.of(
+                "-p",
+                "foo=http://www.example.com/Example/V1/ExampleService",
+                "-p",
+                "bar=http://www.example.com/Example/V1/ExampleService",
+                "-d",
+                this.outputDir.toString(),
+                this.wsdl.toString());
 
-		var actual = createTask(testInfo.getDisplayName(), options -> options.getPackagePrefixes()
-			.set(List.of(new Wsdl2JsOptions.UriPrefixPair("http://www.example.com/Example/V1/ExampleService", "foo"),
-					new Wsdl2JsOptions.UriPrefixPair("http://www.example.com/Example/V1/ExampleService", "bar"))))
-			.getArgumentProviders()
-			.get(0)
-			.asArguments();
+        var actual = createTask(testInfo.getDisplayName(), options -> options.getPackagePrefixes()
+                        .set(List.of(
+                                new Wsdl2JsOptions.UriPrefixPair(
+                                        "http://www.example.com/Example/V1/ExampleService", "foo"),
+                                new Wsdl2JsOptions.UriPrefixPair(
+                                        "http://www.example.com/Example/V1/ExampleService", "bar"))))
+                .getArgumentProviders()
+                .get(0)
+                .asArguments();
 
-		assertThat(actual).containsExactlyElementsOf(expected);
-	}
+        assertThat(actual).containsExactlyElementsOf(expected);
+    }
 
-	@Test
-	void wsdlVersion(TestInfo testInfo) {
-		var expected = List.of("-wv", "1.1", "-d", this.outputDir.toString(), this.wsdl.toString());
+    @Test
+    void wsdlVersion(TestInfo testInfo) {
+        var expected = List.of("-wv", "1.1", "-d", this.outputDir.toString(), this.wsdl.toString());
 
-		var actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlVersion().set("1.1"))
-			.getArgumentProviders()
-			.get(0)
-			.asArguments();
+        var actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlVersion()
+                        .set("1.1"))
+                .getArgumentProviders()
+                .get(0)
+                .asArguments();
 
-		assertThat(actual).containsExactlyElementsOf(expected);
-	}
+        assertThat(actual).containsExactlyElementsOf(expected);
+    }
 
-	@Test
-	void wsdlOnly(TestInfo testInfo) {
-		var expected = List.of("-d", this.outputDir.toString(), this.wsdl.toString());
+    @Test
+    void wsdlOnly(TestInfo testInfo) {
+        var expected = List.of("-d", this.outputDir.toString(), this.wsdl.toString());
 
-		var actual = createTask(testInfo.getDisplayName()).getArgumentProviders().get(0).asArguments();
+        var actual = createTask(testInfo.getDisplayName())
+                .getArgumentProviders()
+                .get(0)
+                .asArguments();
 
-		assertThat(actual).containsExactlyElementsOf(expected);
-	}
+        assertThat(actual).containsExactlyElementsOf(expected);
+    }
 
-	private Wsdl2Js createTask(String taskName, Action<? super Wsdl2JsOptions> configurer) {
-		return this.project.getTasks().create(taskName, Wsdl2Js.class, wsdl2java -> wsdl2java.toolOptions(options -> {
-			options.getOutputDir().set(this.outputDir.toFile());
-			options.getWsdl().set(this.wsdl.toString());
-			configurer.execute(options);
-		}));
-	}
+    private Wsdl2Js createTask(String taskName, Action<? super Wsdl2JsOptions> configurer) {
+        return this.project
+                .getTasks()
+                .create(
+                        taskName,
+                        Wsdl2Js.class,
+                        wsdl2java -> wsdl2java.toolOptions(options -> {
+                            options.getOutputDir().set(this.outputDir.toFile());
+                            options.getWsdl().set(this.wsdl.toString());
+                            configurer.execute(options);
+                        }));
+    }
 
-	private Wsdl2Js createTask(String taskName) {
-		return this.project.getTasks().create(taskName, Wsdl2Js.class, wsdl2java -> wsdl2java.toolOptions(options -> {
-			options.getOutputDir().set(this.outputDir.toFile());
-			options.getWsdl().set(this.wsdl.toString());
-		}));
-	}
+    private Wsdl2Js createTask(String taskName) {
+        return this.project
+                .getTasks()
+                .create(
+                        taskName,
+                        Wsdl2Js.class,
+                        wsdl2java -> wsdl2java.toolOptions(options -> {
+                            options.getOutputDir().set(this.outputDir.toFile());
+                            options.getWsdl().set(this.wsdl.toString());
+                        }));
+    }
 
-	@Nested
-	class UriPrefixPairTests {
+    @Nested
+    class UriPrefixPairTests {
 
-		@Test
-		void nullChecks() {
-			var uriPrefixPair = new Wsdl2JsOptions.UriPrefixPair();
-			assertThatNullPointerException().isThrownBy(() -> uriPrefixPair.setPrefix(null));
-			assertThatNullPointerException().isThrownBy(() -> uriPrefixPair.setUri(null));
-		}
-
-	}
-
+        @Test
+        void nullChecks() {
+            var uriPrefixPair = new Wsdl2JsOptions.UriPrefixPair();
+            assertThatNullPointerException().isThrownBy(() -> uriPrefixPair.setPrefix(null));
+            assertThatNullPointerException().isThrownBy(() -> uriPrefixPair.setUri(null));
+        }
+    }
 }
