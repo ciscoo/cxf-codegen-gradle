@@ -5,7 +5,7 @@ pluginManagement {
     }
     plugins {
         id("com.gradle.plugin-publish") version "1.1.0"
-        id("org.asciidoctor.jvm.convert") version "3.3.2"
+        id("org.asciidoctor.jvm.convert") version "4.0.2"
         id("org.ajoberstar.git-publish") version "4.2.1"
     }
 }
