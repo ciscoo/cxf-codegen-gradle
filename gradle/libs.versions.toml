@@ -8,7 +8,6 @@ junitBom = { module = "org.junit:junit-bom", version.ref = "junit" }
 junitJupiter = { module = "org.junit.jupiter:junit-jupiter" }
 assertj = { module = "org.assertj:assertj-core", version = "3.24.2" }
 javapoet = { module = "com.squareup:javapoet", version = "1.13.0" }
-gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version = "6.22.0" }
-gradle-springJavaFormat = { module = "io.spring.javaformat:spring-javaformat-gradle-plugin", version = "0.0.40" }
+gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version = "6.25.0" }
 gradle-nexusPublish = { module = "io.github.gradle-nexus:publish-plugin", version = "2.0.0-rc-1" }
 slf4jNop = { module = "org.slf4j:slf4j-nop", version.ref = "slf4j" } # Unused; exists to allow automatic updates.
