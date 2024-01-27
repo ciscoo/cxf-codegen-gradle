@@ -12,5 +12,6 @@ repositories {
 tasks.register("calculator", Wsdl2Java) {
     toolOptions {
         wsdl.set(file("wsdls/calculator.wsdl").toPath().toAbsolutePath().toString())
+        bindingFiles.add(file("async-binding.xml").toPath().toAbsolutePath().toString())
     }
 }

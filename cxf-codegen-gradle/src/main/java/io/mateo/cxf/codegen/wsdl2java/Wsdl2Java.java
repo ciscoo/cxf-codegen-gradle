@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.gradle.api.Action;
+import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.CacheableTask;
@@ -28,14 +29,17 @@ import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.Nested;
 import org.gradle.process.CommandLineArgumentProvider;
 
+import javax.inject.Inject;
+
 /**
  * Generates Java sources from WSDLs.
  */
 @CacheableTask
 public abstract class Wsdl2Java extends JavaExec {
 
-	public Wsdl2Java() {
-		getArgumentProviders().add(new Wsdl2JavaArgumentProvider());
+	@Inject
+	public Wsdl2Java(ProjectLayout layout) {
+		getArgumentProviders().add(new Wsdl2JavaArgumentProvider(this, layout));
 	}
 
 	/**
@@ -61,14 +65,23 @@ public abstract class Wsdl2Java extends JavaExec {
 		configurer.execute(this.getWsdl2JavaOptions());
 	}
 
-	private class Wsdl2JavaArgumentProvider implements CommandLineArgumentProvider {
+	private static class Wsdl2JavaArgumentProvider implements CommandLineArgumentProvider {
+
+		private final Wsdl2Java task;
+
+		private final ProjectLayout layout;
+
+		public Wsdl2JavaArgumentProvider(Wsdl2Java task, ProjectLayout layout) {
+			this.task = task;
+			this.layout = layout;
+		}
 
 		@Override
 		public Iterable<String> asArguments() {
-			Wsdl2JavaOptions options = Wsdl2Java.this.getWsdl2JavaOptions();
+			Wsdl2JavaOptions options = this.task.getWsdl2JavaOptions();
 			// Don't rely on just onlyIf spec.
 			if (!options.getWsdl().isPresent()) {
-				throw new IllegalStateException("Cannot generate arguments for task '" + Wsdl2Java.this.getName()
+				throw new IllegalStateException("Cannot generate arguments for task '" + this.task.getName()
 						+ "' because 'wsdl' has no value.");
 			}
 			List<String> arguments = new ArrayList<>();
@@ -93,10 +106,7 @@ public abstract class Wsdl2Java extends JavaExec {
 			arguments.add(outputDir);
 			if (options.getBindingFiles().isPresent()) {
 				options.getBindingFiles().get().forEach(binding -> {
-					RegularFile bindingFile = Wsdl2Java.this.getProject()
-						.getLayout()
-						.getProjectDirectory()
-						.file(binding);
+					RegularFile bindingFile = this.layout.getProjectDirectory().file(binding);
 					arguments.add("-b");
 					arguments.add(bindingFile.getAsFile().toPath().toAbsolutePath().toString());
 				});
