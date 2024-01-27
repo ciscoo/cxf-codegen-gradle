@@ -40,6 +40,7 @@ c0d2577c8e578299c3b37f33dad0a060  documentation/src/docs/asciidoc/authors.adoc
 c8c36f078c68e93e2736e78b7f99cb50  documentation/src/docs/gradle/generating-javascript/minimal-task-usage.gradle
 cdd413e84d95a11b049cdcc704a33ff2  documentation/src/docs/gradle/examples/service-name.gradle.kts
 d3ea3ad65f59c62f312106dc4e40a754  documentation/src/docs/gradle/generating-java/minimal-task-usage.gradle
+d488dacd581794418f324484478baf89  documentation/build.gradle.kts
 d9a4b39c58ab47ff28249e7300851686  documentation/src/docs/gradle/examples/service-name.gradle
 df1f72d7d1c11192b5ecfa46fde01a06  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/wsdl2java/Wsdl2Java.java
 e6fd866b92f561d1ebdfdb219baced77  documentation/src/docs/gradle/overview/plugin-application.gradle.kts
@@ -47,5 +48,4 @@ e92a3dc777934dea35a03e0f758b358a  documentation/src/docs/asciidoc/overview.adoc
 e96a10a0fa6fdb8a562e6338db97fffb  documentation/src/docs/gradle/generating-javascript/tool-options.gradle
 ebdbaf1c44c981f3cdec7ff48659f360  documentation/src/docs/gradle/generating-java/tool-options.gradle.kts
 ef434e7f61d6e9d3231bd07f4fbebb43  documentation/src/docs/gradle/overview/plugin-application.gradle
-f6dc2445f38fb765f363c0d2e68c8ebe  documentation/build.gradle.kts
 ff1187a052710134e6a2f1fe1bc2b690  documentation/src/docs/gradle/generating-java/verbose-logging.gradle.kts
