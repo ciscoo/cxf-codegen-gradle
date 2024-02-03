@@ -32,6 +32,7 @@
 8aabbee41acd5f7826c3e7829b754739  documentation/src/docs/gradle/generating-javascript/minimal-task-usage.gradle.kts
 8c99f6300c3d4ffa778465cab364e235  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/CxfCodegenPlugin.java
 9ea5d31c006f4f1a7475c1ea2decc019  documentation/src/docs/gradle/plugin-configuration/managing-dependency-versions.gradle.kts
+a003c5d408393face786157a106c8ae6  documentation/src/docs/asciidoc/overview.adoc
 a50297541302cf389f3d956c9ae684fa  cxf-codegen-gradle/src/main/java/io/mateo/cxf/codegen/package-info.java
 b4fb4df5246dc2de82b34ad187b6b01c  documentation/src/docs/asciidoc/plugin-configuration.adoc
 be1a863ea826a6e2b0e1db0b3fed7ffe  documentation/src/docs/asciidoc/generating-javascript.adoc
@@ -44,7 +45,6 @@ d3ea3ad65f59c62f312106dc4e40a754  documentation/src/docs/gradle/generating-java/
 d488dacd581794418f324484478baf89  documentation/build.gradle.kts
 d9a4b39c58ab47ff28249e7300851686  documentation/src/docs/gradle/examples/service-name.gradle
 e6fd866b92f561d1ebdfdb219baced77  documentation/src/docs/gradle/overview/plugin-application.gradle.kts
-e92a3dc777934dea35a03e0f758b358a  documentation/src/docs/asciidoc/overview.adoc
 e96a10a0fa6fdb8a562e6338db97fffb  documentation/src/docs/gradle/generating-javascript/tool-options.gradle
 ebdbaf1c44c981f3cdec7ff48659f360  documentation/src/docs/gradle/generating-java/tool-options.gradle.kts
 ef434e7f61d6e9d3231bd07f4fbebb43  documentation/src/docs/gradle/overview/plugin-application.gradle
