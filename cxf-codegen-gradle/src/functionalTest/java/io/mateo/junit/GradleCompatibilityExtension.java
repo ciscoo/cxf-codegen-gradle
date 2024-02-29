@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import org.gradle.util.GradleVersion;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.Extension;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -35,24 +34,10 @@ import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
  */
 public final class GradleCompatibilityExtension implements TestTemplateInvocationContextProvider {
 
-    private static final List<String> GRADLE_8_VERSIONS = List.of("8.4", "8.5", "current");
-
-    private static final List<String> DEFAULT_GRADLE_VERSIONS;
-
-    static {
-        List<String> defaultVersions = new ArrayList<>(GRADLE_8_VERSIONS.size());
-        defaultVersions.addAll(GRADLE_8_VERSIONS);
-        DEFAULT_GRADLE_VERSIONS = List.copyOf(defaultVersions);
-    }
-
     private final List<String> gradleVersions;
 
     public GradleCompatibilityExtension() {
-        this.gradleVersions = GRADLE_8_VERSIONS;
-        System.err.println("Testing against the following Gradle versions " + this.gradleVersions);
-        Assertions.assertTrue(
-                DEFAULT_GRADLE_VERSIONS.containsAll(this.gradleVersions),
-                "GradleCompatibilityExtension version defaults mismatch");
+        this.gradleVersions = List.of("8.4", "8.5", "current");
     }
 
     public GradleCompatibilityExtension(String... versions) {
