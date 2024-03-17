@@ -5,8 +5,11 @@ https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html[CXF Codeg
 
 == Getting Started
 
-The plugin is https://plugins.gradle.org/[published to Gradle's plugin portal] and can be applied
+The plugin is https://central.sonatype.com/[published to Maven Central] and can be applied
 using the https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block[plugins DSL] block:
+
+NOTE: The plugin was previously published to the Gradle Plugin portal, but switched to publishing to Maven Central
+primarily to track download statistics which the Gradle Plugin portal https://github.com/gradle/plugin-portal-requests/issues/2[does not provide].
 
 ++++
 <details open>
@@ -42,11 +45,12 @@ plugins {
 </details>
 ++++
 
+NOTE: The Gradle plugin proxies Maven Central, so you should not need to configure Maven Central as a plugin repository.
+
 == Documentation
 
 * https://ciscoo.github.io/cxf-codegen-gradle/docs/current/user-guide/[User Guide]
 * https://ciscoo.github.io/cxf-codegen-gradle/docs/current/api/index.html[Javadoc]
-* https://github.com/ciscoo/cxf-codegen-gradle/blob/master/CHANGELOG.adoc[Changelog]
 
 == Snapshots
 
