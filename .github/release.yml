@@ -1,0 +1,20 @@
+changelog:
+  categories:
+    - title: "hammer_and_wrench Breaking Changes"
+      labels:
+        - "type: breaking"
+    - title: ":lady_beetle: Bug Fixes"
+      labels:
+        - "type: bug"
+    - title: ":hammer: Dependency Upgrades"
+      labels:
+        - "type: dependency-upgrade"
+    - title: ":notebook_with_decorative_cover: Documentation"
+      labels:
+        - "type: documentation"
+    - title: ":star: New Features"
+      labels:
+        - "type: enhancement"
+    - title: ":bulb: Other Changes"
+      labels:
+        - "type: task"
