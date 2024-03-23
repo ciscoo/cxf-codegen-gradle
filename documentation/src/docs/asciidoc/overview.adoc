@@ -59,6 +59,7 @@ The CXF Codegen Gradle plugin supports the following Gradle versions:
 a|
 - 8.4
 - 8.5
+- 8.6
 - {current-gradle-version}
 |===
 
