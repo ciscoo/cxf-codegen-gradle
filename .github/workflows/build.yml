@@ -80,5 +80,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: 'Publish Snapshot Documentation'
         env:
-          GRGIT_USER: ${{ secrets.GH_TOKEN }}
+          GRGIT_USER: ${{ github.actor }}
+          GRGIT_PASS: ${{ secrets.GH_TOKEN }}
         run: .github/workflows/maybePublishSnapshotDocs.sh
