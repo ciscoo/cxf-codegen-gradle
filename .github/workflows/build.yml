@@ -73,13 +73,15 @@ jobs:
 
   update_snapshot_documentation:
     name: Update Snapshot Documentation
-    needs: linux
+    needs: Linux
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v4
-      - name: 'Publish Snapshot Documentation'
+      - name: Publish Snapshot Documentation
+        uses: ./.github/actions/run-gradle
+        with:
+          arguments: gitPublishPush -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false
         env:
           GRGIT_USER: ${{ github.actor }}
           GRGIT_PASS: ${{ secrets.GH_TOKEN }}
-        run: .github/workflows/maybePublishSnapshotDocs.sh
