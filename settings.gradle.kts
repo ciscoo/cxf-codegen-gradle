@@ -12,7 +12,6 @@ pluginManagement {
 
 rootProject.name = "cxf-codegen-gradle"
 
-include("dependencies")
 include("documentation")
 include("cxf-codegen-gradle")
 
