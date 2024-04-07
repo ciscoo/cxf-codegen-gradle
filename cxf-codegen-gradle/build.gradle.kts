@@ -49,6 +49,8 @@ testing {
     suites {
         register("functionalTest", JvmTestSuite::class) {
             dependencies {
+                implementation(platform(libs.junitBom))
+                implementation(libs.junitJupiter)
                 implementation(project())
                 implementation(libs.assertj)
             }
