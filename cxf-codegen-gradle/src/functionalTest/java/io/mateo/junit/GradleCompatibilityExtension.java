@@ -59,33 +59,27 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
         return versionToDsl.stream().map(GradleVersionTestTemplateInvocationContext::new);
     }
 
-    private static final class GradleVersionTestTemplateInvocationContext implements TestTemplateInvocationContext {
-
-        private final GradleVersionDsl gradleVersionDsl;
-
-        GradleVersionTestTemplateInvocationContext(GradleVersionDsl gradleVersionDsl) {
-            this.gradleVersionDsl = gradleVersionDsl;
-        }
+    private record GradleVersionTestTemplateInvocationContext(GradleVersionDsl gradleVersionDsl)
+            implements TestTemplateInvocationContext {
 
         @Override
         public String getDisplayName(int invocationIndex) {
-            if (this.gradleVersionDsl.getVersion().equals("current")) {
+            if (this.gradleVersionDsl.version().equals("current")) {
                 return String.format(
                         "Gradle %s - %s ",
                         GradleVersion.current().getVersion(),
-                        this.gradleVersionDsl.getDsl().getName());
+                        this.gradleVersionDsl.dsl().getName());
             }
             return String.format(
                     "Gradle %s - %s",
-                    this.gradleVersionDsl.getVersion(),
-                    this.gradleVersionDsl.getDsl().getName());
+                    this.gradleVersionDsl.version(), this.gradleVersionDsl.dsl().getName());
         }
 
         @Override
         public List<Extension> getAdditionalExtensions() {
-            GradleBuild gradleBuild = new GradleBuild().dsl(this.gradleVersionDsl.getDsl());
-            if (!this.gradleVersionDsl.getVersion().equals("current")) {
-                gradleBuild.gradleVersion(this.gradleVersionDsl.getVersion());
+            GradleBuild gradleBuild = new GradleBuild().dsl(this.gradleVersionDsl.dsl());
+            if (!this.gradleVersionDsl.version().equals("current")) {
+                gradleBuild.gradleVersion(this.gradleVersionDsl.version());
             }
             return List.of(new GradleBuildExtension(gradleBuild));
         }

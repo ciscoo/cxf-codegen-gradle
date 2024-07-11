@@ -16,24 +16,6 @@
 package io.mateo.junit;
 
 /**
- * Composite utility class for holding a Gradle version and DSL.
+ * Composite utility record for holding a Gradle version and DSL.
  */
-public class GradleVersionDsl {
-
-    private final String version;
-
-    private final GradleDsl dsl;
-
-    public GradleVersionDsl(String gradleVersion, GradleDsl gradleDsl) {
-        this.version = gradleVersion;
-        this.dsl = gradleDsl;
-    }
-
-    public String getVersion() {
-        return this.version;
-    }
-
-    public GradleDsl getDsl() {
-        return this.dsl;
-    }
-}
+public record GradleVersionDsl(String version, GradleDsl dsl) {}
