@@ -2,9 +2,9 @@ import org.gradle.util.GradleVersion
 
 plugins {
     `java-library-conventions`
-    id("com.diffplug.spotless")
-    id("org.asciidoctor.jvm.convert")
-    id("org.ajoberstar.git-publish")
+    alias(libs.plugins.spotless)
+    alias(libs.plugins.asciidoctorJvmConvert)
+    alias(libs.plugins.gitPublish)
 }
 
 description = "CXF Codegen documentation"

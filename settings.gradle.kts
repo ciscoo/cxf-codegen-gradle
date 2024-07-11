@@ -3,10 +3,6 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
-    plugins {
-        id("org.asciidoctor.jvm.convert") version "4.0.2"
-        id("org.ajoberstar.git-publish") version "4.2.1"
-    }
 }
 
 rootProject.name = "cxf-codegen-gradle"
