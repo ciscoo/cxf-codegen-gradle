@@ -2,7 +2,8 @@ plugins {
     `java-library-conventions`
     signing
     jacoco
-    id("com.gradle.plugin-publish")
+    `maven-publish`
+    `java-gradle-plugin`
 }
 
 description = "CXF Codegen"
@@ -68,9 +69,6 @@ testing {
 gradlePlugin.testSourceSets(sourceSets["functionalTest"])
 
 tasks {
-    publishPlugins {
-        dependsOn(build)
-    }
     withType<Jar>().configureEach {
         manifest.attributes["Automatic-Module-Name"] = "io.mateo.cxf.codegen"
     }
