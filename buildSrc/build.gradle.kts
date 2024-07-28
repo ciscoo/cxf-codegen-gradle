@@ -11,6 +11,7 @@ dependencies {
     implementation(libs.gradle.nexusPublish)
     implementation(libs.gradle.spotless)
     implementation(libs.javapoet)
+    implementation(libs.jackson)
 }
 
 // TODO: https://youtrack.jetbrains.com/issue/KT-63165
