@@ -26,7 +26,7 @@ using the https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_blo
 
 [source,kotlin,subs="verbatim,attributes"]
 ----
-include::../gradle/overview/plugin-application.gradle.kts[]
+include::example$overview/plugin-application.gradle.kts[]
 ----
 
 ++++
@@ -40,7 +40,7 @@ include::../gradle/overview/plugin-application.gradle.kts[]
 
 [source,groovy,subs="verbatim,attributes"]
 ----
-include::../gradle/overview/plugin-application.gradle[]
+include::example$overview/plugin-application.gradle[]
 ----
 
 ++++

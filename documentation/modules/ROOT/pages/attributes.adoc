@@ -1,17 +1,3 @@
-:doctype: book
-:idprefix:
-:idseparator: -
-:toc: left
-:toclevels: 4
-:tabsize: 4
-:numbered:
-:sectanchors:
-:sectnums:
-:icons: font
-:hide-uri-scheme:
-:source-highlighter: rouge
-:docinfo: shared,private
-
 :javadoc-root:  link:../api
 :wsdl-option: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaOptions.html#method.summary[Wsdl2JavaOptions]
 :wsdl2js-options: {javadoc-root}/io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#method.summary[Wsdl2JsOptions]

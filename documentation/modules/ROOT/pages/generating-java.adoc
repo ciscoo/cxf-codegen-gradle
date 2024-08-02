@@ -29,7 +29,7 @@ The minimum requirement for generating Java is a single WSDL which can either be
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/minimal-task-usage.gradle.kts[tags=code]
+include::example$generating-java/minimal-task-usage.gradle.kts[tags=code]
 ----
 
 ++++
@@ -47,7 +47,7 @@ include::../gradle/generating-java/minimal-task-usage.gradle.kts[tags=code]
 
 [source,groovy]
 ----
-include::../gradle/generating-java/minimal-task-usage.gradle[tags=code]
+include::example$generating-java/minimal-task-usage.gradle[tags=code]
 ----
 
 ++++
@@ -76,7 +76,7 @@ offered by the {cxf-codegen-maven-plugin}[Maven plugin].
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/tool-options.gradle.kts[tags=code]
+include::example$generating-java/tool-options.gradle.kts[tags=code]
 ----
 
 ++++
@@ -90,7 +90,7 @@ include::../gradle/generating-java/tool-options.gradle.kts[tags=code]
 
 [source,groovy]
 ----
-include::../gradle/generating-java/tool-options.gradle[tags=code]
+include::example$generating-java/tool-options.gradle[tags=code]
 ----
 
 ++++
@@ -119,7 +119,7 @@ First define some tasks:
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/default-tool-options.gradle.kts[tags=primary]
+include::example$generating-java/default-tool-options.gradle.kts[tags=primary]
 ----
 
 ++++
@@ -133,7 +133,7 @@ include::../gradle/generating-java/default-tool-options.gradle.kts[tags=primary]
 
 [source,groovy]
 ----
-include::../gradle/generating-java/default-tool-options.gradle[tags=primary]
+include::example$generating-java/default-tool-options.gradle[tags=primary]
 ----
 
 ++++
@@ -149,7 +149,7 @@ Then configure each one using the {configure-each}[`configureEach`] method on th
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/default-tool-options.gradle.kts[tags=secondary]
+include::example$generating-java/default-tool-options.gradle.kts[tags=secondary]
 ----
 
 ++++
@@ -163,7 +163,7 @@ include::../gradle/generating-java/default-tool-options.gradle.kts[tags=secondar
 
 [source,groovy]
 ----
-include::../gradle/generating-java/default-tool-options.gradle[tags=secondary]
+include::example$generating-java/default-tool-options.gradle[tags=secondary]
 ----
 
 ++++
@@ -206,7 +206,7 @@ In the following example, https://logback.qos.ch/[Logback] is used which provide
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/logging-task.gradle.kts[tags=code]
+include::example$generating-java/logging-task.gradle.kts[tags=code]
 ----
 
 ++++
@@ -220,7 +220,7 @@ include::../gradle/generating-java/logging-task.gradle.kts[tags=code]
 
 [source,groovy]
 ----
-include::../gradle/generating-java/logging-task.gradle[tags=code]
+include::example$generating-java/logging-task.gradle[tags=code]
 ----
 
 ++++
@@ -250,7 +250,7 @@ NOTE: The example below configures logging for **all** `{wsdl2java-task}` tasks.
 
 [source,kotlin]
 ----
-include::../gradle/generating-java/verbose-logging.gradle.kts[tags=code]
+include::example$generating-java/verbose-logging.gradle.kts[tags=code]
 ----
 
 ++++
@@ -264,7 +264,7 @@ include::../gradle/generating-java/verbose-logging.gradle.kts[tags=code]
 
 [source,groovy]
 ----
-include::../gradle/generating-java/verbose-logging.gradle[tags=code]
+include::example$generating-java/verbose-logging.gradle[tags=code]
 ----
 
 ++++

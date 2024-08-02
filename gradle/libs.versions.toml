@@ -16,3 +16,4 @@ slf4jNop = { module = "org.slf4j:slf4j-nop", version.ref = "slf4j" } # Unused; e
 gitPublish = { id = "org.ajoberstar.git-publish", version = "4.2.1" }
 asciidoctorJvmConvert = { id = "org.asciidoctor.jvm.convert", version = "4.0.2" }
 spotless = { id = "com.diffplug.spotless" }
+anotra = { id = "org.antora", version = "1.0.0" }

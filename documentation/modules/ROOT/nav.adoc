@@ -1,0 +1,5 @@
+* xref:index.adoc[]
+* xref:plugin-configuration.adoc[]
+* xref:generating-java.adoc[]
+* xref:generating-javascript.adoc[]
+* xref:examples.adoc[]

@@ -9,6 +9,10 @@ plugins {
 
 val libsCatalog = versionCatalogs.named("libs")
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     libsCatalog.findLibrary("junitBom").ifPresent {
         testImplementation(platform(it))
