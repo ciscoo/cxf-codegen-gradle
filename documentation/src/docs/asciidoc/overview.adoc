@@ -16,7 +16,7 @@ The API is not a 1:1 port and leans heavily on Gradle idioms and conventions.
 
 To get started with the plugin it needs to be applied to your project.
 
-The plugin is https://plugins.gradle.org/plugin/io.mateo.cxf-codegen[published to Gradle's plugin portal] and can be applied
+The plugin is https://central.sonatype.com[published to Maven Central] and can be applied
 using the https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block[plugins DSL] block:
 
 ++++
