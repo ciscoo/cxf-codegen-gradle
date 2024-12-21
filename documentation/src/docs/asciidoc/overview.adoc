@@ -64,6 +64,8 @@ a|
 - 8.8
 - 8.9
 - {current-gradle-version}
+- 8.11
+- 8.12
 |===
 
 The plugin is fully tested against the above versions to ensure compatibility. View
