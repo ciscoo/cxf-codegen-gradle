@@ -756,7 +756,7 @@ the same thing. Refer to the <a href="generating-java.html#default-options">defa
 
 <span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"calculator"</span><span class="p">,</span> <span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">toolOptions</span> <span class="p">{</span>
-        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="n">projectDirectory</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s">"calculator.wsdl"</span><span class="p">).</span><span class="n">asFile</span><span class="p">.</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span>
+        <span class="n">wsdl</span> <span class="p">=</span> <span class="n">layout</span><span class="p">.</span><span class="n">projectDirectory</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s">"calculator.wsdl"</span><span class="p">).</span><span class="n">asFile</span><span class="p">.</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">()</span>
         <span class="n">bindingFiles</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="n">projectDirectory</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s">"async-binding.xml"</span><span class="p">).</span><span class="n">asFile</span><span class="p">.</span><span class="n">absolutePath</span><span class="p">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
@@ -773,7 +773,7 @@ the same thing. Refer to the <a href="generating-java.html#default-options">defa
 
 <span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+        <span class="n">wsdl</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">()</span>
         <span class="n">bindingFiles</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"async-binding.xml"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">absolutePath</span><span class="o">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
     <span class="o">}</span>
 <span class="o">}</span></code></pre>
@@ -807,7 +807,7 @@ the same thing. Refer to the <a href="generating-java.html#default-options">defa
 
 <span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"calculator"</span><span class="p">,</span> <span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">toolOptions</span> <span class="p">{</span>
-        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="n">projectDirectory</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s">"calculator.wsdl"</span><span class="p">).</span><span class="n">asFile</span><span class="p">.</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span>
+        <span class="n">wsdl</span> <span class="p">=</span> <span class="n">layout</span><span class="p">.</span><span class="n">projectDirectory</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s">"calculator.wsdl"</span><span class="p">).</span><span class="n">asFile</span><span class="p">.</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">()</span>
         <span class="n">extraArgs</span><span class="p">.</span><span class="nf">addAll</span><span class="p">(</span><span class="nf">listOf</span><span class="p">(</span><span class="s">"-databinding"</span><span class="p">,</span> <span class="s">"jibx"</span><span class="p">))</span> <i class="conum" data-value="2"></i><b>(2)</b>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
@@ -828,7 +828,7 @@ the same thing. Refer to the <a href="generating-java.html#default-options">defa
 
 <span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+        <span class="n">wsdl</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">()</span>
         <span class="n">extraArgs</span><span class="o">.</span><span class="na">addAll</span><span class="o">([</span><span class="s2">"-databinding"</span><span class="o">,</span> <span class="s2">"jibx"</span><span class="o">])</span> <i class="conum" data-value="2"></i><b>(2)</b>
     <span class="o">}</span>
 <span class="o">}</span></code></pre>
@@ -862,8 +862,8 @@ the same thing. Refer to the <a href="generating-java.html#default-options">defa
 
 <span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"calculator"</span><span class="p">,</span> <span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">toolOptions</span> <span class="p">{</span>
-        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="n">projectDirectory</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s">"calculator.wsdl"</span><span class="p">).</span><span class="n">asFile</span><span class="p">.</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span>
-        <span class="n">serviceName</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s">"Calculator"</span><span class="p">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="n">wsdl</span> <span class="p">=</span> <span class="n">layout</span><span class="p">.</span><span class="n">projectDirectory</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s">"calculator.wsdl"</span><span class="p">).</span><span class="n">asFile</span><span class="p">.</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">()</span>
+        <span class="n">serviceName</span> <span class="p">=</span> <span class="s">"Calculator"</span> <i class="conum" data-value="1"></i><b>(1)</b>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
 </div>
@@ -879,8 +879,8 @@ the same thing. Refer to the <a href="generating-java.html#default-options">defa
 
 <span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
-        <span class="n">serviceName</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s2">"Calculator"</span><span class="o">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="n">wsdl</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">()</span>
+        <span class="n">serviceName</span> <span class="o">=</span> <span class="s2">"Calculator"</span> <i class="conum" data-value="1"></i><b>(1)</b>
     <span class="o">}</span>
 <span class="o">}</span></code></pre>
 </div>
@@ -941,7 +941,7 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 <span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"calculator"</span><span class="p">,</span> <span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span> <i class="conum" data-value="5"></i><b>(5)</b>
     <span class="n">inputs</span><span class="p">.</span><span class="nf">files</span><span class="p">(</span><span class="n">extractWsdl</span><span class="p">)</span>
     <span class="nf">toolOptions</span> <span class="p">{</span>
-        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">extractWsdl</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">outputs</span><span class="p">.</span><span class="n">files</span><span class="p">.</span><span class="n">singleFile</span><span class="p">.</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">()</span> <span class="p">})</span>
+        <span class="n">wsdl</span> <span class="p">=</span> <span class="n">extractWsdl</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">outputs</span><span class="p">.</span><span class="n">files</span><span class="p">.</span><span class="n">singleFile</span><span class="p">.</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">()</span> <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
 </div>
@@ -989,7 +989,7 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 <span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span> <i class="conum" data-value="5"></i><b>(5)</b>
     <span class="n">inputs</span><span class="o">.</span><span class="na">files</span><span class="o">(</span><span class="n">extractWsdl</span><span class="o">)</span>
     <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">extractWsdl</span><span class="o">.</span><span class="na">map</span> <span class="o">{</span> <span class="n">it</span><span class="o">.</span><span class="na">outputs</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">singleFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">()</span> <span class="o">})</span>
+        <span class="n">wsdl</span> <span class="o">=</span> <span class="n">extractWsdl</span><span class="o">.</span><span class="na">map</span> <span class="o">{</span> <span class="n">it</span><span class="o">.</span><span class="na">outputs</span><span class="o">.</span><span class="na">files</span><span class="o">.</span><span class="na">singleFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">()</span> <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre>
 </div>
@@ -1039,7 +1039,7 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 
 <span class="n">tasks</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="s">"calculator"</span><span class="p">,</span> <span class="nc">Wsdl2Java</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">toolOptions</span> <span class="p">{</span>
-        <span class="n">wsdl</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="n">projectDirectory</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s">"calculator.wsdl"</span><span class="p">).</span><span class="n">asFile</span><span class="p">.</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">())</span>
+        <span class="n">wsdl</span> <span class="p">=</span> <span class="n">layout</span><span class="p">.</span><span class="n">projectDirectory</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s">"calculator.wsdl"</span><span class="p">).</span><span class="n">asFile</span><span class="p">.</span><span class="nf">toPath</span><span class="p">().</span><span class="nf">toAbsolutePath</span><span class="p">().</span><span class="nf">toString</span><span class="p">()</span>
         <span class="n">xjcArgs</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="s">"-Xts"</span><span class="p">)</span> <i class="conum" data-value="3"></i><b>(3)</b>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
@@ -1061,7 +1061,7 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 
 <span class="n">tasks</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s2">"calculator"</span><span class="o">,</span> <span class="n">Wsdl2Java</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">toolOptions</span> <span class="o">{</span>
-        <span class="n">wsdl</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+        <span class="n">wsdl</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="na">projectDirectory</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s2">"calculator.wsdl"</span><span class="o">).</span><span class="na">asFile</span><span class="o">.</span><span class="na">toPath</span><span class="o">().</span><span class="na">toAbsolutePath</span><span class="o">().</span><span class="na">toString</span><span class="o">()</span>
         <span class="n">xjcArgs</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s2">"-Xts"</span><span class="o">)</span> <i class="conum" data-value="3"></i><b>(3)</b>
     <span class="o">}</span>
 <span class="o">}</span></code></pre>
@@ -1090,7 +1090,7 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 <div id="footer">
 <div id="footer-text">
 Version 2.5.0-SNAPSHOT<br>
-Last updated 2024-12-24 05:34:22 UTC
+Last updated 2024-12-24 05:48:50 UTC
 </div>
 </div>
 </body>
