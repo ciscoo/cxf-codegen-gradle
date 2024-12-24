@@ -141,6 +141,7 @@ val isCIEnvironment = System.getenv("CI")?.toBoolean() ?: false
 
 signing {
     isRequired = !(isSnapshot || isCIEnvironment)
+    sign(publishing.publications)
 }
 
 afterEvaluate {
