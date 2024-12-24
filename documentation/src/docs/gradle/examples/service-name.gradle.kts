@@ -17,8 +17,8 @@ repositories {
 
 tasks.register("calculator", Wsdl2Java::class) {
     toolOptions {
-        wsdl.set(layout.projectDirectory.file("calculator.wsdl").asFile.toPath().toAbsolutePath().toString())
-        serviceName.set("Calculator") // <1>
+        wsdl = layout.projectDirectory.file("calculator.wsdl").asFile.toPath().toAbsolutePath().toString()
+        serviceName = "Calculator" // <1>
     }
 }
 // end::code[]

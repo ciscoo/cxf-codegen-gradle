@@ -8,11 +8,11 @@ plugins {
 // tag::code[]
 tasks.register("example", Wsdl2Js::class) {
     toolOptions {
-        wsdl.set(file("path/to/example.wsdl").absolutePath)
-        outputDir.set(file("$buildDir/example-generated-js")) // <1>
-        catalog.set(file("path/to/example-catalog.xml")) // <2>
-        packagePrefixes.set(listOf(UriPrefixPair("https://example.com", "example"))) // <3>
-        verbose.set(true) // <4>
+        wsdl = file("path/to/example.wsdl").absolutePath
+        outputDir = file("$buildDir/example-generated-js") // <1>
+        catalog = file("path/to/example-catalog.xml") // <2>
+        packagePrefixes = listOf(UriPrefixPair("https://example.com", "example")) // <3>
+        verbose = true // <4>
     }
 }
 // end::code[]

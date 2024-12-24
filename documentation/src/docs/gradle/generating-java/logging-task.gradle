@@ -24,6 +24,6 @@ dependencies {
 tasks.register("example", Wsdl2Java) {
     jvmArgs = ["-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Slf4jLogger"]
     toolOptions {
-        wsdl.set(file("wsdls/calculator.wsdl").toPath().toAbsolutePath().toString())
+        wsdl = file("wsdls/calculator.wsdl").toPath().toAbsolutePath().toString()
     }
 }

@@ -13,7 +13,7 @@ plugins {
 
 tasks.register("example", Wsdl2Java::class) { // <1>
     toolOptions { // <2>
-        wsdl.set(file("path/to/example.wsdl").toPath().toAbsolutePath().toString()) // <3>
+        wsdl = file("path/to/example.wsdl").toPath().toAbsolutePath().toString() // <3>
     }
     allJvmArgs = listOf("-Duser.language=fr", "-Duser.country=CA") // <4>
 }

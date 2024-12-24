@@ -9,17 +9,17 @@ plugins {
 tasks {
     register("first", Wsdl2Java::class) {
         toolOptions {
-            wsdl.set(file("path/to/first.wsdl").toPath().toAbsolutePath().toString())
+            wsdl = file("path/to/first.wsdl").toPath().toAbsolutePath().toString()
         }
     }
     register("second", Wsdl2Java::class) {
         toolOptions {
-            wsdl.set(file("path/to/second.wsdl").toPath().toAbsolutePath().toString())
+            wsdl = file("path/to/second.wsdl").toPath().toAbsolutePath().toString()
         }
     }
     register("third", Wsdl2Java::class) {
         toolOptions {
-            wsdl.set(file("path/to/third.wsdl").toPath().toAbsolutePath().toString())
+            wsdl = file("path/to/third.wsdl").toPath().toAbsolutePath().toString()
         }
     }
 }
@@ -28,7 +28,7 @@ tasks {
 //tag::secondary[]
 tasks.withType(Wsdl2Java::class).configureEach {
     toolOptions {
-        markGenerated.set(true)
+        markGenerated = true
     }
 }
 //end::secondary[]

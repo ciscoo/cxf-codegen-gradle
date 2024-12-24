@@ -21,7 +21,7 @@ dependencies {
 
 tasks.register("calculator", Wsdl2Java) {
     toolOptions {
-        wsdl.set(layout.projectDirectory.file("calculator.wsdl").asFile.toPath().toAbsolutePath().toString())
+        wsdl = layout.projectDirectory.file("calculator.wsdl").asFile.toPath().toAbsolutePath().toString()
         extraArgs.addAll(["-databinding", "jibx"]) // <2>
     }
 }

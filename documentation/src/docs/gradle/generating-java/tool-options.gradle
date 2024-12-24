@@ -8,11 +8,11 @@ plugins {
 // tag::code[]
 tasks.register("example", Wsdl2Java) {
     toolOptions {
-        wsdl.set(file("path/to/example.wsdl").toPath().toAbsolutePath().toString())
-        outputDir.set(file("$buildDir/generated-java")) // <1>
-        markGenerated.set(true) // <2>
-        packageNames.set(["com.example", "com.foo.bar"]) // <3>
-        asyncMethods.set(["foo", "bar"]) // <4>
+        wsdl = file("path/to/example.wsdl").toPath().toAbsolutePath().toString()
+        outputDir = file("$buildDir/generated-java") // <1>
+        markGenerated = true // <2>
+        packageNames = ["com.example", "com.foo.bar"] // <3>
+        asyncMethods = ["foo", "bar"] // <4>
     }
 }
 // end::code[]
