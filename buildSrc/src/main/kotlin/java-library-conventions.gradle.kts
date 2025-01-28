@@ -10,13 +10,13 @@ plugins {
 val libsCatalog = versionCatalogs.named("libs")
 
 dependencies {
-    libsCatalog.findLibrary("junitBom").ifPresent {
+    libsCatalog.findLibrary("junit-bom").ifPresent {
         testImplementation(platform(it))
     }
-    libsCatalog.findLibrary("junitJupiter").ifPresent {
+    libsCatalog.findLibrary("junit-jupiter").ifPresent {
         testImplementation(it)
     }
-    libsCatalog.findLibrary("assertj").ifPresent {
+    libsCatalog.findLibrary("assertj-core").ifPresent {
         testImplementation(it)
     }
 }

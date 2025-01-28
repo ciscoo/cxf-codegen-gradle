@@ -4,13 +4,13 @@ slf4j = "2.0.16"
 junit = "5.11.3"
 
 [libraries]
-junitBom = { module = "org.junit:junit-bom", version.ref = "junit" }
-junitJupiter = { module = "org.junit.jupiter:junit-jupiter" }
-assertj = { module = "org.assertj:assertj-core", version = "3.26.3" }
+junit-Bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+assertj-core = { module = "org.assertj:assertj-core", version = "3.26.3" }
 javapoet = { module = "com.palantir.javapoet:javapoet", version = "0.6.0" }
 gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version = "6.25.0" }
 gradle-nexusPublish = { module = "io.github.gradle-nexus:publish-plugin", version = "2.0.0" }
-slf4jNop = { module = "org.slf4j:slf4j-nop", version.ref = "slf4j" } # Unused; exists to allow automatic updates.
+slf4j-nop = { module = "org.slf4j:slf4j-nop", version.ref = "slf4j" } # Unused; exists to allow automatic updates.
 
 [plugins]
 gitPublish = { id = "org.ajoberstar.git-publish", version = "4.2.1" }

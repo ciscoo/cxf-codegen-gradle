@@ -50,10 +50,10 @@ testing {
     suites {
         register("functionalTest", JvmTestSuite::class) {
             dependencies {
-                implementation(platform(libs.junitBom))
-                implementation(libs.junitJupiter)
+                implementation(platform(libs.junit.bom))
+                implementation(libs.junit.jupiter)
                 implementation(project())
-                implementation(libs.assertj)
+                implementation(libs.assertj.core)
             }
             targets.configureEach {
                 testTask.configure {
