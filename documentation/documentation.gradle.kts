@@ -15,8 +15,8 @@ val docsDir = layout.buildDirectory.dir("ghpages-docs")
 val replaceCurrentDocs = project.hasProperty("replaceCurrentDocs")
 
 gitPublish {
-    repoUri.set("https://github.com/ciscoo/cxf-codegen-gradle.git")
-    branch.set("gh-pages")
+    repoUri = "https://github.com/ciscoo/cxf-codegen-gradle.git"
+    branch = "gh-pages"
 
     contents {
         from(docsDir)

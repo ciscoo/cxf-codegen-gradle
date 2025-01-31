@@ -25,7 +25,7 @@ java {
     withJavadocJar()
     withSourcesJar()
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
@@ -71,7 +71,7 @@ tasks {
     }
 
     compileJava {
-        options.release.set(JavaVersion.VERSION_1_8.majorVersion.toInt())
+        options.release = JavaVersion.VERSION_1_8.majorVersion.toInt()
         options.compilerArgs.addAll(listOf("-Xlint:all", "-Werror"))
     }
 

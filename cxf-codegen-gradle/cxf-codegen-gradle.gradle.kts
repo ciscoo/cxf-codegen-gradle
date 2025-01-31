@@ -9,8 +9,8 @@ plugins {
 description = "CXF Codegen"
 
 gradlePlugin {
-    website.set("https://ciscoo.github.io/cxf-codegen-gradle/docs/current/user-guide/")
-    vcsUrl.set("https://github.com/ciscoo/cxf-codegen-gradle")
+    website = "https://ciscoo.github.io/cxf-codegen-gradle/docs/current/user-guide/"
+    vcsUrl = "https://github.com/ciscoo/cxf-codegen-gradle"
     plugins {
         create("cxfCodegen") {
             id = "io.mateo.cxf-codegen"
@@ -21,15 +21,15 @@ gradlePlugin {
                 The next major version and subsequent versions will only be published to the Maven Central Repository.
                 """.trimIndent()
             implementationClass = "io.mateo.cxf.codegen.CxfCodegenPlugin"
-            tags.set(listOf("cxf", "wsdl2java"))
+            tags = listOf("cxf", "wsdl2java")
         }
     }
 }
 
 val generateVersionAccessor =
     tasks.register("generateVersionAccessor", io.mateo.build.GenerateVersionAccessor::class) {
-        cxfVersion.set(libs.versions.cxf)
-        slf4jVersion.set(libs.versions.slf4j)
+        cxfVersion = libs.versions.cxf
+        slf4jVersion = libs.versions.slf4j
     }
 
 sourceSets.main {
@@ -86,7 +86,7 @@ tasks {
     jacocoTestReport {
         dependsOn(test)
         reports {
-            xml.required.set(true)
+            xml.required = true
         }
     }
 }
@@ -111,27 +111,27 @@ publishing {
     }
     publications.containerWithType(MavenPublication::class).configureEach {
         pom {
-            url.set("https://github.com/ciscoo/cxf-codegen-gradle")
+            url = "https://github.com/ciscoo/cxf-codegen-gradle"
             licenses {
                 license {
-                    name.set("Apache License, Version 2.0")
-                    url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                    name = "Apache License, Version 2.0"
+                    url = "https://www.apache.org/licenses/LICENSE-2.0"
                 }
             }
             developers {
                 developer {
-                    name.set("Francisco Mateo")
-                    email.set("cisco21c@gmail.com")
+                    name = "Francisco Mateo"
+                    email = "cisco21c@gmail.com"
                 }
             }
             scm {
-                connection.set("scm:git:github.com/ciscoo/cxf-codegen-gradle.git")
-                developerConnection.set("scm:git:ssh://github.com/ciscoo/cxf-codegen-gradle.git")
-                url.set("https://github.com/ciscoo/cxf-codegen-gradle")
+                connection = "scm:git:github.com/ciscoo/cxf-codegen-gradle.git"
+                developerConnection = "scm:git:ssh://github.com/ciscoo/cxf-codegen-gradle.git"
+                url = "https://github.com/ciscoo/cxf-codegen-gradle"
             }
             issueManagement {
-                system.set("GitHub")
-                url.set("https://github.com/ciscoo/cxf-codegen-gradle/issues")
+                system = "GitHub"
+                url = "https://github.com/ciscoo/cxf-codegen-gradle/issues"
             }
         }
     }
@@ -148,14 +148,14 @@ afterEvaluate {
     publishing {
         publications.named<MavenPublication>("pluginMaven") {
             pom {
-                name.set("CXF Codegen Gradle Plugin")
-                description.set("Plugin to generate code sources from WSDL.")
+                name = "CXF Codegen Gradle Plugin"
+                description = "Plugin to generate code sources from WSDL."
             }
         }
         publications.named<MavenPublication>("cxfCodegenPluginMarkerMaven") {
             pom {
-                name.set("CXF Codegen Gradle Plugin Marker")
-                description.set("CXF Codegen Gradle plugin marker artifact.")
+                name = "CXF Codegen Gradle Plugin Marker"
+                description = "CXF Codegen Gradle plugin marker artifact."
             }
         }
     }
