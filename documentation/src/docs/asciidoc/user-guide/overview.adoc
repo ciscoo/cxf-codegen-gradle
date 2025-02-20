@@ -1,6 +1,5 @@
 [[overview]]
 = Overview
-include::attributes.adoc[]
 
 The goal of this document is to provide reference documentation for developers utilizing the CXF Codegen Gradle plugin.
 
@@ -26,7 +25,7 @@ using the https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_blo
 
 [source,kotlin,subs="verbatim,attributes"]
 ----
-include::../gradle/overview/plugin-application.gradle.kts[]
+include::../../gradle/overview/plugin-application.gradle.kts[]
 ----
 
 ++++
@@ -40,7 +39,7 @@ include::../gradle/overview/plugin-application.gradle.kts[]
 
 [source,groovy,subs="verbatim,attributes"]
 ----
-include::../gradle/overview/plugin-application.gradle[]
+include::../../gradle/overview/plugin-application.gradle[]
 ----
 
 ++++

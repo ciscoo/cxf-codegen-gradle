@@ -1,3 +1,6 @@
+import org.asciidoctor.gradle.base.AsciidoctorAttributeProvider
+import org.asciidoctor.gradle.jvm.AbstractAsciidoctorTask
+import org.gradle.kotlin.dsl.withType
 import org.gradle.util.GradleVersion
 
 plugins {
@@ -59,16 +62,34 @@ tasks {
     }
 
     asciidoctor {
+        sources {
+            include("user-guide/index.adoc")
+        }
+    }
+
+    withType<AbstractAsciidoctorTask>().configureEach {
         baseDirFollowsSourceDir()
-        setOutputDir(layout.buildDirectory.dir("user-guide"))
-        attributes(
-            mapOf(
-                "revnumber" to version,
-                "current-gradle-version" to GradleVersion.current().version,
-                "plugin-version" to version,
-                "outdir" to outputDir.absolutePath,
-                "cxf-version" to libs.versions.cxf.get(),
-            ),
+        attributeProviders.add(
+            AsciidoctorAttributeProvider {
+                mapOf(
+                    "revnumber" to version,
+                    "current-gradle-version" to GradleVersion.current().version,
+                    "plugin-version" to version,
+                    "outdir" to outputDir.absolutePath,
+                    "source-highlighter" to "rouge",
+                    "tabsize" to "4",
+                    "toc" to "left",
+                    "numbered" to "true",
+                    "toclevels" to "4",
+                    "icons" to "font",
+                    "sectanchors" to true,
+                    "sectnums" to true,
+                    "hide-uri-scheme" to true,
+                    "idprefix" to "",
+                    "idseparator" to "-",
+                    "cxf-version" to libs.versions.cxf.get(),
+                )
+            },
         )
     }
 
@@ -76,9 +97,7 @@ tasks {
         from(copyPluginApiDocs) {
             into("api")
         }
-        from(asciidoctor) {
-            into("user-guide")
-        }
+        from(asciidoctor)
         into(docsDir.map { it.dir(docsVersion) })
         includeEmptyDirs = false
     }

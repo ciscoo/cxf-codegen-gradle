@@ -1,6 +1,5 @@
 [[plugin-configuration]]
 = Plugin Configuration
-include::attributes.adoc[]
 
 [[plugin-extension]]
 == Extension
@@ -14,7 +13,7 @@ The plugin contributes a single extension to the project named `cxfCodegen`.
 
 [source,kotlin]
 ----
-include::../gradle/plugin-configuration/extension.gradle.kts[tags=code]
+include::../../gradle/plugin-configuration/extension.gradle.kts[tags=code]
 ----
 
 ++++
@@ -28,7 +27,7 @@ include::../gradle/plugin-configuration/extension.gradle.kts[tags=code]
 
 [source,groovy]
 ----
-include::../gradle/plugin-configuration/extension.gradle[tags=code]
+include::../../gradle/plugin-configuration/extension.gradle[tags=code]
 ----
 
 ++++
@@ -93,7 +92,7 @@ To change the version using the extension, specify the version using the `cxfVer
 
 [source,kotlin]
 ----
-include::../gradle/plugin-configuration/managing-dependency-versions-extension.gradle.kts[tags=code]
+include::../../gradle/plugin-configuration/managing-dependency-versions-extension.gradle.kts[tags=code]
 ----
 
 ++++
@@ -107,7 +106,7 @@ include::../gradle/plugin-configuration/managing-dependency-versions-extension.g
 
 [source,groovy]
 ----
-include::../gradle/plugin-configuration/managing-dependency-versions-extension.gradle[tags=code]
+include::../../gradle/plugin-configuration/managing-dependency-versions-extension.gradle[tags=code]
 ----
 
 ++++
@@ -126,7 +125,7 @@ can be used:
 
 [source,kotlin]
 ----
-include::../gradle/plugin-configuration/managing-dependency-versions.gradle.kts[tags=code]
+include::../../gradle/plugin-configuration/managing-dependency-versions.gradle.kts[tags=code]
 ----
 
 ++++
@@ -140,7 +139,7 @@ include::../gradle/plugin-configuration/managing-dependency-versions.gradle.kts[
 
 [source,groovy]
 ----
-include::../gradle/plugin-configuration/managing-dependency-versions.gradle[tags=code]
+include::../../gradle/plugin-configuration/managing-dependency-versions.gradle[tags=code]
 ----
 
 ++++

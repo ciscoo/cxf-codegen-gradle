@@ -1,6 +1,5 @@
 [[generating-javascript-sources]]
 = Generating JavaScript Sources
-include::attributes.adoc[]
 
 To generate JavaScript sources from a WSDL, define task of type `{wsdl2js-task-type}` and configure the `toolOptions`. Note that the task is a subclass of `{javaexec-task}`.
 
@@ -18,7 +17,7 @@ The minimum requirement for generating JavaScript is a single WSDL file.
 
 [source,kotlin]
 ----
-include::../gradle/generating-javascript/minimal-task-usage.gradle.kts[tags=code]
+include::../../gradle/generating-javascript/minimal-task-usage.gradle.kts[tags=code]
 ----
 
 ++++
@@ -32,7 +31,7 @@ include::../gradle/generating-javascript/minimal-task-usage.gradle.kts[tags=code
 
 [source,groovy]
 ----
-include::../gradle/generating-javascript/minimal-task-usage.gradle[tags=code]
+include::../../gradle/generating-javascript/minimal-task-usage.gradle[tags=code]
 ----
 
 ++++
@@ -56,7 +55,7 @@ offered by the {wsdl2js-tool-docs}[`wsdl2js`] tool.
 
 [source,kotlin]
 ----
-include::../gradle/generating-javascript/tool-options.gradle.kts[tags=code]
+include::../../gradle/generating-javascript/tool-options.gradle.kts[tags=code]
 ----
 
 ++++
@@ -70,7 +69,7 @@ include::../gradle/generating-javascript/tool-options.gradle.kts[tags=code]
 
 [source,groovy]
 ----
-include::../gradle/generating-javascript/tool-options.gradle[tags=code]
+include::../../gradle/generating-javascript/tool-options.gradle[tags=code]
 ----
 
 ++++

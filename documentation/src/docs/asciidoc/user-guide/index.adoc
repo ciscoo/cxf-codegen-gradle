@@ -1,0 +1,13 @@
+[[user-guide]]
+= CXF Codegen User Guide
+Francisco Mateo
+:basedir: {includedir}/user-guide
+:last-update-label!:
+:docinfo2:
+
+include::{includedir}/link-attributes.adoc[]
+include::{basedir}/overview.adoc[leveloffset=+1]
+include::{basedir}/plugin-configuration.adoc[leveloffset=+1]
+include::{basedir}/generating-java.adoc[leveloffset=+1]
+include::{basedir}/generating-javascript.adoc[leveloffset=+1]
+include::{basedir}/examples.adoc[leveloffset=+1]

@@ -1,6 +1,5 @@
 [[java-examples]]
 = Java Examples
-include::attributes.adoc[]
 
 This section provides Gradle examples translated from the https://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html[Maven plugin examples].
 
@@ -39,7 +38,7 @@ the same thing. Refer to the <<generating-java#default-options, default options>
 
 [source,kotlin]
 ----
-include::../gradle/examples/jaxws-binding-file.gradle.kts[tags=code]
+include::../../gradle/examples/jaxws-binding-file.gradle.kts[tags=code]
 ----
 
 ++++
@@ -53,7 +52,7 @@ include::../gradle/examples/jaxws-binding-file.gradle.kts[tags=code]
 
 [source,groovy]
 ----
-include::../gradle/examples/jaxws-binding-file.gradle[tags=code]
+include::../../gradle/examples/jaxws-binding-file.gradle[tags=code]
 ----
 
 ++++
@@ -72,7 +71,7 @@ include::../gradle/examples/jaxws-binding-file.gradle[tags=code]
 
 [source,kotlin]
 ----
-include::../gradle/examples/specify-data-binding.gradle.kts[tags=code]
+include::../../gradle/examples/specify-data-binding.gradle.kts[tags=code]
 ----
 
 ++++
@@ -86,7 +85,7 @@ include::../gradle/examples/specify-data-binding.gradle.kts[tags=code]
 
 [source,groovy]
 ----
-include::../gradle/examples/specify-data-binding.gradle[tags=code]
+include::../../gradle/examples/specify-data-binding.gradle[tags=code]
 ----
 
 ++++
@@ -106,7 +105,7 @@ include::../gradle/examples/specify-data-binding.gradle[tags=code]
 
 [source,kotlin]
 ----
-include::../gradle/examples/service-name.gradle.kts[tags=code]
+include::../../gradle/examples/service-name.gradle.kts[tags=code]
 ----
 
 ++++
@@ -120,7 +119,7 @@ include::../gradle/examples/service-name.gradle.kts[tags=code]
 
 [source,groovy]
 ----
-include::../gradle/examples/service-name.gradle[tags=code]
+include::../../gradle/examples/service-name.gradle[tags=code]
 ----
 
 ++++
@@ -142,7 +141,7 @@ For example, to use the WSDL published in the `cxf-testutils` JAR artifact:
 
 [source,kotlin]
 ----
-include::../gradle/examples/loading-wsdl.gradle.kts[tags=code]
+include::../../gradle/examples/loading-wsdl.gradle.kts[tags=code]
 ----
 
 ++++
@@ -156,7 +155,7 @@ include::../gradle/examples/loading-wsdl.gradle.kts[tags=code]
 
 [source,groovy]
 ----
-include::../gradle/examples/loading-wsdl.gradle[tags=code]
+include::../../gradle/examples/loading-wsdl.gradle[tags=code]
 ----
 
 ++++
@@ -179,7 +178,7 @@ include::../gradle/examples/loading-wsdl.gradle[tags=code]
 
 [source,kotlin]
 ----
-include::../gradle/examples/using-xjc-extensions.gradle.kts[tags=code]
+include::../../gradle/examples/using-xjc-extensions.gradle.kts[tags=code]
 ----
 
 ++++
@@ -193,7 +192,7 @@ include::../gradle/examples/using-xjc-extensions.gradle.kts[tags=code]
 
 [source,groovy]
 ----
-include::../gradle/examples/using-xjc-extensions.gradle[tags=code]
+include::../../gradle/examples/using-xjc-extensions.gradle[tags=code]
 ----
 
 ++++
