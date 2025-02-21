@@ -1,0 +1,4 @@
+[[release-notes]]
+= Release Notes
+
+The release notes are available link:{releaseNotesUrl}[here].
