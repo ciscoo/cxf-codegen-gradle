@@ -10,3 +10,5 @@ This document contains the _changelog_ for all CXF Codegen releases since 2.5.0.
 Please refer to the <<../user-guide/index.adoc#user-guide,User Guide>> for comprehensive reference documentation.
 
 include::{includedir}/link-attributes.adoc[]
+
+include::{basedir}/release-notes-2.5.0.adoc[]

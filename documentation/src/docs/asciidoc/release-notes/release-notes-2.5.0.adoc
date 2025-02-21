@@ -1,0 +1,30 @@
+[[release-notes-2.5.0]]
+== 2.5.0
+
+*Date of Release:* ??
+
+For a complete list of all _closed_ issues and pull requests for this release, consult the
+https://github.com/ciscoo/cxf-codegen-gradle/milestone/18?closed=1[2.5.0] milestone page in the
+CXF Codegen Gradle repository on GitHub.
+
+[[release-notes-2.5.0-bug-fixes]]
+=== Bug Fixes
+
+* ??
+
+[[release-notes-2.5.0-deprecations]]
+=== Deprecations
+
+* ??
+
+[[release-notes-2.5.0-breaking-changes]]
+=== Breaking Changes
+
+* ??
+
+[[release-notes-2.5.0-new-features-and-improvements]]
+=== New Features and Improvements
+
+* Changelog added to documentation
+* Documentation samples now use Kotlin property assignment.
+* Upgrade to Apache CXF 4.1.0
