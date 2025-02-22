@@ -44,7 +44,7 @@ jobs:
         uses: codecov/codecov-action@v5
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      - name: Run Checks
+      - name: Run Functional Tests
         shell: bash
         run: ./gradlew functionalTest
 
