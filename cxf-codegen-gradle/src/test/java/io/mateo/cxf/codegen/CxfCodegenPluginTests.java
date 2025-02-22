@@ -276,7 +276,7 @@ class CxfCodegenPluginTests {
         project.getPlugins().apply("io.mateo.cxf-codegen");
 
         assertThat(message.get())
-                .isEqualTo("Support for Gradle versions less than 8.11 is deprecated. You are using Gradle 8.10.");
+                .isEqualTo("Support for Gradle versions less than 8.11 is deprecated. You are using Gradle 8.10.1.");
     }
 
     @org.junitpioneer.jupiter.SetSystemProperty(key = "GRADLE_VERSION_OVERRIDE", value = "8.11")
