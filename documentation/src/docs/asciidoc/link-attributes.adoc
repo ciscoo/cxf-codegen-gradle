@@ -1,7 +1,7 @@
 :javadoc-root:  link:../api
 :wsdl-option: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaOptions.html#method.summary[Wsdl2JavaOptions]
 :wsdl2js-options: {javadoc-root}/io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#method.summary[Wsdl2JsOptions]
-:wsdl2java-task: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html[Wsdl2JavaTask]
+:wsdl2java-task: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2Java.html[Wsdl2JavaTask]
 :wsdl2java-task-type: {javadoc-root}/io/mateo/cxf/codegen/wsdl2java/Wsdl2Java.html[Wsdl2Java]
 :wsdl2js-task-type: {javadoc-root}/io/mateo/cxf/codegen/wsdl2js/Wsdl2Js.html[Wsdl2Js]
 :cxf-codegen-extension: {javadoc-root}/io/mateo/cxf/codegen/dsl/CxfCodegenExtension.html[CxfCodegenExtension]
