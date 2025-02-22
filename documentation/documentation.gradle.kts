@@ -65,9 +65,11 @@ tasks {
         sources {
             include("**/index.adoc")
         }
-        attributes(mapOf(
-            "releaseNotesUrl" to "../release-notes/index.html#release-notes"
-        ))
+        attributes(
+            mapOf(
+                "releaseNotesUrl" to "../release-notes/index.html#release-notes",
+            ),
+        )
     }
 
     withType<AbstractAsciidoctorTask>().configureEach {
