@@ -12,76 +12,71 @@ permissions:
   contents: read
 
 jobs:
-  Linux:
-    runs-on: ubuntu-latest
+  build:
+    name: "${{ matrix.os.name}}"
+    runs-on: ${{ matrix.os.id }}
+    if: ${{ github.repository == 'ciscoo/cxf-codegen-gradle' }}
+    strategy:
+      matrix:
+        os:
+          - id: ubuntu-latest
+            name: Linux
+          - id: windows-latest
+            name: Windows
+          - id: macos-latest
+            name: macOS
     steps:
-      - name: Checkout repository
+      - name: Prepare Windows runner
+        if: ${{ runner.os == 'Windows' }}
+        run: |
+          git config --global core.autocrlf true
+          git config --global core.longPaths true
+          Stop-Service -name Docker
+      - name: Check Out Repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - name: Main Build
-        uses: ./.github/actions/run-gradle
+      - name: Setup Gradle
+        uses: ./.github/actions/setup-gradle
+      - name: Run Checks
+        shell: bash
+        run: ./gradlew check
       - name: Upload to Codecov.io
-        uses: codecov/codecov-action@v3
-      - name: Functional Tests
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: functionalTest
+        if: ${{ runner.os == 'Linux' }}
+        uses: codecov/codecov-action@v5
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Run Checks
+        shell: bash
+        run: ./gradlew functionalTest
 
-  Windows:
-    runs-on: windows-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - name: Main Build
-        uses: ./.github/actions/run-gradle
-      - name: Functional Tests
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: functionalTest
-
-  macOS:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - name: Main Build
-        uses: ./.github/actions/run-gradle
-      - name: Functional Tests
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: functionalTest
 
   publish_snapshot_artifacts:
     name: Publish Snapshot Artifacts
-    needs: linux
+    needs: build
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
     steps:
-      - uses: actions/checkout@v4
+      - name: Check Out Repository
+        uses: actions/checkout@v4
+      - name: Setup Gradle
+        uses: ./.github/actions/setup-gradle
       - name: Publish
-        uses: ./.github/actions/run-gradle
+        run: ./gradlew publishAllPublicationsToSonatypeSnapshotsRepository -x check
         env:
           ORG_GRADLE_PROJECT_sonatypeSnapshotsUsername: ${{ secrets.SONATYPE_USERNAME }}
           ORG_GRADLE_PROJECT_sonatypeSnapshotsPassword: ${{ secrets.SONATYPE_PASSWORD }}
-        with:
-          arguments: publishAllPublicationsToSonatypeSnapshotsRepository -x check
 
   update_snapshot_documentation:
     name: Update Snapshot Documentation
-    needs: Linux
+    needs: build
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
     steps:
-      - uses: actions/checkout@v4
+      - name: Check Out Repository
+        uses: actions/checkout@v4
+      - name: Setup Gradle
+        uses: ./.github/actions/setup-gradle
       - name: Publish Snapshot Documentation
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: gitPublishPush -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false
+        run: ./gradlew gitPublishPush -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false
         env:
           GRGIT_USER: ${{ github.actor }}
           GRGIT_PASS: ${{ secrets.GH_TOKEN }}

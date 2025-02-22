@@ -1,0 +1,23 @@
+name: Prepare Java
+description: Prepare a Java installation for a build.
+inputs:
+  java-version:
+    description: The Java version to compile and test with.
+    required: true
+  java-distribution:
+    description: The Java distribution to use for the build.
+    required: true
+outputs:
+  path:
+    description: Path to where the Java environment has been installed (same as $JAVA_HOME).
+    value: ${{ steps.setup-java.outputs.path }}
+runs:
+  using: "composite"
+  steps:
+    - name: "Set up Java ${{ inputs.java-version }} ${{ inputs.java-distribution }}"
+      id: setup-java
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ inputs.java-version }}
+        distribution: ${{ inputs.java-distribution }}
+        check-latest: true
