@@ -653,7 +653,7 @@ pre.rouge {
 }
 </style>
 </head>
-<body id="user-guide" class="book toc2 toc-left">
+<body id="user-guide" class="article toc2 toc-left">
 <div id="header">
 <h1>CXF Codegen User Guide</h1>
 <div class="details">
@@ -719,6 +719,7 @@ pre.rouge {
 <li><a href="#examples.using-xjc-extensions">5.5. Using XJC Extensions</a></li>
 </ul>
 </li>
+<li><a href="#release-notes">6. Release Notes</a></li>
 </ul>
 </div>
 </div>
@@ -806,10 +807,10 @@ using the <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:pl
 <p>8.9</p>
 </li>
 <li>
-<p>8.10</p>
+<p>8.10.1</p>
 </li>
 <li>
-<p>8.11</p>
+<p>8.11.1</p>
 </li>
 <li>
 <p>8.12.1</p>
@@ -833,7 +834,7 @@ the source of the <a href="https://github.com/ciscoo/cxf-codegen-gradle/tree/mas
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-All examples are written for <em>and</em> are tested for Gradle 8.10.
+All examples are written for <em>and</em> are tested for Gradle 8.10.1.
 Depending on your Gradle version, you may need to adapt the example to a syntax that is compatible
 with your Gradle version.
 </td>
@@ -963,7 +964,7 @@ Gradle&#8217;s dependency management instead.</p>
 <td class="content">
 <div class="paragraph">
 <p>You will need to ensure the version of CXF you specify is compatible with the
-<a href="#options-usage">options</a> used <strong>and</strong> your application&#8217;s version of <a href="https://jakarta.ee/specifications/">Jakarta EE</a> (Java EE).</p>
+<a href="generating-java.html#options-usage">options</a> used <strong>and</strong> your application&#8217;s version of <a href="https://jakarta.ee/specifications/">Jakarta EE</a> (Java EE).</p>
 </div>
 <div class="paragraph">
 <p>Additionally, depending on the version of you CXF you specify, you will also need to ensure you have the appropriate
@@ -1400,7 +1401,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The example below configures logging for <strong>all</strong> <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2JavaTask.html">Wsdl2JavaTask</a></code> tasks.
+The example below configures logging for <strong>all</strong> <code><a href="../api/io/mateo/cxf/codegen/wsdl2java/Wsdl2Java.html">Wsdl2JavaTask</a></code> tasks.
 </td>
 </tr>
 </table>
@@ -1572,13 +1573,13 @@ for <code><a href="../api/io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#metho
 <div class="sect2">
 <h3 id="generating-javascript-sources.default-options"><a class="anchor" href="#generating-javascript-sources.default-options"></a>4.3. Default Options</h3>
 <div class="paragraph">
-<p>You may want to configure options that apply to all tasks. This is can be accomplished using native Gradle functionality. Refer to the <a href="#default-options">default options</a> section in the documentation for generating Java sources for examples. Replace <code>Wsdl2Java</code> with <code>Wsdl2Js</code> in the examples.</p>
+<p>You may want to configure options that apply to all tasks. This is can be accomplished using native Gradle functionality. Refer to the <a href="generating-java.html#default-options">default options</a> section in the documentation for generating Java sources for examples. Replace <code>Wsdl2Java</code> with <code>Wsdl2Js</code> in the examples.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="generating-javascript-sources.logging"><a class="anchor" href="#generating-javascript-sources.logging"></a>4.4. Logging</h3>
 <div class="paragraph">
-<p>Refer to the <a href="#logging">documentation</a> for generating Java sources. The process for enabling or disabling logs is the same. Replace <code>Wsdl2Java</code> with <code>Wsdl2Js</code>.</p>
+<p>Refer to the <a href="generating-java.html#logging">documentation</a> for generating Java sources. The process for enabling or disabling logs is the same. Replace <code>Wsdl2Java</code> with <code>Wsdl2Js</code>.</p>
 </div>
 </div>
 </div>
@@ -1598,7 +1599,7 @@ for <code><a href="../api/io/mateo/cxf/codegen/wsdl2js/Wsdl2JsOptions.html#metho
 <td class="content">
 <div class="paragraph">
 <p>You will need to ensure you have the appropriate dependencies when generating code. Additionally, there may be more dependencies the CXF Codegen
-tool requires. Review <a href="#dependency-configuration">dependency configuration</a> documentation on how to
+tool requires. Review <a href="plugin-configuration.html#dependency-configuration">dependency configuration</a> documentation on how to
 add additional dependencies to the CXF Codegen tool classpath.</p>
 </div>
 <div class="paragraph">
@@ -1615,7 +1616,7 @@ add additional dependencies to the CXF Codegen tool classpath.</p>
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-All examples are written for <em>and</em> tested for Gradle 8.10.
+All examples are written for <em>and</em> tested for Gradle 8.10.1.
 Depending on your Gradle version, you may need to adapt the example to a syntax that is compatible
 with your Gradle version.
 </td>
@@ -1646,7 +1647,7 @@ It is responsibility of the user to provide the location a WSDL. This keeps the 
 <ol class="loweralpha" type="a">
 <li>
 <p>The <code>defaultOptions</code> configuration does not exist in this Gradle plugin. Instead, use native Gradle APIs to accomplish
-the same thing. Refer to the <a href="#default-options">default options</a> section for details.</p>
+the same thing. Refer to the <a href="generating-java.html#default-options">default options</a> section for details.</p>
 </li>
 </ol>
 </div>
@@ -1990,11 +1991,18 @@ For example, to use the WSDL published in the <code>cxf-testutils</code> JAR art
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="release-notes"><a class="anchor" href="#release-notes"></a>6. Release Notes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The release notes are available <a href="../release-notes/index.html#release-notes">here</a>.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 2.5.0-SNAPSHOT<br>
-Last updated 2025-02-20 03:18:15 UTC
 </div>
 </div>
 </body>
