@@ -35,6 +35,9 @@ import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.TaskCollection;
+import org.gradle.util.GradleVersion;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * {@link Plugin} for code generation from WSDLs using Apache CXF.
@@ -44,6 +47,8 @@ public class CxfCodegenPlugin implements Plugin<Project> {
     private static final String WSDL2JAVA_TOOL_MAIN_CLASS = "org.apache.cxf.tools.wsdlto.WSDLToJava";
 
     private static final String WSDL2JS_TOOL_MAIN_CLASS = "org.apache.cxf.tools.wsdlto.javascript.WSDLToJavaScript";
+
+    private static final Logger logger = LoggerFactory.getLogger(CxfCodegenPlugin.class);
 
     /**
      * Name of the {@link Configuration} where dependencies are used for code generation.
@@ -72,12 +77,23 @@ public class CxfCodegenPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
+        warnForDeprecatedGradleVersion();
         CxfCodegenExtension extension = createExtension(project);
         NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration = createConfiguration(project, extension);
         configureWsdl2JavaTaskConventions(project, cxfCodegenConfiguration);
         configureWsdl2JsTaskConventions(project, cxfCodegenConfiguration);
         addToSourceSet(project);
         registerAggregateTask(project);
+    }
+
+    private void warnForDeprecatedGradleVersion() {
+        GradleVersion currentGradleVersion = GradleVersion.version(System.getProperty(
+                "GRADLE_VERSION_OVERRIDE", GradleVersion.current().getVersion()));
+        if (currentGradleVersion.compareTo(GradleVersion.version("8.11")) < 0) {
+            logger.warn(
+                    "Support for Gradle versions less than 8.11 is deprecated. You are using Gradle {}.",
+                    GradleVersion.current().getVersion());
+        }
     }
 
     private CxfCodegenExtension createExtension(Project project) {

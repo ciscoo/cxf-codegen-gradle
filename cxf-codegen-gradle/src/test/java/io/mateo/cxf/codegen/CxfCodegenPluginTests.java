@@ -258,6 +258,47 @@ class CxfCodegenPluginTests {
                 .isEqualTo(GeneratedVersionAccessor.CXF_VERSION));
     }
 
+    @org.junitpioneer.jupiter.SetSystemProperty(key = "GRADLE_VERSION_OVERRIDE", value = "8.10")
+    @Test
+    void warnForDeprecated() throws IllegalAccessException {
+        var message = new java.util.concurrent.atomic.AtomicReference<String>();
+        var logger = (org.gradle.internal.logging.slf4j.OutputEventListenerBackedLogger)
+                org.slf4j.LoggerFactory.getLogger(CxfCodegenPlugin.class);
+
+        var contextField = org.apache.commons.lang3.reflect.FieldUtils.getField(
+                org.gradle.internal.logging.slf4j.OutputEventListenerBackedLogger.class, "context", true);
+        var context =
+                (org.gradle.internal.logging.slf4j.OutputEventListenerBackedLoggerContext) contextField.get(logger);
+        context.setOutputEventListener(
+                logEvent -> message.getAndSet(((org.gradle.internal.logging.events.LogEvent) logEvent).getMessage()));
+
+        Project project = ProjectBuilder.builder().build();
+        project.getPlugins().apply("io.mateo.cxf-codegen");
+
+        assertThat(message.get())
+                .isEqualTo("Support for Gradle versions less than 8.11 is deprecated. You are using Gradle 8.10.");
+    }
+
+    @org.junitpioneer.jupiter.SetSystemProperty(key = "GRADLE_VERSION_OVERRIDE", value = "8.11")
+    @Test
+    void noWarningForDeprecated() throws IllegalAccessException {
+        var message = new java.util.concurrent.atomic.AtomicReference<String>();
+        var logger = (org.gradle.internal.logging.slf4j.OutputEventListenerBackedLogger)
+                org.slf4j.LoggerFactory.getLogger(CxfCodegenPlugin.class);
+
+        var contextField = org.apache.commons.lang3.reflect.FieldUtils.getField(
+                org.gradle.internal.logging.slf4j.OutputEventListenerBackedLogger.class, "context", true);
+        var context =
+                (org.gradle.internal.logging.slf4j.OutputEventListenerBackedLoggerContext) contextField.get(logger);
+        context.setOutputEventListener(
+                logEvent -> message.getAndSet(((org.gradle.internal.logging.events.LogEvent) logEvent).getMessage()));
+
+        Project project = ProjectBuilder.builder().build();
+        project.getPlugins().apply("io.mateo.cxf-codegen");
+
+        assertThat(message.get()).isNull();
+    }
+
     @SuppressWarnings("unchecked")
     public <T> T uncheckedCast(Object object) {
         return (T) object;

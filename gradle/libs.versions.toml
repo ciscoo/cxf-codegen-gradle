@@ -6,6 +6,8 @@ junit = "5.11.3"
 [libraries]
 junit-Bom = { module = "org.junit:junit-bom", version.ref = "junit" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junit-pioneer = { module = "org.junit-pioneer:junit-pioneer", version = "2.3.0" }
+apache-lang3 = { module = "org.apache.commons:commons-lang3", version = "3.17.0" }
 assertj-core = { module = "org.assertj:assertj-core", version = "3.26.3" }
 javapoet = { module = "com.palantir.javapoet:javapoet", version = "0.6.0" }
 gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version = "6.25.0" }
