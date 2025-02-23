@@ -87,9 +87,9 @@ for `{wsdl2js-options}` for more details.
 [[generating-javascript-sources.default-options]]
 == Default Options
 
-You may want to configure options that apply to all tasks. This is can be accomplished using native Gradle functionality. Refer to the <<generating-java#default-options, default options>> section in the documentation for generating Java sources for examples. Replace `Wsdl2Java` with `Wsdl2Js` in the examples.
+You may want to configure options that apply to all tasks. This is can be accomplished using native Gradle functionality. Refer to the <<default-options-java, default options>> section in the documentation for generating Java sources for examples. Replace `Wsdl2Java` with `Wsdl2Js` in the examples.
 
 [[generating-javascript-sources.logging]]
 == Logging
 
-Refer to the <<generating-java#logging, documentation>> for generating Java sources. The process for enabling or disabling logs is the same. Replace `Wsdl2Java` with `Wsdl2Js`.
+Refer to the <<logging, documentation>> for generating Java sources. The process for enabling or disabling logs is the same. Replace `Wsdl2Java` with `Wsdl2Js`.

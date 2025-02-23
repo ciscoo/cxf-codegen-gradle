@@ -73,7 +73,7 @@ Gradle's dependency management instead.
 [CAUTION]
 ====
 You will need to ensure the version of CXF you specify is compatible with the
-<<generating-java.adoc#options-usage, options>> used **and** your application's version of https://jakarta.ee/specifications/[Jakarta EE] (Java EE).
+<<options-usage, options>> used **and** your application's version of https://jakarta.ee/specifications/[Jakarta EE] (Java EE).
 
 Additionally, depending on the version of you CXF you specify, you will also need to ensure you have the appropriate
 dependencies for the `cxfCodegen` classpath and/or your application's classpath.

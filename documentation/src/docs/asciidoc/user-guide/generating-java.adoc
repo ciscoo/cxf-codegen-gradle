@@ -104,7 +104,7 @@ include::../../gradle/generating-java/tool-options.gradle[tags=code]
 There are more options available than what is shown above. View the method summary section in the Javadoc
 for `{wsdl-option}` for more details.
 
-[[default-options]]
+[[default-options-java]]
 == Default Options
 
 You may want to configure options that apply to all tasks. This is easily accomplished using native Gradle functionality.
