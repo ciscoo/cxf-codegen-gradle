@@ -28,8 +28,9 @@ gitPublish {
 
     preserve {
         include("**/*")
-        exclude("docs/$docsVersion/**")
-        if (replaceCurrentDocs) {
+        if (snapshot) {
+            exclude("docs/snapshot/**")
+        } else {
             exclude("docs/current/**")
         }
     }
@@ -103,25 +104,19 @@ tasks {
             into("api")
         }
         from(asciidoctor)
-        into(docsDir.map { it.dir(docsVersion) })
+        into(docsDir.map { it.dir(if (snapshot) "snapshot" else "current") })
         includeEmptyDirs = false
     }
 
-    val createCurrentDocsFolder by registering(Copy::class) {
-        from(prepareDocsForGitHubPages)
-        into(docsDir.map { it.dir("current") })
-        onlyIf { replaceCurrentDocs }
-    }
-
     build {
-        dependsOn(createCurrentDocsFolder)
+        dependsOn(prepareDocsForGitHubPages)
     }
 
     gitPublishCopy {
-        dependsOn(createCurrentDocsFolder)
+        dependsOn(prepareDocsForGitHubPages)
     }
 
     gitPublishCommit {
-        dependsOn(createCurrentDocsFolder)
+        dependsOn(prepareDocsForGitHubPages)
     }
 }
