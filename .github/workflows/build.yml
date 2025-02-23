@@ -48,7 +48,6 @@ jobs:
         shell: bash
         run: ./gradlew functionalTest
 
-
   publish_snapshot_artifacts:
     name: Publish Snapshot Artifacts
     needs: build
