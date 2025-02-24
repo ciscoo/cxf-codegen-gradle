@@ -79,6 +79,7 @@ tasks {
             this as StandardJavadocDocletOptions
             docTitle = "CXF Codegen Gradle Plugin $version API"
         }
+        source = sourceSets.main.map { it.allJava.filter { !it.canonicalPath.contains("internal") }.asFileTree }.get()
     }
     test {
         finalizedBy(jacocoTestReport)
