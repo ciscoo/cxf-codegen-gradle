@@ -10,21 +10,21 @@ CXF Codegen Gradle repository on GitHub.
 [[release-notes-2.5.0-bug-fixes]]
 === Bug Fixes
 
-* ??
+* None
 
 [[release-notes-2.5.0-deprecations]]
 === Deprecations
 
-* ??
+* None
 
 [[release-notes-2.5.0-breaking-changes]]
 === Breaking Changes
 
-* ??
+* None
 
 [[release-notes-2.5.0-new-features-and-improvements]]
 === New Features and Improvements
 
 * Changelog added to documentation
 * Documentation samples now use Kotlin property assignment.
-* Upgrade to Apache CXF 4.1.0
+* Upgrade to Apache CXF 4.1.1
