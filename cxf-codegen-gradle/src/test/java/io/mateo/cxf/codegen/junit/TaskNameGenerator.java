@@ -16,6 +16,7 @@
 package io.mateo.cxf.codegen.junit;
 
 import java.lang.reflect.Method;
+import java.util.List;
 import org.junit.jupiter.api.DisplayNameGenerator;
 
 /**
@@ -35,12 +36,13 @@ public final class TaskNameGenerator implements DisplayNameGenerator {
     }
 
     @Override
-    public String generateDisplayNameForNestedClass(Class<?> nestedClass) {
-        return STANDARD_DISPLAY_NAME_GENERATOR.generateDisplayNameForNestedClass(nestedClass);
+    public String generateDisplayNameForNestedClass(List<Class<?>> enclosingInstanceTypes, Class<?> nestedClass) {
+        return STANDARD_DISPLAY_NAME_GENERATOR.generateDisplayNameForNestedClass(enclosingInstanceTypes, nestedClass);
     }
 
     @Override
-    public String generateDisplayNameForMethod(Class<?> testClass, Method testMethod) {
+    public String generateDisplayNameForMethod(
+            List<Class<?>> enclosingInstanceTypes, Class<?> testClass, Method testMethod) {
         return testMethod.getName();
     }
 }
