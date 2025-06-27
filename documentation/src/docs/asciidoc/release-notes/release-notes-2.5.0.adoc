@@ -15,7 +15,7 @@ CXF Codegen Gradle repository on GitHub.
 [[release-notes-2.5.0-deprecations]]
 === Deprecations
 
-* None
+* Deprecate support for Gradle versions < 8.11
 
 [[release-notes-2.5.0-breaking-changes]]
 === Breaking Changes
@@ -27,4 +27,7 @@ CXF Codegen Gradle repository on GitHub.
 
 * Changelog added to documentation
 * Documentation samples now use Kotlin property assignment.
-* Upgrade to Apache CXF 4.1.1
+* Upgrade to Apache CXF 4.1.2
+* Upgrade to SLF4J 2.0.17
+* Test against Gradle 8.13
+* Test against Gradle 8.14
