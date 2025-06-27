@@ -58,7 +58,7 @@ class PluginConfigurationFunctionalTests {
         assertThat(result.getOutput()).contains("Configured CXF version = 3.2.0");
         assertThat(result.getOutput())
                 .contains(
-                        "[org.slf4j:slf4j-nop:2.0.16, org.apache.cxf:cxf-core:3.2.0, org.apache.cxf:cxf-tools-common:3.2.0, org.apache.cxf:cxf-tools-wsdlto-core:3.2.0, org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:3.2.0]");
+                        "[org.slf4j:slf4j-nop:2.0.17, org.apache.cxf:cxf-core:3.2.0, org.apache.cxf:cxf-tools-common:3.2.0, org.apache.cxf:cxf-tools-wsdlto-core:3.2.0, org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:3.2.0, org.apache.cxf:cxf-tools-wsdlto-frontend-javascript:3.2.0]");
     }
 
     Path scriptFor(String name) {
