@@ -38,7 +38,7 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 
     public GradleCompatibilityExtension() {
         this.gradleVersions =
-                List.of("8.4", "8.5", "8.6", "8.7", "8.8", "8.9", "current", "8.11.1", "8.12.1", "8.13", "8.14");
+                List.of("8.4", "8.5", "8.6", "8.7", "8.8", "8.9", "current", "8.11.1", "8.12.1", "8.13", "8.14.2");
     }
 
     public GradleCompatibilityExtension(String... versions) {
