@@ -19,9 +19,6 @@ dependencies {
     libsCatalog.findLibrary("junit-pioneer").ifPresent {
         testImplementation(it)
     }
-    libsCatalog.findLibrary("apache-lang3").ifPresent {
-        testImplementation(it)
-    }
     libsCatalog.findLibrary("assertj-core").ifPresent {
         testImplementation(it)
     }
