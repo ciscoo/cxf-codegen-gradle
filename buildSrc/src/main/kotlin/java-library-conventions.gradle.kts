@@ -34,7 +34,7 @@ java {
 
 testing {
     suites {
-        withType(JvmTestSuite::class) {
+        withType<JvmTestSuite> {
             libsCatalog.findVersion("junit").ifPresent {
                 useJUnitJupiter(it.requiredVersion)
             }
