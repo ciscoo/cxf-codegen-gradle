@@ -68,7 +68,13 @@ testing {
 
 gradlePlugin.testSourceSets(sourceSets["functionalTest"])
 
+val stagingRepoDir = layout.buildDirectory.dir("staging-repo")
+
 tasks {
+    register<Delete>("cleanStagingRepo") {
+        description = "Deletes only the staging repository directory."
+        delete(stagingRepoDir)
+    }
     withType<Jar>().configureEach {
         manifest.attributes["Automatic-Module-Name"] = "io.mateo.cxf.codegen"
     }
@@ -90,6 +96,9 @@ tasks {
             xml.required = true
         }
     }
+    register("publishAllToStagingRepository") {
+        dependsOn(withType<PublishToMavenRepository>().named { it.endsWith("ToStagingRepository") })
+    }
 }
 val isSnapshot = project.version.toString().endsWith("SNAPSHOT")
 
@@ -108,6 +117,10 @@ publishing {
             name = "sonatypeSnapshots"
             url = uri("https://oss.sonatype.org/content/repositories/snapshots")
             credentials(PasswordCredentials::class)
+        }
+        maven {
+            name = "staging"
+            url = uri(stagingRepoDir.map { it.asFile })
         }
     }
     publications.containerWithType(MavenPublication::class).configureEach {
@@ -161,12 +174,12 @@ afterEvaluate {
         }
     }
     tasks {
-        named("publishCxfCodegenPluginMarkerMavenPublicationToSonatypeSnapshotsRepository") {
+        named("publishCxfCodegenPluginMarkerMavenPublicationToMavenCentralSnapshotsRepository") {
             onlyIf("snapshot") {
                 isSnapshot
             }
         }
-        named("publishPluginMavenPublicationToSonatypeSnapshotsRepository") {
+        named("publishPluginMavenPublicationToMavenCentralSnapshotsRepository") {
             onlyIf("snapshot") {
                 isSnapshot
             }
