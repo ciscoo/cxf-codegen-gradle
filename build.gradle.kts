@@ -1,5 +1,4 @@
 plugins {
-    `nexus-publishing-conventions`
     `code-style-conventions`
 }
 

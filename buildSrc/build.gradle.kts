@@ -8,7 +8,6 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.gradle.nexusPublish)
     implementation(libs.gradle.spotless)
     implementation(libs.javapoet)
 }
