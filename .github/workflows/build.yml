@@ -59,10 +59,10 @@ jobs:
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Publish
-        run: ./gradlew publishAllPublicationsToSonatypeSnapshotsRepository -x check
+        run: ./gradlew publishAllPublicationsToMavenCentralSnapshotsRepository -x check
         env:
-          ORG_GRADLE_PROJECT_sonatypeSnapshotsUsername: ${{ secrets.SONATYPE_USERNAME }}
-          ORG_GRADLE_PROJECT_sonatypeSnapshotsPassword: ${{ secrets.SONATYPE_PASSWORD }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
 
   update_snapshot_documentation:
     name: Update Snapshot Documentation
