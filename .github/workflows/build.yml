@@ -33,7 +33,7 @@ jobs:
           git config --global core.longPaths true
           Stop-Service -name Docker
       - name: Check Out Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Run Checks
@@ -55,7 +55,7 @@ jobs:
     if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
     steps:
       - name: Check Out Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Publish
@@ -71,7 +71,7 @@ jobs:
     if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
     steps:
       - name: Check Out Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Publish Snapshot Documentation
