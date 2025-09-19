@@ -1,9 +1,9 @@
 plugins {
     `java-library-conventions`
-    signing
     jacoco
-    `maven-publish`
     `java-gradle-plugin`
+    `maven-publish`
+    `jreleaser-conventions`
 }
 
 description = "CXF Codegen"
@@ -68,13 +68,7 @@ testing {
 
 gradlePlugin.testSourceSets(sourceSets["functionalTest"])
 
-val stagingRepoDir = layout.buildDirectory.dir("staging-repo")
-
 tasks {
-    register<Delete>("cleanStagingRepo") {
-        description = "Deletes only the staging repository directory."
-        delete(stagingRepoDir)
-    }
     withType<Jar>().configureEach {
         manifest.attributes["Automatic-Module-Name"] = "io.mateo.cxf.codegen"
     }
@@ -96,11 +90,7 @@ tasks {
             xml.required = true
         }
     }
-    register("publishAllToStagingRepository") {
-        dependsOn(withType<PublishToMavenRepository>().named { it.endsWith("ToStagingRepository") })
-    }
 }
-val isSnapshot = project.version.toString().endsWith("SNAPSHOT")
 
 configurations.register("apiDocs") {
     isCanBeConsumed = true
@@ -112,17 +102,6 @@ artifacts {
 }
 
 publishing {
-    repositories {
-        maven {
-            name = "mavenCentralSnapshots"
-            url = uri("https://central.sonatype.com/repository/maven-snapshots")
-            credentials(PasswordCredentials::class)
-        }
-        maven {
-            name = "staging"
-            url = uri(stagingRepoDir.map { it.asFile })
-        }
-    }
     publications.containerWithType(MavenPublication::class).configureEach {
         pom {
             url = "https://github.com/ciscoo/cxf-codegen-gradle"
@@ -151,13 +130,6 @@ publishing {
     }
 }
 
-val isCIEnvironment = System.getenv("CI")?.toBoolean() ?: false
-
-signing {
-    isRequired = !(isSnapshot || isCIEnvironment)
-    sign(publishing.publications)
-}
-
 afterEvaluate {
     publishing {
         publications.named<MavenPublication>("pluginMaven") {
@@ -170,18 +142,6 @@ afterEvaluate {
             pom {
                 name = "CXF Codegen Gradle Plugin Marker"
                 description = "CXF Codegen Gradle plugin marker artifact."
-            }
-        }
-    }
-    tasks {
-        named("publishCxfCodegenPluginMarkerMavenPublicationToMavenCentralSnapshotsRepository") {
-            onlyIf("snapshot") {
-                isSnapshot
-            }
-        }
-        named("publishPluginMavenPublicationToMavenCentralSnapshotsRepository") {
-            onlyIf("snapshot") {
-                isSnapshot
             }
         }
     }
