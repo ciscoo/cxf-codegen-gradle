@@ -34,16 +34,13 @@ jobs:
           Stop-Service -name Docker
       - name: Check Out Repository
         uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Run Checks
         shell: bash
         run: ./gradlew check
-      - name: Upload to Codecov.io
-        if: ${{ runner.os == 'Linux' }}
-        uses: codecov/codecov-action@v5
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Run Functional Tests
         shell: bash
         run: ./gradlew functionalTest
@@ -56,6 +53,8 @@ jobs:
     steps:
       - name: Check Out Repository
         uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Publish
@@ -72,6 +71,8 @@ jobs:
     steps:
       - name: Check Out Repository
         uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Publish Snapshot Documentation

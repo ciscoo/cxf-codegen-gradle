@@ -1,6 +1,8 @@
 name: Validate Gradle Wrapper
 on: [push, pull_request]
 
+permissions: {}
+
 jobs:
   validation:
     name: Validation
@@ -8,5 +10,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - name: Validate Gradle Wrapper
         uses: gradle/actions/wrapper-validation@v4
