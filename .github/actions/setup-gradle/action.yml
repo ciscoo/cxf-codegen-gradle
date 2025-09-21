@@ -28,10 +28,12 @@ runs:
     - name: Set up Toolchain
       if: ${{ inputs.java-toolchain == 'true' }}
       shell: bash
-      run: |
+      run: | # zizmor: ignore[github-env]
         echo "org.gradle.java.installations.auto-download=false" >> $HOME/.gradle/gradle.properties
-        echo "JDK${{ inputs.java-version }}=$JAVA_HOME" >> $GITHUB_ENV
+        echo "JDK$JAVA_VERSION=$JAVA_HOME" >> $GITHUB_ENV
         echo $JAVA_HOME
+      env:
+        JAVA_VERSION: ${{ inputs.java-version }}
     - name: Display Java Toolchain Information
       shell: bash
       run: ./gradlew -q javaToolchains
