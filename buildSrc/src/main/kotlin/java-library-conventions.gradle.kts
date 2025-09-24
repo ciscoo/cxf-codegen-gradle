@@ -16,9 +16,6 @@ dependencies {
     libsCatalog.findLibrary("junit-jupiter").ifPresent {
         testImplementation(it)
     }
-    libsCatalog.findLibrary("junit-pioneer").ifPresent {
-        testImplementation(it)
-    }
     libsCatalog.findLibrary("assertj-core").ifPresent {
         testImplementation(it)
     }

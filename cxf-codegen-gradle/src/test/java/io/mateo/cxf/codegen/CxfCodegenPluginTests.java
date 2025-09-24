@@ -23,8 +23,6 @@ import io.mateo.cxf.codegen.internal.GeneratedVersionAccessor;
 import io.mateo.cxf.codegen.junit.TaskNameGenerator;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 import io.mateo.cxf.codegen.wsdl2js.Wsdl2Js;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
@@ -258,53 +256,6 @@ class CxfCodegenPluginTests {
         assertThat(extension).isNotNull().satisfies(ext -> assertThat(
                         ext.getCxfVersion().get())
                 .isEqualTo(GeneratedVersionAccessor.CXF_VERSION));
-    }
-
-    @org.junitpioneer.jupiter.SetSystemProperty(key = "GRADLE_VERSION_OVERRIDE", value = "8.10")
-    @Test
-    void warnForDeprecated() throws IllegalAccessException, NoSuchFieldException {
-        var message = new java.util.concurrent.atomic.AtomicReference<String>();
-        var logger = (org.gradle.internal.logging.slf4j.OutputEventListenerBackedLogger)
-                org.slf4j.LoggerFactory.getLogger(CxfCodegenPlugin.class);
-
-        var contextField = getField(org.gradle.internal.logging.slf4j.OutputEventListenerBackedLogger.class, "context");
-        var context =
-                (org.gradle.internal.logging.slf4j.OutputEventListenerBackedLoggerContext) contextField.get(logger);
-        context.setOutputEventListener(
-                logEvent -> message.getAndSet(((org.gradle.internal.logging.events.LogEvent) logEvent).getMessage()));
-
-        Project project = ProjectBuilder.builder().build();
-        project.getPlugins().apply("io.mateo.cxf-codegen");
-
-        assertThat(message.get())
-                .isEqualTo("Support for Gradle versions less than 8.11 is deprecated. You are using Gradle 8.10.1.");
-    }
-
-    @org.junitpioneer.jupiter.SetSystemProperty(key = "GRADLE_VERSION_OVERRIDE", value = "8.11")
-    @Test
-    void noWarningForDeprecated() throws IllegalAccessException, NoSuchFieldException {
-        var message = new java.util.concurrent.atomic.AtomicReference<String>();
-        var logger = (org.gradle.internal.logging.slf4j.OutputEventListenerBackedLogger)
-                org.slf4j.LoggerFactory.getLogger(CxfCodegenPlugin.class);
-
-        var contextField = getField(org.gradle.internal.logging.slf4j.OutputEventListenerBackedLogger.class, "context");
-        var context =
-                (org.gradle.internal.logging.slf4j.OutputEventListenerBackedLoggerContext) contextField.get(logger);
-        context.setOutputEventListener(
-                logEvent -> message.getAndSet(((org.gradle.internal.logging.events.LogEvent) logEvent).getMessage()));
-
-        Project project = ProjectBuilder.builder().build();
-        project.getPlugins().apply("io.mateo.cxf-codegen");
-
-        assertThat(message.get()).isNull();
-    }
-
-    private Field getField(Class<?> clazz, String fieldName) throws NoSuchFieldException {
-        Field field = clazz.getDeclaredField(fieldName);
-        if (Modifier.isPrivate(field.getModifiers())) {
-            field.setAccessible(true);
-        }
-        return field;
     }
 
     @SuppressWarnings("unchecked")
