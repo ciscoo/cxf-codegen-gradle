@@ -1,7 +1,7 @@
 [[release-notes-2.5.0]]
 == 2.5.0
 
-*Date of Release:* ??
+*Date of Release:* 2025-09-25
 
 For a complete list of all _closed_ issues and pull requests for this release, consult the
 https://github.com/ciscoo/cxf-codegen-gradle/milestone/18?closed=1[2.5.0] milestone page in the

@@ -20,7 +20,7 @@ primarily to track download statistics which the Gradle Plugin portal https://gi
 ----
 plugins {
     java
-    id("io.mateo.cxf-codegen") version "2.4.1"
+    id("io.mateo.cxf-codegen") version "2.5.0"
 }
 ----
 
@@ -37,7 +37,7 @@ plugins {
 ----
 plugins {
     id "java"
-    id "io.mateo.cxf-codegen" version "2.4.1"
+    id "io.mateo.cxf-codegen" version "2.5.0"
 }
 ----
 
