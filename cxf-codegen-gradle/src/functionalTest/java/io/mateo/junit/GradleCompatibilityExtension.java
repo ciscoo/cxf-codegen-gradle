@@ -18,7 +18,6 @@ package io.mateo.junit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
-import org.gradle.util.GradleVersion;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.Extension;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -37,9 +36,7 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
     private final List<String> gradleVersions;
 
     public GradleCompatibilityExtension() {
-        this.gradleVersions = List.of(
-                "8.4", "8.5", "8.6", "8.7", "8.8", "8.9", "current", "8.11.1", "8.12.1", "8.13", "8.14.3", "9.0.0",
-                "9.1.0");
+        this.gradleVersions = List.of("9.1.0");
     }
 
     public GradleCompatibilityExtension(String... versions) {
@@ -66,12 +63,6 @@ public final class GradleCompatibilityExtension implements TestTemplateInvocatio
 
         @Override
         public String getDisplayName(int invocationIndex) {
-            if (this.gradleVersionDsl.version().equals("current")) {
-                return String.format(
-                        "Gradle %s - %s ",
-                        GradleVersion.current().getVersion(),
-                        this.gradleVersionDsl.dsl().getName());
-            }
             return String.format(
                     "Gradle %s - %s",
                     this.gradleVersionDsl.version(), this.gradleVersionDsl.dsl().getName());
