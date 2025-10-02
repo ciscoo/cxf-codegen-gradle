@@ -149,7 +149,6 @@ public class CxfCodegenPlugin implements Plugin<Project> {
     private NamedDomainObjectProvider<Configuration> createConfiguration(
             Project project, CxfCodegenExtension extension) {
         return project.getConfigurations().register(CXF_CODEGEN_CONFIGURATION_NAME, configuration -> {
-            configuration.setVisible(false);
             configuration.setCanBeConsumed(false);
             configuration.setCanBeResolved(true);
             configuration.setDescription("Classpath for CXF Codegen.");

@@ -62,7 +62,6 @@ class CxfCodegenPluginTests {
                 this.project.getConfigurations().findByName(CxfCodegenPlugin.CXF_CODEGEN_CONFIGURATION_NAME);
 
         assertThat(configuration).isNotNull();
-        assertThat(configuration.isVisible()).isFalse();
         assertThat(configuration.isCanBeConsumed()).isFalse();
         assertThat(configuration.isCanBeResolved()).isTrue();
         assertThat(configuration.getDescription()).isEqualTo("Classpath for CXF Codegen.");
