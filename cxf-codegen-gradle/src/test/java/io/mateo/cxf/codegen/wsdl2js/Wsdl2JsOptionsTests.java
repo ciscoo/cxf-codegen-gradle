@@ -185,26 +185,28 @@ class Wsdl2JsOptionsTests {
     private Wsdl2Js createTask(String taskName, Action<? super Wsdl2JsOptions> configurer) {
         return this.project
                 .getTasks()
-                .create(
+                .register(
                         taskName,
                         Wsdl2Js.class,
                         wsdl2java -> wsdl2java.toolOptions(options -> {
                             options.getOutputDir().set(this.outputDir.toFile());
                             options.getWsdl().set(this.wsdl.toString());
                             configurer.execute(options);
-                        }));
+                        }))
+                .get();
     }
 
     private Wsdl2Js createTask(String taskName) {
         return this.project
                 .getTasks()
-                .create(
+                .register(
                         taskName,
                         Wsdl2Js.class,
                         wsdl2java -> wsdl2java.toolOptions(options -> {
                             options.getOutputDir().set(this.outputDir.toFile());
                             options.getWsdl().set(this.wsdl.toString());
-                        }));
+                        }))
+                .get();
     }
 
     @Nested

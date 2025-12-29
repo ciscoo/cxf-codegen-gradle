@@ -653,7 +653,7 @@ class Wsdl2JavaOptionsTests {
     private Wsdl2Java createTask(String taskName, Action<? super Wsdl2JavaOptions> configurer) {
         return this.project
                 .getTasks()
-                .create(
+                .register(
                         taskName,
                         Wsdl2Java.class,
                         wsdl2java -> wsdl2java.toolOptions(options -> {
@@ -661,26 +661,31 @@ class Wsdl2JavaOptionsTests {
                             options.getWsdl()
                                     .set(this.wsdl.toAbsolutePath().toUri().toString());
                             configurer.execute(options);
-                        }));
+                        }))
+                .get();
     }
 
     private Wsdl2Java createTask(String taskName) {
         return this.project
                 .getTasks()
-                .create(
+                .register(
                         taskName,
                         Wsdl2Java.class,
                         wsdl2java -> wsdl2java.toolOptions(options -> {
                             options.getOutputDir().set(this.outputDir.toFile());
                             options.getWsdl()
                                     .set(this.wsdl.toAbsolutePath().toUri().toString());
-                        }));
+                        }))
+                .get();
     }
 
     private Wsdl2Java createTaskWithConfiguration(String taskName, Action<? super Wsdl2JavaOptions> configurer) {
-        return this.project.getTasks().create(taskName, Wsdl2Java.class, wsdl2java -> {
-            wsdl2java.getWsdl2JavaOptions().getOutputDir().set(this.outputDir.toFile());
-            wsdl2java.toolOptions(configurer);
-        });
+        return this.project
+                .getTasks()
+                .register(taskName, Wsdl2Java.class, wsdl2java -> {
+                    wsdl2java.getWsdl2JavaOptions().getOutputDir().set(this.outputDir.toFile());
+                    wsdl2java.toolOptions(configurer);
+                })
+                .get();
     }
 }
