@@ -12,7 +12,7 @@ gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", ver
 slf4j-nop = { module = "org.slf4j:slf4j-nop", version.ref = "slf4j" } # Unused; exists to allow automatic updates.
 
 [plugins]
-gitPublish = { id = "org.ajoberstar.git-publish", version = "4.2.1" }
+gitPublish = { id = "org.ajoberstar.git-publish", version = "4.2.2" }
 asciidoctorJvmConvert = { id = "org.asciidoctor.jvm.convert", version = "4.0.5" }
 spotless = { id = "com.diffplug.spotless" }
 jreleaser = { id = "org.jreleaser", version = "1.21.0" }
