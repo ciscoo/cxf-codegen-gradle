@@ -20,16 +20,16 @@ import org.gradle.api.provider.Property;
 /**
  * Configuration options for the plugin.
  */
-public abstract class CxfCodegenExtension {
+public interface CxfCodegenExtension {
 
     /**
      * Name of this extension.
      */
-    public static final String EXTENSION_NAME = "cxfCodegen";
+    String EXTENSION_NAME = "cxfCodegen";
 
     /**
      * Specify the version of Apache CXF dependencies. The convention is
      * {@value io.mateo.cxf.codegen.internal.GeneratedVersionAccessor#CXF_VERSION}
      */
-    public abstract Property<String> getCxfVersion();
+    Property<String> getCxfVersion();
 }
