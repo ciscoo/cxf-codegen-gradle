@@ -71,7 +71,7 @@ tasks {
     }
 
     compileJava {
-        options.release = JavaVersion.VERSION_1_8.majorVersion.toInt()
+        options.release = java.toolchain.languageVersion.map { it.asInt() }
         options.compilerArgs.addAll(listOf("-Xlint:all", "-Werror"))
     }
 
