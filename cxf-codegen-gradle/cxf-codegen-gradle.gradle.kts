@@ -26,6 +26,10 @@ gradlePlugin {
     }
 }
 
+dependencies {
+    compileOnly(libs.cxf.toolsWsdltoCore)
+}
+
 val generateVersionAccessor =
     tasks.register("generateVersionAccessor", io.mateo.build.GenerateVersionAccessor::class) {
         cxfVersion = libs.versions.cxf

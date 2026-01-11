@@ -15,6 +15,9 @@
  */
 package io.mateo.cxf.codegen.dsl;
 
+import org.gradle.api.Action;
+import org.gradle.api.ExtensiblePolymorphicDomainObjectContainer;
+import org.gradle.api.Incubating;
 import org.gradle.api.provider.Property;
 
 /**
@@ -32,4 +35,26 @@ public interface CxfCodegenExtension {
      * {@value io.mateo.cxf.codegen.internal.GeneratedVersionAccessor#CXF_VERSION}
      */
     Property<String> getCxfVersion();
+
+    /**
+     * The options for the code generation.
+     * @return code generations options
+     */
+    @Incubating
+    ExtensiblePolymorphicDomainObjectContainer<Option> getOptions();
+
+    /**
+     * Whether the generated sources should be added to the main source set. The convention is {@code true}.
+     * @return whether to add to main source set
+     */
+    @Incubating
+    Property<Boolean> getAddToMainSourceSet();
+
+    /**
+     * Configures the code generation options of this projects
+     * @param configurer the action to configure the code generation options with
+     */
+    default void options(Action<ExtensiblePolymorphicDomainObjectContainer<Option>> configurer) {
+        configurer.execute(getOptions());
+    }
 }

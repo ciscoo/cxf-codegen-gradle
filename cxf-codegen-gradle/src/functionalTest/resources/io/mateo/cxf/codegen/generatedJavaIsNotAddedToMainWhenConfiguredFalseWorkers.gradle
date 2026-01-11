@@ -1,0 +1,26 @@
+import io.mateo.cxf.codegen.workers.Wsdl2JavaOption
+
+plugins {
+    id "java"
+    id "io.mateo.cxf-codegen"
+}
+
+repositories {
+    mavenCentral()
+}
+
+def mainSourceSet = sourceSets.main
+def initialSize = mainSourceSet.java.srcDirs.size()
+
+cxfCodegen {
+    addToMainSourceSet = false
+    options {
+        register("calculator", Wsdl2JavaOption) {
+            wsdl = file("wsdls/calculator.wsdl").toPath().toAbsolutePath().toString()
+        }
+    }
+}
+
+afterEvaluate {
+    println "Main source set size: ${mainSourceSet.java.srcDirs.size()}"
+}

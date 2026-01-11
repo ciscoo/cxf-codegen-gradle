@@ -42,6 +42,16 @@ class CxfCodegenPluginFunctionalTests {
     }
 
     @TestTemplate
+    void failForMissingWsdlWorkers(GradleBuild gradleBuild) {
+        BuildResult result = gradleBuild.buildAndFail("-Pio.mateo.cxf-codegen.workers=true", "wsdl2java");
+
+        assertThat(result.task(":wsdl2java"))
+                .isNotNull()
+                .extracting(BuildTask::getOutcome)
+                .isEqualTo(TaskOutcome.FAILED);
+    }
+
+    @TestTemplate
     void javaSourceGenerationFromWsdl(GradleBuild gradleBuild) {
         BuildResult result = gradleBuild.build("calculator");
 
@@ -86,10 +96,61 @@ class CxfCodegenPluginFunctionalTests {
     }
 
     @TestTemplate
+    void javaSourceGenerationFromWsdlWorkers(GradleBuild gradleBuild) {
+        BuildResult result = gradleBuild.build("-Pio.mateo.cxf-codegen.workers=true", "wsdl2java");
+
+        assertThat(result.task(":wsdl2java"))
+                .isNotNull()
+                .extracting(BuildTask::getOutcome)
+                .isEqualTo(TaskOutcome.SUCCESS);
+        assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
+            Path generatedSources = projectDir.resolve(Path.of("build", "calculator-wsdl2java-generated-sources"));
+            assertThat(generatedSources).exists().isNotEmptyDirectory();
+
+            Path packageDir = generatedSources.resolve(Path.of("org", "tempuri"));
+            assertThat(packageDir).exists().isNotEmptyDirectory();
+
+            List<Path> sourcesDir;
+            try (var files = Files.list(packageDir)) {
+                sourcesDir = files.toList();
+            }
+            assertThat(sourcesDir).isNotEmpty().hasSize(12);
+
+            List<String> generatedFiles = sourcesDir.stream()
+                    .map(Path::getFileName)
+                    .map(Path::toString)
+                    .sorted()
+                    .collect(Collectors.toList());
+            List<String> expectedFiles = List.of(
+                    "Add.java",
+                    "AddResponse.java",
+                    "Calculator.java",
+                    "CalculatorSoap.java",
+                    "Divide.java",
+                    "DivideResponse.java",
+                    "Multiply.java",
+                    "MultiplyResponse.java",
+                    "ObjectFactory.java",
+                    "Subtract.java",
+                    "SubtractResponse.java",
+                    "package-info.java");
+
+            assertThat(generatedFiles).containsExactlyInAnyOrderElementsOf(expectedFiles);
+        });
+    }
+
+    @TestTemplate
     void generatedJavaIsNotAddedToMainWhenConfiguredFalse(GradleBuild gradleBuild) {
         BuildResult result = gradleBuild.build("verify");
 
         assertThat(result.getOutput()).contains("Source directories size match: true");
+    }
+
+    @TestTemplate
+    void generatedJavaIsNotAddedToMainWhenConfiguredFalseWorkers(GradleBuild gradleBuild) {
+        BuildResult result = gradleBuild.build("-Pio.mateo.cxf-codegen.workers=true");
+
+        assertThat(result.getOutput()).contains("Main source set size: 1");
     }
 
     @TestTemplate

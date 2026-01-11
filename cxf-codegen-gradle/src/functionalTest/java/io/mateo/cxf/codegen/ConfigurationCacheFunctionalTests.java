@@ -39,4 +39,19 @@ class ConfigurationCacheFunctionalTests {
                         output -> assertThat(output).contains("no cached configuration is available"));
         assertThat(finalResult.getOutput()).contains("Reusing configuration cache.");
     }
+
+    @TestTemplate
+    void configurationCacheWorkersCompatibility(GradleBuild gradleBuild) {
+        GradleRunner runner = gradleBuild
+                .useConfigurationCache()
+                .prepareRunner("--configuration-cache", "-Pio.mateo.cxf-codegen.workers=true", "wsdl2java");
+
+        BuildResult initialResult = runner.build();
+        BuildResult finalResult = runner.build();
+
+        assertThat(initialResult.getOutput()).contains("no cached configuration is available for tasks: wsdl2java");
+        assertThat(finalResult.getOutput())
+                .contains("Reusing configuration cache.")
+                .contains("Task :wsdl2java UP-TO-DATE");
+    }
 }

@@ -10,6 +10,8 @@ assertj-core = { module = "org.assertj:assertj-core", version = "3.27.6" }
 javapoet = { module = "com.palantir.javapoet:javapoet", version = "0.10.0" }
 gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version = "8.1.0" }
 slf4j-nop = { module = "org.slf4j:slf4j-nop", version.ref = "slf4j" } # Unused; exists to allow automatic updates.
+cxf-toolsWsdltoCore = { module = "org.apache.cxf:cxf-tools-wsdlto-core", version.ref = "cxf" }
+
 
 [plugins]
 gitPublish = { id = "org.ajoberstar.git-publish", version = "5.1.3" }

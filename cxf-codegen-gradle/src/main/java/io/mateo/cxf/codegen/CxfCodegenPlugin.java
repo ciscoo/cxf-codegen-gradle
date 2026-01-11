@@ -17,33 +17,47 @@ package io.mateo.cxf.codegen;
 
 import io.mateo.cxf.codegen.dsl.CxfCodegenExtension;
 import io.mateo.cxf.codegen.internal.GeneratedVersionAccessor;
+import io.mateo.cxf.codegen.workers.Wsdl2JavaOption;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 import io.mateo.cxf.codegen.wsdl2js.Wsdl2Js;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import org.gradle.api.Incubating;
 import org.gradle.api.NamedDomainObjectProvider;
+import org.gradle.api.NamedDomainObjectSet;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.ModuleDependency;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
+import org.gradle.api.logging.Logger;
+import org.gradle.api.logging.Logging;
 import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.TaskCollection;
+import org.gradle.api.tasks.TaskProvider;
 
 /**
  * {@link Plugin} for code generation from WSDLs using Apache CXF.
  */
 public class CxfCodegenPlugin implements Plugin<Project> {
 
+    private static final Logger logger = Logging.getLogger(CxfCodegenPlugin.class);
+
     private static final String WSDL2JAVA_TOOL_MAIN_CLASS = "org.apache.cxf.tools.wsdlto.WSDLToJava";
 
     private static final String WSDL2JS_TOOL_MAIN_CLASS = "org.apache.cxf.tools.wsdlto.javascript.WSDLToJavaScript";
+
+    /**
+     * Gradle property name to enable the use of workers for code generation.
+     */
+    @Incubating
+    public static final String WORKERS_PROPERTY = "io.mateo.cxf-codegen.workers";
 
     /**
      * Name of the {@link Configuration} where dependencies are used for code generation.
@@ -74,16 +88,66 @@ public class CxfCodegenPlugin implements Plugin<Project> {
     public void apply(Project project) {
         CxfCodegenExtension extension = createExtension(project);
         NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration = createConfiguration(project, extension);
+        if (useWorkers(project)) {
+            if (logger.isInfoEnabled()) {
+                logger.info("Workers enabled for CXF code generation");
+            }
+            setupWorkers(project, extension, cxfCodegenConfiguration);
+            return;
+        }
         configureWsdl2JavaTaskConventions(project, cxfCodegenConfiguration);
         configureWsdl2JsTaskConventions(project, cxfCodegenConfiguration);
         addToSourceSet(project);
         registerAggregateTask(project);
     }
 
+    private void setupWorkers(
+            Project project,
+            CxfCodegenExtension extension,
+            NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration) {
+        extension.getOptions().registerBinding(Wsdl2JavaOption.class, Wsdl2JavaOption.class);
+
+        NamedDomainObjectSet<Wsdl2JavaOption> wsdl2JavaOptions =
+                extension.getOptions().withType(Wsdl2JavaOption.class);
+
+        wsdl2JavaOptions.configureEach(option -> option.getOutputDirectory()
+                .convention(project.getLayout()
+                        .getBuildDirectory()
+                        .dir("%s-wsdl2java-generated-sources".formatted(option.getName()))));
+
+        TaskProvider<io.mateo.cxf.codegen.workers.Wsdl2Java> wsdl2Java = project.getTasks()
+                .register(WSDL2JAVA_TASK_NAME, io.mateo.cxf.codegen.workers.Wsdl2Java.class, task -> {
+                    task.setDescription("Generates Java sources using workers for all Java options");
+                    task.setGroup(WSDL2JAVA_GROUP);
+                    task.getWsdl2JavaClasspath().from(cxfCodegenConfiguration);
+                    task.getOptions().set(wsdl2JavaOptions);
+                });
+
+        project.afterEvaluate(evaluated -> {
+            if (extension.getAddToMainSourceSet().get()) {
+                evaluated
+                        .getExtensions()
+                        .getByType(JavaPluginExtension.class)
+                        .getSourceSets()
+                        .named(SourceSet.MAIN_SOURCE_SET_NAME)
+                        .configure(main -> main.getJava().srcDir(wsdl2Java));
+            }
+        });
+    }
+
+    private boolean useWorkers(Project project) {
+        Object workersProperty = project.findProperty(WORKERS_PROPERTY);
+        if (workersProperty == null) {
+            return false;
+        }
+        return Boolean.parseBoolean(workersProperty.toString());
+    }
+
     private CxfCodegenExtension createExtension(Project project) {
         CxfCodegenExtension extension =
                 project.getExtensions().create(CxfCodegenExtension.EXTENSION_NAME, CxfCodegenExtension.class);
         extension.getCxfVersion().convention(GeneratedVersionAccessor.CXF_VERSION);
+        extension.getAddToMainSourceSet().convention(true);
         return extension;
     }
 

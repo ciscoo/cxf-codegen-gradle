@@ -17,15 +17,18 @@ package io.mateo.cxf.codegen;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import io.mateo.cxf.codegen.dsl.CxfCodegenExtension;
 import io.mateo.cxf.codegen.internal.GeneratedVersionAccessor;
 import io.mateo.cxf.codegen.junit.TaskNameGenerator;
+import io.mateo.cxf.codegen.workers.Wsdl2JavaOption;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 import io.mateo.cxf.codegen.wsdl2js.Wsdl2Js;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.gradle.api.Describable;
@@ -252,9 +255,103 @@ class CxfCodegenPluginTests {
     void extensionCreatedWithDefaults() {
         var extension = this.project.getExtensions().findByType(CxfCodegenExtension.class);
 
-        assertThat(extension).isNotNull().satisfies(ext -> assertThat(
-                        ext.getCxfVersion().get())
-                .isEqualTo(GeneratedVersionAccessor.CXF_VERSION));
+        assertThat(extension).isNotNull().satisfies(ext -> {
+            assertThat(ext.getCxfVersion().get()).isEqualTo(GeneratedVersionAccessor.CXF_VERSION);
+            assertThat(ext.getAddToMainSourceSet().get()).isTrue();
+        });
+    }
+
+    @Test
+    void workersEnabledDisablesTasksApproach() {
+        Project project =
+                getProject(p -> p.getExtensions().getExtraProperties().set(CxfCodegenPlugin.WORKERS_PROPERTY, "true"));
+        assertThat(project.getTasks().withType(Wsdl2Java.class)).isEmpty();
+        assertThat(project.getTasks().withType(Wsdl2Js.class)).isEmpty();
+        assertThat(project.getTasks().withType(io.mateo.cxf.codegen.workers.Wsdl2Java.class))
+                .hasSize(1);
+    }
+
+    @Test
+    void canCreateJavaOptions() {
+        Project project =
+                getProject(p -> p.getExtensions().getExtraProperties().set(CxfCodegenPlugin.WORKERS_PROPERTY, "true"));
+        CxfCodegenExtension extension = project.getExtensions().getByType(CxfCodegenExtension.class);
+        assertThatNoException().isThrownBy(() -> extension.getOptions().create("foo", Wsdl2JavaOption.class));
+    }
+
+    @Test
+    void javaOptionDefaults() {
+        Project project =
+                getProject(p -> p.getExtensions().getExtraProperties().set(CxfCodegenPlugin.WORKERS_PROPERTY, "true"));
+        Wsdl2JavaOption option = project.getExtensions()
+                .getByType(CxfCodegenExtension.class)
+                .getOptions()
+                .create("foo", Wsdl2JavaOption.class);
+        assertThat(option.getOutputDirectory().get().getAsFile().getAbsolutePath())
+                .endsWith("build/foo-wsdl2java-generated-sources");
+    }
+
+    @Test
+    void workersJavaTaskConfigured() {
+        Project project =
+                getProject(p -> p.getExtensions().getExtraProperties().set(CxfCodegenPlugin.WORKERS_PROPERTY, "true"));
+        project.getExtensions()
+                .getByType(CxfCodegenExtension.class)
+                .getOptions()
+                .create("foo", Wsdl2JavaOption.class);
+        assertThat(project.getTasks().withType(io.mateo.cxf.codegen.workers.Wsdl2Java.class))
+                .singleElement()
+                .satisfies(task -> {
+                    assertThat(task.getDescription())
+                            .isEqualTo("Generates Java sources using workers for all Java options");
+                    assertThat(task.getGroup()).isEqualTo(CxfCodegenPlugin.WSDL2JAVA_GROUP);
+                    assertThatCode(() -> task.getWsdl2JavaClasspath().getFiles())
+                            .hasMessageContaining("configuration ':cxfCodegen'");
+                    assertThat(task.getOptions().get()).singleElement().satisfies(option -> assertThat(option.getName())
+                            .isEqualTo("foo"));
+                });
+    }
+
+    @Test
+    void disableAddingJavaWorkerOutputToMain() {
+        Project project =
+                getProject(p -> p.getExtensions().getExtraProperties().set(CxfCodegenPlugin.WORKERS_PROPERTY, "true"));
+        project.getPluginManager().apply("java");
+        SourceSetContainer sourceSets = project.getExtensions().getByType(SourceSetContainer.class);
+        SourceDirectorySet java =
+                sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME).getJava();
+        int expectedSize = java.getSrcDirs().size();
+
+        CxfCodegenExtension extension = project.getExtensions().getByType(CxfCodegenExtension.class);
+
+        extension.getAddToMainSourceSet().set(false);
+        extension.getOptions().create("foo", Wsdl2JavaOption.class);
+
+        // force evaluation
+        project.getAllTasks(false);
+
+        assertThat(java.getSrcDirs()).hasSize(expectedSize);
+
+        List<String> paths = java.getSrcDirs().stream()
+                .map(it -> it.toPath().toAbsolutePath().toString())
+                .toList();
+        String outputDir = Path.of(
+                        project.getLayout()
+                                .getBuildDirectory()
+                                .getAsFile()
+                                .get()
+                                .getAbsolutePath(),
+                        "foo-wsdl2java-generated-sources")
+                .toFile()
+                .getAbsolutePath();
+        assertThat(paths).isNotEmpty().doesNotContain(outputDir);
+    }
+
+    public Project getProject(Consumer<Project> configurer) {
+        Project project = ProjectBuilder.builder().build();
+        configurer.accept(project);
+        project.getPlugins().apply("io.mateo.cxf-codegen");
+        return project;
     }
 
     @SuppressWarnings("unchecked")
