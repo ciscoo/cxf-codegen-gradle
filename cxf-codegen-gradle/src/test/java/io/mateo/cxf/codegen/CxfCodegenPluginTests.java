@@ -23,6 +23,7 @@ import io.mateo.cxf.codegen.dsl.CxfCodegenExtension;
 import io.mateo.cxf.codegen.internal.GeneratedVersionAccessor;
 import io.mateo.cxf.codegen.junit.TaskNameGenerator;
 import io.mateo.cxf.codegen.workers.Wsdl2JavaOption;
+import io.mateo.cxf.codegen.workers.Wsdl2JsOption;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 import io.mateo.cxf.codegen.wsdl2js.Wsdl2Js;
 import java.nio.file.Path;
@@ -280,6 +281,14 @@ class CxfCodegenPluginTests {
     }
 
     @Test
+    void canCreateJsOptions() {
+        Project project =
+                getProject(p -> p.getExtensions().getExtraProperties().set(CxfCodegenPlugin.WORKERS_PROPERTY, "true"));
+        CxfCodegenExtension extension = project.getExtensions().getByType(CxfCodegenExtension.class);
+        assertThatNoException().isThrownBy(() -> extension.getOptions().create("foo", Wsdl2JsOption.class));
+    }
+
+    @Test
     void javaOptionDefaults() {
         Project project =
                 getProject(p -> p.getExtensions().getExtraProperties().set(CxfCodegenPlugin.WORKERS_PROPERTY, "true"));
@@ -289,6 +298,18 @@ class CxfCodegenPluginTests {
                 .create("foo", Wsdl2JavaOption.class);
         assertThat(option.getOutputDirectory().get().getAsFile().getAbsolutePath())
                 .endsWith("build/foo-wsdl2java-generated-sources");
+    }
+
+    @Test
+    void jsOptionDefaults() {
+        Project project =
+                getProject(p -> p.getExtensions().getExtraProperties().set(CxfCodegenPlugin.WORKERS_PROPERTY, "true"));
+        Wsdl2JsOption option = project.getExtensions()
+                .getByType(CxfCodegenExtension.class)
+                .getOptions()
+                .create("foo", Wsdl2JsOption.class);
+        assertThat(option.getOutputDirectory().get().getAsFile().getAbsolutePath())
+                .endsWith("build/foo-wsdl2js-generated-sources");
     }
 
     @Test
@@ -306,6 +327,27 @@ class CxfCodegenPluginTests {
                             .isEqualTo("Generates Java sources using workers for all Java options");
                     assertThat(task.getGroup()).isEqualTo(CxfCodegenPlugin.WSDL2JAVA_GROUP);
                     assertThatCode(() -> task.getWsdl2JavaClasspath().getFiles())
+                            .hasMessageContaining("configuration ':cxfCodegen'");
+                    assertThat(task.getOptions().get()).singleElement().satisfies(option -> assertThat(option.getName())
+                            .isEqualTo("foo"));
+                });
+    }
+
+    @Test
+    void workersJsTaskConfigured() {
+        Project project =
+                getProject(p -> p.getExtensions().getExtraProperties().set(CxfCodegenPlugin.WORKERS_PROPERTY, "true"));
+        project.getExtensions()
+                .getByType(CxfCodegenExtension.class)
+                .getOptions()
+                .create("foo", Wsdl2JsOption.class);
+        assertThat(project.getTasks().withType(io.mateo.cxf.codegen.workers.Wsdl2Js.class))
+                .singleElement()
+                .satisfies(task -> {
+                    assertThat(task.getDescription())
+                            .isEqualTo("Generates JavaScript sources using workers for all JS options");
+                    assertThat(task.getGroup()).isEqualTo(CxfCodegenPlugin.WSDL2JS_GROUP);
+                    assertThatCode(() -> task.getWsdl2JsClasspath().getFiles())
                             .hasMessageContaining("configuration ':cxfCodegen'");
                     assertThat(task.getOptions().get()).singleElement().satisfies(option -> assertThat(option.getName())
                             .isEqualTo("foo"));

@@ -174,4 +174,26 @@ class CxfCodegenPluginFunctionalTests {
             }
         });
     }
+
+    @TestTemplate
+    void jsSourceGenerationFromWsdlWorkers(GradleBuild gradleBuild) {
+        BuildResult result = gradleBuild.build("-Pio.mateo.cxf-codegen.workers=true", "wsdl2js");
+
+        assertThat(result.task(":wsdl2js"))
+                .isNotNull()
+                .extracting(BuildTask::getOutcome)
+                .isEqualTo(TaskOutcome.SUCCESS);
+        assertThat(gradleBuild.getProjectDir()).satisfies(projectDir -> {
+            var generatedSources = projectDir.resolve(Path.of("build", "calculator-wsdl2js-generated-sources"));
+            assertThat(generatedSources).exists().isNotEmptyDirectory();
+
+            try (var files = Files.list(generatedSources)) {
+                var generatedFiles =
+                        files.map(Path::getFileName).map(Path::toString).collect(Collectors.toList());
+                var expectedFiles = List.of("Calculator.js");
+
+                assertThat(generatedFiles).containsExactlyInAnyOrderElementsOf(expectedFiles);
+            }
+        });
+    }
 }

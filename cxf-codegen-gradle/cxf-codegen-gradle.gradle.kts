@@ -28,6 +28,7 @@ gradlePlugin {
 
 dependencies {
     compileOnly(libs.cxf.toolsWsdltoCore)
+    compileOnly(libs.cxf.toolsWsdltoFrontendJs)
 }
 
 val generateVersionAccessor =

@@ -18,6 +18,7 @@ package io.mateo.cxf.codegen;
 import io.mateo.cxf.codegen.dsl.CxfCodegenExtension;
 import io.mateo.cxf.codegen.internal.GeneratedVersionAccessor;
 import io.mateo.cxf.codegen.workers.Wsdl2JavaOption;
+import io.mateo.cxf.codegen.workers.Wsdl2JsOption;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 import io.mateo.cxf.codegen.wsdl2js.Wsdl2Js;
 import java.util.HashMap;
@@ -92,7 +93,8 @@ public class CxfCodegenPlugin implements Plugin<Project> {
             if (logger.isInfoEnabled()) {
                 logger.info("Workers enabled for CXF code generation");
             }
-            setupWorkers(project, extension, cxfCodegenConfiguration);
+            setupJavaWorkers(project, extension, cxfCodegenConfiguration);
+            setupJsWorkers(project, extension, cxfCodegenConfiguration);
             return;
         }
         configureWsdl2JavaTaskConventions(project, cxfCodegenConfiguration);
@@ -101,7 +103,29 @@ public class CxfCodegenPlugin implements Plugin<Project> {
         registerAggregateTask(project);
     }
 
-    private void setupWorkers(
+    private void setupJsWorkers(
+            Project project,
+            CxfCodegenExtension extension,
+            NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration) {
+        extension.getOptions().registerBinding(Wsdl2JsOption.class, Wsdl2JsOption.class);
+
+        NamedDomainObjectSet<Wsdl2JsOption> wsdl2JsOptions =
+                extension.getOptions().withType(Wsdl2JsOption.class);
+
+        wsdl2JsOptions.configureEach(option -> option.getOutputDirectory()
+                .convention(project.getLayout()
+                        .getBuildDirectory()
+                        .dir("%s-wsdl2js-generated-sources".formatted(option.getName()))));
+
+        project.getTasks().register(WSDL2JS_TASK_NAME, io.mateo.cxf.codegen.workers.Wsdl2Js.class, task -> {
+            task.setDescription("Generates JavaScript sources using workers for all JS options");
+            task.setGroup(WSDL2JS_GROUP);
+            task.getWsdl2JsClasspath().from(cxfCodegenConfiguration);
+            task.getOptions().set(wsdl2JsOptions);
+        });
+    }
+
+    private void setupJavaWorkers(
             Project project,
             CxfCodegenExtension extension,
             NamedDomainObjectProvider<Configuration> cxfCodegenConfiguration) {
