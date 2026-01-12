@@ -532,8 +532,8 @@ class Wsdl2JavaActionTests {
     }
 
     private List<String> getTestArguments(Consumer<Wsdl2JavaOption> configurer) {
-        Consumer<Wsdl2JavaOption> setWsdl = option ->
-                option.getWsdl().set(this.wsdl.toAbsolutePath().toUri().toString());
+        Consumer<Wsdl2JavaOption> setWsdl =
+                option -> option.getWsdl().set(this.wsdl.toAbsolutePath().toString());
         CodegenParameters parameters = createParameters(setWsdl.andThen(configurer));
         parameters.getProjectDirectory().set(this.project.getLayout().getProjectDirectory());
         return new TestAction(parameters).getArguments();
