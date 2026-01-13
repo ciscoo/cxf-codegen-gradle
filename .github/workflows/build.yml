@@ -48,7 +48,7 @@ jobs:
         if: ${{ always() }}
         with:
           name: Open Test Reports (${{ github.job }})
-          path: "**/build/open-test-report.xml"
+          path: "cxf-codegen-gradle/build/open-test-report.xml"
 
   publish_snapshot_artifacts:
     name: Publish Snapshot Artifacts
