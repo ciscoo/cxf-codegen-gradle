@@ -59,12 +59,14 @@ testing {
                 implementation(libs.junit.jupiter)
                 implementation(project())
                 implementation(libs.assertj.core)
+                runtimeOnly(libs.junit.platformReporting)
             }
             targets.configureEach {
                 testTask.configure {
                     testLogging {
                         exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
                     }
+                    systemProperty("junit.platform.reporting.open.xml.enabled", "true")
                 }
             }
         }
