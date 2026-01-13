@@ -56,7 +56,7 @@ class Wsdl2JavaActionTests {
                 "com.example.bar",
                 "-d",
                 this.outputDirectory.toString(),
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         List<String> actual =
                 getTestArguments(option -> option.getPackageNames().set(List.of("com.example.foo", "com.example.bar")));
@@ -73,7 +73,7 @@ class Wsdl2JavaActionTests {
                 "bar",
                 "-d",
                 this.outputDirectory.toString(),
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         List<String> actual =
                 getTestArguments(option -> option.getNamespaceExcludes().set(List.of("foo", "bar")));
@@ -104,7 +104,7 @@ class Wsdl2JavaActionTests {
                         .toPath()
                         .toAbsolutePath()
                         .toString(),
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         List<String> actual =
                 getTestArguments(option -> option.getBindingFiles().set(List.of("foo", "bar")));
@@ -119,7 +119,7 @@ class Wsdl2JavaActionTests {
                 this.outputDirectory.toString(),
                 "-fe",
                 "foo",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         List<String> actual = getTestArguments(option -> option.getFrontend().set("foo"));
 
@@ -133,7 +133,7 @@ class Wsdl2JavaActionTests {
                 this.outputDirectory.toString(),
                 "-db",
                 "foo",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getDatabinding().set("foo"));
@@ -148,7 +148,7 @@ class Wsdl2JavaActionTests {
                 this.outputDirectory.toString(),
                 "-wv",
                 "foo",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getWsdlVersion().set("foo"));
@@ -163,7 +163,7 @@ class Wsdl2JavaActionTests {
                 this.outputDirectory.toString(),
                 "-catalog",
                 "foo",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual = getTestArguments(option -> option.getCatalog().set("foo"));
 
@@ -177,7 +177,7 @@ class Wsdl2JavaActionTests {
                 this.outputDirectory.toString(),
                 "-exsh",
                 "true",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getExtendedSoapHeaders().set(true));
@@ -191,7 +191,7 @@ class Wsdl2JavaActionTests {
                 "-d",
                 this.outputDirectory.toString(),
                 "-noTypes",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual = getTestArguments(option -> option.getNoTypes().set(true));
 
@@ -204,7 +204,7 @@ class Wsdl2JavaActionTests {
                 "-d",
                 this.outputDirectory.toString(),
                 "-allowElementReferences",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getAllowElementRefs().set(true));
@@ -218,7 +218,7 @@ class Wsdl2JavaActionTests {
                 "-d",
                 this.outputDirectory.toString(),
                 "-validate=foo",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getValidateWsdl().set("foo"));
@@ -232,7 +232,7 @@ class Wsdl2JavaActionTests {
                 "-d",
                 this.outputDirectory.toString(),
                 "-mark-generated",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getMarkGenerated().set(true));
@@ -246,7 +246,7 @@ class Wsdl2JavaActionTests {
                 "-d",
                 this.outputDirectory.toString(),
                 "-suppress-generated-date",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getSuppressGeneratedDate().set(true));
@@ -261,7 +261,7 @@ class Wsdl2JavaActionTests {
                 this.outputDirectory.toString(),
                 "-dex",
                 "true",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getDefaultExcludesNamespace().set(true));
@@ -276,7 +276,7 @@ class Wsdl2JavaActionTests {
                 this.outputDirectory.toString(),
                 "-dns",
                 "true",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual = getTestArguments(
                 option -> option.getDefaultNamespacePackageMapping().set(true));
@@ -291,7 +291,7 @@ class Wsdl2JavaActionTests {
                 this.outputDirectory.toString(),
                 "-sn",
                 "foo",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getServiceName().set("foo"));
@@ -306,7 +306,7 @@ class Wsdl2JavaActionTests {
                 this.outputDirectory.toString(),
                 "-faultSerialVersionUID",
                 "1234",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getFaultSerialVersionUid().set("1234"));
@@ -321,7 +321,7 @@ class Wsdl2JavaActionTests {
                 this.outputDirectory.toString(),
                 "-exceptionSuper",
                 UncheckedIOException.class.toString(),
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getExceptionSuper().set(UncheckedIOException.class.toString()));
@@ -338,7 +338,7 @@ class Wsdl2JavaActionTests {
                 "foo",
                 "-seiSuper",
                 "bar",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getSeiSuper().set(List.of("foo", "bar")));
@@ -352,7 +352,7 @@ class Wsdl2JavaActionTests {
                 "-d",
                 this.outputDirectory.toString(),
                 "-autoNameResolution",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getAutoNameResolution().set(true));
@@ -366,7 +366,7 @@ class Wsdl2JavaActionTests {
                 "-d",
                 this.outputDirectory.toString(),
                 "-noAddressBinding",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getNoAddressBinding().set(true));
@@ -381,7 +381,7 @@ class Wsdl2JavaActionTests {
                 this.outputDirectory.toString(),
                 "-xjc-Xts",
                 "-xjc-Xwsdlextension",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getXjcArgs().set(List.of("-Xts", "-Xwsdlextension")));
@@ -396,7 +396,7 @@ class Wsdl2JavaActionTests {
                 this.outputDirectory.toString(),
                 "-client",
                 "-all",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getExtraArgs().set(List.of("-client", "-all")));
@@ -411,7 +411,7 @@ class Wsdl2JavaActionTests {
                 this.outputDirectory.toString(),
                 "-wsdlLocation",
                 "foo",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getWsdlLocation().set("foo"));
@@ -425,7 +425,7 @@ class Wsdl2JavaActionTests {
                 "-d",
                 this.outputDirectory.toString(),
                 "-wsdlList",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getWsdlList().set(true));
@@ -440,7 +440,7 @@ class Wsdl2JavaActionTests {
                 "UTF-8",
                 "-d",
                 this.outputDirectory.toString(),
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getEncoding().set("UTF-8"));
@@ -454,7 +454,7 @@ class Wsdl2JavaActionTests {
                 "-d",
                 this.outputDirectory.toString(),
                 "-verbose",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual = getTestArguments(option -> option.getVerbose().set(true));
 
@@ -467,7 +467,7 @@ class Wsdl2JavaActionTests {
                 "-d",
                 this.outputDirectory.toString(),
                 "-asyncMethods=foo,bar",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getAsyncMethods().set(List.of("foo", "bar")));
@@ -481,7 +481,7 @@ class Wsdl2JavaActionTests {
                 "-d",
                 this.outputDirectory.toString(),
                 "-bareMethods=foo,bar",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getBareMethods().set(List.of("foo", "bar")));
@@ -495,7 +495,7 @@ class Wsdl2JavaActionTests {
                 "-d",
                 this.outputDirectory.toString(),
                 "-mimeMethods=foo,bar",
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual =
                 getTestArguments(option -> option.getMimeMethods().set(List.of("foo", "bar")));
@@ -508,7 +508,7 @@ class Wsdl2JavaActionTests {
         List<String> expected = List.of(
                 "-d",
                 this.outputDirectory.toString(),
-                this.wsdl.toAbsolutePath().toUri().toString());
+                this.wsdl.toAbsolutePath().toString());
 
         Iterable<String> actual = getTestArguments(option -> {});
 
