@@ -26,7 +26,7 @@ import io.mateo.cxf.codegen.workers.Wsdl2JavaOption;
 import io.mateo.cxf.codegen.workers.Wsdl2JsOption;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 import io.mateo.cxf.codegen.wsdl2js.Wsdl2Js;
-import java.io.File;
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
@@ -298,7 +298,8 @@ class CxfCodegenPluginTests {
                 .getOptions()
                 .create("foo", Wsdl2JavaOption.class);
         assertThat(option.getOutputDirectory().get().getAsFile().getAbsolutePath())
-                .endsWith("build%sfoo-wsdl2java-generated-sources".formatted(File.pathSeparator));
+                .endsWith("build%sfoo-wsdl2java-generated-sources"
+                        .formatted(FileSystems.getDefault().getSeparator()));
     }
 
     @Test
@@ -310,7 +311,8 @@ class CxfCodegenPluginTests {
                 .getOptions()
                 .create("foo", Wsdl2JsOption.class);
         assertThat(option.getOutputDirectory().get().getAsFile().getAbsolutePath())
-                .endsWith("build%sfoo-wsdl2js-generated-sources".formatted(File.pathSeparator));
+                .endsWith("build%sfoo-wsdl2js-generated-sources"
+                        .formatted(FileSystems.getDefault().getSeparator()));
     }
 
     @Test
