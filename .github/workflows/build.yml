@@ -81,5 +81,5 @@ jobs:
       - name: Publish Snapshot Documentation
         run: ./gradlew gitPublishPush -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false
         env:
-          GRGIT_USER: ${{ github.actor }}
+          GRGIT_USER: git
           GRGIT_PASS: ${{ secrets.GH_TOKEN }}
