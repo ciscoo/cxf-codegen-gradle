@@ -1,5 +1,5 @@
 [versions]
-cxf = "4.1.3"
+cxf = "4.1.4"
 slf4j = "2.0.17"
 junit = "6.0.2"
 
