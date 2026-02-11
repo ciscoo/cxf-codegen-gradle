@@ -15,7 +15,7 @@ configurations.cxfCodegen {
 }
 
 dependencies {
-    cxfCodegen("ch.qos.logback:logback-classic:1.5.27")
+    cxfCodegen("ch.qos.logback:logback-classic:1.5.29")
 }
 // end::code[]
 
