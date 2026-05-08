@@ -5,7 +5,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "cxf-codegen-gradle"
+rootProject.name = "cxf-codegen-gradle-build"
 
 include("documentation")
 include("cxf-codegen-gradle")
@@ -34,3 +34,4 @@ rootProject.children.forEach {
 }
 
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
