@@ -1,23 +1,22 @@
-// tag::code[]
+// #region code
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java
-// end::code[]
+// #endregion code
 
 plugins {
     java
     id("io.mateo.cxf-codegen")
 }
 
-// tag::code[]
+// #region code
 
 // ...
 
-tasks.register("example", Wsdl2Java::class) { // <1>
-    toolOptions { // <2>
-        wsdl = file("path/to/example.wsdl").toPath().toAbsolutePath().toString() // <3>
+tasks.register<Wsdl2Java>("example") {
+    toolOptions {
+        wsdl = file("path/to/example.wsdl").absolutePath
     }
-    allJvmArgs = listOf("-Duser.language=fr", "-Duser.country=CA") // <4>
 }
-// end::code[]
+// #endregion code
 
 tasks.register("verify") {
     doLast {

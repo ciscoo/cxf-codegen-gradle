@@ -1,0 +1,27 @@
+// #region code
+import io.mateo.cxf.codegen.workers.Wsdl2JavaOption
+// #endregion code
+
+plugins {
+    java
+    id("io.mateo.cxf.codegen")
+}
+
+// #region code
+
+// ...
+
+cxfCodegen {
+    options {
+        register("example", Wsdl2JavaOption) {
+            wsdl = file("src/main/resources/wsdl/example.wsdl").absolutePath
+        }
+    }
+}
+// #endregion code
+
+tasks.register("verify") {
+    doLast {
+        println(cxfCodegen.options.getByName("example", Wsdl2JavaOption::class).wsdl.get())
+    }
+}

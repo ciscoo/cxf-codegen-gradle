@@ -1,6 +1,6 @@
-// tag::code[]
+// #region code
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java
-// end::code[]
+// #endregion code
 
 plugins {
     id "java"
@@ -11,7 +11,7 @@ repositories {
     mavenCentral()
 }
 
-// tag::code[]
+// #region code
 
 configurations {
     myConfiguration // <1>
@@ -46,10 +46,10 @@ def extractWsdl = tasks.register("extractWsdl") { // <4>
     }
 }
 
-tasks.register("calculator", Wsdl2Java) { // <5>
+tasks.register("calculator", Wsdl2Java) {
     inputs.files(extractWsdl)
     toolOptions {
-        wsdl = extractWsdl.map { it.outputs.files.singleFile.toPath().toAbsolutePath().toString() }
+        wsdl = extractWsdl.map { it.outputs.files.singleFile.toPath().toAbsolutePath().toString() } // <5>
     }
 }
-// end::code[]
+// #endregion code

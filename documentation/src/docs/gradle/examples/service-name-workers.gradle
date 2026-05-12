@@ -1,0 +1,26 @@
+// #region code
+import io.mateo.cxf.codegen.workers.Wsdl2JavaOption
+// #endregion code
+
+plugins {
+    id "java"
+    id "io.mateo.cxf-codegen"
+}
+
+repositories {
+    mavenCentral()
+}
+
+// #region code
+
+// ...
+
+cxfCodegen {
+    options {
+        register("calculator", Wsdl2JavaOption) {
+            wsdl = layout.projectDirectory.file("calculator.wsdl").asFile.toPath().toAbsolutePath().toString()
+            serviceName = "Calculator"
+        }
+    }
+}
+// #endregion code

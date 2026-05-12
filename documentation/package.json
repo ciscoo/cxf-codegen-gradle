@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "documentation",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "prettier": "3.8.1",
+    "vitepress": "^2.0.0-alpha.17"
+  }
+}

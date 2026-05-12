@@ -20,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import io.mateo.junit.GradleBuild;
 import io.mateo.junit.GradleCompatibilityExtension;
 import java.nio.file.Path;
+import java.util.stream.Stream;
 import org.gradle.testkit.runner.BuildTask;
 import org.gradle.testkit.runner.TaskOutcome;
 import org.junit.jupiter.api.TestTemplate;
@@ -28,7 +29,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 class ExamplesFunctionalTests {
 
     @RegisterExtension
-    static GradleCompatibilityExtension extension = new GradleCompatibilityExtension("current");
+    static GradleCompatibilityExtension extension = new GradleCompatibilityExtension();
 
     @TestTemplate
     void jaxwsBindingFile(GradleBuild gradleBuild) {
@@ -36,8 +37,18 @@ class ExamplesFunctionalTests {
     }
 
     @TestTemplate
+    void jaxwsBindingFileWorkers(GradleBuild gradleBuild) {
+        doTestForScript("jaxws-binding-file-workers", gradleBuild, "-Pio.mateo.cxf-codegen.workers=true");
+    }
+
+    @TestTemplate
     void specifyDataBinding(GradleBuild gradleBuild) {
-        doTestForScript("specify-data-binding", gradleBuild);
+        doTestForScript("data-binding", gradleBuild);
+    }
+
+    @TestTemplate
+    void specifyDataBindingWorkers(GradleBuild gradleBuild) {
+        doTestForScript("data-binding-workers", gradleBuild, "-Pio.mateo.cxf-codegen.workers=true");
     }
 
     @TestTemplate
@@ -46,8 +57,18 @@ class ExamplesFunctionalTests {
     }
 
     @TestTemplate
+    void serviceNameWorkers(GradleBuild gradleBuild) {
+        doTestForScript("service-name-workers", gradleBuild, "-Pio.mateo.cxf-codegen.workers=true");
+    }
+
+    @TestTemplate
     void loadFromArtifact(GradleBuild gradleBuild) {
         doTestForScript("loading-wsdl", gradleBuild);
+    }
+
+    @TestTemplate
+    void loadFromArtifactWorkers(GradleBuild gradleBuild) {
+        doTestForScript("loading-wsdl-workers", gradleBuild, "-Pio.mateo.cxf-codegen.workers=true");
     }
 
     @TestTemplate
@@ -55,11 +76,17 @@ class ExamplesFunctionalTests {
         doTestForScript("using-xjc-extensions", gradleBuild);
     }
 
-    private void doTestForScript(String name, GradleBuild gradleBuild) {
+    @TestTemplate
+    void usingXjcExtensionsWorkers(GradleBuild gradleBuild) {
+        doTestForScript("using-xjc-extensions-workers", gradleBuild, "-Pio.mateo.cxf-codegen.workers=true");
+    }
+
+    private void doTestForScript(String name, GradleBuild gradleBuild, String... additionalArgs) {
         final var rootDir = Path.of("").toAbsolutePath().getParent();
         final var scriptPath = rootDir.resolve(Path.of("documentation", "src", "docs", "gradle", "examples", name));
 
-        var runner = gradleBuild.script(scriptPath).prepareRunner("wsdl2java");
+        var args = Stream.concat(Stream.of(additionalArgs), Stream.of("wsdl2java")).toArray(String[]::new);
+        var runner = gradleBuild.script(scriptPath).prepareRunner(args);
 
         var result = runner.build();
 

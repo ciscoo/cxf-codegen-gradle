@@ -7,11 +7,11 @@ repositories {
     mavenCentral()
 }
 
-// tag::code[]
+// #region code
 cxfCodegen { // <1>
 
 }
-// end::code[]
+// #endregion code
 
 tasks.register("verify") {
     doLast {

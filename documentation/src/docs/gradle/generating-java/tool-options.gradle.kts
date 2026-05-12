@@ -5,7 +5,7 @@ plugins {
     id("io.mateo.cxf-codegen")
 }
 
-// tag::code[]
+// #region code
 tasks.register("example", Wsdl2Java::class) {
     toolOptions {
         wsdl = file("path/to/example.wsdl").toPath().toAbsolutePath().toString()
@@ -15,7 +15,7 @@ tasks.register("example", Wsdl2Java::class) {
         asyncMethods = listOf("foo", "bar") // <4>
     }
 }
-// end::code[]
+// #endregion code
 
 tasks.register("verify") {
     doLast {

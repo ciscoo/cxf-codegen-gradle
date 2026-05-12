@@ -109,7 +109,7 @@ public interface Wsdl2JavaOption extends Option {
      * Enables or disables the loading of the default namespace package name mapping.
      * <p>
      * If not set, {@code wsdl2java} defaults to {@code true} and <a href=
-     * "http://www.w3.org/2005/08/addressing=org.apache.cxf.ws.addressingnamespace">http://www.w3.org/2005/08/addressing</a>
+     * "http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing=org.apache.cxf.ws.addressingnamespace</a>
      * package mapping will be enabled.
      * @return default namespace package mapping indicator
      */

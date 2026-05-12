@@ -1,6 +1,6 @@
-// tag::code[]
+// #region code
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java
-// end::code[]
+// #endregion code
 
 plugins {
     id "java"
@@ -11,14 +11,14 @@ repositories {
     mavenCentral()
 }
 
-// tag::code[]
+// #region code
 
 // ...
 
 tasks.register("calculator", Wsdl2Java) {
     toolOptions {
         wsdl = layout.projectDirectory.file("calculator.wsdl").asFile.toPath().toAbsolutePath().toString()
-        serviceName = "Calculator" // <1>
+        serviceName = "Calculator"
     }
 }
-// end::code[]
+// #endregion code

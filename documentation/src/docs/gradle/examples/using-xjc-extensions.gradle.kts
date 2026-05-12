@@ -1,6 +1,6 @@
-// tag::code[]
+// #region code
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java
-// end::code[]
+// #endregion code
 
 plugins {
     java
@@ -11,7 +11,7 @@ repositories {
     mavenCentral()
 }
 
-// tag::code[]
+// #region code
 
 // ...
 
@@ -26,4 +26,4 @@ tasks.register("calculator", Wsdl2Java::class) {
         xjcArgs.add("-Xts") // <3>
     }
 }
-// end::code[]
+// #endregion code

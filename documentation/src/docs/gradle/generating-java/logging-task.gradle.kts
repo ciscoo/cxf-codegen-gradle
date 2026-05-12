@@ -9,7 +9,7 @@ repositories {
     mavenCentral()
 }
 
-// tag::code[]
+// #region code
 configurations.cxfCodegen {
     exclude(group = "org.slf4j", module = "slf4j-nop")
 }
@@ -17,7 +17,7 @@ configurations.cxfCodegen {
 dependencies {
     cxfCodegen("ch.qos.logback:logback-classic:1.5.24")
 }
-// end::code[]
+// #endregion code
 
 tasks.register("example", Wsdl2Java::class) {
     jvmArgs = listOf("-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Slf4jLogger")

@@ -7,11 +7,11 @@ repositories {
     mavenCentral()
 }
 
-// tag::code[]
+// #region code
 cxfCodegen {
-    cxfVersion = "3.2.0" // 3.3.0 breaks the build
+    cxfVersion = "{{ previousCxfVersion }}"
 }
-// end::code[]
+// #endregion code
 
 tasks.register("verify") {
     doLast {

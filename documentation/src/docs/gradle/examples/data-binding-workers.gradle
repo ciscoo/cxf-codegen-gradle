@@ -1,0 +1,25 @@
+import io.mateo.cxf.codegen.workers.Wsdl2JavaOption
+
+plugins {
+    id "java"
+    id "io.mateo.cxf-codegen"
+}
+
+repositories {
+    mavenCentral()
+}
+
+// #region code
+dependencies {
+    cxfCodegen "org.apache.cxf:cxf-rt-databinding-jibx:3.1.18"
+}
+
+cxfCodegen {
+    options {
+        register("calculator", Wsdl2JavaOption) {
+            wsdl = layout.projectDirectory.file("calculator.wsdl").asFile.toPath().toAbsolutePath().toString()
+            extraArgs.addAll(["-databinding", "jibx"])
+        }
+    }
+}
+// #endregion code

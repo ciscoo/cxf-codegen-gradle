@@ -23,8 +23,8 @@ tasks.register("calculator", Wsdl2Java::class) {
     }
 }
 
-// tag::code[]
+// #region code
 tasks.withType(Wsdl2Java::class).configureEach {
     jvmArgs = listOf("-Dorg.apache.cxf.Logger=org.apache.cxf.common.logging.Slf4jLogger")
 }
-// end::code[]
+// #endregion code

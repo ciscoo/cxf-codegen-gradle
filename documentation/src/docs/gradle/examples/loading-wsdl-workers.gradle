@@ -1,0 +1,56 @@
+// #region code
+import io.mateo.cxf.codegen.workers.Wsdl2JavaOption
+// #endregion code
+
+plugins {
+    id "java"
+    id "io.mateo.cxf-codegen"
+}
+
+repositories {
+    mavenCentral()
+}
+
+// #region code
+
+configurations {
+    myConfiguration // <1>
+}
+
+dependencies {
+    myConfiguration "org.apache.cxf:cxf-testutils:4.0.0" // <2>
+}
+
+def copyArtifact = tasks.register("copyArtifact", Copy) { // <3>
+    from(configurations.myConfiguration) {
+        include {
+            it.name.startsWith("cxf-testutils")
+        }
+    }
+    into(layout.buildDirectory.dir("copied-artifact"))
+}
+
+def extractWsdl = tasks.register("extractWsdl") { // <4>
+    def wsdlFile = layout.buildDirectory.file("extracted.wsdl")
+    inputs.files(copyArtifact)
+    outputs.file(wsdlFile)
+    doLast {
+        // Assumes single JAR artifact from previous task
+        def list = []
+        inputs.files.singleFile.eachFileRecurse(groovy.io.FileType.FILES) { f -> list.add(f) }
+        def archive = list.first()
+        def textResource = resources.text.fromArchiveEntry(archive, "wsdl/calculator.wsdl")
+        def f = wsdlFile.get().asFile
+        f.createNewFile()
+        f.write(textResource.asString())
+    }
+}
+
+cxfCodegen {
+    options {
+        register("calculator", Wsdl2JavaOption) {
+            wsdl = extractWsdl.map { it.outputs.files.singleFile.toPath().toAbsolutePath().toString() } // <5>
+        }
+    }
+}
+// #endregion code

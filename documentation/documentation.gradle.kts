@@ -1,7 +1,11 @@
-import org.asciidoctor.gradle.base.AsciidoctorAttributeProvider
-import org.asciidoctor.gradle.jvm.AbstractAsciidoctorTask
-import org.gradle.kotlin.dsl.withType
+import io.mateo.build.ProcessExamples
 import org.gradle.util.GradleVersion
+import java.io.PrintWriter
+import java.nio.file.Files
+import kotlin.io.path.bufferedWriter
+import kotlin.io.path.name
+import kotlin.io.path.nameWithoutExtension
+import kotlin.io.path.readLines
 
 plugins {
     `java-library-conventions`
@@ -36,87 +40,48 @@ gitPublish {
     }
 }
 
-val pluginApiDocsClasspath by configurations.registering {
-    isCanBeConsumed = false
-    isCanBeResolved = true
+val javadoc by configurations.dependencyScope("javadoc")
+val javadocClasspath by configurations.resolvable("javadocClasspath") {
+    extendsFrom(javadoc)
+    attributes {
+        attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category.DOCUMENTATION))
+        attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
+        attribute(DocsType.DOCS_TYPE_ATTRIBUTE, objects.named(DocsType.JAVADOC))
+        attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
+    }
 }
 
 dependencies {
-    "pluginApiDocsClasspath"(
-        project(
-            mapOf(
-                "path" to ":cxf-codegen-gradle",
-                "configuration" to "apiDocs",
-            ),
-        ),
-    )
+    javadoc(projects.cxfCodegenGradle)
 }
 
 tasks {
-    listOf(jar, javadocJar, sourcesJar).forEach { it { enabled = false } }
-
-    val copyPluginApiDocs by registering(Copy::class) {
-        from(pluginApiDocsClasspath) {
-            exclude("**/*.jar")
+    val extractPluginJavadoc by registering(Copy::class) {
+        from(zipTree(javadocClasspath.files.single()))
+        into(layout.projectDirectory.dir("public/javadoc"))
+    }
+    val processExamples by registering(ProcessExamples::class) {
+        source(layout.projectDirectory.dir("src/docs/gradle"))
+        include("**/*.gradle.kts", "**/*.gradle")
+        outputDirectory = layout.buildDirectory.dir("processed-examples")
+    }
+    val generateGradleMetadata by registering {
+        val json = layout.buildDirectory.file("gradle-project-metadata.json")
+        outputs.file(json)
+        doLast {
+            json.get().asFile.writeText(
+                """
+                {
+                    "version": "$docsVersion",
+                    "cxfVersion": "${libs.versions.cxf.get()}",
+                    "slf4jVersion": "${libs.versions.slf4j.get()}",
+                    "gradleVersion": "${GradleVersion.current().version}"
+                }
+                """.trimIndent(),
+            )
         }
-        into(layout.buildDirectory.dir("plugin-api-docs"))
     }
-
-    asciidoctor {
-        sources {
-            include("**/index.adoc")
-        }
-        attributes(
-            mapOf(
-                "releaseNotesUrl" to "../release-notes/index.html#release-notes",
-            ),
-        )
-    }
-
-    withType<AbstractAsciidoctorTask>().configureEach {
-        baseDirFollowsSourceDir()
-        attributeProviders.add(
-            AsciidoctorAttributeProvider {
-                mapOf(
-                    "revnumber" to version,
-                    "current-gradle-version" to GradleVersion.current().version,
-                    "plugin-version" to version,
-                    "outdir" to outputDir.absolutePath,
-                    "source-highlighter" to "rouge",
-                    "tabsize" to "4",
-                    "toc" to "left",
-                    "numbered" to "true",
-                    "toclevels" to "4",
-                    "icons" to "font",
-                    "sectanchors" to true,
-                    "sectnums" to true,
-                    "hide-uri-scheme" to true,
-                    "idprefix" to "",
-                    "idseparator" to "-",
-                    "cxf-version" to libs.versions.cxf.get(),
-                )
-            },
-        )
-    }
-
-    val prepareDocsForGitHubPages by registering(Copy::class) {
-        from(copyPluginApiDocs) {
-            into("api")
-        }
-        from(asciidoctor)
-        into(docsDir.map { it.dir(if (snapshot) "snapshot" else "current") })
-        includeEmptyDirs = false
-    }
-
-    build {
-        dependsOn(prepareDocsForGitHubPages)
-    }
-
-    gitPublishCopy {
-        dependsOn(prepareDocsForGitHubPages)
-    }
-
-    gitPublishCommit {
-        dependsOn(prepareDocsForGitHubPages)
+    val buildDocs by registering {
+        inputs.files(extractPluginJavadoc, processExamples, generateGradleMetadata)
     }
 }
