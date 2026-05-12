@@ -1,6 +1,6 @@
 [versions]
 cxf = "4.2.0"
-slf4j = "2.0.17"
+slf4j = "2.0.18"
 junit = "6.0.3"
 
 [libraries]
