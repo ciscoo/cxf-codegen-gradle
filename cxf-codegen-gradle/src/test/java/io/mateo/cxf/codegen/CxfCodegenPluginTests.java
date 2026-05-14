@@ -83,7 +83,14 @@ class CxfCodegenPluginTests {
                 "cxf-tools-wsdlto-databinding-jaxb",
                 "cxf-tools-wsdlto-frontend-jaxws",
                 "cxf-tools-wsdlto-frontend-javascript");
-        var expectedVersions = List.of("2.0.18", "4.2.0", "4.2.0", "4.2.0", "4.2.0", "4.2.0", "4.2.0");
+        var expectedVersions = List.of(
+                GeneratedVersionAccessor.SLF4J_VERSION,
+                GeneratedVersionAccessor.CXF_VERSION,
+                GeneratedVersionAccessor.CXF_VERSION,
+                GeneratedVersionAccessor.CXF_VERSION,
+                GeneratedVersionAccessor.CXF_VERSION,
+                GeneratedVersionAccessor.CXF_VERSION,
+                GeneratedVersionAccessor.CXF_VERSION);
 
         Configuration configuration =
                 this.project.getConfigurations().getByName(CxfCodegenPlugin.CXF_CODEGEN_CONFIGURATION_NAME);
