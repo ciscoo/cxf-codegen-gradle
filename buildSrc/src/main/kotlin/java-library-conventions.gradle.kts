@@ -46,6 +46,12 @@ testing {
                     }
                 }
             }
+            if (name == JvmTestSuitePlugin.DEFAULT_TEST_SUITE_NAME) {
+                dependencies {
+                    // Leads to classpath issues on Gradle 9.5+
+                    implementation(gradleApi())
+                }
+            }
         }
     }
 }
