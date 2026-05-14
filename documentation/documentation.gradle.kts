@@ -10,7 +10,6 @@ import kotlin.io.path.readLines
 plugins {
     `java-library-conventions`
     alias(libs.plugins.spotless)
-    alias(libs.plugins.asciidoctorJvmConvert)
     alias(libs.plugins.gitPublish)
 }
 
