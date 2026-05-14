@@ -85,7 +85,8 @@ class ExamplesFunctionalTests {
         final var rootDir = Path.of("").toAbsolutePath().getParent();
         final var scriptPath = rootDir.resolve(Path.of("documentation", "src", "docs", "gradle", "examples", name));
 
-        var args = Stream.concat(Stream.of(additionalArgs), Stream.of("wsdl2java")).toArray(String[]::new);
+        var args =
+                Stream.concat(Stream.of(additionalArgs), Stream.of("wsdl2java")).toArray(String[]::new);
         var runner = gradleBuild.script(scriptPath).prepareRunner(args);
 
         var result = runner.build();
