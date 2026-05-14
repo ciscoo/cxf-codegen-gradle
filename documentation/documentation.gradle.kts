@@ -1,11 +1,5 @@
 import io.mateo.build.ProcessExamples
 import org.gradle.util.GradleVersion
-import java.io.PrintWriter
-import java.nio.file.Files
-import kotlin.io.path.bufferedWriter
-import kotlin.io.path.name
-import kotlin.io.path.nameWithoutExtension
-import kotlin.io.path.readLines
 
 plugins {
     `java-library-conventions`
