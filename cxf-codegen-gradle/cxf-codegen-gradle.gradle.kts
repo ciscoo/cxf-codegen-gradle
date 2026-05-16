@@ -99,15 +99,6 @@ tasks {
     }
 }
 
-configurations.register("apiDocs") {
-    isCanBeConsumed = true
-    isCanBeResolved = false
-}
-
-artifacts {
-    add("apiDocs", tasks.javadoc)
-}
-
 publishing {
     publications.containerWithType(MavenPublication::class).configureEach {
         pom {
