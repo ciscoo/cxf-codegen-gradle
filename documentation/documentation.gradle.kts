@@ -80,5 +80,22 @@ tasks {
     val buildDocs = register<Exec>("buildDocs") {
         description = "Builds the documentation for publication."
         inputs.files(extractPluginJavadoc, processExamples, generateGradleMetadata)
+        outputs.dir(layout.buildDirectory.dir("dist"))
+        outputs.upToDateWhen { false }
+        executable = "npm"
+        args = listOf("run", "build")
+    }
+    val previewDocs = register<Exec>("previewDocs") {
+        description = "Locally preview the production documentation build."
+        inputs.files(buildDocs)
+        executable = "npm"
+        args = listOf("run", "preview")
+    }
+    val devDocs = register<Exec>("devDocs") {
+        description = "Start VitePress dev server for documentation development."
+        inputs.files(extractPluginJavadoc, processExamples, generateGradleMetadata)
+        outputs.dir(layout.buildDirectory.dir("dist"))
+        executable = "npm"
+        args = listOf("run", "dev")
     }
 }
