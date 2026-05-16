@@ -52,6 +52,7 @@ dependencies {
 tasks {
     val extractPluginJavadoc =
         register<Copy>("extractPluginJavadoc") {
+            inputs.files(javadocClasspath)
             description = "Extracts the plugin Javadoc."
             from(zipTree(javadocClasspath.map { it.files.single() }))
             into(layout.projectDirectory.dir("public/javadoc"))
