@@ -5,6 +5,9 @@ const gradleMetadata = readGradleMetadata();
 
 export default defineConfig({
   vite: {
+    server: {
+      open: true
+    },
     define: {
       __VERSION__: JSON.stringify(gradleMetadata.version),
       __GRADLE_BUILD_VERSION__: JSON.stringify(gradleMetadata.gradleVersion),
