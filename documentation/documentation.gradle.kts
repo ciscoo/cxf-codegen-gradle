@@ -112,4 +112,10 @@ tasks {
             executable = "npm"
             args = listOf("run", "dev")
         }
+    clean {
+        delete(npmInstall)
+        delete(extractPluginJavadoc)
+        delete(buildDocs)
+        delete(devDocs)
+    }
 }
