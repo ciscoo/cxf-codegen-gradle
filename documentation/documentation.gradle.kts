@@ -33,8 +33,8 @@ gitPublish {
     }
 }
 
-val javadoc by configurations.dependencyScope("javadoc")
-val javadocClasspath by configurations.resolvable("javadocClasspath") {
+val javadoc = configurations.dependencyScope("javadoc")
+val javadocClasspath = configurations.resolvable("javadocClasspath") {
     extendsFrom(javadoc)
     attributes {
         attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category.DOCUMENTATION))
@@ -49,16 +49,19 @@ dependencies {
 }
 
 tasks {
-    val extractPluginJavadoc by registering(Copy::class) {
-        from(zipTree(javadocClasspath.files.single()))
+    val extractPluginJavadoc = register<Copy>("extractPluginJavadoc") {
+        description = "Extracts the plugin Javadoc."
+        from(zipTree(javadocClasspath.map { it.files.single() }))
         into(layout.projectDirectory.dir("public/javadoc"))
     }
-    val processExamples by registering(ProcessExamples::class) {
+    val processExamples = register<ProcessExamples>("processExamples") {
+        description = "Process all examples from the project."
         source(layout.projectDirectory.dir("src/docs/gradle"))
         include("**/*.gradle.kts", "**/*.gradle")
         outputDirectory = layout.buildDirectory.dir("processed-examples")
     }
-    val generateGradleMetadata by registering {
+    val generateGradleMetadata = register("generateGradleMetadata") {
+        description = "Generates a metadata file for the documentation."
         val json = layout.buildDirectory.file("gradle-project-metadata.json")
         outputs.file(json)
         doLast {
@@ -74,7 +77,8 @@ tasks {
             )
         }
     }
-    val buildDocs by registering {
+    val buildDocs = register<Exec>("buildDocs") {
+        description = "Builds the documentation for publication."
         inputs.files(extractPluginJavadoc, processExamples, generateGradleMetadata)
     }
 }
