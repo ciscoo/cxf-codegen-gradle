@@ -9,9 +9,9 @@ export default defineConfig({
       open: true
     },
     define: {
-      __VERSION__: JSON.stringify(gradleMetadata.version),
-      __GRADLE_BUILD_VERSION__: JSON.stringify(gradleMetadata.gradleVersion),
-      __CXF_VERSION__: JSON.stringify(gradleMetadata.cxfVersion),
+      __VERSION__: gradleMetadata.version,
+      __GRADLE_BUILD_VERSION__: gradleMetadata.gradleVersion,
+      __CXF_VERSION__: gradleMetadata.cxfVersion,
     },
   },
   srcExclude: ["build/**"],
