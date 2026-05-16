@@ -82,10 +82,16 @@ tasks {
                 )
             }
         }
+    val npmInstall = register<Exec>("npmInstall") {
+        description = "Installs NPM dependencies."
+        outputs.dir(layout.projectDirectory.dir("node_modules"))
+        executable = "npm"
+        args = listOf("install")
+    }
     val buildDocs =
         register<Exec>("buildDocs") {
             description = "Builds the documentation for publication."
-            inputs.files(extractPluginJavadoc, processExamples, generateGradleMetadata)
+            inputs.files(extractPluginJavadoc, processExamples, generateGradleMetadata, npmInstall)
             outputs.dir(layout.buildDirectory.dir("dist"))
             outputs.upToDateWhen { false }
             executable = "npm"
@@ -101,7 +107,7 @@ tasks {
     val devDocs =
         register<Exec>("devDocs") {
             description = "Start VitePress dev server for documentation development."
-            inputs.files(extractPluginJavadoc, processExamples, generateGradleMetadata)
+            inputs.files(extractPluginJavadoc, processExamples, generateGradleMetadata, npmInstall)
             outputs.dir(layout.buildDirectory.dir("dist"))
             executable = "npm"
             args = listOf("run", "dev")
