@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.mateo.cxf.codegen.dsl;
+package io.mateo.cxf.codegen.workers;
 
 import org.gradle.api.Incubating;
 import org.gradle.api.Named;

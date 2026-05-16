@@ -15,7 +15,6 @@
  */
 package io.mateo.cxf.codegen.workers;
 
-import io.mateo.cxf.codegen.dsl.Option;
 import org.gradle.api.Incubating;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.provider.Property;
