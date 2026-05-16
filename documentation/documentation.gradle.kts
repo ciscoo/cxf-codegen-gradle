@@ -108,7 +108,7 @@ tasks {
         register<Exec>("devDocs") {
             description = "Start VitePress dev server for documentation development."
             inputs.files(extractPluginJavadoc, processExamples, generateGradleMetadata, npmInstall)
-            outputs.dir(layout.buildDirectory.dir("dist"))
+            outputs.dir(layout.projectDirectory.dir(".vitepress/cache"))
             executable = "npm"
             args = listOf("run", "dev")
         }
