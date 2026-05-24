@@ -15,6 +15,7 @@
  */
 package io.mateo.cxf.codegen.dsl;
 
+import io.mateo.cxf.codegen.workers.Option;
 import org.gradle.api.Action;
 import org.gradle.api.ExtensiblePolymorphicDomainObjectContainer;
 import org.gradle.api.Incubating;

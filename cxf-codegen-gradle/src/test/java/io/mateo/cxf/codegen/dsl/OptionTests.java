@@ -17,6 +17,7 @@ package io.mateo.cxf.codegen.dsl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import io.mateo.cxf.codegen.workers.Option;
 import org.gradle.testfixtures.ProjectBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

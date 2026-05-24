@@ -21,10 +21,10 @@ import io.mateo.cxf.codegen.workers.Wsdl2JavaOption;
 import io.mateo.cxf.codegen.workers.Wsdl2JsOption;
 import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java;
 import io.mateo.cxf.codegen.wsdl2js.Wsdl2Js;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import org.gradle.api.Incubating;
 import org.gradle.api.NamedDomainObjectProvider;
 import org.gradle.api.NamedDomainObjectSet;
@@ -37,7 +37,6 @@ import org.gradle.api.artifacts.dsl.DependencyHandler;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.logging.Logging;
 import org.gradle.api.plugins.JavaPluginExtension;
-import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.TaskCollection;
@@ -240,30 +239,27 @@ public class CxfCodegenPlugin implements Plugin<Project> {
             configuration.setCanBeConsumed(false);
             configuration.setCanBeResolved(true);
             configuration.setDescription("Classpath for CXF Codegen.");
-            configuration.getDependencies().addAllLater(createDependencies(project, extension));
+            configuration.getDependencies().addAllLater(createDependencies(project.getDependencies(), extension));
         });
     }
 
-    private Provider<List<Dependency>> createDependencies(Project project, CxfCodegenExtension extension) {
-        return extension.getCxfVersion().flatMap(cxfVersion -> createDependenciesProvider(project, cxfVersion));
+    private Provider<List<Dependency>> createDependencies(
+            DependencyHandler dependencyHandler, CxfCodegenExtension extension) {
+        return extension.getCxfVersion().map(cxfVersion -> cxfVersionToDependencies(dependencyHandler, cxfVersion));
     }
 
-    private ListProperty<Dependency> createDependenciesProvider(Project project, String cxfVersion) {
-        ListProperty<Dependency> dependencies = project.getObjects().listProperty(Dependency.class);
-        addDependencies(dependencies::add, project.getDependencies(), cxfVersion);
-        return dependencies;
-    }
+    private List<Dependency> cxfVersionToDependencies(DependencyHandler dependencyHandler, String cxfVersion) {
+        List<Dependency> dependencies = new ArrayList<>(7);
 
-    private void addDependencies(Consumer<Dependency> adderFn, DependencyHandler dependencyHandler, String cxfVersion) {
         // Suppress/silence logs by default for a cleaner build output.
-        adderFn.accept(dependencyHandler.create("org.slf4j:slf4j-nop:" + GeneratedVersionAccessor.SLF4J_VERSION));
+        dependencies.add(dependencyHandler.create("org.slf4j:slf4j-nop:" + GeneratedVersionAccessor.SLF4J_VERSION));
 
         // Same dependencies defined in cxf-codegen-plugin's POM.
-        adderFn.accept(dependencyHandler.create("org.apache.cxf:cxf-core:" + cxfVersion));
-        adderFn.accept(dependencyHandler.create("org.apache.cxf:cxf-tools-common:" + cxfVersion));
-        adderFn.accept(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-core:" + cxfVersion));
-        adderFn.accept(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:" + cxfVersion));
-        adderFn.accept(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:" + cxfVersion));
+        dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-core:" + cxfVersion));
+        dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-common:" + cxfVersion));
+        dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-core:" + cxfVersion));
+        dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:" + cxfVersion));
+        dependencies.add(dependencyHandler.create("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:" + cxfVersion));
 
         // The Maven plugin excludes cxf-rt-frontend-simple, so exclude it here as well.
         ModuleDependency dependency = (ModuleDependency)
@@ -272,6 +268,7 @@ public class CxfCodegenPlugin implements Plugin<Project> {
         excludeProperties.put("group", "org.apache.cxf");
         excludeProperties.put("module", "cxf-rt-frontend-simple");
         dependency.exclude(excludeProperties);
-        adderFn.accept(dependency);
+        dependencies.add(dependency);
+        return dependencies;
     }
 }
