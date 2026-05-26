@@ -49,6 +49,14 @@ export default defineConfig({
         ],
       },
       {
+        text: "JavaScript Generation",
+        items: [
+          { text: "Overview", link: "/javascript-generation/overview" },
+          { text: "Worker API", link: "/javascript-generation/worker-api" },
+          { text: "Task API", link: "/javascript-generation/task-api" },
+        ],
+      },
+      {
         text: "Examples",
         items: [
           { text: "Overview", link: "/examples/overview" },

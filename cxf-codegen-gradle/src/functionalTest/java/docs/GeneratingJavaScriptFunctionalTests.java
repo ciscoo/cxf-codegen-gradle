@@ -56,6 +56,16 @@ class GeneratingJavaScriptFunctionalTests {
                         "verbose=true");
     }
 
+    @TestTemplate
+    void workerOption(GradleBuild gradleBuild) {
+        BuildResult result = gradleBuild
+                .script(scriptFor("worker-option"))
+                .prepareRunner("-Pio.mateo.cxf-codegen.workers=true", "verify")
+                .build();
+
+        assertThat(result.getOutput()).contains("/src/main/resources/wsdl/example.wsdl");
+    }
+
     Path scriptFor(String name) {
         final var rootDir = Path.of("").toAbsolutePath().getParent();
         return rootDir.resolve(Path.of("documentation", "src", "docs", "gradle", "generating-javascript", name));
