@@ -82,12 +82,13 @@ tasks {
                 )
             }
         }
-    val npmInstall = register<Exec>("npmInstall") {
-        description = "Installs NPM dependencies."
-        outputs.dir(layout.projectDirectory.dir("node_modules"))
-        executable = "npm"
-        args = listOf("install")
-    }
+    val npmInstall =
+        register<Exec>("npmInstall") {
+            description = "Installs NPM dependencies."
+            outputs.dir(layout.projectDirectory.dir("node_modules"))
+            executable = "npm"
+            args = listOf("install")
+        }
     val buildDocs =
         register<Exec>("buildDocs") {
             description = "Builds the documentation for publication."
