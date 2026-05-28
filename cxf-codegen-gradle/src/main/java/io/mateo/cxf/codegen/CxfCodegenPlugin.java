@@ -147,13 +147,15 @@ public class CxfCodegenPlugin implements Plugin<Project> {
                 });
 
         project.afterEvaluate(evaluated -> {
-            if (extension.getAddToMainSourceSet().get()) {
-                evaluated
-                        .getExtensions()
-                        .getByType(JavaPluginExtension.class)
-                        .getSourceSets()
-                        .named(SourceSet.MAIN_SOURCE_SET_NAME)
-                        .configure(main -> main.getJava().srcDir(wsdl2Java));
+            if (evaluated.getPluginManager().hasPlugin("java")) {
+                if (extension.getAddToMainSourceSet().get()) {
+                    evaluated
+                            .getExtensions()
+                            .getByType(JavaPluginExtension.class)
+                            .getSourceSets()
+                            .named(SourceSet.MAIN_SOURCE_SET_NAME)
+                            .configure(main -> main.getJava().srcDir(wsdl2Java));
+                }
             }
         });
     }

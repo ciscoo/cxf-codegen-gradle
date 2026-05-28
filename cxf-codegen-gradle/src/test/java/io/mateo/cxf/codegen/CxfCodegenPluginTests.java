@@ -399,6 +399,19 @@ class CxfCodegenPluginTests {
         assertThat(paths).isNotEmpty().doesNotContain(outputDir);
     }
 
+    @Test
+    void doesNotAddToMainSourceSetWhenJavaPluginNotApplied() {
+        Project project =
+                getProject(p -> p.getExtensions().getExtraProperties().set(CxfCodegenPlugin.WORKERS_PROPERTY, "true"));
+
+        CxfCodegenExtension extension = project.getExtensions().getByType(CxfCodegenExtension.class);
+
+        extension.getAddToMainSourceSet().set(true);
+        extension.getOptions().create("foo", Wsdl2JavaOption.class);
+
+        assertThatNoException().isThrownBy(() -> project.getAllTasks(false));
+    }
+
     public Project getProject(Consumer<Project> configurer) {
         Project project = ProjectBuilder.builder().build();
         configurer.accept(project);
