@@ -35,6 +35,6 @@ export default function (): GradleMetadata {
   const contents = readFileSync("build/gradle-project-metadata.json", "utf-8");
   const metadata: GradleMetadata = JSON.parse(contents);
   return Object.fromEntries(
-      Object.entries(metadata).map(([k, v]) => [k, JSON.stringify(v)])
+    Object.entries(metadata).map(([k, v]) => [k, JSON.stringify(v)]),
   ) as Record<keyof GradleMetadata, string>;
 }

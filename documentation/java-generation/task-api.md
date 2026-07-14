@@ -4,7 +4,7 @@
 > The [Worker API](worker-api.md) is the preferred approach for Java code generation
 
 The Task API approach uses Gradle tasks to execute the `wsdl2java` tool. For each WSDL document to process, you must
-create a separate Gradle task of type `Wsdl2Java`. 
+create a separate Gradle task of type `Wsdl2Java`.
 
 The `Wsdl2Java` task is provided by this plugin and is a subclass of Gradle's
 [`JavaExec`](https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html). As such, any and all configuration
@@ -28,7 +28,7 @@ where `$name` is the task name.
 Additionally, when defining a task:
 
 1. For each task, the generated Java sources (the task output) is added to the `main` source sets.
-   * This can be disabled when creating the task by configuring `addToMainSourceSet` to `false`.
+   - This can be disabled when creating the task by configuring `addToMainSourceSet` to `false`.
      This is a property on the task itself.
 2. All `Wsdl2Java` task types are aggregated to a single task named `wsdl2java`.
 
@@ -70,7 +70,7 @@ To enable logging for Apache CXF:
 1. Exclude the `org.slf4j:slf4j-nop` dependency
 2. Include a SLF4J provider (or binding)
 3. Include a logging library
-   * The library should implement the SLF4J API
+   - The library should implement the SLF4J API
 
 In the following example, [Logback](https://logback.qos.ch) is used which provides an implementation of the SLF4J API.
 

@@ -6,7 +6,7 @@ const gradleMetadata = readGradleMetadata();
 export default defineConfig({
   vite: {
     server: {
-      open: true
+      open: true,
     },
     define: {
       __VERSION__: gradleMetadata.version,
@@ -62,8 +62,14 @@ export default defineConfig({
           { text: "Overview", link: "/examples/overview" },
           { text: "JAX-WS Binding File", link: "/examples/jax-ws-binding" },
           { text: "Specify Data Binding", link: "/examples/data-binding" },
-          { text: "Specify Service to Generate Artifacts For", link: "/examples/service" },
-          { text: "Loading A WSDL From A Maven Repository", link: "/examples/remote-wsdl" },
+          {
+            text: "Specify Service to Generate Artifacts For",
+            link: "/examples/service",
+          },
+          {
+            text: "Loading A WSDL From A Maven Repository",
+            link: "/examples/remote-wsdl",
+          },
           { text: "Using XJC Extensions", link: "/examples/xjc-extensions" },
         ],
       },

@@ -4,7 +4,7 @@
 > The [Worker API](worker-api.md) is the preferred approach for JavaScript code generation
 
 The Task API approach uses Gradle tasks to execute the `wsdl2js` tool. For each WSDL document to process, you must
-create a separate Gradle task of type `Wsdl2Js`. 
+create a separate Gradle task of type `Wsdl2Js`.
 
 The `Wsdl2Js` task is provided by this plugin and is a subclass of Gradle's
 [`JavaExec`](https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html). As such, any and all configuration

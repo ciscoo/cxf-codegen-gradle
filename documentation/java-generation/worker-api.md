@@ -17,9 +17,11 @@ This can be accomplished in several ways such as configuring it in the `gradle.p
 command-line argument when invoking Gradle. The properties file approach is shown below.
 
 ::: code-group
+
 ```properties [gradle.properties]
 io.mateo.cxf-codegen.workers=true
 ```
+
 :::
 
 ## Configuration
