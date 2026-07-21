@@ -19,7 +19,7 @@ export default defineConfig({
   lang: "en-US",
   title: "CXF Codegen Gradle",
   description: "Gradle plugin implementation of CXF Codegen",
-  lastUpdated: true,
+  lastUpdated: false,
   cleanUrls: false,
   base: "/docs/current/user-guide",
   themeConfig: {
