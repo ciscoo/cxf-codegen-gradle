@@ -23,6 +23,9 @@ export default defineConfig({
   cleanUrls: false,
   base: "/docs/current/user-guide",
   themeConfig: {
+    search: {
+      provider: 'local'
+    },
     sidebar: [
       {
         text: "Introduction",
