@@ -26,6 +26,10 @@ export default defineConfig({
     search: {
       provider: 'local'
     },
+    logo: {
+      light: '/logo-light.svg',
+      dark: '/logo-dark.svg'
+    },
     sidebar: [
       {
         text: "Introduction",
