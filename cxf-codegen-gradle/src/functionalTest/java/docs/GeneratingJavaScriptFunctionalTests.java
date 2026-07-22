@@ -63,7 +63,9 @@ class GeneratingJavaScriptFunctionalTests {
                 .prepareRunner("-Pio.mateo.cxf-codegen.workers=true", "verify")
                 .build();
 
-        assertThat(result.getOutput()).contains("/src/main/resources/wsdl/example.wsdl");
+        assertThat(result.getOutput())
+                .contains(Path.of("src", "main", "resources", "wsdl", "example.wsdl")
+                        .toString());
     }
 
     Path scriptFor(String name) {
