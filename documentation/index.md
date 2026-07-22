@@ -2,7 +2,7 @@
 layout: home
 hero:
   name: "CXF Codegen Gradle"
-  text: "Gradle plugin for CXF code generation"
+  tagline: "Code generation through Apache CXF"
   image:
     light: /logo-light.svg
     dark: /logo-dark.svg
