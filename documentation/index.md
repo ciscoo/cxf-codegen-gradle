@@ -24,7 +24,4 @@ features:
   - icon: 📦
     title: Isolated Projects
     details: Compatible with Isolated projects.
-  - icon: 📝
-    title: Kotlin & Groovy DSL
-    details: Choose the DSL you like, both are fully supported.
 ---
