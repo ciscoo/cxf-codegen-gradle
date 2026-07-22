@@ -67,7 +67,7 @@ jobs:
     name: Update Snapshot Documentation
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
+    if: false && github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
     steps:
       - name: Check Out Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
