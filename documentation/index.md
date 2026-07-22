@@ -15,10 +15,16 @@ hero:
       text: Examples
       link: /examples
 features:
+  - icon: 🧬
+    title: WSDL &rarr; Java
+    details: Generate Java sources from WSDL through <code>wsdl2java</code>, mirroring the Apache CXF Maven codegen plugin's API.
+  - icon: ⚡
+    title: Configuration Cache
+    details: Full support for Gradle's configuration cache and incremental builds.
+  - icon: 📦
+    title: Isolated Projects
+    details: Compatible with Isolated projects.
   - icon: 📝
-    title: Documentation that delights
-    details: Documentation with examples in the Kotlin and Groovy DSL.
-  - icon: ⚡️
-    title: Faster Builds
-    details: Full support for Gradle's configuration cache and incremental build.
+    title: Kotlin & Groovy DSL
+    details: Choose the DSL you like, both are fully supported.
 ---
