@@ -73,7 +73,7 @@ tasks {
                 json.get().asFile.writeText(
                     """
                     {
-                        "version": "$docsVersion",
+                        "version": "${rootProject.version}",
                         "cxfVersion": "${libs.versions.cxf.get()}",
                         "slf4jVersion": "${libs.versions.slf4j.get()}",
                         "gradleVersion": "${GradleVersion.current().version}"
