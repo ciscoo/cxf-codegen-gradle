@@ -13,7 +13,7 @@ hero:
       link: /overview
     - theme: alt
       text: Examples
-      link: /examples
+      link: /examples/overview
 features:
   - icon: 🧬
     title: WSDL &rarr; Java
