@@ -84,5 +84,8 @@ export default defineConfig({
     socialLinks: [
       { icon: "github", link: "https://github.com/ciscoo/cxf-codegen-gradle" },
     ],
+    footer: {
+      message: "Released under Apache 2.0 license"
+    }
   },
 });
