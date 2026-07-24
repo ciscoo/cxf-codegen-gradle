@@ -55,7 +55,7 @@ tasks {
                     """
                     {
                         "version": "${rootProject.version}",
-                        "docsVersion": "$docsVersion"
+                        "docsVersion": "$docsVersion",
                         "cxfVersion": "${libs.versions.cxf.get()}",
                         "slf4jVersion": "${libs.versions.slf4j.get()}",
                         "gradleVersion": "${GradleVersion.current().version}"
