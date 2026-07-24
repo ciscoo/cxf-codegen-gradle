@@ -3,7 +3,7 @@ import readGradleMetadata from "./gradle";
 
 const gradleMetadata = readGradleMetadata();
 const isSnapshot = gradleMetadata.version.endsWith("-SNAPSHOT");
-const base = isSnapshot ? "/docs/snapshot/user-guide" : "/docs/current/user-guide";
+const base = isSnapshot ? "/cxf-codegen-gradle/docs/snapshot/user-guide" : "/cxf-codegen-gradle/docs/current/user-guide";
 
 export default defineConfig({
   vite: {
