@@ -98,7 +98,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          rsync -a --delete ../documentation/build/gh-pages/ ./docs/snapshot
+          rsync -a --delete --ignore-times ../documentation/build/gh-pages/ ./docs/snapshot
           git add docs/snapshot
           git commit -m "Publish snapshot docs" || echo "nothing to commit"
           git push
