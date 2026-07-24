@@ -4,34 +4,9 @@ import org.gradle.util.GradleVersion
 plugins {
     `java-library-conventions`
     alias(libs.plugins.spotless)
-    alias(libs.plugins.gitPublish)
 }
 
 description = "CXF Codegen documentation"
-
-val snapshot = rootProject.version.toString().contains("SNAPSHOT")
-val docsVersion = if (snapshot) "snapshot" else rootProject.version.toString()
-val docsDir = layout.buildDirectory.dir("ghpages-docs")
-val replaceCurrentDocs = project.hasProperty("replaceCurrentDocs")
-
-gitPublish {
-    repoUri = "https://github.com/ciscoo/cxf-codegen-gradle.git"
-    branch = "gh-pages"
-
-    contents {
-        from(docsDir)
-        into("docs")
-    }
-
-    preserve {
-        include("**/*")
-        if (snapshot) {
-            exclude("docs/snapshot/**")
-        } else {
-            exclude("docs/current/**")
-        }
-    }
-}
 
 val javadoc = configurations.dependencyScope("javadoc")
 val javadocClasspath =
@@ -55,7 +30,7 @@ tasks {
             inputs.files(javadocClasspath)
             description = "Extracts the plugin Javadoc."
             from(zipTree(javadocClasspath.map { it.files.single() }))
-            into(layout.projectDirectory.dir("public/javadoc"))
+            into(layout.buildDirectory.dir("api"))
         }
     val processExamples =
         register<ProcessExamples>("processExamples") {
@@ -110,9 +85,20 @@ tasks {
             description = "Start VitePress dev server for documentation development."
             inputs.files(extractPluginJavadoc, processExamples, generateGradleMetadata, npmInstall)
             outputs.dir(layout.projectDirectory.dir(".vitepress/cache"))
+            outputs.upToDateWhen { false }
             executable = "npm"
             args = listOf("run", "dev")
         }
+    register<Copy>("prepareDocsForUpload") {
+        description = "Prepares documentation for upload to GitHub Pages"
+        into(layout.buildDirectory.dir("gh-pages"))
+        from(extractPluginJavadoc) {
+            into("api")
+        }
+        from(buildDocs) {
+            into("user-guide")
+        }
+    }
     clean {
         delete(npmInstall)
         delete(extractPluginJavadoc)

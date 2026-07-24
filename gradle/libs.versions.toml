@@ -16,6 +16,5 @@ cxf-toolsWsdltoFrontendJs = { module = "org.apache.cxf:cxf-tools-wsdlto-frontend
 
 
 [plugins]
-gitPublish = { id = "org.ajoberstar.git-publish", version = "6.0.0" }
 spotless = { id = "com.diffplug.spotless" }
 jreleaser = { id = "org.jreleaser", version = "1.25.0" }
