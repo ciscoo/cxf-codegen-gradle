@@ -72,6 +72,7 @@ tasks {
             outputs.upToDateWhen { false }
             executable = "npm"
             args = listOf("run", "build")
+            environment("DOCS_TARGET", providers.environmentVariable("DOCS_TARGET").getOrElse("current"))
         }
     val previewDocs =
         register<Exec>("previewDocs") {
