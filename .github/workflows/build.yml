@@ -67,19 +67,29 @@ jobs:
     name: Update Snapshot Documentation
     needs: build
     runs-on: ubuntu-latest
-    if: false && github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
     steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: documentation/.nvmrc
       - name: Check Out Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          ref: gh-pages
           fetch-depth: 1
-      - run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Setup Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
-      - name: Publish Snapshot Documentation
-        run: ./gradlew gitPublishPush -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false
-        env:
-          GRGIT_USER: git
-          GRGIT_PASS: ${{ secrets.GH_TOKEN }}
+      - name: Configure Gradle Properties
+        run: |
+          echo 'systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false' >> $GRADLE_USER_HOME/gradle.properties
+          echo 'org.gradle.daemon=false' >> $GRADLE_USER_HOME/gradle.properties
+      - name: Prepare Snapshot Documentation
+        run: ./gradlew :documentation:prepareDocsForUpload
+      - name: Sync Snapshot Documentation
+        run: |
+          ls -la
