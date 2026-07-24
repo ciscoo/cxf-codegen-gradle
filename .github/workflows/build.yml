@@ -92,5 +92,6 @@ jobs:
       - name: Prepare Snapshot Documentation
         run: ./gradlew :documentation:prepareDocsForUpload
       - name: Sync Snapshot Documentation
+        working-directory: gh-pages
         run: |
           ls -la
