@@ -100,7 +100,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          rsync -a --delete --ignore-times ../documentation/build/gh-pages/ "./docs/${DOCS_TARGET}"
+          rsync -a -v --delete --ignore-times ../documentation/build/gh-pages/ "./docs/${DOCS_TARGET}"
           git add "docs/${DOCS_TARGET}"
           git commit -m "Publish ${DOCS_TARGET} docs" || echo "nothing to commit"
           git push
