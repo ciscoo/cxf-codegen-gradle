@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: io.mateo.cxf.codegen
+Created-By: 17.0.19 (Eclipse Adoptium 17.0.19+10)
+Implementation-Title: CXF Codegen
+Implementation-Version: 3.0.0-SNAPSHOT
+Specification-Title: CXF Codegen
+Specification-Version: 3.0.0-SNAPSHOT
+
