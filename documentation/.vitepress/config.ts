@@ -37,6 +37,7 @@ export default defineConfig({
       },
       {
         text: "Javadoc",
+        target: "_blank",
         link: (pageData) => {
           const depth = pageData.relativePath.split("/").length - 1;
           return "../".repeat(depth + 1) + "api/";
