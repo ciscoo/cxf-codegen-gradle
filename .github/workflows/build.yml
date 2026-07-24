@@ -69,19 +69,20 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
     steps:
+      - name: Check Out Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 1
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: documentation/.nvmrc
-      - name: Check Out Repository
+      - name: Check Out GitHub Pages
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: gh-pages
+          path: gh-pages
           fetch-depth: 1
-      - name: Setup Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Configure Gradle Properties
