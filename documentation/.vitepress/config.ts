@@ -24,24 +24,24 @@ export default defineConfig({
   base: `/cxf-codegen-gradle/docs/${gradleMetadata.docsVersion}/user-guide`,
   themeConfig: {
     search: {
-      provider: 'local'
+      provider: "local",
     },
     logo: {
-      light: '/logo-light.svg',
-      dark: '/logo-dark.svg'
+      light: "/logo-light.svg",
+      dark: "/logo-dark.svg",
     },
     nav: [
       {
         text: "Guide",
-        link: "/overview"
+        link: "/overview",
       },
       {
-        text: 'Javadoc',
+        text: "Javadoc",
         link: (pageData) => {
-          const depth = pageData.relativePath.split('/').length - 1;
-          return '../'.repeat(depth + 1) + 'api/';
-        }
-      }
+          const depth = pageData.relativePath.split("/").length - 1;
+          return "../".repeat(depth + 1) + "api/";
+        },
+      },
     ],
     sidebar: [
       {
@@ -98,7 +98,7 @@ export default defineConfig({
       { icon: "github", link: "https://github.com/ciscoo/cxf-codegen-gradle" },
     ],
     footer: {
-      message: "Released under Apache 2.0 license"
-    }
+      message: "Released under Apache 2.0 license",
+    },
   },
 });
