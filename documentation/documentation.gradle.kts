@@ -71,6 +71,13 @@ tasks {
             executable = "npm"
             args = listOf("install")
         }
+    val prettierFormat =
+        register<Exec>("prettierFormat") {
+            description = "Runs Prettier."
+            inputs.files("**/*.md", "**/*.ts", "package.json")
+            executable = "npm"
+            args = listOf("run", "format")
+        }
     val buildDocs =
         register<Exec>("buildDocs") {
             description = "Builds the documentation for publication."
