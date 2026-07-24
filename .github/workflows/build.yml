@@ -93,12 +93,14 @@ jobs:
           echo 'org.gradle.daemon=false' >> $GRADLE_USER_HOME/gradle.properties
       - name: Prepare Snapshot Documentation
         run: ./gradlew :documentation:prepareDocsForUpload
-      - name: Sync Snapshot Documentation
+      - name: Sync Documentation
+        env:
+          DOCS_TARGET: snapshot
         working-directory: gh-pages
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          rsync -a --delete --ignore-times ../documentation/build/gh-pages/ ./docs/snapshot
-          git add docs/snapshot
-          git commit -m "Publish snapshot docs" || echo "nothing to commit"
+          rsync -a --delete --ignore-times ../documentation/build/gh-pages/ "./docs/${DOCS_TARGET}"
+          git add "docs/${DOCS_TARGET}"
+          git commit -m "Publish ${DOCS_TARGET} docs" || echo "nothing to commit"
           git push
