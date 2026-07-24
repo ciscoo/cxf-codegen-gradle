@@ -30,6 +30,19 @@ export default defineConfig({
       light: '/logo-light.svg',
       dark: '/logo-dark.svg'
     },
+    nav: [
+      {
+        text: "Guide",
+        link: "/overview"
+      },
+      {
+        text: 'Javadoc',
+        link: (pageData) => {
+          const depth = pageData.relativePath.split('/').length - 1;
+          return '../'.repeat(depth + 1) + 'api/';
+        }
+      }
+    ],
     sidebar: [
       {
         text: "Introduction",
