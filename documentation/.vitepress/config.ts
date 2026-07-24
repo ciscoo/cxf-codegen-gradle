@@ -2,6 +2,8 @@ import { defineConfig } from "vitepress";
 import readGradleMetadata from "./gradle";
 
 const gradleMetadata = readGradleMetadata();
+const isSnapshot = gradleMetadata.version.endsWith("-SNAPSHOT");
+const base = isSnapshot ? "/docs/snapshot/user-guide" : "/docs/current/user-guide";
 
 export default defineConfig({
   vite: {
@@ -21,7 +23,7 @@ export default defineConfig({
   description: "Gradle plugin implementation of CXF Codegen",
   lastUpdated: false,
   cleanUrls: false,
-  base: "/docs/current/user-guide",
+  base,
   themeConfig: {
     search: {
       provider: 'local'
