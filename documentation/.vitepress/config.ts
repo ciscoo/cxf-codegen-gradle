@@ -21,7 +21,7 @@ export default defineConfig({
   description: "Gradle plugin implementation of CXF Codegen",
   lastUpdated: false,
   cleanUrls: false,
-  base: `/cxf-codegen-gradle/docs/${gradleMetadata.docsVersion}/user-guide`,
+  base: `/cxf-codegen-gradle/docs/${JSON.parse(gradleMetadata.docsVersion)}/user-guide`,
   themeConfig: {
     search: {
       provider: "local",
