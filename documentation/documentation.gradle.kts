@@ -45,10 +45,16 @@ tasks {
             val json = layout.buildDirectory.file("gradle-project-metadata.json")
             outputs.file(json)
             doLast {
+                val docsVersion = if (rootProject.version.toString().endsWith("SNAPSHOT")) {
+                    "snapshot"
+                } else {
+                    "current"
+                }
                 json.get().asFile.writeText(
                     """
                     {
                         "version": "${rootProject.version}",
+                        "docsVersion": "$docsVersion"
                         "cxfVersion": "${libs.versions.cxf.get()}",
                         "slf4jVersion": "${libs.versions.slf4j.get()}",
                         "gradleVersion": "${GradleVersion.current().version}"

@@ -10,6 +10,11 @@ type GradleMetadata = {
   version: string;
 
   /**
+   * The version of the docs; primarily to determine the base path.
+   */
+  docsVersion: string;
+
+  /**
    * The version of Apache CXF.
    */
   cxfVersion: string;
