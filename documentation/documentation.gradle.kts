@@ -71,15 +71,23 @@ tasks {
             executable = "npm"
             args = listOf("install")
         }
-    val prettierFormat =
-        register<Exec>("prettierFormat") {
+    register<Exec>("prettierFormat") {
+        description = "Runs Prettier."
+        inputs.files("**/*.md", "**/*.ts", "package.json")
+        executable = "npm"
+        args = listOf("run", "format:write")
+        outputs.upToDateWhen { false }
+    }
+    val prettierCheck =
+        register<Exec>("prettierCheck") {
             description = "Runs Prettier."
             inputs.files("**/*.md", "**/*.ts", "package.json")
             executable = "npm"
-            args = listOf("run", "format")
+            args = listOf("run", "format:check")
         }
     val buildDocs =
         register<Exec>("buildDocs") {
+            dependsOn(prettierCheck)
             description = "Builds the documentation for publication."
             inputs.files(extractPluginJavadoc, processExamples, generateGradleMetadata, npmInstall)
             outputs.dir(layout.buildDirectory.dir("dist"))
@@ -90,6 +98,7 @@ tasks {
         }
     val previewDocs =
         register<Exec>("previewDocs") {
+            dependsOn(prettierCheck)
             description = "Locally preview the production documentation build."
             inputs.files(buildDocs)
             executable = "npm"
