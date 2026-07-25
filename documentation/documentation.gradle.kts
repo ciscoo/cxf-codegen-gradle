@@ -73,7 +73,7 @@ tasks {
         }
     register<Exec>("prettierFormat") {
         description = "Runs Prettier."
-        inputs.files("**/*.md", "**/*.ts", "package.json")
+        inputs.files(npmInstall, "**/*.md", "**/*.ts", "package.json")
         executable = "npm"
         args = listOf("run", "format:write")
         outputs.upToDateWhen { false }
@@ -81,7 +81,7 @@ tasks {
     val prettierCheck =
         register<Exec>("prettierCheck") {
             description = "Runs Prettier."
-            inputs.files("**/*.md", "**/*.ts", "package.json")
+            inputs.files(npmInstall, "**/*.md", "**/*.ts", "package.json")
             executable = "npm"
             args = listOf("run", "format:check")
         }
