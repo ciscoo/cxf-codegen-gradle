@@ -3,6 +3,11 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    includeBuild("build-logic-settings")
+}
+
+plugins {
+    id("publishing-conventions")
 }
 
 rootProject.name = "cxf-codegen-gradle-build"

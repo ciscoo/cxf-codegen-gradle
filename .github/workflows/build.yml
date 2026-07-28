@@ -58,7 +58,7 @@ jobs:
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Publish
-        run: ./gradlew publishAllPublicationsToMavenCentralSnapshotsRepository -x check
+        run: ./gradlew publishAggregationToCentralSnapshots -x check
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}

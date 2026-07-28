@@ -3,7 +3,6 @@ plugins {
     jacoco
     `java-gradle-plugin`
     `maven-publish`
-    `jreleaser-conventions`
 }
 
 description = "CXF Codegen"

@@ -10,7 +10,6 @@ repositories {
 dependencies {
     implementation(libs.gradle.spotless)
     implementation(libs.javapoet)
-    implementation(libs.plugins.jreleaser.map { "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}" }.get())
 }
 
 // TODO: https://youtrack.jetbrains.com/issue/KT-63165
