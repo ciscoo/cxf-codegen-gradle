@@ -70,20 +70,30 @@ tasks {
             outputs.dir(layout.projectDirectory.dir("node_modules"))
             executable = "npm"
             args = listOf("install")
+            onlyIf("not skipped") {
+                !project.hasProperty("skipDocs")
+            }
         }
-    register<Exec>("prettierFormat") {
-        description = "Runs Prettier."
-        inputs.files(npmInstall, "**/*.md", "**/*.ts", "package.json")
-        executable = "npm"
-        args = listOf("run", "format:write")
-        outputs.upToDateWhen { false }
-    }
+    val prettierFormat =
+        register<Exec>("prettierFormat") {
+            description = "Runs Prettier."
+            inputs.files(npmInstall, "**/*.md", "**/*.ts", "package.json")
+            executable = "npm"
+            args = listOf("run", "format:write")
+            outputs.upToDateWhen { false }
+            onlyIf("not skipped") {
+                !project.hasProperty("skipDocs")
+            }
+        }
     val prettierCheck =
         register<Exec>("prettierCheck") {
             description = "Runs Prettier."
             inputs.files(npmInstall, "**/*.md", "**/*.ts", "package.json")
             executable = "npm"
             args = listOf("run", "format:check")
+            onlyIf("not skipped") {
+                !project.hasProperty("skipDocs")
+            }
         }
     val buildDocs =
         register<Exec>("buildDocs") {
@@ -122,6 +132,12 @@ tasks {
         from(buildDocs) {
             into("user-guide")
         }
+    }
+    spotlessCheck {
+        finalizedBy(prettierCheck)
+    }
+    spotlessApply {
+        finalizedBy(prettierFormat)
     }
     clean {
         delete(npmInstall)
