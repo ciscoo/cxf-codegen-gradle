@@ -6,7 +6,7 @@ Documentation built with [VitePress](https://vitepress.dev/).
 
 In addition to the overall project prerequisites, the following is required to build the documentation:
 
-* Node.js (refer to `.nvmrc` for version)
+- Node.js (refer to `.nvmrc` for version)
 
 ## Development
 
