@@ -14,7 +14,7 @@ export default defineConfig({
       __CXF_VERSION__: gradleMetadata.cxfVersion,
     },
   },
-  srcExclude: ["parts/**", "build/**"],
+  srcExclude: ["README.md", "parts/**", "build/**"],
   outDir: "build/dist",
   lang: "en-US",
   title: "CXF Codegen Gradle",
