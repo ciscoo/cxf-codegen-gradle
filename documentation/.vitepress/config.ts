@@ -43,6 +43,15 @@ export default defineConfig({
           return "../".repeat(depth + 1) + "api/";
         },
       },
+      {
+        text: JSON.parse(gradleMetadata.version.toString()),
+        items: [
+          {
+            text: "Changelog",
+            link: "https://github.com/ciscoo/cxf-codegen-gradle/blob/master/CHANGELOG.md",
+          },
+        ],
+      },
     ],
     sidebar: [
       {
