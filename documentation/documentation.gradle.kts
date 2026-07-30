@@ -1,5 +1,4 @@
 import io.mateo.build.ProcessExamples
-import org.gradle.util.GradleVersion
 
 plugins {
     `java-library-conventions`
@@ -133,11 +132,16 @@ tasks {
             into("user-guide")
         }
     }
-    spotlessCheck {
-        finalizedBy(prettierCheck)
-    }
-    spotlessApply {
-        finalizedBy(prettierFormat)
+    if (!org.gradle.internal.os.OperatingSystem
+            .current()
+            .isWindows
+    ) {
+        spotlessCheck {
+            finalizedBy(prettierCheck)
+        }
+        spotlessApply {
+            finalizedBy(prettierFormat)
+        }
     }
     clean {
         delete(npmInstall)
