@@ -93,7 +93,7 @@ tasks {
             locale = Locale.ENGLISH.language
             this as StandardJavadocDocletOptions
             links = listOf(
-                "https://docs.oracle.com/en/java/javase/11/docs/api/",
+                "https://docs.oracle.com/en/java/javase/17/docs/api/",
                 "https://docs.gradle.org/current/javadoc/"
             )
             addBooleanOption("Xdoclint:html,syntax", true)
