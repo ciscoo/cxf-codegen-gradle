@@ -10,7 +10,7 @@
     "format:check": "prettier --check ."
   },
   "devDependencies": {
-    "@types/node": "26.1.1",
+    "@types/node": "26.1.2",
     "prettier": "3.9.6",
     "vitepress": "2.0.0-alpha.18"
   }
