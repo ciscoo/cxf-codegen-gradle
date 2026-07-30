@@ -37,7 +37,7 @@ plugins {
 </details>
 
 > [!NOTE]
-> The Gradle plugin proxies Maven Central, so you should not need to configure Maven Central as a plugin repository.
+> The Gradle plugin portal proxies Maven Central, so you should not need to configure Maven Central as a plugin repository.
 
 ## Documentation
 
@@ -46,7 +46,7 @@ plugins {
 
 ## Snapshots
 
-Snapshots of the next development version are published to the Sonatype OSSRH snapshot repository.
+Snapshots of the next development version are published to the Maven Central Portal Snapshots repository.
 
 Documentation for snapshots:
 
@@ -120,7 +120,7 @@ The plugin can be built and published to your local Maven cache using the
 [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
 
 ```bash
-./gradlew :cxf-codegen-gradle:publishToMavenLocal
+./gradlew nmcpPublishAggregationToMavenLocal
 ```
 
 This will build and publish it to your local Maven cache. It won't run any of
