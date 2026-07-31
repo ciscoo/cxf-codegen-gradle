@@ -17,7 +17,36 @@ Snapshots are published automatically for every commit to the `master` branch. S
 - [ ] Execute `./gradlew clean build`
 - [ ] Execute `./gradlew publishAggregationToCentralPortal`
 - [ ] Find deployment info at https://central.sonatype.com/publishing/deployments
-- [ ] Verify deployment using a sample test project
+- [ ] [Verify deployment](https://central.sonatype.org/publish/publish-portal-api/#gradle) using a sample test project:
+    ```properties
+    # gradle.properties
+    
+    # Central Publishing API can take up to 1min to respond.
+    systemProp.org.gradle.internal.http.connectionTimeout=120000
+    systemProp.org.gradle.internal.http.socketTimeout=120000
+    
+    # Bearer <base64 encoded username:pass>
+    centralManualTestingAuthHeaderName=Authorization
+    centralManualTestingAuthHeaderValue=
+    ```
+
+    ```kotlin
+    // settings.gradle.kts
+    pluginManagement {
+        repositories {
+            mavenCentral()
+            maven {
+                name = "centralManualTesting"
+                url = uri("https://central.sonatype.com/api/v1/publisher/deployments/download/")
+                credentials(HttpHeaderCredentials::class)
+                authentication {
+                    register<HttpHeaderAuthentication>("header")
+                }
+            }
+            gradlePluginPortal()
+        }
+    }
+    ```
 - [ ] Publish deployment
 - [ ] Change `version` in `gradle.properties` in `master` to new development versions and commit with message *Back to snapshots*
 - [ ] Push `master` and push the tag `git push origin vx.x.x`
@@ -32,7 +61,36 @@ Snapshots are published automatically for every commit to the `master` branch. S
 - [ ] Execute `./gradlew clean build`
 - [ ] Execute `./gradlew publishAggregationToCentralPortal`
 - [ ] Find deployment info at https://central.sonatype.com/publishing/deployments
-- [ ] Verify deployment using a sample test project
+- [ ] [Verify deployment](https://central.sonatype.org/publish/publish-portal-api/#gradle) using a sample test project:
+    ```properties
+    # gradle.properties
+    
+    # Central Publishing API can take up to 1min to respond.
+    systemProp.org.gradle.internal.http.connectionTimeout=120000
+    systemProp.org.gradle.internal.http.socketTimeout=120000
+    
+    # Bearer <base64 encoded username:pass>
+    centralManualTestingAuthHeaderName=Authorization
+    centralManualTestingAuthHeaderValue=
+    ```
+    
+    ```kotlin
+    // settings.gradle.kts
+    pluginManagement {
+        repositories {
+            mavenCentral()
+            maven {
+                name = "centralManualTesting"
+                url = uri("https://central.sonatype.com/api/v1/publisher/deployments/download/")
+                credentials(HttpHeaderCredentials::class)
+                authentication {
+                    register<HttpHeaderAuthentication>("header")
+                }
+            }
+            gradlePluginPortal()
+        }
+    }
+    ```
 - [ ] Publish deployment
 - [ ] Prepare docs for upload `./gradlew :documentation:prepareDocsForUpload`
 - [ ] Upload docs:
