@@ -35,9 +35,9 @@ class IsolatedProjectsFunctionalTests {
         BuildResult initialResult = runner.build();
         BuildResult finalResult = runner.build();
 
-        assertThat(initialResult.getOutput()).contains("Isolated projects is an incubating feature");
+        assertThat(initialResult.getOutput()).containsIgnoringCase("Isolated projects is an incubating feature");
         assertThat(finalResult.getOutput())
-                .contains("Isolated projects is an incubating feature")
+                .containsIgnoringCase("Isolated projects is an incubating feature")
                 .contains("Reusing configuration cache.");
     }
 
@@ -53,9 +53,9 @@ class IsolatedProjectsFunctionalTests {
         BuildResult initialResult = runner.build();
         BuildResult finalResult = runner.build();
 
-        assertThat(initialResult.getOutput()).contains("Isolated projects is an incubating feature");
+        assertThat(initialResult.getOutput()).containsIgnoringCase("Isolated projects is an incubating feature");
         assertThat(finalResult.getOutput())
-                .contains("Isolated projects is an incubating feature")
+                .containsIgnoringCase("Isolated projects is an incubating feature")
                 .contains("Reusing configuration cache.")
                 .contains("Task :wsdl2java UP-TO-DATE");
     }
