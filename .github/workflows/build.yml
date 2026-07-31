@@ -67,6 +67,9 @@ jobs:
     name: Update Snapshot Documentation
     needs: build
     runs-on: ubuntu-latest
+    concurrency:
+      group: gh-pages-deploy
+      cancel-in-progress: false
     permissions:
       contents: write
     if: github.event_name == 'push' && github.repository == 'ciscoo/cxf-codegen-gradle' && github.ref == 'refs/heads/master'
