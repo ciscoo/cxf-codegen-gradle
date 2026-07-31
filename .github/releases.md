@@ -34,7 +34,16 @@ Snapshots are published automatically for every commit to the `master` branch. S
 - [ ] Find deployment info at https://central.sonatype.com/publishing/deployments
 - [ ] Verify deployment using a sample test project
 - [ ] Publish deployment
-- [ ] Prepare docs for upload `/gradlew :documentation:prepareDocsForUpload`
-- [ ] Upload docs `./gradlew gitPublishPush` (docs are generated/prepared by the `build` task earlier)
+- [ ] Prepare docs for upload `./gradlew :documentation:prepareDocsForUpload`
+- [ ] Upload docs:
+    ```shell
+    git fetch origin gh-pages
+    git worktree add gh-pages gh-pages
+    cd gh-pages
+    rsync -a -v --delete --ignore-times ../documentation/build/gh-pages/ "./docs/current"
+    git add docs/current
+    git commit -m "Publish current docs" || echo "nothing to commit"
+    git push
+    ```
 - [ ] Change `version` in `gradle.properties` in `master` to new development versions and commit with message *Back to snapshots*
 - [ ] Push `master` and push the tag `git push origin vx.x.x`
