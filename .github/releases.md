@@ -102,6 +102,8 @@ Snapshots are published automatically for every commit to the `master` branch. S
     git add docs/current
     git commit -m "Publish current docs" || echo "nothing to commit"
     git push
+    cd ..
+    git worktree remove gh-pages
     ```
 - [ ] Change `version` in `gradle.properties` in `master` to new development versions and commit with message *Back to snapshots*
 - [ ] Push `master` and push the tag `git push origin vx.x.x`
