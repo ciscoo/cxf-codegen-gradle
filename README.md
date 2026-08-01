@@ -18,7 +18,7 @@ using the [plugins DSL](https://docs.gradle.org/current/userguide/plugins.html#s
 ```kotlin
 plugins {
     java
-    id("io.mateo.cxf-codegen") version "2.5.0"
+    id("io.mateo.cxf-codegen") version "3.0.0"
 }
 ```
 
@@ -30,7 +30,7 @@ plugins {
 ```groovy
 plugins {
     id "java"
-    id "io.mateo.cxf-codegen" version "2.5.0"
+    id "io.mateo.cxf-codegen" version "3.0.0"
 }
 ```
 
