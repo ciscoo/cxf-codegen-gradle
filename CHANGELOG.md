@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > [!TIP]
 > For a complete list of all _closed_ issues and pull requests for this release, consult the milestone of the release.
 
+## Unreleased
+
 ## [3.0.0](https://github.com/ciscoo/cxf-codegen-gradle/milestone/18?closed=1) - 2026-07-31
 
 - Overhaul documentation with VitePress.
