@@ -1,7 +1,7 @@
 [versions]
 cxf = "4.2.3"
 slf4j = "2.0.18"
-junit = "6.1.2"
+junit = "6.1.3"
 
 [libraries]
 junit-Bom = { module = "org.junit:junit-bom", version.ref = "junit" }
