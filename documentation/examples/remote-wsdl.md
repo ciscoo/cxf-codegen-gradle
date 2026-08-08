@@ -6,8 +6,8 @@ For example, to use the WSDL published in the `cxf-testutils` JAR artifact:
 ## Workers
 
 ::: code-group
-<<< @/build/processed-examples/examples/loading-wsdl-workers.gradle.kts#code{3,6,9,18,35 kotlin} [Kotlin]
-<<< @/build/processed-examples/examples/loading-wsdl-workers.gradle#code{4,8,11,20,39 groovy} [Groovy]
+<<< @/build/processed-examples/examples/loading-wsdl-workers.gradle.kts{3,6,9,18,35 kotlin} [Kotlin]
+<<< @/build/processed-examples/examples/loading-wsdl-workers.gradle{4,8,11,20,39 groovy} [Groovy]
 :::
 
 1. Define a configuration to hold the dependency.
@@ -19,8 +19,8 @@ For example, to use the WSDL published in the `cxf-testutils` JAR artifact:
 ## Task
 
 ::: code-group
-<<< @/build/processed-examples/examples/loading-wsdl.gradle.kts#code{3,6,9,18,35 kotlin} [Kotlin]
-<<< @/build/processed-examples/examples/loading-wsdl.gradle#code{4,8,11,20,39 groovy} [Groovy]
+<<< @/build/processed-examples/examples/loading-wsdl.gradle.kts{3,6,9,18,35 kotlin} [Kotlin]
+<<< @/build/processed-examples/examples/loading-wsdl.gradle{4,8,11,20,39 groovy} [Groovy]
 :::
 
 1. Define a configuration to hold the dependency.

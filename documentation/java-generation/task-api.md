@@ -18,8 +18,8 @@ Create the task using your preferred method of task creation.
 The following example shows a single task named `example` that processes the `example.wsdl` document:
 
 ::: code-group
-<<< @/build/processed-examples/generating-java/minimal-task-usage.gradle.kts#code{kotlin} [Kotlin]
-<<< @/build/processed-examples/generating-java/minimal-task-usage.gradle#code{groovy} [Groovy]
+<<< @/build/processed-examples/generating-java/minimal-task-usage.gradle.kts{kotlin} [Kotlin]
+<<< @/build/processed-examples/generating-java/minimal-task-usage.gradle{groovy} [Groovy]
 :::
 
 By convention, the generated Java sources will be created in the`$buildDir/$name-wsdl2java-generated-sources` directory
@@ -75,8 +75,8 @@ To enable logging for Apache CXF:
 In the following example, [Logback](https://logback.qos.ch) is used which provides an implementation of the SLF4J API.
 
 ::: code-group
-<<< @/build/processed-examples/generating-java/logging-task.gradle.kts#code{kotlin} [Kotlin]
-<<< @/build/processed-examples/generating-java/logging-task.gradle#code{groovy} [Groovy]
+<<< @/build/processed-examples/generating-java/logging-task.gradle.kts{kotlin} [Kotlin]
+<<< @/build/processed-examples/generating-java/logging-task.gradle{groovy} [Groovy]
 :::
 
 With the above configuration, you will see logs from Apache CXF:

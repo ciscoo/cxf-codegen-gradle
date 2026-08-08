@@ -18,8 +18,8 @@ Create the task using your preferred method of task creation.
 The following example shows a single task named `example` that processes the `example.wsdl` document:
 
 ::: code-group
-<<< @/build/processed-examples/generating-javascript/minimal-task-usage.gradle.kts#code{kotlin} [Kotlin]
-<<< @/build/processed-examples/generating-javascript/minimal-task-usage.gradle#code{groovy} [Groovy]
+<<< @/build/processed-examples/generating-javascript/minimal-task-usage.gradle.kts{kotlin} [Kotlin]
+<<< @/build/processed-examples/generating-javascript/minimal-task-usage.gradle{groovy} [Groovy]
 :::
 
 By convention, the generated JavaScript sources will be created in the`$buildDir/$name-wsdl2js-generated-sources` directory

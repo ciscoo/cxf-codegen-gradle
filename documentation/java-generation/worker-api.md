@@ -34,8 +34,8 @@ To create an option, use the `options` container through the `cxfCodegen` extens
 The following example shows a single option named `example` that processes the `example.wsdl` document:
 
 ::: code-group
-<<< @/build/processed-examples/generating-java/worker-option.gradle.kts#code{kotlin} [Kotlin]
-<<< @/build/processed-examples/generating-java/worker-option.gradle#code{groovy} [Groovy]
+<<< @/build/processed-examples/generating-java/worker-option.gradle.kts{kotlin} [Kotlin]
+<<< @/build/processed-examples/generating-java/worker-option.gradle{groovy} [Groovy]
 :::
 
 By convention, the generated Java sources will be created in the`$buildDir/$name-wsdl2java-generated-sources` directory
@@ -50,8 +50,8 @@ If you do not want the generated code to be added to the `main` source set, you 
 to false as shown below:
 
 ::: code-group
-<<< @/build/processed-examples/generating-java/disable-main-inclusion.gradle.kts#code{kotlin} [Kotlin]
-<<< @/build/processed-examples/generating-java/disable-main-inclusion.gradle#code{groovy} [Groovy]
+<<< @/build/processed-examples/generating-java/disable-main-inclusion.gradle.kts{kotlin} [Kotlin]
+<<< @/build/processed-examples/generating-java/disable-main-inclusion.gradle{groovy} [Groovy]
 :::
 
 ## Tool Options

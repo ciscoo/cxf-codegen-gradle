@@ -34,8 +34,8 @@ To create an option, use the `options` container through the `cxfCodegen` extens
 The following example shows a single option named `example` that processes the `example.wsdl` document:
 
 ::: code-group
-<<< @/build/processed-examples/generating-javascript/worker-option.gradle.kts#code{kotlin} [Kotlin]
-<<< @/build/processed-examples/generating-javascript/worker-option.gradle#code{groovy} [Groovy]
+<<< @/build/processed-examples/generating-javascript/worker-option.gradle.kts{kotlin} [Kotlin]
+<<< @/build/processed-examples/generating-javascript/worker-option.gradle{groovy} [Groovy]
 :::
 
 By convention, the generated JavaScript sources will be created in the`$buildDir/$name-wsdl2js-generated-sources` directory

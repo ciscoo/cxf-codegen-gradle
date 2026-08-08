@@ -49,8 +49,8 @@ different version.
 The following example shows how to override the CXF version to {{ previousCxfVersion }}.
 
 ::: code-group
-<<< @/src/docs/gradle/plugin-configuration/cxf-version.gradle.kts#code{2 kotlin-vue} [Kotlin]
-<<< @/src/docs/gradle/plugin-configuration/cxf-version.gradle#code{2 groovy-vue} [Groovy]
+<<< @/src/docs/gradle/plugin-configuration/cxf-version.gradle.kts{2 kotlin-vue} [Kotlin]
+<<< @/src/docs/gradle/plugin-configuration/cxf-version.gradle{2 groovy-vue} [Groovy]
 :::
 
 > [!WARNING]
@@ -82,6 +82,6 @@ The following example shows adding the `cxf-rt-databinding-jibx` dependency to t
 This dependency will be included in the code generation classpath.
 
 ::: code-group
-<<< @/src/docs/gradle/plugin-configuration/dependency-management.gradle.kts#code{kotlin-vue} [Kotlin]
-<<< @/src/docs/gradle/plugin-configuration/dependency-management.gradle#code{groovy-vue} [Groovy]
+<<< @/src/docs/gradle/plugin-configuration/dependency-management.gradle.kts{kotlin-vue} [Kotlin]
+<<< @/src/docs/gradle/plugin-configuration/dependency-management.gradle{groovy-vue} [Groovy]
 :::

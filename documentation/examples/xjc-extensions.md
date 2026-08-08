@@ -3,8 +3,8 @@
 ## Workers
 
 ::: code-group
-<<< @/build/processed-examples/examples/using-xjc-extensions-workers.gradle.kts#code{6-7,13 kotlin} [Kotlin]
-<<< @/build/processed-examples/examples/using-xjc-extensions-workers.gradle#code{6-7,13 groovy} [Groovy]
+<<< @/build/processed-examples/examples/using-xjc-extensions-workers.gradle.kts{6-7,13 kotlin} [Kotlin]
+<<< @/build/processed-examples/examples/using-xjc-extensions-workers.gradle{6-7,13 groovy} [Groovy]
 :::
 
 1. Add the required CXF JXC dependency to your application dependencies.
@@ -15,8 +15,8 @@
 ## Task
 
 ::: code-group
-<<< @/build/processed-examples/examples/using-xjc-extensions.gradle.kts#code{6-7,13 kotlin} [Kotlin]
-<<< @/build/processed-examples/examples/using-xjc-extensions.gradle#code{6-7,13 groovy} [Groovy]
+<<< @/build/processed-examples/examples/using-xjc-extensions.gradle.kts{6-7,13 kotlin} [Kotlin]
+<<< @/build/processed-examples/examples/using-xjc-extensions.gradle{6-7,13 groovy} [Groovy]
 :::
 
 1. Add the required CXF JXC dependency to your application dependencies.
