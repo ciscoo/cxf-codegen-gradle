@@ -1,5 +1,5 @@
 import { defineConfig } from "vitepress";
-import readGradleMetadata from "./gradle";
+import readGradleMetadata from "./gradle.js";
 
 const gradleMetadata = readGradleMetadata();
 
