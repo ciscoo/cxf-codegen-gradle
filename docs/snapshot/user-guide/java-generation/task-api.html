@@ -8,12 +8,12 @@
     <meta name="generator" content="VitePress v2.0.0-alpha.19">
     <link rel="preload stylesheet" href="/cxf-codegen-gradle/docs/snapshot/user-guide/assets/style.DJx8Egio.css" as="style">
     <link rel="preload stylesheet" href="/cxf-codegen-gradle/docs/snapshot/user-guide/vp-icons.css" as="style">
-    <script type="module" src="/cxf-codegen-gradle/docs/snapshot/user-guide/assets/chunks/metadata.c412f491.js"></script>
-    <script type="module" src="/cxf-codegen-gradle/docs/snapshot/user-guide/assets/app.DAjCh22b.js"></script>
+    <script type="module" src="/cxf-codegen-gradle/docs/snapshot/user-guide/assets/chunks/metadata.04b29246.js"></script>
+    <script type="module" src="/cxf-codegen-gradle/docs/snapshot/user-guide/assets/app.1CyC7rn7.js"></script>
     <link rel="preload" href="/cxf-codegen-gradle/docs/snapshot/user-guide/assets/inter-roman-latin.BOE8-mWI.woff2" as="font" type="font/woff2" crossorigin="">
-    <link rel="modulepreload" href="/cxf-codegen-gradle/docs/snapshot/user-guide/assets/chunks/theme.D85G1yXP.js">
+    <link rel="modulepreload" href="/cxf-codegen-gradle/docs/snapshot/user-guide/assets/chunks/theme.Cd0KYser.js">
     <link rel="modulepreload" href="/cxf-codegen-gradle/docs/snapshot/user-guide/assets/chunks/framework.CHxjxqJh.js">
-    <link rel="modulepreload" href="/cxf-codegen-gradle/docs/snapshot/user-guide/assets/java-generation_task-api.md.D7udlrN6.lean.js">
+    <link rel="modulepreload" href="/cxf-codegen-gradle/docs/snapshot/user-guide/assets/java-generation_task-api.md.CvQVj6NW.lean.js">
     <script id="check-dark-mode">(()=>{let e=localStorage.getItem(`vitepress-theme-appearance`)||`auto`,t=window.matchMedia(`(prefers-color-scheme: dark)`).matches;(!e||e===`auto`?t:e===`dark`)&&document.documentElement.classList.add(`dark`)})();</script>
     <script id="check-mac-os">document.documentElement.classList.toggle(`mac`,/Mac|iPhone|iPod|iPad/i.test(navigator.platform));</script>
   </head>
@@ -41,7 +41,7 @@
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">dependencies</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> {</span></span>
-<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">    cxfCodegen</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;ch.qos.logback:logback-classic:1.6.1&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">    cxfCodegen</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;ch.qos.logback:logback-classic:1.6.2&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span></code></pre></div><div class="language-groovy"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang">groovy</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">configurations {</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    cxfCodegen {</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        exclude </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">group</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;org.slf4j&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">module</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;slf4j-nop&quot;</span></span>
@@ -49,7 +49,7 @@
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">dependencies {</span></span>
-<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    cxfCodegen </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;ch.qos.logback:logback-classic:1.6.1&quot;</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    cxfCodegen </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;ch.qos.logback:logback-classic:1.6.2&quot;</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span></code></pre></div></div></div><p>With the above configuration, you will see logs from Apache CXF:</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>11:00:38.266 [main] DEBUG org.apache.cxf.common.logging.LogUtils -- Using org.apache.cxf.common.logging.Slf4jLogger for logging.</span></span>
 <span class="line"><span>11:00:38.319 [main] DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader -- Loading plugin jar:file:~/.gradle/caches/modules-2/files-2.1/org.apache.cxf/cxf-tools-wsdlto-databinding-jaxb/4.0.0/5876acee034617f4f6ed756105fe9a0dc50a750c/cxf-tools-wsdlto-databinding-jaxb-4.0.0.jar!/META-INF/tools-plugin.xml</span></span>
 <span class="line"><span>11:00:38.349 [main] DEBUG org.apache.cxf.tools.wsdlto.core.PluginLoader -- Found 1 databindings in &lt;jaxb&gt; plugin.</span></span>
