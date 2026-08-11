@@ -15,7 +15,7 @@ configurations.cxfCodegen {
 }
 
 dependencies {
-    cxfCodegen("ch.qos.logback:logback-classic:1.6.1")
+    cxfCodegen("ch.qos.logback:logback-classic:1.6.2")
 }
 // #endregion code
 
