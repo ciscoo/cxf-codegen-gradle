@@ -14,7 +14,7 @@ configurations.cxfCodegen {
 }
 
 dependencies {
-    cxfCodegen("ch.qos.logback:logback-classic:1.6.3")
+    cxfCodegen("ch.qos.logback:logback-classic:1.6.4")
 }
 
 tasks.register("calculator", Wsdl2Java::class) {
