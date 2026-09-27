@@ -185,9 +185,11 @@ class CxfCodegenPluginTests {
                 sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME).getJava();
         int expectedSize = java.getSrcDirs().size();
 
-        project.getTasks().register(testInfo.getDisplayName(), Wsdl2Java.class, wsdl2java -> wsdl2java
-                .getAddToMainSourceSet()
-                .set(false));
+        project.getTasks()
+                .register(
+                        testInfo.getDisplayName(),
+                        Wsdl2Java.class,
+                        wsdl2java -> wsdl2java.getAddToMainSourceSet().set(false));
 
         assertThat(java.getSrcDirs()).hasSize(expectedSize);
 
@@ -213,12 +215,13 @@ class CxfCodegenPluginTests {
         var b = project.getTasks().register("b", Wsdl2Java.class);
 
         Task wsdl2java = project.getTasks().getByName(CxfCodegenPlugin.WSDL2JAVA_TASK_NAME);
-        assertThat(wsdl2java.getDependsOn()).satisfies(dependencies -> assertThat(dependencies)
-                .singleElement()
-                .asInstanceOf(InstanceOfAssertFactories.type(TaskCollection.class))
-                .satisfies(tasks -> {
-                    assertThat(tasks).containsExactlyInAnyOrder(a.get(), b.get());
-                }));
+        assertThat(wsdl2java.getDependsOn())
+                .satisfies(dependencies -> assertThat(dependencies)
+                        .singleElement()
+                        .asInstanceOf(InstanceOfAssertFactories.type(TaskCollection.class))
+                        .satisfies(tasks -> {
+                            assertThat(tasks).containsExactlyInAnyOrder(a.get(), b.get());
+                        }));
     }
 
     @Test
@@ -338,8 +341,9 @@ class CxfCodegenPluginTests {
                     assertThat(task.getGroup()).isEqualTo(CxfCodegenPlugin.WSDL2JAVA_GROUP);
                     assertThatCode(() -> task.getWsdl2JavaClasspath().getFiles())
                             .hasMessageContaining("configuration ':cxfCodegen'");
-                    assertThat(task.getOptions().get()).singleElement().satisfies(option -> assertThat(option.getName())
-                            .isEqualTo("foo"));
+                    assertThat(task.getOptions().get())
+                            .singleElement()
+                            .satisfies(option -> assertThat(option.getName()).isEqualTo("foo"));
                 });
     }
 
@@ -359,8 +363,9 @@ class CxfCodegenPluginTests {
                     assertThat(task.getGroup()).isEqualTo(CxfCodegenPlugin.WSDL2JS_GROUP);
                     assertThatCode(() -> task.getWsdl2JsClasspath().getFiles())
                             .hasMessageContaining("configuration ':cxfCodegen'");
-                    assertThat(task.getOptions().get()).singleElement().satisfies(option -> assertThat(option.getName())
-                            .isEqualTo("foo"));
+                    assertThat(task.getOptions().get())
+                            .singleElement()
+                            .satisfies(option -> assertThat(option.getName()).isEqualTo("foo"));
                 });
     }
 

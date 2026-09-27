@@ -222,8 +222,10 @@ public class CxfCodegenPlugin implements Plugin<Project> {
     }
 
     private void addToSourceSet(Project project) {
-        project.afterEvaluate(
-                evaluated -> evaluated.getTasks().withType(Wsdl2Java.class).all(wsdl2Java -> {
+        project.afterEvaluate(evaluated -> evaluated
+                .getTasks()
+                .withType(Wsdl2Java.class)
+                .all(wsdl2Java -> {
                     if (wsdl2Java.getAddToMainSourceSet().get()) {
                         evaluated
                                 .getExtensions()
