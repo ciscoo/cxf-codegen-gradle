@@ -82,8 +82,9 @@ class Wsdl2JsOptionsTests {
     void verbose(TestInfo testInfo) {
         var expected = List.of("-d", this.outputDir.toString(), "-verbose", this.wsdl.toString());
 
-        var actual = createTask(testInfo.getDisplayName(), options -> options.getVerbose()
-                        .set(true))
+        var actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getVerbose().set(true))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -109,8 +110,9 @@ class Wsdl2JsOptionsTests {
     void validate(TestInfo testInfo) {
         var expected = List.of("-d", this.outputDir.toString(), "-validate=true", this.wsdl.toString());
 
-        var actual = createTask(testInfo.getDisplayName(), options -> options.getValidate()
-                        .set("true"))
+        var actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getValidate().set("true"))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -124,8 +126,9 @@ class Wsdl2JsOptionsTests {
         var expected = List.of(
                 "-catalog", catalog.toAbsolutePath().toString(), "-d", this.outputDir.toString(), this.wsdl.toString());
 
-        var actual = createTask(testInfo.getDisplayName(), options -> options.getCatalog()
-                        .set(catalog.toFile()))
+        var actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getCatalog().set(catalog.toFile()))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -144,12 +147,14 @@ class Wsdl2JsOptionsTests {
                 this.outputDir.toString(),
                 this.wsdl.toString());
 
-        var actual = createTask(testInfo.getDisplayName(), options -> options.getPackagePrefixes()
-                        .set(List.of(
-                                new Wsdl2JsOptions.UriPrefixPair(
-                                        "http://www.example.com/Example/V1/ExampleService", "foo"),
-                                new Wsdl2JsOptions.UriPrefixPair(
-                                        "http://www.example.com/Example/V1/ExampleService", "bar"))))
+        var actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getPackagePrefixes()
+                                .set(List.of(
+                                        new Wsdl2JsOptions.UriPrefixPair(
+                                                "http://www.example.com/Example/V1/ExampleService", "foo"),
+                                        new Wsdl2JsOptions.UriPrefixPair(
+                                                "http://www.example.com/Example/V1/ExampleService", "bar"))))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -161,8 +166,9 @@ class Wsdl2JsOptionsTests {
     void wsdlVersion(TestInfo testInfo) {
         var expected = List.of("-wv", "1.1", "-d", this.outputDir.toString(), this.wsdl.toString());
 
-        var actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlVersion()
-                        .set("1.1"))
+        var actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getWsdlVersion().set("1.1"))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();

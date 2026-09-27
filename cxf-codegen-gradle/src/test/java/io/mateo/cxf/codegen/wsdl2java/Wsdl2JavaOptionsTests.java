@@ -68,8 +68,9 @@ class Wsdl2JavaOptionsTests {
                 this.outputDir.toString(),
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getPackageNames()
-                        .set(List.of("com.example.foo", "com.example.bar")))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getPackageNames().set(List.of("com.example.foo", "com.example.bar")))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -88,8 +89,9 @@ class Wsdl2JavaOptionsTests {
                 this.outputDir.toString(),
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getNamespaceExcludes()
-                        .set(List.of("foo", "bar")))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getNamespaceExcludes().set(List.of("foo", "bar")))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -122,8 +124,9 @@ class Wsdl2JavaOptionsTests {
                         .toString(),
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getBindingFiles()
-                        .set(List.of("foo", "bar")))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getBindingFiles().set(List.of("foo", "bar")))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -140,8 +143,9 @@ class Wsdl2JavaOptionsTests {
                 "foo",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getFrontend()
-                        .set("foo"))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getFrontend().set("foo"))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -158,8 +162,9 @@ class Wsdl2JavaOptionsTests {
                 "foo",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getDatabinding()
-                        .set("foo"))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getDatabinding().set("foo"))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -176,8 +181,9 @@ class Wsdl2JavaOptionsTests {
                 "foo",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlVersion()
-                        .set("foo"))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getWsdlVersion().set("foo"))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -194,8 +200,9 @@ class Wsdl2JavaOptionsTests {
                 "foo",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getCatalog()
-                        .set("foo"))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getCatalog().set("foo"))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -212,8 +219,9 @@ class Wsdl2JavaOptionsTests {
                 "true",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getExtendedSoapHeaders()
-                        .set(true))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getExtendedSoapHeaders().set(true))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -229,8 +237,9 @@ class Wsdl2JavaOptionsTests {
                 "-noTypes",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getNoTypes()
-                        .set(true))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getNoTypes().set(true))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -246,8 +255,9 @@ class Wsdl2JavaOptionsTests {
                 "-allowElementReferences",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getAllowElementRefs()
-                        .set(true))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getAllowElementRefs().set(true))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -263,8 +273,9 @@ class Wsdl2JavaOptionsTests {
                 "-validate=foo",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getValidateWsdl()
-                        .set("foo"))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getValidateWsdl().set("foo"))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -280,8 +291,9 @@ class Wsdl2JavaOptionsTests {
                 "-mark-generated",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getMarkGenerated()
-                        .set(true))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getMarkGenerated().set(true))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -297,8 +309,9 @@ class Wsdl2JavaOptionsTests {
                 "-suppress-generated-date",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getSuppressGeneratedDate()
-                        .set(true))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getSuppressGeneratedDate().set(true))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -315,8 +328,9 @@ class Wsdl2JavaOptionsTests {
                 "true",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getDefaultExcludesNamespace()
-                        .set(true))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getDefaultExcludesNamespace().set(true))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -352,8 +366,9 @@ class Wsdl2JavaOptionsTests {
                 "foo",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getServiceName()
-                        .set("foo"))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getServiceName().set("foo"))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -370,8 +385,9 @@ class Wsdl2JavaOptionsTests {
                 "1234",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getFaultSerialVersionUid()
-                        .set("1234"))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getFaultSerialVersionUid().set("1234"))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -388,8 +404,9 @@ class Wsdl2JavaOptionsTests {
                 UncheckedIOException.class.toString(),
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getExceptionSuper()
-                        .set(UncheckedIOException.class.toString()))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getExceptionSuper().set(UncheckedIOException.class.toString()))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -408,8 +425,9 @@ class Wsdl2JavaOptionsTests {
                 "bar",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getSeiSuper()
-                        .set(List.of("foo", "bar")))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getSeiSuper().set(List.of("foo", "bar")))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -425,8 +443,9 @@ class Wsdl2JavaOptionsTests {
                 "-autoNameResolution",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getAutoNameResolution()
-                        .set(true))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getAutoNameResolution().set(true))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -442,8 +461,9 @@ class Wsdl2JavaOptionsTests {
                 "-noAddressBinding",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getNoAddressBinding()
-                        .set(true))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getNoAddressBinding().set(true))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -460,8 +480,9 @@ class Wsdl2JavaOptionsTests {
                 "-xjc-Xwsdlextension",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getXjcArgs()
-                        .set(List.of("-Xts", "-Xwsdlextension")))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getXjcArgs().set(List.of("-Xts", "-Xwsdlextension")))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -478,8 +499,9 @@ class Wsdl2JavaOptionsTests {
                 "-all",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getExtraArgs()
-                        .set(List.of("-client", "-all")))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getExtraArgs().set(List.of("-client", "-all")))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -496,8 +518,9 @@ class Wsdl2JavaOptionsTests {
                 "foo",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlLocation()
-                        .set("foo"))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getWsdlLocation().set("foo"))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -513,8 +536,9 @@ class Wsdl2JavaOptionsTests {
                 "-wsdlList",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getWsdlList()
-                        .set(true))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getWsdlList().set(true))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -531,8 +555,9 @@ class Wsdl2JavaOptionsTests {
                 this.outputDir.toString(),
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getEncoding()
-                        .set("UTF-8"))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getEncoding().set("UTF-8"))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -548,8 +573,9 @@ class Wsdl2JavaOptionsTests {
                 "-verbose",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getVerbose()
-                        .set(true))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getVerbose().set(true))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -565,8 +591,9 @@ class Wsdl2JavaOptionsTests {
                 "-asyncMethods=foo,bar",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getAsyncMethods()
-                        .set(List.of("foo", "bar")))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getAsyncMethods().set(List.of("foo", "bar")))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -582,8 +609,9 @@ class Wsdl2JavaOptionsTests {
                 "-bareMethods=foo,bar",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getBareMethods()
-                        .set(List.of("foo", "bar")))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getBareMethods().set(List.of("foo", "bar")))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
@@ -599,8 +627,9 @@ class Wsdl2JavaOptionsTests {
                 "-mimeMethods=foo,bar",
                 this.wsdl.toAbsolutePath().toUri().toString());
 
-        Iterable<String> actual = createTask(testInfo.getDisplayName(), options -> options.getMimeMethods()
-                        .set(List.of("foo", "bar")))
+        Iterable<String> actual = createTask(
+                        testInfo.getDisplayName(),
+                        options -> options.getMimeMethods().set(List.of("foo", "bar")))
                 .getArgumentProviders()
                 .get(0)
                 .asArguments();
